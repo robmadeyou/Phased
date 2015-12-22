@@ -22,7 +22,7 @@ public final class Sprite extends DrawingArea {
 		try {
 		if( Client.normalLogin == true) {
 				//Image image = Toolkit.getDefaultToolkit().createImage(abyte0);
-				Image image = Toolkit.getDefaultToolkit().createImage(location+"Background.png");
+				Image image = Toolkit.getDefaultToolkit().createImage(location+"background.png");
             MediaTracker mediatracker = new MediaTracker(component);
             mediatracker.addImage(image, 0);
             mediatracker.waitForAll();
@@ -36,7 +36,7 @@ public final class Sprite extends DrawingArea {
             PixelGrabber pixelgrabber = new PixelGrabber(image, 0, 0, myWidth, myHeight, myPixels, 0, myWidth);
             pixelgrabber.grabPixels();
 		} else if( Client.normalLogin == false) {
-				Image image = Toolkit.getDefaultToolkit().createImage(location+"Background.png");
+				Image image = Toolkit.getDefaultToolkit().createImage(location+"background.png");
 				MediaTracker mediatracker = new MediaTracker(component);
 				mediatracker.addImage(image, 0);
 				mediatracker.waitForAll();
@@ -95,7 +95,9 @@ public final class Sprite extends DrawingArea {
 	}
     public Sprite(String img, int i)
     {
-        ImageIcon imageicon = new ImageIcon(img);
+		System.out.println( img );
+
+		ImageIcon imageicon = new ImageIcon(img);
         imageicon.getIconHeight();
         imageicon.getIconWidth();
         try {
@@ -116,6 +118,7 @@ public final class Sprite extends DrawingArea {
     }
 	
 	public Sprite(String img, int width, int height) {
+		System.out.println( img );
 		try {
 			Image image = Toolkit.getDefaultToolkit().createImage(FileOperations.ReadFile(img));
 			myWidth = width;
@@ -134,6 +137,7 @@ public final class Sprite extends DrawingArea {
 	}
 
     public Sprite(String img) {
+		img.replaceAll( " ", "" ).toLowerCase();
 		try {
 			Image image = Toolkit.getDefaultToolkit().getImage(location + img + ".png");
 			ImageIcon sprite = new ImageIcon(image);

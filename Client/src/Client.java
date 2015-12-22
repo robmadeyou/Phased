@@ -4414,8 +4414,8 @@ private void loadingStages()
 
 
 			LFull = new Sprite("Login/Random/LFull.png");
-			LEmpty = new Sprite("Login/Random/LEmpty.png");
-			Sprite logo = new Sprite(sign.signlink.findcachedir()+"Sprites/Logo.png");
+			LEmpty = new Sprite("Login/Random/lempty.png");
+			Sprite logo = new Sprite(sign.signlink.findcachedir()+"Sprites/logo.png");
 			logo.drawSprite(385-174-174, 14+25);
 			loginScreenArea.initDrawingArea();
 			sprite.method346(0, 0);
@@ -5058,8 +5058,8 @@ private void loadingStages()
 			return;
 		}
 		loginScreenArea.initDrawingArea();
-		Sprite loadingBarBkg = new Sprite("Login/Loading 1");
-		Sprite loadingBar = new Sprite(sign.signlink.findcachedir() + "Sprites/Login/Loading 2.png", (int)Math.round(i*2.02), 12);
+		Sprite loadingBarBkg = new Sprite("Login/loading1");
+		Sprite loadingBar = new Sprite(sign.signlink.findcachedir() + "Sprites/Login/loading2.png", (int)Math.round(i*2.02), 12);
 		loadingBarBkg.drawSprite( 20, 30 );
 		loadingBar.drawSprite(82, 54);
 		newRegularFont.drawCenteredString(s + " - "+i+"%", 180, 46, 0xFFFFFD, 0);
