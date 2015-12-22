@@ -1,7 +1,7 @@
 .idea/
 *.class
 *.iml
-Client/.AggrothCacheV0/
+.AggrothCacheV0/
 Server/dupers.txt
 Server/trades/
 Server/bans/
