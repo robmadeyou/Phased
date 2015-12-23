@@ -12,9 +12,6 @@ import server.util.Misc;
 
 public class PlayerSave
 {
-
-	
-	
 	/**
 	*Loading
 	**/
@@ -337,6 +334,7 @@ public class PlayerSave
 		
 		BufferedWriter characterfile = null;
 		try {
+			System.out.println( System.getProperty("user.dir") );
 			characterfile = new BufferedWriter(new FileWriter("./Data/characters/"+p.playerName+".txt"));
 			
 			/*ACCOUNT*/

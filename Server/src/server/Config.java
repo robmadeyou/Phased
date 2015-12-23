@@ -4,7 +4,7 @@ import server.model.npcs.*;
 
 public class Config {
 
-	public static final boolean SERVER_DEBUG = false;//needs to be false for Real world to work
+	public static final boolean SERVER_DEBUG = true;//needs to be false for Real world to work
 	
 	//public static String SERVER_NAME = "InsidiaX";
 	public static final String WELCOME_MESSAGE = "Welcome to InsidiaX";
@@ -193,4 +193,9 @@ public class Config {
 	public static final int SLAYER_EXPERIENCE = 20;
 	public static final int COOKING_EXPERIENCE = 30;
 	public static final int FLETCHING_EXPERIENCE = 35;
+
+	public static void Setup()
+	{
+
 	}
+}
