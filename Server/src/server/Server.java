@@ -10,9 +10,7 @@ import java.text.DecimalFormat;
 import server.util.ControlPanel;
 import server.model.players.Highscores;
 import server.model.players.Client;
-//GTLVOTE
 import org.Vote.*;
-//END OF GTLVOTE
 import org.apache.mina.common.IoAcceptor;
 import org.apache.mina.transport.socket.nio.SocketAcceptor;
 import org.apache.mina.transport.socket.nio.SocketAcceptorConfig;
@@ -31,7 +29,6 @@ import server.world.PublicEvent;
 import server.world.ItemHandler;
 import server.world.ObjectHandler;
 import server.world.ObjectManager;
-//import server.util.MadTurnipConnection;
 import server.world.ShopHandler;
 import server.world.ClanChatHandler;
 import server.world.WalkingHandler;
@@ -93,7 +90,6 @@ public class Server
         shutdownServer = true;
         System.exit ( 0 );
     }
-    //private static final WorkerThread engine = new WorkerThread();
 
     static
     {
@@ -221,7 +217,7 @@ public class Server
             while ( !Server.shutdownServer )
             {
                 if ( sleepTime > 0 )
-                    Thread.sleep ( sleepTime );
+                Thread.sleep ( sleepTime );
                 PublicEvent.process ();
                 engineTimer.reset ();
                 itemHandler.process ();
@@ -280,16 +276,11 @@ public class Server
                     for ( Player p : PlayerHandler.players )
                     {
                         if ( p == null )
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            for (Player p : PlayerHandler.players) {
-                if (p == null)
                             continue;
                         PlayerSave.saveGame ( ( Client ) p );
                         System.out.println ( "Saved game for " + p.playerName + "." );
                         lastMassSave = System.currentTimeMillis ();
                     }
-
                 }
             }
         } catch ( Exception ex )
@@ -301,7 +292,6 @@ public class Server
                     continue;
                 PlayerSave.saveGame ( ( Client ) p );
                 System.out.println ( "Saved game for " + p.playerName + "." );
->>>>>>> cbf09c6d50bed619259e71399fa05d2968a02fcf
             }
         }
         acceptor = null;
