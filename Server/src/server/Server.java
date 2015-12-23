@@ -21,25 +21,19 @@ import server.model.npcs.NPCHandler;
 import server.model.npcs.NPCDrops;
 import server.model.players.PlayerHandler;
 import server.model.players.Player;
-import server.model.players.Client;
 import server.model.players.PlayerSave;
 import server.model.minigames.*;
 import server.net.ConnectionHandler;
 import server.net.ConnectionThrottleFilter;
-import server.util.ShutDownHook;
 import server.util.SimpleTimer;
 import server.util.log.Logger;
-import server.event.Event;
-import server.event.EventContainer;
 import server.world.PublicEvent;
 import server.world.ItemHandler;
 import server.world.ObjectHandler;
 import server.world.ObjectManager;
 //import server.util.MadTurnipConnection;
 import server.world.ShopHandler;
-import server.world.map.VirtualWorld;
 import server.world.ClanChatHandler;
-import server.world.WorldMap;
 import server.world.WalkingHandler;
 
 /**
@@ -51,13 +45,14 @@ import server.world.WalkingHandler;
  * @author Ryan Lmctruck30
  */
 
-public class Server {
+public class Server
+{
 
     public static boolean sleeping;
     public static int cycleRate;
     public static MadTurnipConnection md;
     public static boolean UpdateServer = false;
-    public static long lastMassSave = System.currentTimeMillis();
+    public static long lastMassSave = System.currentTimeMillis ();
     private static IoAcceptor acceptor;
     private static ConnectionHandler connectionHandler;
     private static ConnectionThrottleFilter throttleFilter;
@@ -67,49 +62,54 @@ public class Server {
     public static boolean shutdownServer = false;
     public static boolean shutdownClientHandler;
     public static int serverlistenerPort;
-    public static ItemHandler itemHandler = new ItemHandler();
-    public static PlayerHandler playerHandler = new PlayerHandler();
-    public static ControlPanel panel = new ControlPanel(true); // false if you want it off
-    public static NPCHandler npcHandler = new NPCHandler();
-    public static ShopHandler shopHandler = new ShopHandler();
-    public static ObjectHandler objectHandler = new ObjectHandler();
-    public static ObjectManager objectManager = new ObjectManager();
-    public static CastleWars castleWars = new CastleWars();
-    public static FightPits fightPits = new FightPits();
-    public static PestControl pestControl = new PestControl();
+    public static ItemHandler itemHandler = new ItemHandler ();
+    public static PlayerHandler playerHandler = new PlayerHandler ();
+    public static ControlPanel panel = new ControlPanel ( true ); // false if you want it off
+    public static NPCHandler npcHandler = new NPCHandler ();
+    public static ShopHandler shopHandler = new ShopHandler ();
+    public static ObjectHandler objectHandler = new ObjectHandler ();
+    public static ObjectManager objectManager = new ObjectManager ();
+    public static CastleWars castleWars = new CastleWars ();
+    public static FightPits fightPits = new FightPits ();
+    public static PestControl pestControl = new PestControl ();
     public static MainLoader vote;// GTL Vote loader. Used later. ~SK8R.
-    public static int days, hours, minutes, secundes;
-    private static WarriorsGuild warriorsGuild = new WarriorsGuild();
+    public static int days, hours, minutes, seconds;
+    private static WarriorsGuild warriorsGuild = new WarriorsGuild ();
 
-    public static WarriorsGuild getWarriorsGuild() {
+    public static WarriorsGuild getWarriorsGuild ()
+    {
         return warriorsGuild;
     }
 
-    public static NPCDrops npcDrops = new NPCDrops();
-    public static ClanChatHandler clanChat = new ClanChatHandler();
-    public static FightCaves fightCaves = new FightCaves();
-    public static RFD rfd = new RFD();
+    public static NPCDrops npcDrops = new NPCDrops ();
+    public static ClanChatHandler clanChat = new ClanChatHandler ();
+    public static FightCaves fightCaves = new FightCaves ();
+    public static RFD rfd = new RFD ();
     //public static WorldMap worldMap = new WorldMap();
-    public static long[] TIMES = new long[5];
+    public static long[] TIMES = new long[ 5 ];
 
-    public static void shutdown() {
+    public static void shutdown ()
+    {
         shutdownServer = true;
-        System.exit(0);
+        System.exit ( 0 );
     }
     //private static final WorkerThread engine = new WorkerThread();
 
-    static {
-        if (!Config.SERVER_DEBUG) {
+    static
+    {
+        if ( !Config.SERVER_DEBUG )
+        {
             serverlistenerPort = 43594;
-        } else {
+        } else
+        {
             serverlistenerPort = 43594;
         }
         cycleRate = 474;
         shutdownServer = false;
-        engineTimer = new SimpleTimer();
-        debugTimer = new SimpleTimer();
+        engineTimer = new SimpleTimer ();
+        debugTimer = new SimpleTimer ();
         sleepTime = 0;
-        debugPercentFormat = new DecimalFormat("0.0#%");
+        debugPercentFormat = new DecimalFormat ( "0.0#%" );
     }
 
     //height,absX,absY,toAbsX,toAbsY,type
@@ -117,43 +117,51 @@ public class Server {
     {
         return I.I(height,absX,absY,toAbsX,toAbsY,type);
     }*/
-    public static void main(java.lang.String args[]) throws NullPointerException, IOException {
-        Config.Setup();
-        if (Config.USE_MYSQL_SHIT) {
-            md = new MadTurnipConnection();
-            md.start();
-            System.out.println("[Auto Donation]Processing");
-            Highscores.process();
-            vote = new MainLoader("aggroth.com", "aggrothc_vote", "aggrothpassword", "aggrothc_vote");
-            if (Highscores.connected) {
-                System.out.println("[Highscores]Connected to MySQL Database!");
-            } else {
-                System.out.println("[Highscores]Failed to connect to MySQL Database!");
+    public static void main (java.lang.String args[]) throws NullPointerException, IOException
+    {
+        if ( Config.USE_MYSQL_SHIT )
+        {
+            md = new MadTurnipConnection ();
+            md.start ();
+            System.out.println ( "[Auto Donation]Processing" );
+            Highscores.process ();
+            vote = new MainLoader ( "aggroth.com", "aggrothc_vote", "aggrothpassword", "aggrothc_vote" );
+            if ( Highscores.connected )
+            {
+                System.out.println ( "[Highscores]Connected to MySQL Database!" );
+            } else
+            {
+                System.out.println ( "[Highscores]Failed to connect to MySQL Database!" );
             }
         }
-        Runtime.getRuntime().addShutdownHook(new Thread() {
-            public void run() {
-                for (Player p : PlayerHandler.players) {
-                    if (p == null)
+        Runtime.getRuntime ().addShutdownHook ( new Thread ()
+        {
+            public void run ()
+            {
+                for ( Player p : PlayerHandler.players )
+                {
+                    if ( p == null )
                         continue;
-                    System.out.println("Saving all players...");
-                    PlayerSave.saveGame((Client) p);
+                    System.out.println ( "Saving all players..." );
+                    PlayerSave.saveGame ( ( Client ) p );
                 }
             }
-        });
-        try {
-            WalkingHandler.getSingleton().initialize();
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } );
+        try
+        {
+            WalkingHandler.getSingleton ().initialize ();
+        } catch ( Exception ex )
+        {
+            ex.printStackTrace ();
         }
 
         /**
          * Starting Up Server
          */
 
-        System.setOut(new Logger(System.out));
-        System.setErr(new Logger(System.err));
-        System.out.println("Launching Aggroth, enjoy playing.");
+        System.setOut ( new Logger ( System.out ) );
+        System.setErr ( new Logger ( System.err ) );
+        System.out.println ( "Launching Aggroth, enjoy playing." );
 
         /**
          * World Map Loader
@@ -170,145 +178,171 @@ public class Server {
         /**
          * Accepting Connections
          */
-        acceptor = new SocketAcceptor();
-        connectionHandler = new ConnectionHandler();
+        acceptor = new SocketAcceptor ();
+        connectionHandler = new ConnectionHandler ();
 
-        SocketAcceptorConfig sac = new SocketAcceptorConfig();
-        sac.getSessionConfig().setTcpNoDelay(false);
-        sac.setReuseAddress(true);
-        sac.setBacklog(100);
+        SocketAcceptorConfig sac = new SocketAcceptorConfig ();
+        sac.getSessionConfig ().setTcpNoDelay ( false );
+        sac.setReuseAddress ( true );
+        sac.setBacklog ( 100 );
 
-        throttleFilter = new ConnectionThrottleFilter(Config.CONNECTION_DELAY);
-        sac.getFilterChain().addFirst("throttleFilter", throttleFilter);
-        acceptor.bind(new InetSocketAddress(serverlistenerPort), connectionHandler, sac);
+        throttleFilter = new ConnectionThrottleFilter ( Config.CONNECTION_DELAY );
+        sac.getFilterChain ().addFirst ( "throttleFilter", throttleFilter );
+        acceptor.bind ( new InetSocketAddress ( serverlistenerPort ), connectionHandler, sac );
 
         /**
          * Initialise Handlers
          */
         //VoteForCash.createConnection();
-        EventManager.initialize();
-        Connection.initialize();
+        EventManager.initialize ();
+        Connection.initialize ();
         //PlayerSaving.initialize();
         //MysqlManager.createConnection();
 
         /**
          * Clipped Following (NPC)
          */
-        try {
-            WalkingHandler.getSingleton().initialize();
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        try
+        {
+            WalkingHandler.getSingleton ().initialize ();
+        } catch ( Exception ex )
+        {
+            ex.printStackTrace ();
         }
         /**
          * Server Successfully Loaded
          */
-        System.out.println("Server online on port: " + serverlistenerPort);
+        System.out.println ( "Server online on port: " + serverlistenerPort );
         /**
          * Main Server Tick
          */
-        try {
-            while (!Server.shutdownServer) {
-                if (sleepTime > 0)
-                    Thread.sleep(sleepTime);
-                PublicEvent.process();
-                engineTimer.reset();
-                itemHandler.process();
-                playerHandler.process();
-                npcHandler.process();
-                shopHandler.process();
-                objectManager.process();
-                fightPits.process();
-                pestControl.process();
-                cycleTime = engineTimer.elapsed();
-                if (cycleTime < 575)
+        try
+        {
+            while ( !Server.shutdownServer )
+            {
+                if ( sleepTime > 0 )
+                    Thread.sleep ( sleepTime );
+                PublicEvent.process ();
+                engineTimer.reset ();
+                itemHandler.process ();
+                playerHandler.process ();
+                npcHandler.process ();
+                shopHandler.process ();
+                objectManager.process ();
+                fightPits.process ();
+                pestControl.process ();
+                cycleTime = engineTimer.elapsed ();
+                if ( cycleTime < 575 )
                     sleepTime = cycleRate - cycleTime;
                 else
                     sleepTime = 0;
                 totalCycleTime += cycleTime;
                 cycles++;
-                debug();
-                if (Config.SERVER_DEBUG) //i see.... i used wrong symbol lol LOL !
+                debug ();
+                if ( Config.SERVER_DEBUG ) //i see.... i used wrong symbol lol LOL !
                     //System.out.println(cycleTime+"--"+sleepTime);
-                    secundes++;
-                if (secundes == 120) {
+                    seconds++;
+                if ( seconds == 120 )
+                {
                     minutes++;
-                    secundes = 0;
+                    seconds = 0;
                 }
-                if (minutes == 60) {
+                if ( minutes == 60 )
+                {
                     hours++;
                     minutes = 0;
                 }
-                if (hours == 24) {
+                if ( hours == 24 )
+                {
                     days++;
                     hours = 0;
                 }
-                if (hours == 2 && minutes == 0 && secundes == 20) {
+
+                if ( hours == 2 && minutes == 0 && seconds == 20 )
+                {
                     PlayerHandler.updateSeconds = 60;
                     PlayerHandler.updateAnnounced = false;
                     PlayerHandler.updateRunning = true;
-                    PlayerHandler.updateStartTime = System.currentTimeMillis();
+                    PlayerHandler.updateStartTime = System.currentTimeMillis ();
                 }
-                if (UpdateServer) {
-                    if (System.currentTimeMillis() - PlayerHandler.updateStartTime > 15000) {
+                if ( UpdateServer )
+                {
+                    if ( System.currentTimeMillis () - PlayerHandler.updateStartTime > 15000 )
+                    {
 
-                        System.gc();
-                        Server.shutdown();
-
+                        System.gc ();
+                        Server.shutdown ();
                     }
                 }
 
-                if (System.currentTimeMillis() - lastMassSave > 72000000) {
-                    for (Player p : PlayerHandler.players) {
-                        if (p == null)
-                            continue;
-                        PlayerSave.saveGame((Client) p);
-                        System.out.println("Saved game for " + p.playerName + ".");
-                        lastMassSave = System.currentTimeMillis();
-                    }
-
-                }
-            }
+                if ( System.currentTimeMillis () - lastMassSave > 72000000 )
+                {
+                    for ( Player p : PlayerHandler.players )
+                    {
+                        if ( p == null )
         } catch (Exception ex) {
             ex.printStackTrace();
             for (Player p : PlayerHandler.players) {
                 if (p == null)
+                            continue;
+                        PlayerSave.saveGame ( ( Client ) p );
+                        System.out.println ( "Saved game for " + p.playerName + "." );
+                        lastMassSave = System.currentTimeMillis ();
+                    }
+
+                }
+            }
+        } catch ( Exception ex )
+        {
+            ex.printStackTrace ();
+            for ( Player p : PlayerHandler.players )
+            {
+                if ( p == null )
                     continue;
-                PlayerSave.saveGame((Client) p);
-                System.out.println("Saved game for " + p.playerName + ".");
+                PlayerSave.saveGame ( ( Client ) p );
+                System.out.println ( "Saved game for " + p.playerName + "." );
+>>>>>>> cbf09c6d50bed619259e71399fa05d2968a02fcf
             }
         }
         acceptor = null;
         connectionHandler = null;
         sac = null;
-        System.exit(0);
+        System.exit ( 0 );
     }
 
-    public static void processAllPackets() {
-        for (int j = 0; j < playerHandler.players.length; j++) {
-            if (playerHandler.players[j] != null) {
-                while (playerHandler.players[j].processQueuedPackets()) ;
+    public static void processAllPackets ()
+    {
+        for ( int j = 0; j < playerHandler.players.length; j++ )
+        {
+            if ( playerHandler.players[ j ] != null )
+            {
+                while ( playerHandler.players[ j ].processQueuedPackets () )
+                    ;
             }
         }
     }
 
     public static boolean playerExecuted = false;
 
-    private static void debug() {
-        if (debugTimer.elapsed() > 360 * 1000 || playerExecuted) {
+    private static void debug ()
+    {
+        if ( debugTimer.elapsed () > 360 * 1000 || playerExecuted )
+        {
             long averageCycleTime = totalCycleTime / cycles;
-            System.out.println("Average Cycle Time: " + averageCycleTime + "ms");
-            double engineLoad = ((double) averageCycleTime / (double) cycleRate);
-            System.out.println("Players online: " + PlayerHandler.playerCount + ", engine load: " + debugPercentFormat.format(engineLoad));
+            System.out.println ( "Average Cycle Time: " + averageCycleTime + "ms" );
+            double engineLoad = ( ( double ) averageCycleTime / ( double ) cycleRate );
+            System.out.println ( "Players online: " + PlayerHandler.playerCount + ", engine load: " + debugPercentFormat.format ( engineLoad ) );
             totalCycleTime = 0;
             cycles = 0;
-            System.gc();
-            System.runFinalization();
-            debugTimer.reset();
+            System.gc ();
+            System.runFinalization ();
+            debugTimer.reset ();
             playerExecuted = false;
         }
     }
 
-    public static long getSleepTimer() {
+    public static long getSleepTimer ()
+    {
         return sleepTime;
     }
 

@@ -22,5 +22,6 @@ public class FollowPlayer implements PacketType {
 		c.usingRangeWeapon = false;
 		c.followDistance = 1;
 		c.followId = followPlayer;
+		c.sendMessage( "I am a creepy stalker following people..." );
 	}	
 }

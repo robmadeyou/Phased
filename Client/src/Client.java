@@ -14732,15 +14732,15 @@ public class Client extends RSApplet
         }
         for ( int i = 0; i <= 4; i++ )
         {
-            chatArea[ i ] = new Sprite ( "Gameframe/Gameframes/chatArea " + i + "" );
+            chatArea[ i ] = new Sprite ( "Gameframe/GameFrames/chatarea " + i + "" );
         }
         for ( int i = 0; i <= 4; i++ )
         {
-            tabArea[ i ] = new Sprite ( "Gameframe/Gameframes/tabArea " + i + "" );
+            tabArea[ i ] = new Sprite ( "Gameframe/GameFrames/tabarea " + i + "" );
         }
         for ( int i = 0; i <= 4; i++ )
         {
-            CustomMapback[ i ] = new Sprite ( "Gameframe/Gameframes/Mapback " + i + "" );
+            CustomMapback[ i ] = new Sprite ( "Gameframe/GameFrames/Mapback " + i + "" );
         }
         for ( int i = 0; i <= 13; i++ )
         {
@@ -14752,7 +14752,7 @@ public class Client extends RSApplet
         }
         for ( int i = 0; i <= 4; i++ )
         {
-            Black[ i ] = new Sprite ( "Gameframe/Gameframes/Black " + i + "" );
+            Black[ i ] = new Sprite ( "Gameframe/GameFrames/Black " + i + "" );
         }
         for ( int i4 = 0; i4 < 3; i4++ )
         {

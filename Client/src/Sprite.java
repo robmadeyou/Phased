@@ -95,7 +95,7 @@ public final class Sprite extends DrawingArea {
 	}
     public Sprite(String img, int i)
     {
-		System.out.println( img );
+		img = img.replace( "PNG", "png" );
 
 		ImageIcon imageicon = new ImageIcon(img);
         imageicon.getIconHeight();
@@ -118,7 +118,7 @@ public final class Sprite extends DrawingArea {
     }
 	
 	public Sprite(String img, int width, int height) {
-		System.out.println( img );
+		img = img.replace( "PNG", "png" );
 		try {
 			Image image = Toolkit.getDefaultToolkit().createImage(FileOperations.ReadFile(img));
 			myWidth = width;
@@ -137,7 +137,7 @@ public final class Sprite extends DrawingArea {
 	}
 
     public Sprite(String img) {
-		img.replaceAll( " ", "" ).toLowerCase();
+		img = img.replace( "PNG", "png" );
 		try {
 			Image image = Toolkit.getDefaultToolkit().getImage(location + img + ".png");
 			ImageIcon sprite = new ImageIcon(image);

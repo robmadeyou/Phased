@@ -29,7 +29,6 @@ public class ItemClick2 implements PacketType {
 			break;
 
 			case 11694:
-
 				c.sendMessage("Dismantling has been disabled due to duping");
 			break;
 			case 11696:

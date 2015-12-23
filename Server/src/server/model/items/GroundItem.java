@@ -48,9 +48,4 @@ public class GroundItem {
 		return this.ownerName;
 	}
 	
-	
-
-	
-
-	
 }

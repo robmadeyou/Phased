@@ -1,14 +1,11 @@
 package server;
-import server.model.npcs.*;
-
 
 public class Config {
 
-	public static final boolean SERVER_DEBUG = true;//needs to be false for Real world to work
+	public static final boolean SERVER_DEBUG = false;
 	
-	//public static String SERVER_NAME = "InsidiaX";
-	public static final String WELCOME_MESSAGE = "Welcome to InsidiaX";
-	public static final String FORUMS = "www.insidiax.com/";
+	public static final String WELCOME_MESSAGE = "Welcome to Cant phase me";
+	public static final String FORUMS = "www.cantphase.me";
 	
 	public static final int CLIENT_VERSION = 5;
 	
@@ -166,14 +163,16 @@ public class Config {
 	/**
 	 * Slayer Variables
 	 */
-	public static final int[][] SLAYER_TASKS = {{1,87,90,4,5}, //low tasks
-												{6,7,8,9,10}, //med tasks
-																						{11,12,13,14,15}, //high tasks
-																						{16,17,18,19,20},//elite tasks
-																						{1,1,15,20,25}, //low reqs
-																						{30,35,40,45,50}, //med reqs
-																						{60,75,80,85,90}, //high reqs
-																						{70,85,90,99}}; //elite reqs
+	public static final int[][] SLAYER_TASKS = {
+												{1, 87,90,4, 5}, //low tasks
+												{6, 7, 8, 9, 10}, //med tasks
+												{11,12,13,14,15}, //high tasks
+												{16,17,18,19,20},//elite tasks
+												{1, 1, 15,20,25}, //low reqs
+												{30,35,40,45,50}, //med reqs
+												{60,75,80,85,90}, //high reqs
+												{70,85,90,99} //elite reqs
+												};
 	
 	/**
 	* Skill Experience Multipliers
@@ -185,7 +184,7 @@ public class Config {
 	public static final int FIREMAKING_EXPERIENCE = 10;
 	public static final int HERBLORE_EXPERIENCE = 35;
 	public static final int FISHING_EXPERIENCE = 35;
-	public static final int AGILITY_EXPERIENCE = 70;
+	public static final int AGILITY_EXPERIENCE = 40;
 	public static final int PRAYER_EXPERIENCE = 35;
 	public static final int RUNECRAFTING_EXPERIENCE = 40;
 	public static final int CRAFTING_EXPERIENCE = 40;
