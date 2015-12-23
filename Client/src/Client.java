@@ -11080,6 +11080,7 @@ public class Client extends RSApplet
                     int i2 = myPlayer.x + k1 >> 7;
                     int j2 = myPlayer.y - l1 >> 7;
                     boolean flag1 = doWalkTo ( 1, 0, 0, 0, myPlayer.smallY[ 0 ], 0, 0, j2, myPlayer.smallX[ 0 ], true, i2 );
+
                     if ( flag1 )
                     {
                         stream.writeWordBigEndian ( i );

@@ -203,7 +203,7 @@ entitydef.itemActions[2] = "Teleport";
 entitydef.itemActions[0] = "Talk to";
 entitydef.itemActions[2] = "GodWars";
          entitydef.name = "Weirdo"; //Npc name
-         entitydef.description = "That a weirdo... keep walking.".getBytes(); //Npc description
+         entitydef.description = "That's a weirdo... keep walking.".getBytes(); //Npc description
       }
      if (i == 8275) { //Npc id
 	 entitydef.itemActions = new String[5];
