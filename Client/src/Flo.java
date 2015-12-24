@@ -12,7 +12,7 @@ public static String loc = signlink.findcachedir()+"Data/Animation/";
 	}
 	
 	public static void unpackConfig(NamedArchive archive) {
-		Stream stream = new Stream(/*archive.getDataForName("flo.dat")*/getData(loc+"flo.dat"));
+		Stream stream = new Stream(getData(loc+"flo.dat"));
 		System.out.println("Loaded the floors.");
 		int cacheSize = stream.readUnsignedWord();
 		if(cache == null)
@@ -29,7 +29,6 @@ public static String loc = signlink.findcachedir()+"Data/Animation/";
 		do
 		{
 			int i = stream.readUnsignedByte();
-			boolean dummy;
 			if(i == 0)
 				return;
 			else
@@ -40,9 +39,6 @@ public static String loc = signlink.findcachedir()+"Data/Animation/";
 			} else
 			if(i == 2)
 				anInt391 = stream.readUnsignedByte();
-			else
-			if(i == 3)
-				dummy = true;
 			else
 			if(i == 5)
 				aBoolean393 = false;
