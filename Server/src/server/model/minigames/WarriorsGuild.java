@@ -73,7 +73,7 @@ public class WarriorsGuild {
 		Server.npcHandler.spawnNpc(c, npcId, xCoord, yCoord, 0, 0, hitPoints, maxHit, attack, defence, true, true);
 	}
 	
-	private final String[][] DEFENDER = { {"17273", "Flameburst"},{"20072", "No"}, {"8850", "Rune"}, {"8849", "Adamant"}, {"8848", "Mithril"}, {"8847", "Black"}, {"8846", "Steel"}, {"8845", "Iron"}, {"8844", "Bronze"}};
+	private final String[][] DEFENDER = { {"17273", "Flameburst"},{"20072", "Dragon"}, {"8850", "Rune"}, {"8849", "Adamant"}, {"8848", "Mithril"}, {"8847", "Black"}, {"8846", "Steel"}, {"8845", "Iron"}, {"8844", "Bronze"}};
 	
 	/**
 	 * Gets the cyclops' drop itemid.
