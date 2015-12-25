@@ -16,7 +16,7 @@ public class Gui extends Client implements ActionListener, FocusListener {
 		super();
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-			sign.signlink.startpriv(InetAddress.getByName("77.171.122.218"));
+			sign.signlink.startpriv(InetAddress.getByName("localhost"));
 			initUI();
 		} catch(Exception ex)	{
 			ex.printStackTrace();

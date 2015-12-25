@@ -5661,6 +5661,7 @@ public class Client extends RSApplet
             return;
         }
         loginScreenArea.initDrawingArea ();
+        System.out.println( sign.signlink.findcachedir() );
         Sprite loadingBarBkg = new Sprite ( "Login/loading1" );
         Sprite loadingBar = new Sprite ( sign.signlink.findcachedir () + "Sprites/Login/loading2.png", ( int ) Math.round ( i * 2.02 ), 12 );
         loadingBarBkg.drawSprite ( 20, 30 );

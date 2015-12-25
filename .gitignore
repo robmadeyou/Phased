@@ -1,9 +1,0 @@
-.idea/
-*.class
-*.iml
-.AggrothCacheV0/
-Server/dupers.txt
-Server/trades/
-Server/bans/
-Server/out/
-Client/out/
