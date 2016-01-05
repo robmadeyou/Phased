@@ -478,7 +478,6 @@ c.getItems().addItem(989,1);
 			case 1513:
 			case 590:
 				c.getFiremaking().checkLogType(itemUsed, useWith);
-				//c.sendMessage("Firemaking is disabled.");
 			break;
 			
 		default:
