@@ -86,6 +86,15 @@ public class PlayerHandler
         return -1;
     }
 
+    /**
+     * @param s String
+     * @return Player
+     */
+    public static Player getPlayerFromName( String s )
+    {
+        return players[ getPlayerID( s ) ];
+    }
+
     public void updatePlayerNames ()
     {
         playerCount = 0;

@@ -1,6 +1,9 @@
 package server.util;
 
 import server.Server;
+import server.helpers.StringHelper;
+import server.model.players.Client;
+import server.model.players.Player;
 import server.model.players.PlayerHandler;
 
 import java.io.*;
@@ -32,6 +35,19 @@ public class InputManager implements Runnable {
     }
 
     public String handleInput(String line) {
+        if( line.startsWith( "message" ) )
+        {
+            String[] ar = line.split( " " );
+            String name = ar[ 1 ];
+            ar[0] = null;
+            ar[1] = null;
+            String message = StringHelper.combine( ar, " " );
+
+            Client c = (Client)PlayerHandler.getPlayerFromName( name );
+            c.sendMessage( message );
+            return "done";
+        }
+
         switch( line )
         {
             case "online":

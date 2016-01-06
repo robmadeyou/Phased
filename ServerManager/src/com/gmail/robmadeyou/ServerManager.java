@@ -20,7 +20,7 @@ public class ServerManager
         }
         try
         {
-            sock = new Socket ( "192.168.0.174", 4412 );
+            sock = new Socket ( "localhost", 4412 );
 
             PrintWriter os = new PrintWriter(sock.getOutputStream(), true);
             os.println ( ServerManager.combine ( args, " " ) );
