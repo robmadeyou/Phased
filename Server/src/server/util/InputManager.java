@@ -1,7 +1,24 @@
 package server.util;
 
-/**
- * Created by r on 01/01/2016.
- */
-public class InputManager {
+import java.util.Scanner;
+
+public class InputManager extends Thread {
+
+
+    public InputManager() {
+        setDaemon(true);
+    }
+
+    public void handleInput(String line) {
+
+    }
+
+    public void run() {
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            this.handleInput(scanner.nextLine());
+
+        }
+    }
 }
