@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 
 import com.sun.org.apache.xpath.internal.SourceTree;
+import server.util.InputManager;
 import server.util.MadTurnipConnection;
 
 import java.text.DecimalFormat;
@@ -63,7 +64,7 @@ public class Server
     public static int serverlistenerPort;
     public static ItemHandler itemHandler = new ItemHandler ();
     public static PlayerHandler playerHandler = new PlayerHandler ();
-    public static ControlPanel panel = new ControlPanel ( true ); // false if you want it off
+    public static ControlPanel panel = new ControlPanel ( false ); // false if you want it off
     public static NPCHandler npcHandler = new NPCHandler ();
     public static ShopHandler shopHandler = new ShopHandler ();
     public static ObjectHandler objectHandler = new ObjectHandler ();
@@ -212,7 +213,8 @@ public class Server
          */
         System.out.println ( "Server online on port: " + serverlistenerPort );
 
-        Scanner s = new Scanner( System.in );
+        new Thread ( new InputManager () ).start ();
+
         /**
          * Main Server Tick
          */
