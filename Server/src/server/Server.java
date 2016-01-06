@@ -3,9 +3,11 @@ package server;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 
+import com.sun.org.apache.xpath.internal.SourceTree;
 import server.util.MadTurnipConnection;
 
 import java.text.DecimalFormat;
+import java.util.Scanner;
 
 import server.util.ControlPanel;
 import server.model.players.Highscores;
@@ -209,6 +211,8 @@ public class Server
          * Server Successfully Loaded
          */
         System.out.println ( "Server online on port: " + serverlistenerPort );
+
+        Scanner s = new Scanner( System.in );
         /**
          * Main Server Tick
          */
@@ -265,9 +269,8 @@ public class Server
                 {
                     if ( System.currentTimeMillis () - PlayerHandler.updateStartTime > 15000 )
                     {
-
-                        System.gc ();
-                        Server.shutdown ();
+                        System.gc();
+                        Server.shutdown();
                     }
                 }
 
