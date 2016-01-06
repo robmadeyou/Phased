@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 
 import com.sun.org.apache.xpath.internal.SourceTree;
+import server.helpers.StringHelper;
 import server.util.InputManager;
 import server.util.MadTurnipConnection;
 
@@ -50,6 +51,7 @@ public class Server
 
     public static boolean sleeping;
     public static int cycleRate;
+    private static long startTime = System.currentTimeMillis ();
     public static MadTurnipConnection md;
     public static boolean UpdateServer = false;
     public static long lastMassSave = System.currentTimeMillis ();
@@ -303,6 +305,51 @@ public class Server
         connectionHandler = null;
         sac = null;
         System.exit ( 0 );
+    }
+
+    public static String getUptime()
+    {
+        int s = 0, m = 0, h = 0, d = 0, o = 0, y = 0;
+        String[] builder = new String[6];
+
+        long diff = System.currentTimeMillis () - Server.startTime;
+
+        s = (int)Math.floor ( (double) ( diff / 1000 ) ) % 60;
+        m = (int)Math.floor ( (double) ( diff / 1000 / 60 ) ) % 60;
+        h = (int)Math.floor ( (double) ( diff / 1000 / 60 / 60 ) ) % 24;
+        d = (int)Math.floor ( (double) ( diff / 1000 / 60 / 60 / 24 ) ) % 30;
+
+        if( y != 0 )
+        {
+            builder[0] = y + " " + StringHelper.pluralize ( y, "year" );
+        }
+
+        if( o != 0 )
+        {
+            builder[1] = o + " " + StringHelper.pluralize ( o, "month" );
+        }
+
+        if( d != 0 )
+        {
+            builder[2] = d + " " + StringHelper.pluralize ( d, "day" );
+        }
+
+        if( h != 0 )
+        {
+            builder[3] = h + " " + StringHelper.pluralize ( h, "hour" );
+        }
+
+        if( m != 0 )
+        {
+            builder[4] = m + " " + StringHelper.pluralize ( m, "minute" );
+        }
+
+        if( s != 0 )
+        {
+            builder[5] = s + " " + StringHelper.pluralize ( s, "second" );
+        }
+
+        return StringHelper.combine ( builder, ", " );
     }
 
     public static void processAllPackets ()

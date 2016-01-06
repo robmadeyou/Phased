@@ -1,12 +1,9 @@
 package com.gmail.robmadeyou;
 
-import com.sun.xml.internal.ws.util.StringUtils;
 
 import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.net.UnknownHostException;
-import java.util.Scanner;
 
 /**
  * Created by r on 06/01/16.
@@ -23,7 +20,7 @@ public class ServerManager
         }
         try
         {
-            sock = new Socket ( InetAddress.getLocalHost (), 4412 );
+            sock = new Socket ( "192.168.0.174", 4412 );
 
             PrintWriter os = new PrintWriter(sock.getOutputStream(), true);
             os.println ( ServerManager.combine ( args, " " ) );
@@ -33,7 +30,7 @@ public class ServerManager
             String fromServer;
             while ((fromServer = is.readLine()) != null)
             {
-                System.out.println ( "Server: " + fromServer );
+                System.out.println ( fromServer );
                 if ( fromServer.equals ( "Bye." ) )
                     break;
             }

@@ -1,5 +1,6 @@
 package server.util;
 
+import server.Server;
 import server.model.players.PlayerHandler;
 
 import java.io.*;
@@ -18,7 +19,7 @@ public class InputManager implements Runnable {
     {
         try
         {
-            server = new ServerSocket ( 4412, 0, InetAddress.getLocalHost () );
+            server = new ServerSocket ( 4412, 0 );
         }
         catch( UnknownHostException e )
         {
@@ -30,8 +31,16 @@ public class InputManager implements Runnable {
         }
     }
 
-    public void handleInput(String line) {
-
+    public String handleInput(String line) {
+        switch( line )
+        {
+            case "online":
+                return PlayerHandler.playerCount + "";
+            case "uptime":
+                return Server.getUptime ();
+            default:
+                return "Sorry, no idea what you want";
+        }
     }
 
     public void run() {
@@ -40,7 +49,6 @@ public class InputManager implements Runnable {
 
         while( true )
         {
-            System.out.println ( "I'm actually created" );
             try
             {
                 socket = server.accept ();
@@ -51,8 +59,7 @@ public class InputManager implements Runnable {
                 String responseLine;
                 while ((responseLine = is.readLine()) != null) {
                     System.out.println("Server: " + responseLine);
-                    os.println ( responseLine );
-
+                    os.println ( handleInput ( responseLine ) );
                     break;
                 }
 
