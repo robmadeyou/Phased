@@ -44,8 +44,8 @@ public class InputManager implements Runnable {
     }
 
     public void run() {
-        BufferedReader is = null;
-        PrintWriter os = null;
+        BufferedReader is;
+        PrintWriter os;
 
         while( true )
         {
