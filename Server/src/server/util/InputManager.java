@@ -35,6 +35,7 @@ public class InputManager implements Runnable {
     }
 
     public String handleInput(String line) {
+
         if( line.startsWith( "message" ) )
         {
             String[] ar = line.split( " " );
@@ -47,9 +48,25 @@ public class InputManager implements Runnable {
             c.sendMessage( message );
             return "done";
         }
+        else if( line.startsWith( "kick" ) )
+        {
+            String[] heh = line.split( " " );
+            heh[ 0 ] = null;
+            for( String s : heh )
+            {
+                if( s != null )
+                {
+                    Client c = (Client)PlayerHandler.getPlayerFromName( s );
+                    c.logout();
+                }
+            }
+            return "Done";
+        }
 
         switch( line )
         {
+            case "player-list":
+                return StringHelper.combine( PlayerHandler.playersCurrentlyOn, "," );
             case "online":
                 return PlayerHandler.playerCount + "";
             case "uptime":

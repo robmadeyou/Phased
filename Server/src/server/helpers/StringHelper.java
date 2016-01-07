@@ -18,7 +18,7 @@ public class StringHelper
         boolean first = true;
         for ( int x = 0; x < k; ++x )
         {
-            if( s[ x ] != null )
+            if( s[ x ] != null && !s[ x ].equals( "" ) )
             {
                 if( !first )
                 {
