@@ -17,4 +17,6 @@ public class Command
     {
         return this.activation;
     }
+
+    public void
 }
