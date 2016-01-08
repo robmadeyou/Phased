@@ -30,4 +30,30 @@ public class StringHelper
         }
         return out.toString ();
     }
+
+    /**
+     *
+     * @param prepend String[]
+     * @param s String[] Base strings that you want to prepend this one thing to
+     * @return String[] of all prepended strings
+     */
+    public static String[] prepend( String prepend, String[] s )
+    {
+        for( int i = 0; i < s.length; i++ )
+        {
+            s[i] = prepend( prepend, s[i] );
+        }
+        return s;
+    }
+
+    /**
+     *
+     * @param prepend String you want to prepend to base
+     * @param base String base that you want things to be prepended to
+     * @return String
+     */
+    public static String prepend( String prepend, String base )
+    {
+        return prepend + base;
+    }
 }
