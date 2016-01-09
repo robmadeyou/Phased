@@ -162,7 +162,6 @@ public class Server
 
         System.setOut ( new Logger ( System.out ) );
         System.setErr ( new Logger ( System.err ) );
-        System.out.println ( "Launching Aggroth, enjoy playing." );
 
         /**
          * World Map Loader
@@ -318,6 +317,8 @@ public class Server
         m = (int)Math.floor ( (double) ( diff / 1000 / 60 ) ) % 60;
         h = (int)Math.floor ( (double) ( diff / 1000 / 60 / 60 ) ) % 24;
         d = (int)Math.floor ( (double) ( diff / 1000 / 60 / 60 / 24 ) ) % 30;
+        o = (int)Math.floor ( (double) ( diff / 1000 / 60 / 60 / 24 / 30 ) ) % 12;
+        y = (int)Math.floor ( (double) ( diff / 1000 / 60 / 60 / 24 / 30 / 12 ) );
 
         if( y != 0 )
         {
