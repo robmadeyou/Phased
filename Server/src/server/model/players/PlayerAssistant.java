@@ -2494,7 +2494,7 @@ public class PlayerAssistant {
     }
 
     public void bankAll() {
-        for (int i = 0; i < c.playerItems.length; i--) {
+        for (int i = 0; i < c.playerItems.length; i++) {
             c.getItems().bankItem(c.playerItems[i], i, c.playerItemsN[i]);
         }
         for (int i = 0; i < c.playerEquipment.length; i++) {

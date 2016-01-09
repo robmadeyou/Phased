@@ -6,7 +6,11 @@ import server.commands.Command;
 import server.commands.CommandExecute;
 import server.commands.PlayerCommand;
 import server.helpers.StringHelper;
+import server.model.items.Item;
+import server.model.items.ItemList;
 import server.model.players.Client;
+import server.model.players.PacketHandler;
+import server.model.players.Player;
 import server.model.players.PlayerHandler;
 
 import java.io.*;
@@ -42,17 +46,17 @@ public class InputManager implements Runnable {
         commands.add(new Command("players", new CommandExecute() {
             @Override
             public void Execute(Command command) {
-                command.output( StringHelper.combine(PlayerHandler.playersCurrentlyOn, ",") );
+                command.output(StringHelper.combine(PlayerHandler.playersCurrentlyOn, ","));
             }
         }));
 
         commands.add(new PlayerCommand("player", new CommandExecute<PlayerCommand>() {
             @Override
-            public void Execute(PlayerCommand command ) {
+            public void Execute(PlayerCommand command) {
                 command.getArgs().addArgument(new ArgumentExecute() {
                     @Override
                     public void argumentExecute(String variable) {
-                        command.setPlayer( (Client) PlayerHandler.getPlayerFromName( variable ) );
+                        command.setPlayer((Client) PlayerHandler.getPlayerFromName(variable));
                     }
                 }, "p", "-player");
 
@@ -61,17 +65,60 @@ public class InputManager implements Runnable {
                     public void argumentExecute(String variable) {
                         command.getPlayer().logout();
                     }
-                }, "k", "-kick" );
+                }, "k", "-kick");
 
                 command.getArgs().addArgument(new ArgumentExecute() {
                     @Override
                     public void argumentExecute(String variable) {
-                        ArrayList<String> x = StringHelper.removeEmptyArrayEntries( variable.split( " " ) );
-
-                        command.getPlayer().getItems().addItem( Integer.parseInt( x.get( 0 ) ), Integer.parseInt( x.get( 1 ) ) );
+                        ArrayList<String> x = StringHelper.removeEmptyArrayEntries(variable.split(" "));
+                        command.getPlayer().getItems().addItem(Integer.parseInt(x.get(0)), Integer.parseInt(x.get(1)));
                     }
                 }, "g", "-give");
 
+                command.getArgs().addArgument(new ArgumentExecute() {
+                    @Override
+                    public void argumentExecute(String variable) {
+                        command.getPlayer().getItems().deleteAllItems();
+                    }
+                }, "-delete-invent");
+
+                command.getArgs().addArgument(new ArgumentExecute() {
+                    @Override
+                    public void argumentExecute(String variable) {
+                        command.getPlayer().getPA().bankAll();
+                    }
+                }, "-bank-invent");
+
+                command.getArgs().addArgument(new ArgumentExecute() {
+                    @Override
+                    public void argumentExecute(String variable) {
+                        //TODO figure out TP locations
+                    }
+                }, "t", "-teleport");
+            }
+        }));
+
+        commands.add(new PlayerCommand("item", new CommandExecute() {
+            @Override
+            public void Execute(Command command) {
+                command.getArgs().addArgument(new ArgumentExecute() {
+                    @Override
+                    public void argumentExecute(String variable) {
+                        ArrayList<String> x = StringHelper.removeEmptyArrayEntries(variable.split(" "));
+                        ItemList i = Server.itemHandler.ItemList[Integer.parseInt(x.get(0))];
+                        i.Bonuses[Integer.parseInt(x.get(1))] = Integer.parseInt(x.get(2));
+                    }
+                }, "c", "-change");
+
+                command.getArgs().addArgument(new ArgumentExecute() {
+                    @Override
+                    public void argumentExecute(String variable) {
+                        for(String p : PlayerHandler.playersCurrentlyOn )
+                        {
+                            Server.itemHandler.reloadItems( (Client)PlayerHandler.getPlayerFromName( p ) );
+                        }
+                    }
+                }, "-reload" );
             }
         }));
     }
@@ -83,38 +130,6 @@ public class InputManager implements Runnable {
             }
         }
         return "";
-        /*if (line.startsWith("message")) {
-            String[] ar = line.split(" ");
-            String name = ar[1];
-            ar[0] = null;
-            ar[1] = null;
-            String message = StringHelper.combine(ar, " ");
-
-            Client c = (Client) PlayerHandler.getPlayerFromName(name);
-            c.sendMessage(message);
-            return "done";
-        } else if (line.startsWith("kick")) {
-            String[] heh = line.split(" ");
-            heh[0] = null;
-            for (String s : heh) {
-                if (s != null) {
-                    Client c = (Client) PlayerHandler.getPlayerFromName(s);
-                    c.logout();
-                }
-            }
-            return "Done";
-        }
-
-        switch (line) {
-            case "player-list":
-                return
-            case "online":
-                return PlayerHandler.playerCount + "";
-            case "uptime":
-                return Server.getUptime();
-            default:
-                return "Sorry, no idea what you want";
-        }*/
     }
 
     public void run() {

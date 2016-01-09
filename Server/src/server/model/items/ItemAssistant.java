@@ -238,7 +238,7 @@ public class ItemAssistant {
 	* Item kept on death
 	**/
 	
-	public void keepItem(int keepItem, boolean deleteItem) { 	
+	public void keepItem(int keepItem, boolean deleteItem) {
 		int value = 0;
 		int item = 0;
 		int slotId = 0;
