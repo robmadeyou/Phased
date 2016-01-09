@@ -28,7 +28,6 @@ public class CommandArguments
         ArrayList<InputArguments> args = new ArrayList<>();
         InputArguments currentArguments = null;
         String[] split = c.split ( " " );
-        boolean wasLastParameter = false;
         for( int i = 0; i < split.length; i++ )
         {
             if( split[i].startsWith( "-" ) )
@@ -38,21 +37,16 @@ public class CommandArguments
                     args.add( currentArguments );
                 }
                 currentArguments = new InputArguments( split[ i ] );
-                wasLastParameter = true;
             }
             else
             {
                 if( currentArguments != null )
                 {
-                    wasLastParameter = false;
                     currentArguments.addArguments(split[i]);
                 }
             }
         }
-        if( wasLastParameter )
-        {
-            args.add( currentArguments );
-        }
+        args.add( currentArguments );
 
         for( InputArguments ia : args )
         {

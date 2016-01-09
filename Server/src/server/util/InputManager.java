@@ -4,7 +4,9 @@ import server.Server;
 import server.commands.ArgumentExecute;
 import server.commands.Command;
 import server.commands.CommandExecute;
+import server.commands.PlayerCommand;
 import server.helpers.StringHelper;
+import server.model.players.Client;
 import server.model.players.PlayerHandler;
 
 import java.io.*;
@@ -43,12 +45,41 @@ public class InputManager implements Runnable {
                 command.output( StringHelper.combine(PlayerHandler.playersCurrentlyOn, ",") );
             }
         }));
+
+        commands.add(new PlayerCommand("player", new CommandExecute<PlayerCommand>() {
+            @Override
+            public void Execute(PlayerCommand command ) {
+                command.getArgs().addArgument(new ArgumentExecute() {
+                    @Override
+                    public void argumentExecute(String variable) {
+                        command.setPlayer( (Client) PlayerHandler.getPlayerFromName( variable ) );
+                    }
+                }, "p", "-player");
+
+                command.getArgs().addArgument(new ArgumentExecute() {
+                    @Override
+                    public void argumentExecute(String variable) {
+                        command.getPlayer().logout();
+                    }
+                }, "k", "-kick" );
+
+                command.getArgs().addArgument(new ArgumentExecute() {
+                    @Override
+                    public void argumentExecute(String variable) {
+                        ArrayList<String> x = StringHelper.removeEmptyArrayEntries( variable.split( " " ) );
+
+                        command.getPlayer().getItems().addItem( Integer.parseInt( x.get( 0 ) ), Integer.parseInt( x.get( 1 ) ) );
+                    }
+                }, "g", "-give");
+
+            }
+        }));
     }
 
     public String handleInput(String line) {
         for (Command c : this.commands) {
             if (line.startsWith(c.getActivation())) {
-                return c.runCommand(line.replace(c.getActivation(), ""));
+                return c.runCommand(line.replace(c.getActivation() + " ", ""));
             }
         }
         return "";

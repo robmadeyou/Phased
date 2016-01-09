@@ -92,7 +92,7 @@ public class PlayerHandler
      */
     public static Player getPlayerFromName( String s )
     {
-        return players[ getPlayerID( s ) ];
+        return players[ getPlayerID( s.replaceAll( " ", "" ) ) ];
     }
 
     public void updatePlayerNames ()

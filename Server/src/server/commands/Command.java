@@ -1,5 +1,8 @@
 package server.commands;
 
+import server.model.players.Client;
+import server.model.players.PlayerHandler;
+
 import java.util.ArrayList;
 
 /**
@@ -35,9 +38,15 @@ public class Command
     public String runCommand( String command )
     {
         this.output = new StringBuilder();
+        this.commandArguments = new CommandArguments();
         onActivate.Execute( this );
         commandArguments.parseArgumentsFromCommand ( command );
         return this.output.toString();
+    }
+
+    public final Client getClient( String username )
+    {
+        return (Client)PlayerHandler.getPlayerFromName( username );
     }
 
     public void output( String text )

@@ -1,5 +1,7 @@
 package server.helpers;
 
+import java.util.ArrayList;
+
 public class StringHelper
 {
     public static String pluralize( int n, String s )
@@ -55,5 +57,18 @@ public class StringHelper
     public static String prepend( String prepend, String base )
     {
         return prepend + base;
+    }
+
+    public static ArrayList<String> removeEmptyArrayEntries( String[] str )
+    {
+        ArrayList<String> tmp = new ArrayList<>();
+        for( String s : str )
+        {
+            if( !s.equals( "" ) && s != null )
+            {
+                tmp.add( s );
+            }
+        }
+        return tmp;
     }
 }
