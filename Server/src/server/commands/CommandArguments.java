@@ -9,7 +9,7 @@ import java.util.Collections;
  */
 public class CommandArguments
 {
-    private ArrayList< CommandArgument > arguments;
+    private ArrayList< CommandArgument > arguments = new ArrayList<>();
 
     public CommandArguments ()
     {
@@ -25,9 +25,41 @@ public class CommandArguments
 
     public void parseArgumentsFromCommand( String c )
     {
+        ArrayList<InputArguments> args = new ArrayList<>();
+        InputArguments currentArguments = null;
         String[] split = c.split ( " " );
+        boolean wasLastParameter = false;
         for( int i = 0; i < split.length; i++ )
         {
+            if( split[i].startsWith( "-" ) )
+            {
+                if( currentArguments != null )
+                {
+                    args.add( currentArguments );
+                }
+                currentArguments = new InputArguments( split[ i ] );
+                wasLastParameter = true;
+            }
+            else
+            {
+                if( currentArguments != null )
+                {
+                    wasLastParameter = false;
+                    currentArguments.addArguments(split[i]);
+                }
+            }
+        }
+        if( wasLastParameter )
+        {
+            args.add( currentArguments );
+        }
+
+        for( InputArguments ia : args )
+        {
+            for( CommandArgument ca : this.arguments )
+            {
+                ca.checkHasArgumentAndExecute( ia.getVariable(), ia.getArguments() );
+            }
         }
     }
 
@@ -76,13 +108,36 @@ public class CommandArguments
 
     private class InputArguments
     {
-        private String name, arguments;
-        public InputArguments ()
+        private String variable, arguments;
+
+        public InputArguments( String name )
+        {
+            this(name, "");
+        }
+
+        public InputArguments ( String name, String arguments )
         {
             super ();
+
+            this.variable = name;
+            this.arguments = arguments;
+        }
+
+        public String getVariable()
+        {
+            return variable;
+        }
+
+        public String getArguments()
+        {
+            return arguments;
+        }
+
+        public void addArguments( String argument )
+        {
+            this.arguments += " " + argument;
         }
     }
-
 }
 
 

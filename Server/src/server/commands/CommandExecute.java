@@ -5,6 +5,6 @@ package server.commands;
  */
 public interface CommandExecute {
 
-    void Execute( String command );
+    void Execute( Command command );
 
 }

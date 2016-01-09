@@ -16,17 +16,15 @@ public class Command
 {
 
     private String activation;
-    private CommandArguments commandArguments;
+    private CommandArguments commandArguments = new CommandArguments ();
     private CommandExecute onActivate;
+    private StringBuilder output;
 
     public Command ( String activation, CommandExecute onActivate )
     {
         super ();
         this.activation = activation;
         this.onActivate = onActivate;
-
-
-        this.commandArguments = new CommandArguments ();
     }
 
     public CommandArguments getArgs()
@@ -34,9 +32,17 @@ public class Command
         return this.commandArguments;
     }
 
-    public void runCommand( String command )
+    public String runCommand( String command )
     {
+        this.output = new StringBuilder();
+        onActivate.Execute( this );
         commandArguments.parseArgumentsFromCommand ( command );
+        return this.output.toString();
+    }
+
+    public void output( String text )
+    {
+        this.output.append( text );
     }
 
     public String getActivation()
