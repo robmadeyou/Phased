@@ -8,6 +8,7 @@ import server.commands.PlayerCommand;
 import server.helpers.StringHelper;
 import server.model.items.Item;
 import server.model.items.ItemList;
+import server.model.npcs.NPCDrops;
 import server.model.players.Client;
 import server.model.players.PacketHandler;
 import server.model.players.Player;
@@ -117,6 +118,18 @@ public class InputManager implements Runnable {
                         {
                             Server.itemHandler.reloadItems( (Client)PlayerHandler.getPlayerFromName( p ) );
                         }
+                    }
+                }, "-reload" );
+            }
+        }));
+
+        commands.add(new Command("npc", new CommandExecute() {
+            @Override
+            public void Execute(Command command) {
+                command.getArgs().addArgument(new ArgumentExecute() {
+                    @Override
+                    public void argumentExecute(String variable) {
+                        Server.npcDrops.reloadNpcDrops();
                     }
                 }, "-reload" );
             }

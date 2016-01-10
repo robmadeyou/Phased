@@ -68,6 +68,15 @@ public class NPCDrops {
 			e.printStackTrace();
 		}	
 	}
+
+	public void reloadNpcDrops()
+	{
+		normalDrops = new HashMap<>();
+		rareDrops = new HashMap<>();
+		constantDrops = new HashMap<>();
+		dropRarity = new HashMap<>();
+		this.loadDrops();
+	}
 	
 	public void loadConstants() {
 		try {
