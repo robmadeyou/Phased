@@ -24,7 +24,6 @@ public class InputManager implements Runnable
 {
 
     private ServerSocket server;
-    private Socket socket;
     private ArrayList< Command > commands;
 
     public InputManager ()
@@ -96,6 +95,7 @@ public class InputManager implements Runnable
 
     public void run ()
     {
+        Socket socket;
         BufferedReader is;
         PrintWriter os;
 
