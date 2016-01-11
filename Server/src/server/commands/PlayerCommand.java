@@ -8,7 +8,7 @@ import server.model.players.Client;
 public class PlayerCommand extends Command {
 
     public Client player;
-    public PlayerCommand(String activation, CommandExecute onActivate) {
+    public PlayerCommand(String activation, CommandExecute<PlayerCommand> onActivate) {
         super(activation, onActivate);
     }
 
