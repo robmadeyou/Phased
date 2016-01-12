@@ -308,7 +308,7 @@ public class Server
 
     public static String getUptime()
     {
-        int s = 0, m = 0, h = 0, d = 0, o = 0, y = 0;
+        int s, m, h, d, o, y;
         String[] builder = new String[6];
 
         long diff = System.currentTimeMillis () - Server.startTime;

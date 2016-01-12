@@ -9,7 +9,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import server.model.players.EarningPotential;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import server.helpers.JsonHelper;
 import server.Config;
 import server.Server;
 import server.model.items.GroundItem;
@@ -26,7 +28,7 @@ import server.util.Misc;
 public class ItemHandler
 {
 
-    public List< GroundItem > items = new ArrayList< GroundItem > ();
+    public List< GroundItem > items = new ArrayList<> ();
     public static final int HIDE_TICKS = 100;
 
     public ItemHandler ()
@@ -368,6 +370,12 @@ public class ItemHandler
 
     public void loadItemPrices (String filename)
     {
+        JsonArray obj = JsonHelper.getJsonArrayFromFilename ( "./Data/cfg/" + filename );
+        for( int i = 0; i < obj.size (); i++ )
+        {
+
+        }
+
         try
         {
             Scanner s = new Scanner ( new File ( "./Data/cfg/" + filename ) );
