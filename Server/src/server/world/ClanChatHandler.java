@@ -1,10 +1,7 @@
 package server.world;
 
 import server.model.players.Client;
-import server.util.Misc;
 import server.Server;
-
-import java.util.ArrayList;
 
 /**
  * @author Sanity
@@ -72,8 +69,8 @@ public class ClanChatHandler
             if ( Server.playerHandler.players[ clans[ clanId ].members[ j ] ] != null )
             {
                 Client c = ( Client ) Server.playerHandler.players[ clans[ clanId ].members[ j ] ];
-                c.getPA ().sendFrame126 ( "Talking in: @whi@" + clans[ clanId ].name, 18139 );
-                c.getPA ().sendFrame126 ( "Owner: " + clans[ clanId ].owner, 18140 );
+                c.getPlayerAssistant ().sendFrame126 ( "Talking in: @whi@" + clans[ clanId ].name, 18139 );
+                c.getPlayerAssistant ().sendFrame126 ( "Owner: " + clans[ clanId ].owner, 18140 );
                 int slotToFill = 18144;
                         /*if (clans[clanId].members[j] >= 1) {
 						c.CSLS = 0;
@@ -103,13 +100,13 @@ public class ClanChatHandler
                     {
                         if ( Server.playerHandler.players[ clans[ clanId ].members[ i ] ] != null )
                         {
-                            c.getPA ().sendFrame126 ( Server.playerHandler.players[ clans[ clanId ].members[ i ] ].playerName, slotToFill );
+                            c.getPlayerAssistant ().sendFrame126 ( Server.playerHandler.players[ clans[ clanId ].members[ i ] ].playerName, slotToFill );
                             slotToFill++;
                         }
                     }
                 }
                 for ( int k = slotToFill; k < 18244; k++ )
-                    c.getPA ().sendFrame126 ( "", k );
+                    c.getPlayerAssistant ().sendFrame126 ( "", k );
             }
         }
     }
@@ -217,7 +214,7 @@ public class ClanChatHandler
                 Client c = ( Client ) Server.playerHandler.players[ playerId ];
                 Server.playerHandler.players[ playerId ].clanId = -1;
                 c.sendMessage ( "You have left the clan." );
-                c.getPA ().clearClanChat ();
+                c.getPlayerAssistant ().clearClanChat ();
                 c.inAclan = false;
                 clans[ clanId ].playerz -= 1;
                 c.CSLS = 0;
@@ -249,7 +246,7 @@ public class ClanChatHandler
                 c.inAclan = false;
                 c.CSLS = 0;
                 clans[ clanId ].CS = 0;
-                c.getPA ().clearClanChat ();
+                c.getPlayerAssistant ().clearClanChat ();
             }
         }
         clans[ clanId ].members = new int[ 50 ];

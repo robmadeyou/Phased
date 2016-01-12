@@ -1,9 +1,7 @@
 package server.model.players.skills;
 
 import server.model.players.*;
-import server.Config;
 import server.Server;
-import server.util.Misc;
 
 /**
  * @Author Sanity
@@ -55,18 +53,18 @@ public class Summoning
     public void store ()
     {
 
-        c.getPA ().sendFrame126 ( "Summoning BoB", 7421 );
+        c.getPlayerAssistant ().sendFrame126 ( "Summoning BoB", 7421 );
         for ( int k = 0; k < 29; k++ )
         {
             if ( c.storeditems[ k ] > 0 )
             {
-                c.getPA ().Frame34 ( 7423, c.storeditems[ k ], k, 1 );
+                c.getPlayerAssistant ().Frame34 ( 7423, c.storeditems[ k ], k, 1 );
             }
 
 
             if ( c.storeditems[ k ] <= 0 )
             {
-                c.getPA ().Frame34 ( 7423, -1, k, 1 );
+                c.getPlayerAssistant ().Frame34 ( 7423, -1, k, 1 );
             }
 
         }
@@ -84,13 +82,13 @@ public class Summoning
         c.getOutStream ().writeWordA ( 4465 );
         c.getOutStream ().writeWord ( 5063 );
         //c.getOutStream().writeWord(10600);
-        c.getPA ().sendFrame87 ( 286, 0 );
+        c.getPlayerAssistant ().sendFrame87 ( 286, 0 );
 
         c.flushOutStream ();
 
 
         //c.ResetKeepItems();
-        //c.getPA().showInterface(17100);
+        //c.getPlayerAssistant().showInterface(17100);
     }
 
     public void SummonNewNPC (int npcID)
@@ -791,7 +789,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12043, 1 );
-                    c.getPA ().addSkillXP ( 300, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 300, 22 ); //AmtExp is different so its defined in the method
                 }
 
                 break;
@@ -806,7 +804,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12047, 1 );
-                    c.getPA ().addSkillXP ( 500, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 500, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -819,7 +817,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12059, 1 );
-                    c.getPA ().addSkillXP ( 800, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 800, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -832,7 +830,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12019, 1 );
-                    c.getPA ().addSkillXP ( 1000, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 1000, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -846,7 +844,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12009, 1 );
-                    c.getPA ().addSkillXP ( 1500, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 1500, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -860,7 +858,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12778, 1 );
-                    c.getPA ().addSkillXP ( 1600, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 1600, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -874,7 +872,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12049, 1 );
-                    c.getPA ().addSkillXP ( 2000, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 2000, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -888,7 +886,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12055, 1 );
-                    c.getPA ().addSkillXP ( 2100, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 2100, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -902,7 +900,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12808, 1 );
-                    c.getPA ().addSkillXP ( 2400, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 2400, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -916,7 +914,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12067, 1 );
-                    c.getPA ().addSkillXP ( 2800, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 2800, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -929,7 +927,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12063, 1 );
-                    c.getPA ().addSkillXP ( 3000, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 3000, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -942,7 +940,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12091, 1 );
-                    c.getPA ().addSkillXP ( 4000, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 4000, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -955,7 +953,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12800, 1 );
-                    c.getPA ().addSkillXP ( 4500, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 4500, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -969,7 +967,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12053, 1 );
-                    c.getPA ().addSkillXP ( 5000, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 5000, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -983,7 +981,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12065, 1 );
-                    c.getPA ().addSkillXP ( 5400, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 5400, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -996,7 +994,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12021, 1 );
-                    c.getPA ().addSkillXP ( 5300, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 5300, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1009,7 +1007,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12818, 1 );
-                    c.getPA ().addSkillXP ( 5200, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 5200, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1022,7 +1020,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12814, 1 );
-                    c.getPA ().addSkillXP ( 5800, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 5800, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1035,7 +1033,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12798, 1 );
-                    c.getPA ().addSkillXP ( 6000, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 6000, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1048,7 +1046,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12073, 1 );
-                    c.getPA ().addSkillXP ( 6100, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 6100, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1061,7 +1059,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12087, 1 );
-                    c.getPA ().addSkillXP ( 6200, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 6200, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1075,7 +1073,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12071, 1 );
-                    c.getPA ().addSkillXP ( 6300, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 6300, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1089,7 +1087,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12051, 1 );
-                    c.getPA ().addSkillXP ( 6400, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 6400, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1103,7 +1101,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12075, 1 );
-                    c.getPA ().addSkillXP ( 6500, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 6500, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1117,7 +1115,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12816, 1 );
-                    c.getPA ().addSkillXP ( 6600, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 6600, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1131,7 +1129,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12041, 1 );
-                    c.getPA ().addSkillXP ( 6700, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 6700, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1144,7 +1142,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12061, 1 );
-                    c.getPA ().addSkillXP ( 6800, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 6800, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1158,7 +1156,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12007, 1 );
-                    c.getPA ().addSkillXP ( 6900, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 6900, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1172,7 +1170,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12036, 1 );
-                    c.getPA ().addSkillXP ( 7000, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 7000, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1185,7 +1183,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12027, 1 );
-                    c.getPA ().addSkillXP ( 7100, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 7100, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1198,7 +1196,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12077, 1 );
-                    c.getPA ().addSkillXP ( 7200, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 7200, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1211,7 +1209,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12531, 1 );
-                    c.getPA ().addSkillXP ( 7300, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 7300, 22 ); //AmtExp is different so its defined in the method
                 }
 
                 break;
@@ -1226,7 +1224,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12810, 1 );
-                    c.getPA ().addSkillXP ( 7400, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 7400, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1240,7 +1238,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12812, 1 );
-                    c.getPA ().addSkillXP ( 7500, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 7500, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1254,7 +1252,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12784, 1 );
-                    c.getPA ().addSkillXP ( 7600, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 7600, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1268,7 +1266,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12805, 1 );
-                    c.getPA ().addSkillXP ( 7700, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 7700, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1293,7 +1291,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12015, 1 );
-                    c.getPA ().addSkillXP ( 7800, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 7800, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1307,7 +1305,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12045, 1 );
-                    c.getPA ().addSkillXP ( 7900, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 7900, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1321,7 +1319,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12079, 1 );
-                    c.getPA ().addSkillXP ( 8000, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 8000, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1335,7 +1333,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12123, 1 );
-                    c.getPA ().addSkillXP ( 8100, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 8100, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1349,7 +1347,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12031, 1 );
-                    c.getPA ().addSkillXP ( 8200, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 8200, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1363,7 +1361,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12029, 1 );
-                    c.getPA ().addSkillXP ( 8300, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 8300, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1377,7 +1375,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12033, 1 );
-                    c.getPA ().addSkillXP ( 8400, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 8400, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1391,7 +1389,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12820, 1 );
-                    c.getPA ().addSkillXP ( 8500, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 8500, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1405,7 +1403,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12057, 1 );
-                    c.getPA ().addSkillXP ( 8600, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 8600, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1419,7 +1417,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 14623, 1 );
-                    c.getPA ().addSkillXP ( 8700, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 8700, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1432,7 +1430,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12792, 1 );
-                    c.getPA ().addSkillXP ( 8800, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 8800, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1446,7 +1444,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12069, 1 );
-                    c.getPA ().addSkillXP ( 8900, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 8900, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1460,7 +1458,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12011, 1 );
-                    c.getPA ().addSkillXP ( 9000, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 9000, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1474,7 +1472,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12081, 1 );
-                    c.getPA ().addSkillXP ( 9100, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 9100, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1488,7 +1486,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12782, 1 );
-                    c.getPA ().addSkillXP ( 9200, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 9200, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1502,7 +1500,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12794, 1 );
-                    c.getPA ().addSkillXP ( 9300, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 9300, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1516,7 +1514,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12013, 1 );
-                    c.getPA ().addSkillXP ( 9400, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 9400, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1530,7 +1528,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12802, 1 );
-                    c.getPA ().addSkillXP ( 9500, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 9500, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1543,7 +1541,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12806, 1 );
-                    c.getPA ().addSkillXP ( 9600, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 9600, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1557,7 +1555,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12804, 1 );
-                    c.getPA ().addSkillXP ( 9700, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 9700, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1570,7 +1568,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12025, 1 );
-                    c.getPA ().addSkillXP ( 9900, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 9900, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1583,7 +1581,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12017, 1 );
-                    c.getPA ().addSkillXP ( 10000, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 10000, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1597,7 +1595,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12788, 1 );
-                    c.getPA ().addSkillXP ( 11000, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 11000, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1611,7 +1609,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12776, 1 );
-                    c.getPA ().addSkillXP ( 12000, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 12000, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1625,7 +1623,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12083, 1 );
-                    c.getPA ().addSkillXP ( 13800, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 13800, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1639,7 +1637,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12039, 1 );
-                    c.getPA ().addSkillXP ( 5800, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 5800, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1653,7 +1651,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12786, 1 );
-                    c.getPA ().addSkillXP ( 5800, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 5800, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1666,7 +1664,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12089, 1 );
-                    c.getPA ().addSkillXP ( 5800, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 5800, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1680,7 +1678,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12796, 1 );
-                    c.getPA ().addSkillXP ( 5800, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 5800, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1694,7 +1692,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12822, 1 );
-                    c.getPA ().addSkillXP ( 5800, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 5800, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1707,7 +1705,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12093, 1 );
-                    c.getPA ().addSkillXP ( 5800, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 5800, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1721,7 +1719,7 @@ public class Summoning
                 if ( hasitem () )
                 {
                     c.getItems ().addItem ( 12790, 1 );
-                    c.getPA ().addSkillXP ( 5800, 22 ); //AmtExp is different so its defined in the method
+                    c.getPlayerAssistant ().addSkillXP ( 5800, 22 ); //AmtExp is different so its defined in the method
                 }
                 break;
 

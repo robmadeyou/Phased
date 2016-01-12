@@ -95,7 +95,7 @@ public class UseItem {
 				c.getItems().deleteItem(11286, c.getItems().getItemSlot(11286), 1);
 				c.getItems().addItem(11283,1);
 				c.sendMessage("You combine the two materials to create a dragonfire shield.");
-				c.getPA().addSkillXP(500 * Config.SMITHING_EXPERIENCE, c.playerSmithing);
+				c.getPlayerAssistant ().addSkillXP(500 * Config.SMITHING_EXPERIENCE, c.playerSmithing);
 			} else {
 				c.sendMessage("You need a smithing level of 95 to create a dragonfire shield.");
 			}
@@ -107,7 +107,7 @@ public class UseItem {
 					c.getItems().deleteItem(2436, c.getItems().getItemSlot(2436),1);
 					c.getItems().addItem(15308,1);
 					c.sendMessage("You make an Extreme Attack (4).");
-					c.getPA().addSkillXP(300 * Config.HERBLORE_EXPERIENCE, c.playerHerblore);
+					c.getPlayerAssistant ().addSkillXP(300 * Config.HERBLORE_EXPERIENCE, c.playerHerblore);
 				} else {
 					c.sendMessage("You need a herblore level of 80 to make an Extreme.");
 				}
@@ -122,7 +122,7 @@ public class UseItem {
 					c.getItems().deleteItem(2440, c.getItems().getItemSlot(2440),1);
 					c.getItems().addItem(15312,1);
 					c.sendMessage("You make an Extreme Strength (4).");
-					c.getPA().addSkillXP(300 * Config.HERBLORE_EXPERIENCE, c.playerHerblore);
+					c.getPlayerAssistant ().addSkillXP(300 * Config.HERBLORE_EXPERIENCE, c.playerHerblore);
 				} else {
 					c.sendMessage("You need a herblore level of 80 to make an Extreme.");
 				}
@@ -137,7 +137,7 @@ public class UseItem {
 					c.getItems().deleteItem(2442, c.getItems().getItemSlot(2442),1);
 					c.getItems().addItem(15316,1);
 					c.sendMessage("You make an Extreme Defence (4).");
-					c.getPA().addSkillXP(300 * Config.HERBLORE_EXPERIENCE, c.playerHerblore);
+					c.getPlayerAssistant ().addSkillXP(300 * Config.HERBLORE_EXPERIENCE, c.playerHerblore);
 				} else {
 					c.sendMessage("You need a herblore level of 80 to make an Extreme.");
 				}
@@ -152,7 +152,7 @@ public class UseItem {
 					c.getItems().deleteItem(3040, c.getItems().getItemSlot(3040),1);
 					c.getItems().addItem(15320,1);
 					c.sendMessage("You make an Extreme Magic (4).");
-					c.getPA().addSkillXP(300 * Config.HERBLORE_EXPERIENCE, c.playerHerblore);
+					c.getPlayerAssistant ().addSkillXP(300 * Config.HERBLORE_EXPERIENCE, c.playerHerblore);
 				} else {
 					c.sendMessage("You need a herblore level of 80 to make an Extreme.");
 				}
@@ -167,7 +167,7 @@ public class UseItem {
 					c.getItems().deleteItem(2444, c.getItems().getItemSlot(2444),1);
 					c.getItems().addItem(15324,1);
 					c.sendMessage("You make an Extreme Ranging (4).");
-					c.getPA().addSkillXP(300 * Config.HERBLORE_EXPERIENCE, c.playerHerblore);
+					c.getPlayerAssistant ().addSkillXP(300 * Config.HERBLORE_EXPERIENCE, c.playerHerblore);
 				} else {
 					c.sendMessage("You need a herblore level of 80 to make an Extreme.");
 				}
@@ -186,7 +186,7 @@ public class UseItem {
             	c.getItems().deleteItem(15324, c.getItems().getItemSlot(15324),1);
             	c.getItems().addItem(15332,1);
                 c.sendMessage("You make a Overload Potion (4).");
-                c.getPA().addSkillXP(500 * Config.HERBLORE_EXPERIENCE, c.playerHerblore);
+                c.getPlayerAssistant ().addSkillXP(500 * Config.HERBLORE_EXPERIENCE, c.playerHerblore);
             	} else {
                 c.sendMessage("You need a herblore level of 96 to make that potion.");
             	}
@@ -214,7 +214,7 @@ public class UseItem {
 				c.getItems().deleteItem(useWith, c.getItems().getItemSlot(useWith), boltsMade);
 				c.getItems().deleteItem(itemUsed, c.getItems().getItemSlot(itemUsed), boltsMade);
 				c.getItems().addItem(9241, boltsMade);
-				c.getPA().addSkillXP(boltsMade * 6 * Config.FLETCHING_EXPERIENCE, c.playerFletching);
+				c.getPlayerAssistant ().addSkillXP(boltsMade * 6 * Config.FLETCHING_EXPERIENCE, c.playerFletching);
 			} else {
 				c.sendMessage("You need a fletching level of 58 to fletch this item.");
 			}
@@ -225,7 +225,7 @@ public class UseItem {
 				c.getItems().deleteItem(useWith, c.getItems().getItemSlot(useWith), boltsMade);
 				c.getItems().deleteItem(itemUsed, c.getItems().getItemSlot(itemUsed), boltsMade);
 				c.getItems().addItem(9242, boltsMade);
-				c.getPA().addSkillXP(boltsMade * 7 * Config.FLETCHING_EXPERIENCE, c.playerFletching);
+				c.getPlayerAssistant ().addSkillXP(boltsMade * 7 * Config.FLETCHING_EXPERIENCE, c.playerFletching);
 			} else {
 				c.sendMessage("You need a fletching level of 63 to fletch this item.");
 			}		
@@ -236,7 +236,7 @@ public class UseItem {
 				c.getItems().deleteItem(useWith, c.getItems().getItemSlot(useWith), boltsMade);
 				c.getItems().deleteItem(itemUsed, c.getItems().getItemSlot(itemUsed), boltsMade);
 				c.getItems().addItem(9243, boltsMade);
-				c.getPA().addSkillXP(boltsMade * 7 * Config.FLETCHING_EXPERIENCE, c.playerFletching);
+				c.getPlayerAssistant ().addSkillXP(boltsMade * 7 * Config.FLETCHING_EXPERIENCE, c.playerFletching);
 			} else {
 				c.sendMessage("You need a fletching level of 65 to fletch this item.");
 			}		
@@ -247,7 +247,7 @@ public class UseItem {
 				c.getItems().deleteItem(useWith, c.getItems().getItemSlot(useWith), boltsMade);
 				c.getItems().deleteItem(itemUsed, c.getItems().getItemSlot(itemUsed), boltsMade);
 				c.getItems().addItem(9244, boltsMade);
-				c.getPA().addSkillXP(boltsMade * 10 * Config.FLETCHING_EXPERIENCE, c.playerFletching);
+				c.getPlayerAssistant ().addSkillXP(boltsMade * 10 * Config.FLETCHING_EXPERIENCE, c.playerFletching);
 			} else {
 				c.sendMessage("You need a fletching level of 71 to fletch this item.");
 			}		
@@ -258,7 +258,7 @@ public class UseItem {
 				c.getItems().deleteItem(useWith, c.getItems().getItemSlot(useWith), boltsMade);
 				c.getItems().deleteItem(itemUsed, c.getItems().getItemSlot(itemUsed), boltsMade);
 				c.getItems().addItem(9245, boltsMade);
-				c.getPA().addSkillXP(boltsMade * 13 * Config.FLETCHING_EXPERIENCE, c.playerFletching);
+				c.getPlayerAssistant ().addSkillXP(boltsMade * 13 * Config.FLETCHING_EXPERIENCE, c.playerFletching);
 			} else {
 				c.sendMessage("You need a fletching level of 58 to fletch this item.");
 			}		
@@ -267,7 +267,7 @@ public class UseItem {
 			if (c.playerLevel[c.playerFletching] >= 63) {
 				c.getItems().deleteItem(1601, c.getItems().getItemSlot(1601), 1);
 				c.getItems().addItem(9192, 15);
-				c.getPA().addSkillXP(8 * Config.FLETCHING_EXPERIENCE, c.playerFletching);
+				c.getPlayerAssistant ().addSkillXP(8 * Config.FLETCHING_EXPERIENCE, c.playerFletching);
 			} else {
 				c.sendMessage("You need a fletching level of 63 to fletch this item.");
 			}
@@ -276,7 +276,7 @@ public class UseItem {
 			if (c.playerLevel[c.playerFletching] >= 65) {
 				c.getItems().deleteItem(1607, c.getItems().getItemSlot(1607), 1);
 				c.getItems().addItem(9189, 15);
-				c.getPA().addSkillXP(8 * Config.FLETCHING_EXPERIENCE, c.playerFletching);
+				c.getPlayerAssistant ().addSkillXP(8 * Config.FLETCHING_EXPERIENCE, c.playerFletching);
 			} else {
 				c.sendMessage("You need a fletching level of 65 to fletch this item.");
 			}
@@ -285,7 +285,7 @@ public class UseItem {
 			if (c.playerLevel[c.playerFletching] >= 71) {
 				c.getItems().deleteItem(1605, c.getItems().getItemSlot(1605), 1);
 				c.getItems().addItem(9190, 15);
-				c.getPA().addSkillXP(8 * Config.FLETCHING_EXPERIENCE, c.playerFletching);
+				c.getPlayerAssistant ().addSkillXP(8 * Config.FLETCHING_EXPERIENCE, c.playerFletching);
 			} else {
 				c.sendMessage("You need a fletching level of 71 to fletch this item.");
 			}
@@ -294,7 +294,7 @@ public class UseItem {
 			if (c.playerLevel[c.playerFletching] >= 73) {
 				c.getItems().deleteItem(1603, c.getItems().getItemSlot(1603), 1);
 				c.getItems().addItem(9191, 15);
-				c.getPA().addSkillXP(8 * Config.FLETCHING_EXPERIENCE, c.playerFletching);
+				c.getPlayerAssistant ().addSkillXP(8 * Config.FLETCHING_EXPERIENCE, c.playerFletching);
 			} else {
 				c.sendMessage("You need a fletching level of 73 to fletch this item.");
 			}
@@ -303,7 +303,7 @@ public class UseItem {
 			if (c.playerLevel[c.playerFletching] >= 73) {
 				c.getItems().deleteItem(1615, c.getItems().getItemSlot(1615), 1);
 				c.getItems().addItem(9193, 15);
-				c.getPA().addSkillXP(8 * Config.FLETCHING_EXPERIENCE, c.playerFletching);
+				c.getPlayerAssistant ().addSkillXP(8 * Config.FLETCHING_EXPERIENCE, c.playerFletching);
 			} else {
 				c.sendMessage("You need a fletching level of 73 to fletch this item.");
 			}

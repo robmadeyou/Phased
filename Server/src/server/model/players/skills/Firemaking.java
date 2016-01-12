@@ -3,7 +3,7 @@ package server.model.players.skills;
 import server.Config;
 import server.model.players.Client;
 import server.model.objects.Objects;
-import server.Server;
+
 /**
  * Firemaking.java
  *
@@ -44,12 +44,12 @@ public class Firemaking {
 				if (System.currentTimeMillis() - lastLight > DELAY) {
 					c.startAnimation(733,0);
 					c.getItems().deleteItem(logs[slot], c.getItems().getItemSlot(logs[slot]), 1);
-					c.getPA().addSkillXP(logs[slot] * Config.FIREMAKING_EXPERIENCE, c.playerFiremaking);
+					c.getPlayerAssistant ().addSkillXP(logs[slot] * Config.FIREMAKING_EXPERIENCE, c.playerFiremaking);
 					Objects fire = new Objects(2732,c.getX(),c.getY(), 0, -1, 10, 3);
 					Objects fire2 = new Objects(-1,c.getX(),c.getY(), 0, -1, 10, 60);
 					c.sendMessage("You light the fire.");
 					this.lastLight = System.currentTimeMillis();
-					//c.getPA().frame1();
+					//c.getPlayerAssistant().frame1();
 					resetAnim = true;
 				}
 			}

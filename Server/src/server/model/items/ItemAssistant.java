@@ -5,7 +5,6 @@ import server.Server;
 import server.model.players.Client;
 import server.util.Misc;
 import server.model.players.EarningPotential;
-import server.model.minigames.CastleWars;
 
 public class ItemAssistant {
 
@@ -182,7 +181,7 @@ public class ItemAssistant {
 			if (i == 10) {
 				offset = 1;
 			}
-			c.getPA().sendFrame126(send, (1675+i+offset));
+			c.getPlayerAssistant ().sendFrame126(send, (1675+i+offset));
 		}
 
 	}
@@ -633,79 +632,79 @@ public class ItemAssistant {
 		WeaponName2 = WeaponName2.trim();
 		if (WeaponName.equals("Unarmed")) {
 			c.setSidebarInterface(0, 5855); //punch, kick, block
-			c.getPA().sendFrame126(WeaponName, 5857);
+			c.getPlayerAssistant ().sendFrame126(WeaponName, 5857);
 		} else if (WeaponName.endsWith("whip")) {
 			c.setSidebarInterface(0, 12290); //flick, lash, deflect
-			c.getPA().sendFrame246(12291, 200, Weapon);
-			c.getPA().sendFrame126(WeaponName, 12293);
+			c.getPlayerAssistant ().sendFrame246(12291, 200, Weapon);
+			c.getPlayerAssistant ().sendFrame126(WeaponName, 12293);
 		} else if (WeaponName.endsWith("vine")) {
 			c.setSidebarInterface(0, 12290); //flick, lash, deflect
-			c.getPA().sendFrame246(12291, 200, Weapon);
-			c.getPA().sendFrame126(WeaponName, 12293);
+			c.getPlayerAssistant ().sendFrame246(12291, 200, Weapon);
+			c.getPlayerAssistant ().sendFrame126(WeaponName, 12293);
             } else if (WeaponName2.toLowerCase().contains("maul") || WeaponName.endsWith("warhammer")) {
             c.setSidebarInterface(0, 425); //war hamer equip.
-            c.getPA().sendFrame246(426, 200, Weapon);
-            c.getPA().sendFrame126(WeaponName, 428);
+            c.getPlayerAssistant ().sendFrame246(426, 200, Weapon);
+            c.getPlayerAssistant ().sendFrame126(WeaponName, 428);
 		} else if (WeaponName.endsWith("bow") || WeaponName.endsWith("10") || c.playerEquipment[c.playerWeapon] == 16887 || c.playerEquipment[c.playerWeapon] == 16337 || c.playerEquipment[c.playerWeapon] == 13879 || c.playerEquipment[c.playerWeapon] == 15241 || c.playerEquipment[c.playerWeapon] == 18357 || c.playerEquipment[c.playerWeapon] == 13880 || c.playerEquipment[c.playerWeapon] == 13881 || c.playerEquipment[c.playerWeapon] == 13882 || c.playerEquipment[c.playerWeapon] == 13883 || WeaponName.endsWith("full") || WeaponName.startsWith("seercull")) {
 			c.setSidebarInterface(0, 1764); //accurate, rapid, longrange
-			c.getPA().sendFrame246(1765, 200, Weapon);
+			c.getPlayerAssistant ().sendFrame246(1765, 200, Weapon);
 			// c.getPA().sendFrame126(WeaponName, 1767);
 		} else if (WeaponName2.startsWith("dagger") || c.playerEquipment[c.playerWeapon] == 13905 || c.playerEquipment[c.playerWeapon] == 13195 || c.playerEquipment[c.playerWeapon] == 13899 || WeaponName2.contains("Staff of light") || c.playerEquipment[c.playerWeapon] == 18349 || c.playerEquipment[c.playerWeapon] == 10887 || WeaponName2.contains("sword")) {
 			c.setSidebarInterface(0, 2276); //stab, lunge, slash, block
-			c.getPA().sendFrame246(2277, 200, Weapon);
-			c.getPA().sendFrame126(WeaponName, 2279);
+			c.getPlayerAssistant ().sendFrame246(2277, 200, Weapon);
+			c.getPlayerAssistant ().sendFrame126(WeaponName, 2279);
 		} else if (WeaponName.startsWith("Staff") || WeaponName.endsWith("staff") || WeaponName.endsWith("wand")) {
 			c.setSidebarInterface(0, 328); //spike, impale, smash, block
-			c.getPA().sendFrame246(329, 200, Weapon);
-			c.getPA().sendFrame126(WeaponName, 331);
+			c.getPlayerAssistant ().sendFrame246(329, 200, Weapon);
+			c.getPlayerAssistant ().sendFrame126(WeaponName, 331);
 		} else if (WeaponName2.startsWith("dart") || WeaponName2.startsWith("knife") || WeaponName2.startsWith("javelin") || WeaponName.equalsIgnoreCase("toktz-xil-ul")) {
 			c.setSidebarInterface(0, 4446); //accurate, rapid, longrange
-			c.getPA().sendFrame246(4447, 200, Weapon);
-			c.getPA().sendFrame126(WeaponName, 4449);
+			c.getPlayerAssistant ().sendFrame246(4447, 200, Weapon);
+			c.getPlayerAssistant ().sendFrame126(WeaponName, 4449);
 		} else if (WeaponName2.startsWith("pickaxe")) {
 			c.setSidebarInterface(0, 5570); //spike, impale, smash, block
-			c.getPA().sendFrame246(5571, 200, Weapon);
-			c.getPA().sendFrame126(WeaponName, 5573);
+			c.getPlayerAssistant ().sendFrame246(5571, 200, Weapon);
+			c.getPlayerAssistant ().sendFrame126(WeaponName, 5573);
 		} else if (WeaponName2.startsWith("axe") || WeaponName2.startsWith("battleaxe")) {
 			c.setSidebarInterface(0, 1698); //chop, hack, smash, block
-			c.getPA().sendFrame246(1699, 200, Weapon);
-			c.getPA().sendFrame126(WeaponName, 1701);
+			c.getPlayerAssistant ().sendFrame246(1699, 200, Weapon);
+			c.getPlayerAssistant ().sendFrame126(WeaponName, 1701);
 		} else if (WeaponName2.startsWith("halberd")) {
 			c.setSidebarInterface(0, 8460); //jab, swipe, fend
-			c.getPA().sendFrame246(8461, 200, Weapon);
-			c.getPA().sendFrame126(WeaponName, 8463);
+			c.getPlayerAssistant ().sendFrame246(8461, 200, Weapon);
+			c.getPlayerAssistant ().sendFrame126(WeaponName, 8463);
         } else if (c.playerEquipment[c.playerWeapon] == 14486) {
             c.setSidebarInterface(0, 7762); //claws
-            c.getPA().sendFrame246(7763, 200, Weapon);
-            c.getPA().sendFrame126(WeaponName, 7765);
+            c.getPlayerAssistant ().sendFrame246(7763, 200, Weapon);
+            c.getPlayerAssistant ().sendFrame126(WeaponName, 7765);
         } else if (c.playerEquipment[c.playerWeapon] == 14484) {
             c.setSidebarInterface(0, 7762); //claws
-            c.getPA().sendFrame246(7763, 200, Weapon);
-            c.getPA().sendFrame126(WeaponName, 7765);
+            c.getPlayerAssistant ().sendFrame246(7763, 200, Weapon);
+            c.getPlayerAssistant ().sendFrame126(WeaponName, 7765);
 		} else if (WeaponName2.startsWith("scythe")) {
 			c.setSidebarInterface(0, 8460); //jab, swipe, fend
-			c.getPA().sendFrame246(8461, 200, Weapon);
-			c.getPA().sendFrame126(WeaponName, 8463);
+			c.getPlayerAssistant ().sendFrame246(8461, 200, Weapon);
+			c.getPlayerAssistant ().sendFrame126(WeaponName, 8463);
 		} else if (WeaponName2.startsWith("spear")) {
 			c.setSidebarInterface(0, 4679); //lunge, swipe, pound, block
-			c.getPA().sendFrame246(4680, 200, Weapon);
-			c.getPA().sendFrame126(WeaponName, 4682);
+			c.getPlayerAssistant ().sendFrame246(4680, 200, Weapon);
+			c.getPlayerAssistant ().sendFrame126(WeaponName, 4682);
 		} else if (WeaponName2.toLowerCase().contains("mace") || c.playerEquipment[c.playerWeapon] == 13902){
 			c.setSidebarInterface(0, 3796);
-			c.getPA().sendFrame246(3797, 200, Weapon);
-			c.getPA().sendFrame126(WeaponName, 3799);
+			c.getPlayerAssistant ().sendFrame246(3797, 200, Weapon);
+			c.getPlayerAssistant ().sendFrame126(WeaponName, 3799);
 		} else if (c.playerEquipment[c.playerWeapon] == 4153) {
 			c.setSidebarInterface(0, 425); //war hamer equip.
-			c.getPA().sendFrame246(426, 200, Weapon);
-			c.getPA().sendFrame126(WeaponName, 428);	
+			c.getPlayerAssistant ().sendFrame246(426, 200, Weapon);
+			c.getPlayerAssistant ().sendFrame126(WeaponName, 428);
 		} else if (c.playerEquipment[c.playerWeapon] == 18351) {
 			c.setSidebarInterface(0, 2423); //war hamer equip.
-			c.getPA().sendFrame246(426, 200, Weapon);
-			c.getPA().sendFrame126(WeaponName, 428);	
+			c.getPlayerAssistant ().sendFrame246(426, 200, Weapon);
+			c.getPlayerAssistant ().sendFrame126(WeaponName, 428);
 		} else {
 			c.setSidebarInterface(0, 2423); //chop, slash, lunge, block
-			c.getPA().sendFrame246(2424, 200, Weapon);
-			c.getPA().sendFrame126(WeaponName, 2426);
+			c.getPlayerAssistant ().sendFrame246(2424, 200, Weapon);
+			c.getPlayerAssistant ().sendFrame126(WeaponName, 2426);
 		}
 		
 	}
@@ -1355,12 +1354,12 @@ return;
 			case 15442: // whip
 			case 15443: // whip
 			case 15444: // whip
-			c.getPA().sendFrame171(0, 12323);
+			c.getPlayerAssistant ().sendFrame171(0, 12323);
 			specialAmount(weapon, c.specAmount, 12335);
 			break;
 
 			case 19780:// Korasi's Sword
-			c.getPA().sendFrame171(0, 7574); 
+			c.getPlayerAssistant ().sendFrame171(0, 7574);
 			specialAmount(weapon, c.specAmount, 7586);
 			break;
 			
@@ -1376,48 +1375,48 @@ return;
 			case 16887:
 			case 13879:
 			case 13883:
-			c.getPA().sendFrame171(0, 7549);
+			c.getPlayerAssistant ().sendFrame171(0, 7549);
 			specialAmount(weapon, c.specAmount, 7561);
 			break;
 			
 			case 4587:// dscimmy
-			c.getPA().sendFrame171(0, 7599);
+			c.getPlayerAssistant ().sendFrame171(0, 7599);
 			specialAmount(weapon, c.specAmount, 7611);
 			break;
 			
 			case 3204: // d hally
-			c.getPA().sendFrame171(0, 8493);
+			c.getPlayerAssistant ().sendFrame171(0, 8493);
 			specialAmount(weapon, c.specAmount, 8505);
 			break;
 			
 			case 1377: // d battleaxe
-			c.getPA().sendFrame171(0, 7499);
+			c.getPlayerAssistant ().sendFrame171(0, 7499);
 			specialAmount(weapon, c.specAmount, 7511);
 			break;
 			
 			case 4153: // gmaul
-			c.getPA().sendFrame171(0, 7474);
+			c.getPlayerAssistant ().sendFrame171(0, 7474);
 			specialAmount(weapon, c.specAmount, 7486);
 			break;
 			
 			case 1249: //dspear
-			c.getPA().sendFrame171(0, 7674);
+			c.getPlayerAssistant ().sendFrame171(0, 7674);
 			specialAmount(weapon, c.specAmount, 7686);
 			break;		
             case 14486: //dragon claws
-            c.getPA().sendFrame171(0, 7800);
+            c.getPlayerAssistant ().sendFrame171(0, 7800);
             specialAmount(weapon, c.specAmount, 7812);
             break;
             case 14484: //dragon claws
-            c.getPA().sendFrame171(0, 7800);
+            c.getPlayerAssistant ().sendFrame171(0, 7800);
             specialAmount(weapon, c.specAmount, 7812);
             break;
             case 13902: // Statius War
-            c.getPA().sendFrame171(0, 7474);
+            c.getPlayerAssistant ().sendFrame171(0, 7474);
             specialAmount(weapon, c.specAmount, 7486);
             break;
 			case 13904: // Statius War (deg)
-            c.getPA().sendFrame171(0, 7474);
+            c.getPlayerAssistant ().sendFrame171(0, 7474);
             specialAmount(weapon, c.specAmount, 7486);
             break;
 
@@ -1439,24 +1438,24 @@ return;
 			case 11700:
 			case 11730:
 			case 11696:
-			c.getPA().sendFrame171(0, 7574); 
+			c.getPlayerAssistant ().sendFrame171(0, 7574);
 			specialAmount(weapon, c.specAmount, 7586);
 			break;
 			case 13199:
 			case 1434: // dragon mace
-			c.getPA().sendFrame171(0, 7624);
+			c.getPlayerAssistant ().sendFrame171(0, 7624);
 			specialAmount(weapon, c.specAmount, 7636);
 			break;
 			
 			default:
-			c.getPA().sendFrame171(1, 7624); // mace interface
-			c.getPA().sendFrame171(1, 7474); // hammer, gmaul
-			c.getPA().sendFrame171(1, 7499); // axe
-			c.getPA().sendFrame171(1, 7549);  // bow interface
-			c.getPA().sendFrame171(1, 7574); // sword interface
-			c.getPA().sendFrame171(1, 7599); // scimmy sword interface, for most swords
-			c.getPA().sendFrame171(1, 8493);
-			c.getPA().sendFrame171(1, 12323); // whip interface
+			c.getPlayerAssistant ().sendFrame171(1, 7624); // mace interface
+			c.getPlayerAssistant ().sendFrame171(1, 7474); // hammer, gmaul
+			c.getPlayerAssistant ().sendFrame171(1, 7499); // axe
+			c.getPlayerAssistant ().sendFrame171(1, 7549);  // bow interface
+			c.getPlayerAssistant ().sendFrame171(1, 7574); // sword interface
+			c.getPlayerAssistant ().sendFrame171(1, 7599); // scimmy sword interface, for most swords
+			c.getPlayerAssistant ().sendFrame171(1, 8493);
+			c.getPlayerAssistant ().sendFrame171(1, 12323); // whip interface
 			break;		
 		}
 	}
@@ -1467,16 +1466,16 @@ return;
 	
 	public void specialAmount(int weapon, double specAmount, int barId) {
 		c.specBarId = barId;
-		c.getPA().sendFrame70(specAmount >= 10 ? 500 : 0, 0, (--barId));
-        c.getPA().sendFrame70(specAmount >= 9 ? 500 : 0, 0, (--barId));
-        c.getPA().sendFrame70(specAmount >= 8 ? 500 : 0, 0, (--barId));
-		c.getPA().sendFrame70(specAmount >= 7 ? 500 : 0, 0, (--barId));
-		c.getPA().sendFrame70(specAmount >= 6 ? 500 : 0, 0, (--barId));
-		c.getPA().sendFrame70(specAmount >= 5 ? 500 : 0, 0, (--barId));
-		c.getPA().sendFrame70(specAmount >= 4 ? 500 : 0, 0, (--barId));
-		c.getPA().sendFrame70(specAmount >= 3 ? 500 : 0, 0, (--barId));
-		c.getPA().sendFrame70(specAmount >= 2 ? 500 : 0, 0, (--barId));
-		c.getPA().sendFrame70(specAmount >= 1 ? 500 : 0, 0, (--barId));	
+		c.getPlayerAssistant ().sendFrame70(specAmount >= 10 ? 500 : 0, 0, (--barId));
+        c.getPlayerAssistant ().sendFrame70(specAmount >= 9 ? 500 : 0, 0, (--barId));
+        c.getPlayerAssistant ().sendFrame70(specAmount >= 8 ? 500 : 0, 0, (--barId));
+		c.getPlayerAssistant ().sendFrame70(specAmount >= 7 ? 500 : 0, 0, (--barId));
+		c.getPlayerAssistant ().sendFrame70(specAmount >= 6 ? 500 : 0, 0, (--barId));
+		c.getPlayerAssistant ().sendFrame70(specAmount >= 5 ? 500 : 0, 0, (--barId));
+		c.getPlayerAssistant ().sendFrame70(specAmount >= 4 ? 500 : 0, 0, (--barId));
+		c.getPlayerAssistant ().sendFrame70(specAmount >= 3 ? 500 : 0, 0, (--barId));
+		c.getPlayerAssistant ().sendFrame70(specAmount >= 2 ? 500 : 0, 0, (--barId));
+		c.getPlayerAssistant ().sendFrame70(specAmount >= 1 ? 500 : 0, 0, (--barId));
 		updateSpecialBar();
 		sendWeapon(weapon, getItemName(weapon));
 	}
@@ -1487,9 +1486,9 @@ return;
 	
 		public void updateSpecialBar() {
 		if(c.usingSpecial && c.playerEquipment[c.playerWeapon] != 15486) {
-			c.getPA().sendFrame126("@yel@ Special Attack ("+(int)c.specAmount*10+"%)", c.specBarId);
+			c.getPlayerAssistant ().sendFrame126("@yel@ Special Attack ("+(int)c.specAmount*10+"%)", c.specBarId);
 		} else { 
-			c.getPA().sendFrame126("@bla@ Special Attack ("+(int)c.specAmount*10+"%)", c.specBarId);
+			c.getPlayerAssistant ().sendFrame126("@bla@ Special Attack ("+(int)c.specAmount*10+"%)", c.specBarId);
 		}
 	}
 	
@@ -1607,19 +1606,19 @@ return;
 				if(Config.itemRequirements) {
 					if(targetSlot == 10 || targetSlot == 7 || targetSlot == 5 || targetSlot == 4 || targetSlot == 0 || targetSlot == 9 || targetSlot == 10) {
 						if(c.defenceLevelReq > 0) {
-							if(c.getPA().getLevelForXP(c.playerXP[1]) < c.defenceLevelReq) {
+							if(c.getPlayerAssistant ().getLevelForXP(c.playerXP[1]) < c.defenceLevelReq) {
 								c.sendMessage("You need a defence level of "+c.defenceLevelReq+" to wear this item.");
 								canWearItem = false;
 							}
 						}
 						if(c.rangeLevelReq > 0) {
-							if(c.getPA().getLevelForXP(c.playerXP[4]) < c.rangeLevelReq) {
+							if(c.getPlayerAssistant ().getLevelForXP(c.playerXP[4]) < c.rangeLevelReq) {
 								c.sendMessage("You need a range level of "+c.rangeLevelReq+" to wear this item.");
 								canWearItem = false;
 							}
 						}
 						if(c.magicLevelReq > 0) {
-							if(c.getPA().getLevelForXP(c.playerXP[6]) < c.magicLevelReq) {
+							if(c.getPlayerAssistant ().getLevelForXP(c.playerXP[6]) < c.magicLevelReq) {
 								c.sendMessage("You need a magic level of "+c.magicLevelReq+" to wear this item.");
 								canWearItem = false;
 							}
@@ -1627,19 +1626,19 @@ return;
 					}
 					if(targetSlot == 3) {
 						if(c.attackLevelReq > 0) {
-							if(c.getPA().getLevelForXP(c.playerXP[0]) < c.attackLevelReq) {
+							if(c.getPlayerAssistant ().getLevelForXP(c.playerXP[0]) < c.attackLevelReq) {
 								c.sendMessage("You need an attack level of "+c.attackLevelReq+" to wield this weapon.");
 								canWearItem = false;
 							}
 						}
 						if(c.rangeLevelReq > 0) {
-							if(c.getPA().getLevelForXP(c.playerXP[4]) < c.rangeLevelReq) {
+							if(c.getPlayerAssistant ().getLevelForXP(c.playerXP[4]) < c.rangeLevelReq) {
 								c.sendMessage("You need a range level of "+c.rangeLevelReq+" to wield this weapon.");
 								canWearItem = false;
 							}
 						}
 						if(c.magicLevelReq > 0) {
-							if(c.getPA().getLevelForXP(c.playerXP[6]) < c.magicLevelReq) {
+							if(c.getPlayerAssistant ().getLevelForXP(c.playerXP[6]) < c.magicLevelReq) {
 								c.sendMessage("You need a magic level of "+c.magicLevelReq+" to wield this weapon.");
 								canWearItem = false;
 							}
@@ -1659,7 +1658,7 @@ return;
 				if (targetSlot == c.playerWeapon) {
 					c.autocasting = false;
 					c.autocastId = 0;
-					c.getPA().sendFrame36(108, 0);
+					c.getPlayerAssistant ().sendFrame36(108, 0);
 				}
 
 				if(slot >= 0 && wearID >= 0) {
@@ -1761,7 +1760,7 @@ return;
 				getBonus();
 				writeBonus();
 				c.getCombat().getPlayerAnimIndex(c.getItems().getItemName(c.playerEquipment[c.playerWeapon]).toLowerCase());
-				c.getPA().requestUpdates();
+				c.getPlayerAssistant ().requestUpdates();
 				return true;
 			} else {
 				return false;
@@ -2004,7 +2003,7 @@ if(Item.itemStackable[itemID]) {
 					c.sendMessage("You can't Stackable items.");
 					return false;
 				}
-c.getPA().Frame34(7423, itemID, c.summoningslot, 1);
+c.getPlayerAssistant ().Frame34(7423, itemID, c.summoningslot, 1);
 deleteItem(itemID, 1);
 c.occupied[c.summoningslot] = true;
 c.storeditems[c.summoningslot] = itemID;
@@ -2027,7 +2026,7 @@ return false;
 }
 
 
-		c.getPA().sendFrame126(bankSlotsUsed()+" / "+Config.BANK_SIZE, 23003);
+		c.getPlayerAssistant ().sendFrame126(bankSlotsUsed()+" / "+Config.BANK_SIZE, 23003);
 			if(c.inTrade) {
 				c.sendMessage("You can't store items while trading!");
 				return false;

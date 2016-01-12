@@ -1,6 +1,5 @@
 package server.model.players.packets;
 
-import server.Config;
 import server.model.players.Client;
 import server.model.players.PacketType;
 
@@ -12,7 +11,7 @@ public class Trade implements PacketType {
 	@Override
 	public void processPacket(Client c, int packetType, int packetSize) {
 		int tradeId = c.getInStream().readSignedWordBigEndian();
-		c.getPA().resetFollow();
+		c.getPlayerAssistant ().resetFollow();
 		
 		if (c.inTrade) {
 		c.sendMessage("You cannot walk while in a trade.");

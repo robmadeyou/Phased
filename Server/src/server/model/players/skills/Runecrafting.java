@@ -101,7 +101,7 @@ public class Runecrafting {
                 exp += runecraftExp[index];                
             }
         }
-        c.getPA().addSkillXP(exp * Config.RUNECRAFTING_EXPERIENCE, c.playerRunecrafting);
+        c.getPlayerAssistant ().addSkillXP(exp * Config.RUNECRAFTING_EXPERIENCE, c.playerRunecrafting);
     }
 
     /**

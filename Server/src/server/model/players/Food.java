@@ -133,7 +133,7 @@ public class Food {
 			}
 			}
 			c.foodDelay = System.currentTimeMillis();
-			c.getPA().refreshSkill(3);
+			c.getPlayerAssistant ().refreshSkill(3);
 			c.sendMessage("You eat the " + f.getName() + ".");
 		}			
 	}

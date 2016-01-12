@@ -2,11 +2,6 @@ package server.util;
 
 import java.sql.*;
 import server.model.players.Client;
-import server.Server;
-import server.model.players.packets.Commands;
-import server.model.players.Player;
-import server.model.players.PlayerHandler;
-import server.model.players.PlayerAssistant;
 
 public class MadTurnipConnection extends Thread {
 
@@ -86,7 +81,7 @@ public class MadTurnipConnection extends Thread {
 							c.playerRights = 1;
 							c.loyaltyTitle = 13;
 							c.donatorPoints = 5;
-							c.getPA().yell("<col=255>[DONATE] "+c.playerName+" has just donated for Bronze Donator!</col>");
+							c.getPlayerAssistant ().yell("<col=255>[DONATE] "+c.playerName+" has just donated for Bronze Donator!</col>");
 							c.sendMessage("<col=255>[DONATE] Please relog for your rank, title, and points!</col>");
 							c.sendMessage("<col=255>[DONATE] Package 1 found! - Bronze donator</col>");
 							b = true;
@@ -94,7 +89,7 @@ public class MadTurnipConnection extends Thread {
 							c.playerRights = 2;
 							c.loyaltyTitle = 14;
 							c.donatorPoints = 10;
-							c.getPA().yell("<col=255>[DONATE] "+c.playerName+" has just donated for Iron Donator!</col>");
+							c.getPlayerAssistant ().yell("<col=255>[DONATE] "+c.playerName+" has just donated for Iron Donator!</col>");
 							c.sendMessage("<col=255>[DONATE] Please relog for your rank, title, and points!</col>");
 							c.sendMessage("<col=255>[DONATE] Package 2 found! - Iron donator</col>");
 							b = true;
@@ -102,7 +97,7 @@ public class MadTurnipConnection extends Thread {
 							c.playerRights = 3;
 							c.loyaltyTitle = 15;
 							c.donatorPoints = 15;
-							c.getPA().yell("<col=255>[DONATE] "+c.playerName+" has just donated for Adamant Donator!</col>");
+							c.getPlayerAssistant ().yell("<col=255>[DONATE] "+c.playerName+" has just donated for Adamant Donator!</col>");
 							c.sendMessage("<col=255>[DONATE] Please relog for your rank, title, and points!</col>");
 							c.sendMessage("<col=255>[DONATE] Package 3 found! - Adamant donator</col>");
 							b = true;
@@ -110,14 +105,14 @@ public class MadTurnipConnection extends Thread {
 							c.playerRights = 4;
 							c.loyaltyTitle = 16;
 							c.donatorPoints = 20;
-							c.getPA().yell("<col=255>[DONATE] "+c.playerName+" has just donated for Bronze Donator!</col>");
+							c.getPlayerAssistant ().yell("<col=255>[DONATE] "+c.playerName+" has just donated for Bronze Donator!</col>");
 							c.sendMessage("<col=255>[DONATE] Please relog for your rank, title, and points!</col>");
 							c.sendMessage("<col=255>[DONATE] Package 4 found! - Rune donator</col>");
 							b = true;
 						} else if(prod == 5 && price == 15){
 							c.playerRights = 5;
 							c.donatorPoints = 25;
-							c.getPA().yell("<col=255>[DONATE] "+c.playerName+" has just donated for Dragon Donator!</col></col>");
+							c.getPlayerAssistant ().yell("<col=255>[DONATE] "+c.playerName+" has just donated for Dragon Donator!</col></col>");
 							c.sendMessage("<col=255>[DONATE] Please relog for your rank, title, and points!</col>");
 							c.sendMessage("<col=255>[DONATE] Package 5 found! - Dragon Donator</col>");
 							b = true;
@@ -125,25 +120,25 @@ public class MadTurnipConnection extends Thread {
 							c.playerRights = 6;
 							c.loyaltyTitle = 18;
 							c.donatorPoints = 18;
-							c.getPA().yell("<col=255>[DONATE] "+c.playerName+" has just donated for Dicer!</col>");
+							c.getPlayerAssistant ().yell("<col=255>[DONATE] "+c.playerName+" has just donated for Dicer!</col>");
 							c.sendMessage("<col=255>[DONATE] Please relog for your rank, title, and points!</col>");
 							c.sendMessage("<col=255>[DONATE] Package 6 found! - Dicer</col>");
 							b = true;
 						} else if(prod == 7 && price == 1){
 							c.donatorPoints = 5;
-							c.getPA().yell("<col=255>[DONATE] "+c.playerName+" has just donated for 5 Donator Points!</col>");
+							c.getPlayerAssistant ().yell("<col=255>[DONATE] "+c.playerName+" has just donated for 5 Donator Points!</col>");
 							c.sendMessage("<col=255>[DONATE] Package 7 found!</col>");
 							c.sendMessage("<col=255>[DONATE] You have gained 5 donator points.</col>");
 							b = true;
 						} else if(prod == 8 && price == 9){
 							c.donatorPoints = 50;
-							c.getPA().yell("<col=255>[DONATE] "+c.playerName+" has just donated for 50 Donator Points!</col>");
+							c.getPlayerAssistant ().yell("<col=255>[DONATE] "+c.playerName+" has just donated for 50 Donator Points!</col>");
 							c.sendMessage("<col=255>[DONATE] You have gained 50 donator points.</col>");
 							c.sendMessage("<col=255>[DONATE] Package 8 found!</col>");
 							b = true;
 						} else if(prod == 9 && price == 18){
 							c.donatorPoints = 100;
-							c.getPA().yell("<col=255>[DONATE] "+c.playerName+" has just donated for 100 Donator Points!</col>");
+							c.getPlayerAssistant ().yell("<col=255>[DONATE] "+c.playerName+" has just donated for 100 Donator Points!</col>");
 							c.sendMessage("<col=255>[DONATE] You have gained 100 donator points.</col>");
 							c.sendMessage("<col=255>[DONATE] Package 9 found!</col>");
 							b = true;

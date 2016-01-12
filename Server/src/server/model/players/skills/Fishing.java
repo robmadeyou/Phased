@@ -1,12 +1,7 @@
 package server.model.players.skills;
 
 import server.Config;
-import server.Server;
 import server.util.Misc;
-import server.event.Event;
-import server.event.EventContainer;
-import server.event.EventManager;
-import server.model.objects.Objects;
 import server.model.players.Client;
 
 public class Fishing {
@@ -42,15 +37,15 @@ public void FishingProcess() {
                     } else {
                         if (c.fishreq2 != 0 && c.playerLevel[10] >= c.fishreq2 && Misc.random(1) == 1) {
                             c.getItems().addItem(c.fishies2, 1);
-                       c.getPA().addSkillXP(c.fishXP, 10);
+                       c.getPlayerAssistant ().addSkillXP(c.fishXP, 10);
 					  
                         } else {
                             c.getItems().addItem(c.fishies, 1);
-                        c.getPA().addSkillXP(c.fishXP, 10);
+                        c.getPlayerAssistant ().addSkillXP(c.fishXP, 10);
 						
                         }
                         if (c.fishitem == 307)
-                        c.getPA().addSkillXP(c.fishXP, 10);
+                        c.getPlayerAssistant ().addSkillXP(c.fishXP, 10);
 						
                         c.fishtimer = Misc.random(fishtime(c.fishies, c.fishreqt));
                         //c.sendMessage("You catch a " + c.getItems().getItemName(c.fishies).toLowerCase());

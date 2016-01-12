@@ -2,9 +2,6 @@ package server.model.minigames;
 
 import server.model.players.Client;
 import server.util.Misc;
-import server.event.EventManager;
-import server.event.Event;
-import server.event.EventContainer;
 
 public class Gambling {
 
@@ -19,7 +16,7 @@ public class Gambling {
 		int number1 = Misc.random(9);
 		int number2 = Misc.random(9);
 		c.sendMessage("Your numbers are: [<col=255>"+number1+"</col>] and [<col=255>"+number2+"</col>].");
-		c.getPA().removeAllWindows();
+		c.getPlayerAssistant ().removeAllWindows();
 		c.sendMessage("The winning number is: [<col=255>"+random+"</col>]." );
 		if (random == number1 || random == number2) {
 			c.sendMessage("Congratulations! You won random items!");
@@ -38,8 +35,8 @@ public class Gambling {
 		int i2 = randomPrize[3][Misc.random(90)];
 
 		c.getItems().addItem(i2, i1);
-		c.getPA().showInterface(6960);
-		c.getPA().displayItemOnInterface(6963, i2, 0, i1);
+		c.getPlayerAssistant ().showInterface(6960);
+		c.getPlayerAssistant ().displayItemOnInterface(6963, i2, 0, i1);
 
 		if(isDouble) {
 			addReward(c, 2, 40, 1, "Great! You win a double prize!");
@@ -54,13 +51,13 @@ public class Gambling {
 		} else if(chance == 10) {
 			addReward(c, 2, 40, 1, "Exellent! You win a high item!");
 		}
-		c.getPA().displayItemOnInterface(6963, -1, 2, -1);
+		c.getPlayerAssistant ().displayItemOnInterface(6963, -1, 2, -1);
 	}
 
 	public static void addReward(Client c, int i, int l, int t, String s) {
 		int i1 = randomPrize[i][Misc.random(l)];
 		c.getItems().addItem(i1, 1);
-		c.getPA().displayItemOnInterface(6963, i1, t, 1);
+		c.getPlayerAssistant ().displayItemOnInterface(6963, i1, t, 1);
 		if(s.startsWith("")) {
 			return;
 		}
@@ -109,7 +106,7 @@ public class Gambling {
 	}
 
 	private static void stopTheGame(Client c) {
-		c.getPA().removeAllWindows();
+		c.getPlayerAssistant ().removeAllWindows();
 		playerBet = -1;
 		betting = false;
 		hasBetEnough = false;

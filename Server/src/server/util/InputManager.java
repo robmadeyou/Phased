@@ -1,17 +1,11 @@
 package server.util;
 
 import server.Server;
-import server.commands.ArgumentExecute;
 import server.commands.Command;
-import server.commands.CommandExecute;
 import server.commands.PlayerCommand;
 import server.helpers.StringHelper;
-import server.model.items.Item;
 import server.model.items.ItemList;
-import server.model.npcs.NPCDrops;
 import server.model.players.Client;
-import server.model.players.PacketHandler;
-import server.model.players.Player;
 import server.model.players.PlayerHandler;
 
 import java.io.*;
@@ -56,13 +50,13 @@ public class InputManager implements Runnable
 
             c.getArgs ().addArgument ( (String s) -> c.getPlayer ().getItems ().deleteAllItems (), "-delete-invent" );
 
-            c.getArgs ().addArgument ( (String s) -> c.getPlayer ().getPA ().bankAll (), "-bank-invent" );
+            c.getArgs ().addArgument ( (String s) -> c.getPlayer ().getPlayerAssistant ().bankAll (), "-bank-invent" );
         } ) );
 
         commands.add ( new PlayerCommand ( "item", (PlayerCommand c) -> {
 
             c.getArgs ().addArgument ( (String s) -> {
-                ArrayList< String > x = StringHelper.removeEmptyArrayEntries ( s.split ( " " ) );
+                ArrayList< String > x = StringHelper.explodeOnSpaceRemoveEmpty ( s );
                 ItemList i = Server.itemHandler.ItemList[ Integer.parseInt ( x.get ( 0 ) ) ];
                 i.Bonuses[ Integer.parseInt ( x.get ( 1 ) ) ] = Integer.parseInt ( x.get ( 2 ) );
             }, "c", "-change" );
@@ -75,9 +69,8 @@ public class InputManager implements Runnable
             }, "-reload" );
         } ) );
 
-        commands.add ( new Command ( "npc", (Command c) ->
-        {
-                c.getArgs ().addArgument ( (String s ) -> Server.npcDrops.reloadNpcDrops (), "-reload" );
+        commands.add ( new Command ( "npc", (Command c) -> {
+            c.getArgs ().addArgument ( (String s) -> Server.npcDrops.reloadNpcDrops (), "-reload" );
         } ) );
     }
 

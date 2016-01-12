@@ -70,7 +70,7 @@ public class CrystalChest {
 			c.sendMessage("You unlock the chest with your key.");
 			c.getItems().deleteItem(KEY, 1);
 			c.startAnimation(OPEN_ANIMATION);
-			c.getPA().checkObjectSpawn(id + 1, x, y, 3, 10);
+			c.getPlayerAssistant ().checkObjectSpawn(id + 1, x, y, 3, 10);
 			EventManager.getSingleton().addEvent(new Event() {
 				public void execute(EventContainer e) {
 					c.getItems().addItem(DRAGONSTONE, 1);
@@ -78,7 +78,7 @@ public class CrystalChest {
 					c.getItems().addItem(
 							CHEST_REWARDS[Misc.random(getLength() - 1)], 1);
 					c.sendMessage("You find some treasure in the chest.");
-					c.getPA().checkObjectSpawn(id, x, y, 3, 10);
+					c.getPlayerAssistant ().checkObjectSpawn(id, x, y, 3, 10);
 					e.stop();
 				}
 			}, 1800);

@@ -48,21 +48,21 @@ public class FightPits {
 		for (int j = 0; j < Server.playerHandler.players.length; j++) {
 			if (Server.playerHandler.players[j] != null) {
 				Client c = (Client) Server.playerHandler.players[j];
-				if (c.getPA().inPitsWait() || c.inPits) {
-					c.getPA().sendQuest("Fight Pits", 15894);
-					c.getPA().sendQuest("Next Game In : " + gameStartTimer + " seconds.", 15895);
-					c.getPA().sendQuest("Current Champion:", 15897);
-					c.getPA().sendQuest("JalYt-Ket-"+pitsChampion,15898);
-					c.getPA().sendQuest("Foes Remaining: "+playersRemaining, 15899); 
-					c.getPA().sendQuest("", 15896);
-        				c.getPA().sendQuest("", 15900);
-        				c.getPA().sendQuest("", 15901);
-        				c.getPA().sendQuest("", 15902);
-        				c.getPA().sendQuest("", 15903);
-        				c.getPA().sendQuest("", 15904);
-        				c.getPA().sendQuest("", 15905);
-        				c.getPA().sendQuest("", 15906);
-					c.getPA().walkableInterface(15892);
+				if (c.getPlayerAssistant ().inPitsWait() || c.inPits) {
+					c.getPlayerAssistant ().sendQuest("Fight Pits", 15894);
+					c.getPlayerAssistant ().sendQuest("Next Game In : " + gameStartTimer + " seconds.", 15895);
+					c.getPlayerAssistant ().sendQuest("Current Champion:", 15897);
+					c.getPlayerAssistant ().sendQuest("JalYt-Ket-"+pitsChampion,15898);
+					c.getPlayerAssistant ().sendQuest("Foes Remaining: "+playersRemaining, 15899);
+					c.getPlayerAssistant ().sendQuest("", 15896);
+        				c.getPlayerAssistant ().sendQuest("", 15900);
+        				c.getPlayerAssistant ().sendQuest("", 15901);
+        				c.getPlayerAssistant ().sendQuest("", 15902);
+        				c.getPlayerAssistant ().sendQuest("", 15903);
+        				c.getPlayerAssistant ().sendQuest("", 15904);
+        				c.getPlayerAssistant ().sendQuest("", 15905);
+        				c.getPlayerAssistant ().sendQuest("", 15906);
+					c.getPlayerAssistant ().walkableInterface(15892);
 					
 				}
 			}
@@ -78,7 +78,7 @@ public class FightPits {
 		for (int j = 0; j < Server.playerHandler.players.length; j++) {
 			if (Server.playerHandler.players[j] != null )  {
 					Client c = (Client)Server.playerHandler.players[j];
-					if (c.getPA().inPitsWait())
+					if (c.getPlayerAssistant ().inPitsWait())
 						addToPitsGame(j);
 			}	
 		}
@@ -91,7 +91,7 @@ public class FightPits {
 		for (int j = 0; j < Server.playerHandler.players.length; j++) {
 			if (Server.playerHandler.players[j] != null )  {
 					Client c = (Client)Server.playerHandler.players[j];
-					if (c.getPA().inPitsWait())
+					if (c.getPlayerAssistant ().inPitsWait())
 						count++;
 			}	
 		}
@@ -102,7 +102,7 @@ public class FightPits {
 		for (int j = 0; j < playerInPits.length; j++) {
 			if (playerInPits[j] == playerId) {
 				Client c = (Client)Server.playerHandler.players[playerInPits[j]];
-				c.getPA().startTeleport(2399, 5173, 0, "modern");
+				c.getPlayerAssistant ().startTeleport(2399, 5173, 0, "modern");
 				playerInPits[j] = -1;
 				playersRemaining--;
 				c.inPits = false;
@@ -121,7 +121,7 @@ public class FightPits {
 			if (Server.playerHandler.players[playerInPits[j]] == null)
 				continue;
 			Client c = (Client)Server.playerHandler.players[playerInPits[j]];
-			c.getPA().startTeleport(2399, 5173, 0,  "modern");
+			c.getPlayerAssistant ().startTeleport(2399, 5173, 0,  "modern");
 			c.inPits = false;
 		}
 		playerInPits = new int[200];	
@@ -139,7 +139,7 @@ public class FightPits {
 		playersRemaining++;
 		Client c = (Client)Server.playerHandler.players[playerId];
 		playerInPits[pitsSlot++] = playerId;
-		c.getPA().startTeleport(2392 + Misc.random(12), 5139 + Misc.random(25), 0, "modern");
+		c.getPlayerAssistant ().startTeleport(2392 + Misc.random(12), 5139 + Misc.random(25), 0, "modern");
 		c.inPits = true;
 		c.getDH().talk(588, "", "FIGHT!", "", "", 2617);		
 	}

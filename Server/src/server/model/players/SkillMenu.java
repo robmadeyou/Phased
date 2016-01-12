@@ -81,13 +81,13 @@ public class SkillMenu {
 		removeSidebars(c);
 		writeItems(c,skillType);
 		writeText(c,skillType);
-		c.getPA().showInterface(INTERFACE_ID);
+		c.getPlayerAssistant ().showInterface(INTERFACE_ID);
 	}
 	
 	private static void removeSidebars(Client c) {
 		int[] temp = {8849,8846,8823,8824,8827,8837,8840,8843,8859,8862,8865,15303,15306,15309};
 		for (int j = 0; j < temp.length; j++) {
-			c.getPA().sendFrame126("",temp[j]);
+			c.getPlayerAssistant ().sendFrame126("",temp[j]);
 		}
 	}
 	
@@ -112,19 +112,19 @@ public class SkillMenu {
 	
 	
 	private static void writeText(Client c, int skillType) {
-		c.getPA().sendFrame126(SKILLS[skillType], TITLE_LINE);
+		c.getPlayerAssistant ().sendFrame126(SKILLS[skillType], TITLE_LINE);
 		for (int j = 0; j < LEVELS[skillType].length; j++) {
-			c.getPA().sendFrame126(LEVELS[skillType][j], LEVEL_LINE + j);
+			c.getPlayerAssistant ().sendFrame126(LEVELS[skillType][j], LEVEL_LINE + j);
 		}
 		for (int j = 0; j < DESCRIPTION[skillType].length; j++) {
-			c.getPA().sendFrame126(DESCRIPTION[skillType][j], TEXT_LINE + j);
+			c.getPlayerAssistant ().sendFrame126(DESCRIPTION[skillType][j], TEXT_LINE + j);
 		}
 		
 		for (int j = DESCRIPTION[skillType].length; j < 30; j++) {
-			c.getPA().sendFrame126("", LEVEL_LINE + j);
+			c.getPlayerAssistant ().sendFrame126("", LEVEL_LINE + j);
 		}
 		for (int j = LEVELS[skillType].length; j < 30; j++) {
-			c.getPA().sendFrame126("", TEXT_LINE + j);
+			c.getPlayerAssistant ().sendFrame126("", TEXT_LINE + j);
 		}
 	}
 }

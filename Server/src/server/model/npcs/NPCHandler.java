@@ -136,7 +136,7 @@ public class NPCHandler
 		newNPC.underAttack = true;
 		newNPC.facePlayer(c.playerId);
 		if(headIcon) 
-			c.getPA().drawHeadicon(1, slot, 0, 0);
+			c.getPlayerAssistant().drawHeadicon(1, slot, 0, 0);
 		if (summonFollow) {
 			newNPC.summoner = true;
 			newNPC.summonedBy = c.playerId;
@@ -193,7 +193,7 @@ public class NPCHandler
                     int pY = c.getY ();
                     int offX = ( nY - pY ) * -1;
                     int offY = ( nX - pX ) * -1;
-                    c.getPA ().createPlayersProjectile ( nX, nY, offX, offY, 50, getProjectileSpeed ( i ), npcs[ i ].projectileId, 43, 31, -c.getId () - 1, 65 );
+                    c.getPlayerAssistant ().createPlayersProjectile ( nX, nY, offX, offY, 50, getProjectileSpeed ( i ), npcs[ i ].projectileId, 43, 31, -c.getId () - 1, 65 );
                 }
             }
         }
@@ -409,7 +409,7 @@ public class NPCHandler
                         c.gfx0 ( npcs[ i ].endGfx );
                     }
                 }
-                c.getPA ().refreshSkill ( 3 );
+                c.getPlayerAssistant ().refreshSkill ( 3 );
             }
         }
     }
@@ -601,7 +601,7 @@ public class NPCHandler
         newNPC.defence = defence;
         newNPC.spawnedBy = c.getId ();
         if ( headIcon )
-            c.getPA ().drawHeadicon ( 1, slot, 0, 0 );
+            c.getPlayerAssistant ().drawHeadicon ( 1, slot, 0, 0 );
         if ( attackPlayer )
         {
             newNPC.underAttack = true;
@@ -1899,7 +1899,7 @@ public class NPCHandler
 
                     npcs[ i ].oldIndexNPC = npcs[ c ].npcId;
                     startAnimation ( getAttackEmote ( i ), i );
-                    //c.getPA().removeAllWindows();
+                    //c.getPlayerAssistant().removeAllWindows();
                 }
             }
         }
@@ -2874,7 +2874,7 @@ public class NPCHandler
         Client c = ( Client ) Server.playerHandler.players[ npcs[ i ].spawnedBy ];
         c.getItems ().addItem ( 6570, 1 );
         c.sendMessage ( "Congratulations on completing the fight caves minigame!" );
-        c.getPA ().resetTzhaar ();
+        c.getPlayerAssistant ().resetTzhaar ();
         c.waveId = 300;
     }
 
@@ -2882,7 +2882,7 @@ public class NPCHandler
     {
         Client c = ( Client ) Server.playerHandler.players[ npcs[ i ].spawnedBy ];
         c.sendMessage ( "Congratulations you have completed the RFD minigame!" );
-        c.getPA ().resetRFD ();
+        c.getPlayerAssistant ().resetRFD ();
         c.waveId = 300;
     }
 
@@ -2931,7 +2931,7 @@ public class NPCHandler
             if ( npcs[ i ].npcType == 35 )
             {
                 c.dungPoints += 75;
-                c.getPA ().addSkillXP ( ( 1000 ), 24 );
+                c.getPlayerAssistant ().addSkillXP ( ( 1000 ), 24 );
                 c.sendMessage ( "You have gained 1000 dungeoneering XP for killing a soldier." );
                 c.sendMessage ( "You gained 75 dungeoneering points for killing a soldier!" );
             }
@@ -2939,36 +2939,36 @@ public class NPCHandler
             if ( npcs[ i ].npcType == 3375 )
             {
                 c.dungPoints += 5000;
-                c.getPA ().addSkillXP ( ( 250000 ), 24 );
+                c.getPlayerAssistant ().addSkillXP ( ( 250000 ), 24 );
                 c.sendMessage ( "You have gained 250k dungeoneering XP for killing the evil chicken." );
                 c.sendMessage ( "You gained 5k dungeoneering points for killing the evil chicken." );
             }
             if ( npcs[ i ].npcType == 6032 )
             {
-                c.getPA ().yell ( "<col=255>[BOSSING] " + Misc.optimizeText ( c.playerName ) + " has just defeated the nex!</col>" );
+                c.getPlayerAssistant ().yell ( "<col=255>[BOSSING] " + Misc.optimizeText ( c.playerName ) + " has just defeated the nex!</col>" );
             }
             if ( npcs[ i ].npcType == 8133 )
             {
-                c.getPA ().yell ( "<col=255>[BOSSING] " + Misc.optimizeText ( c.playerName ) + " has just defeated the Corporal Beast!</col>" );
+                c.getPlayerAssistant ().yell ( "<col=255>[BOSSING] " + Misc.optimizeText ( c.playerName ) + " has just defeated the Corporal Beast!</col>" );
             }
             if ( npcs[ i ].npcType == 2745 )
             {
-                c.getPA ().yell ( "<col=255>[BOSSING] " + Misc.optimizeText ( c.playerName ) + " has just defeated the Jad and has won a fire cape!</col>" );
+                c.getPlayerAssistant ().yell ( "<col=255>[BOSSING] " + Misc.optimizeText ( c.playerName ) + " has just defeated the Jad and has won a fire cape!</col>" );
             }
             if ( npcs[ i ].npcType == 8528 )
             {
-                c.getPA ().yell ( "<col=255>[BOSSING] " + Misc.optimizeText ( c.playerName ) + " has just defeated Nomad!</col>" );
+                c.getPlayerAssistant ().yell ( "<col=255>[BOSSING] " + Misc.optimizeText ( c.playerName ) + " has just defeated Nomad!</col>" );
             }
             if ( npcs[ i ].npcType == 7133 )
             {
-                c.getPA ().yell ( "<col=255>[QUESTING] " + Misc.optimizeText ( c.playerName ) + " has rescued Mizgog and defeated Bork!</col>" );
+                c.getPlayerAssistant ().yell ( "<col=255>[QUESTING] " + Misc.optimizeText ( c.playerName ) + " has rescued Mizgog and defeated Bork!</col>" );
             }
             if ( NPCDrops.constantDrops.get ( npcs[ i ].npcType ) != null )
             {
                 for ( int item : NPCDrops.constantDrops.get ( npcs[ i ].npcType ) )
                 {
                     if ( c.getItems ().playerHasItem ( 18337, 1 ) && isBone ( item ) )
-                        c.getPA ().addSkillXP ( c.getPrayer ().getExp ( item ) * Config.PRAYER_EXPERIENCE, 5 );
+                        c.getPlayerAssistant ().addSkillXP ( c.getPrayer ().getExp ( item ) * Config.PRAYER_EXPERIENCE, 5 );
                     else
                         Server.itemHandler.createGroundItem ( c, item, npcs[ i ].absX, npcs[ i ].absY, 1, c.playerId );
                     //if (c.clanId >= 0)
@@ -3022,7 +3022,7 @@ public class NPCHandler
             if ( ArmadylKC ( i ) )
             {
                 c.Arma += 1;
-                //c.getPA().sendFrame126(""+c.Arma+"", 16216);
+                //c.getPlayerAssistant().sendFrame126(""+c.Arma+"", 16216);
             }
             if ( npcs[ i ].npcType == 132 )
             {
@@ -3031,17 +3031,17 @@ public class NPCHandler
             if ( BandosKC ( i ) )
             {
                 c.Band += 1;
-                //c.getPA().sendFrame126(""+c.Bandos+"", 16217);
+                //c.getPlayerAssistant().sendFrame126(""+c.Bandos+"", 16217);
             }
             if ( SaraKC ( i ) )
             {
                 c.Sara += 1;
-                //c.getPA().sendFrame126(""+c.Sara+"", 16218);
+                //c.getPlayerAssistant().sendFrame126(""+c.Sara+"", 16218);
             }
             if ( ZammyKC ( i ) )
             {
                 c.Zammy += 1;
-                //c.getPA().sendFrame126(""+c.Zammy+"", 16219);
+                //c.getPlayerAssistant().sendFrame126(""+c.Zammy+"", 16219);
             }
             if ( npcs[ i ].npcType == 3493 )
             {
@@ -3303,12 +3303,12 @@ public class NPCHandler
             if ( c.slayerTask == npcs[ i ].npcType )
             {
                 c.taskAmount--;
-                c.getPA ().addSkillXP ( npcs[ i ].MaxHP * Config.SLAYER_EXPERIENCE, 18 );
+                c.getPlayerAssistant ().addSkillXP ( npcs[ i ].MaxHP * Config.SLAYER_EXPERIENCE, 18 );
                 if ( c.taskAmount <= 0 )
                 {
                     if ( npcs[ i ].npcType == 1645 || npcs[ i ].npcType == 1591 || npcs[ i ].npcType == 1618 || npcs[ i ].npcType == 1643 || npcs[ i ].npcType == 941 || npcs[ i ].npcType == 119 || npcs[ i ].npcType == 82 || npcs[ i ].npcType == 52 || npcs[ i ].npcType == 1612 || npcs[ i ].npcType == 117 || npcs[ i ].npcType == 1265 || npcs[ i ].npcType == 112 || npcs[ i ].npcType == 125 )
                     {
-                        c.getPA ().addSkillXP ( ( npcs[ i ].MaxHP * 10 ) * Config.SLAYER_EXPERIENCE, 18 );
+                        c.getPlayerAssistant ().addSkillXP ( ( npcs[ i ].MaxHP * 10 ) * Config.SLAYER_EXPERIENCE, 18 );
                         c.SPoints += 10;
                         c.levelPoints += 10;
                         c.slayerTask = -1;
@@ -3318,7 +3318,7 @@ public class NPCHandler
                     }
                     if ( npcs[ i ].npcType == 1624 || npcs[ i ].npcType == 1610 || npcs[ i ].npcType == 1592 || npcs[ i ].npcType == 1613 || npcs[ i ].npcType == 1615 || npcs[ i ].npcType == 55 || npcs[ i ].npcType == 84 || npcs[ i ].npcType == 49 || npcs[ i ].npcType == 1618 || npcs[ i ].npcType == 941 || npcs[ i ].npcType == 82 || npcs[ i ].npcType == 2783 || npcs[ i ].npcType == 1341 )
                     {
-                        c.getPA ().addSkillXP ( ( npcs[ i ].MaxHP * 12 ) * Config.SLAYER_EXPERIENCE, 18 );
+                        c.getPlayerAssistant ().addSkillXP ( ( npcs[ i ].MaxHP * 12 ) * Config.SLAYER_EXPERIENCE, 18 );
                         c.SPoints += 15;
                         c.levelPoints += 15;
                         c.slayerTask = -1;
@@ -3328,7 +3328,7 @@ public class NPCHandler
                     }
                     if ( npcs[ i ].npcType == 1648 || npcs[ i ].npcType == 117 || npcs[ i ].npcType == 1265 || npcs[ i ].npcType == 90 || npcs[ i ].npcType == 103 || npcs[ i ].npcType == 78 || npcs[ i ].npcType == 119 || npcs[ i ].npcType == 18 || npcs[ i ].npcType == 101 || npcs[ i ].npcType == 1265 || npcs[ i ].npcType == 181 )
                     {
-                        c.getPA ().addSkillXP ( ( npcs[ i ].MaxHP * 8 ) * Config.SLAYER_EXPERIENCE, 18 );
+                        c.getPlayerAssistant ().addSkillXP ( ( npcs[ i ].MaxHP * 8 ) * Config.SLAYER_EXPERIENCE, 18 );
                         c.SPoints += 5;
                         c.levelPoints += 5;
                         c.slayerTask = -1;
@@ -3338,7 +3338,7 @@ public class NPCHandler
                     }
                     if ( npcs[ i ].npcType == 3847 || npcs[ i ].npcType == 8596 || npcs[ i ].npcType == 3943 || npcs[ i ].npcType == 8528 || npcs[ i ].npcType == 53 || npcs[ i ].npcType == 9947 || npcs[ i ].npcType == 10775 || npcs[ i ].npcType == 9467 || npcs[ i ].npcType == 9465 || npcs[ i ].npcType == 6260 || npcs[ i ].npcType == 2881 || npcs[ i ].npcType == 2882 || npcs[ i ].npcType == 2883 || npcs[ i ].npcType == 8133 || npcs[ i ].npcType == 8349 || npcs[ i ].npcType == 9463 )
                     {
-                        c.getPA ().addSkillXP ( ( npcs[ i ].MaxHP * 13 ) * Config.SLAYER_EXPERIENCE, 18 );
+                        c.getPlayerAssistant ().addSkillXP ( ( npcs[ i ].MaxHP * 13 ) * Config.SLAYER_EXPERIENCE, 18 );
                         c.SPoints += 25;
                         c.levelPoints += 25;
                         c.slayerTask = -1;
@@ -4098,7 +4098,7 @@ public class NPCHandler
                     c.playerLevel[ 5 ] -= ( c.playerLevel[ 5 ] * .22 );
                     npcs[ i ].attackType = 2;
                     c.sendMessage ( "The Strykewyrm Drained Your Prayer Points!" );
-                    c.getPA ().refreshSkill ( 5 );
+                    c.getPlayerAssistant ().refreshSkill ( 5 );
                 }
                 break;
             case 795:
@@ -4670,13 +4670,13 @@ public class NPCHandler
                         int pY = c.getY ();
                         int offX = ( nY - pY ) * -1;
                         int offY = ( nX - pX ) * -1;
-                        c.getPA ().createPlayersProjectile ( nX, nY, offX, offY, 50, getProjectileSpeed ( i ), npcs[ i ].projectileId, 43, 31, -c.getId () - 1, 65 );
+                        c.getPlayerAssistant ().createPlayersProjectile ( nX, nY, offX, offY, 50, getProjectileSpeed ( i ), npcs[ i ].projectileId, 43, 31, -c.getId () - 1, 65 );
                     }
                     c.underAttackBy2 = i;
                     c.singleCombatDelay2 = System.currentTimeMillis ();
                     npcs[ i ].oldIndex = c.playerId;
                     startAnimation ( getAttackEmote ( i ), i );
-                    c.getPA ().removeAllWindows ();
+                    c.getPlayerAssistant ().removeAllWindows ();
                 }
             }
         }
@@ -4854,7 +4854,7 @@ public class NPCHandler
 
                 if ( npcs[ i ].attackType == 3 )
                 { //fire breath
-                    int anti = c.getPA ().antiFire ();
+                    int anti = c.getPlayerAssistant ().antiFire ();
                     if ( anti == 0 )
                     {
                         damage = Misc.random ( 30 ) + 10;
@@ -4879,7 +4879,7 @@ public class NPCHandler
                 //c.setHitDiff(damage);
                 c.handleHitMask ( damage );
                 c.playerLevel[ 3 ] -= damage;
-                c.getPA ().refreshSkill ( 3 );
+                c.getPlayerAssistant ().refreshSkill ( 3 );
                 c.updateRequired = true;
                 //c.setHitUpdateRequired(true);	
             }
@@ -4897,7 +4897,7 @@ public class NPCHandler
                     if ( c.playerLevel[ 5 ] > 0 )
                     {
                         c.playerLevel[ 5 ]--;
-                        c.getPA ().refreshSkill ( 5 );
+                        c.getPlayerAssistant ().refreshSkill ( 5 );
 
                     }
                 }

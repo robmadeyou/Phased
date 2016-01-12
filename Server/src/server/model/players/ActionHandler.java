@@ -5,10 +5,6 @@ import server.Server;
 import server.model.objects.Object;
 import server.util.Misc;
 import server.util.ScriptManager;
-import server.model.players.Client;
-import server.model.npcs.NPCHandler;
-import server.model.minigames.CrystalChest;
-import server.model.items.UseItem;
 
 public class ActionHandler {
 	private Client c;
@@ -28,10 +24,10 @@ public class ActionHandler {
 	if (c.absY <= c.objectY){
 		
 		c.startAnimation(6132);
-		c.getPA().walkTo(0, +3);
+		c.getPlayerAssistant ().walkTo(0, +3);
 		} else if (c.objectY < c.absY) {
 		c.startAnimation(6132);
-				c.getPA().walkTo(0, -3);
+				c.getPlayerAssistant ().walkTo(0, -3);
 				} 
 		}
                 }
@@ -50,7 +46,7 @@ public class ActionHandler {
                  wildyditch();
 	          break;		  
 		case 1765:
-			c.getPA().movePlayer(2271, 4680, 0);
+			c.getPlayerAssistant ().movePlayer(2271, 4680, 0);
 		break;
 		
 		
@@ -69,11 +65,11 @@ public class ActionHandler {
 				c.sendMessage("You can only do this once every 5 minute!");
 				return;
 				}	
-		if(c.playerLevel[5] < c.getPA().getLevelForXP(c.playerXP[5])) {
+		if(c.playerLevel[5] < c.getPlayerAssistant ().getLevelForXP(c.playerXP[5])) {
 				c.startAnimation(645);
-				c.playerLevel[5] = c.getPA().getLevelForXP(c.playerXP[5]);
+				c.playerLevel[5] = c.getPlayerAssistant ().getLevelForXP(c.playerXP[5]);
 				c.sendMessage("You recharge your prayer points.");
-				c.getPA().refreshSkill(5);
+				c.getPlayerAssistant ().refreshSkill(5);
 				c.gwdelay = 600;
 			} else {
 				c.sendMessage("You already have full prayer points.");
@@ -87,17 +83,17 @@ public class ActionHandler {
 		break;
 		
 		/*case 9398://deposit
-	c.getPA().sendFrame126("The Bank of Aggroth - Deposit Box", 7421);
-	c.getPA().sendFrame248(4465, 197);//197 just because you can't see it =\
+	c.getPlayerAssistant().sendFrame126("The Bank of Aggroth - Deposit Box", 7421);
+	c.getPlayerAssistant().sendFrame248(4465, 197);//197 just because you can't see it =\
 	c.getItems().resetItems(7423);
 break;*/
 				
 		case 2286:
-		c.getPA().movePlayer(2595, 4778, 0);
+		c.getPlayerAssistant ().movePlayer(2595, 4778, 0);
 		c.getItems().addItem(995, 2000);
-		c.getPA().addSkillXP(125*c.playerLevel[16], c.playerAgility);
+		c.getPlayerAssistant ().addSkillXP(125*c.playerLevel[16], c.playerAgility);
 		//c.getPA().addSkillXP(300, 24);
-		c.getPA().refreshSkill(c.playerAgility);
+		c.getPlayerAssistant ().refreshSkill(c.playerAgility);
 		break;
 		
 
@@ -122,7 +118,7 @@ break;*/
 		c.sendMessage("You need 90 Hunter to enter the Strykworm's Cave");
 		} else {
 		if((c.playerLevel[21] > 89) && (c.playerLevel[16] >89)) {
-		c.getPA().movePlayer(2515, 4632, 0);
+		c.getPlayerAssistant ().movePlayer(2515, 4632, 0);
 		c.sendMessage("A sense of nervousness fills your body..");
 		c.sendMessage("you find yourself in a mystery cave!");
 		}
@@ -146,7 +142,7 @@ break;*/
 		c.sendMessage("You need 85 Mining to face the Frost Dragons");
 		} else {
 		if((c.playerLevel[14] > 84) && (c.playerLevel[18] >91)) {
-		c.getPA().movePlayer(3052, 9577, 0);
+		c.getPlayerAssistant ().movePlayer(3052, 9577, 0);
 		c.sendMessage("A nervous chill runs down your spine..");
 		c.sendMessage("you find yourself in the Frost Dragons Lair!");
 		}
@@ -158,40 +154,40 @@ break;*/
 		break;
 		
 		case 4150:
-		c.getPA().movePlayer(2606, 3154, 0);
+		c.getPlayerAssistant ().movePlayer(2606, 3154, 0);
 		c.sendMessage("Welcome to Funpk!");
 		break;
 		
 		
 		case 7315: 
-		c.getPA().movePlayer(2605, 3153, 0);
+		c.getPlayerAssistant ().movePlayer(2605, 3153, 0);
 		c.sendMessage("Welcome to FunPK, Don't Get Owned!");
 		break;
 		
 		case 7316: 
-		c.getPA().movePlayer(3095, 3501, 0);
+		c.getPlayerAssistant ().movePlayer(3095, 3501, 0);
 		c.sendMessage("You have returned from FunPk Unharmed!");
 		break;
 		
 		case 25808:
-		c.getPA().openUpBank();
+		c.getPlayerAssistant ().openUpBank();
 		break;
 		
 		case 2471:
-		c.getPA().movePlayer(3363, 9638, 0);
+		c.getPlayerAssistant ().movePlayer(3363, 9638, 0);
 		c.sendMessage("Welcome to PkBox!");
 		break;
 		
 		case 8987:
-		c.getPA().movePlayer(3086, 3493, 0);
+		c.getPlayerAssistant ().movePlayer(3086, 3493, 0);
 		break;
 		
 		case 6455:
-		c.getPA().movePlayer(2837, 3803, 1);
+		c.getPlayerAssistant ().movePlayer(2837, 3803, 1);
 		break;
 		
 		case 6456:
-		c.getPA().movePlayer(2837, 3806, 0);
+		c.getPlayerAssistant ().movePlayer(2837, 3806, 0);
 		break;
 		
         	case 3192:
@@ -199,20 +195,20 @@ break;*/
                 break;
 		
 		case 2469:
-		c.getPA().movePlayer(1762, 5180, 0);
+		c.getPlayerAssistant ().movePlayer(1762, 5180, 0);
 		break;
 		
 		case 6461:
-		c.getPA().movePlayer(2851, 3809, 2);
+		c.getPlayerAssistant ().movePlayer(2851, 3809, 2);
 		break;
 		
 		case 13623:
-		c.getPA().movePlayer(2837, 3806, 0);
+		c.getPlayerAssistant ().movePlayer(2837, 3806, 0);
 		c.sendMessage("Multi Zone Is Working!");
 		break;
 		
 		case 15638:
-		c.getPA().movePlayer(2841, 3538, 0);
+		c.getPlayerAssistant ().movePlayer(2841, 3538, 0);
 		break;
 				case 411:
 			if(c.altarPrayed == 0) {
@@ -231,73 +227,73 @@ break;*/
 		break;
 
 		case 13619:
-		c.getPA().movePlayer(2717, 9801, 4);
+		c.getPlayerAssistant ().movePlayer(2717, 9801, 4);
 		c.sendMessage("You teleported to tormented demons donator only NPC's!");
 		c.sendMessage("You'll only be able to see Donators here, Sorta like world 2...");
 		break;
 		case 6452:
 			if (c.absX == 3304 && c.absY == 9376) {
-		c.getPA().movePlayer(3305, 9376, 4);
+		c.getPlayerAssistant ().movePlayer(3305, 9376, 4);
 		c.sendMessage("Prepare for the strongest monster in the game!");
 		c.sendMessage("Note: It has 3 waves on it's hp bar!");
 				} else {
 			c.autoRet = 0;
 			c.getCombat().resetPlayerAttack();
-		        c.getPA().movePlayer(3304, 9376, 0);
+		        c.getPlayerAssistant ().movePlayer(3304, 9376, 0);
 				}
 		break;
 		case 6451:
 			if (c.absX == 3304 && c.absY == 9375) {
-		c.getPA().movePlayer(3305, 9375, 4);
+		c.getPlayerAssistant ().movePlayer(3305, 9375, 4);
 		c.sendMessage("Prepare for the strongest monster in the game!");
 		c.sendMessage("Note: It has 3 waves on it's hp bar!");
 				} else {
 			c.autoRet = 0;
 			c.getCombat().resetPlayerAttack();
-		        c.getPA().movePlayer(3304, 9375, 0);
+		        c.getPlayerAssistant ().movePlayer(3304, 9375, 0);
 				}
 		break;
 		case 13625:
-		c.getPA().movePlayer(2975, 9515, 1);
+		c.getPlayerAssistant ().movePlayer(2975, 9515, 1);
 		c.sendMessage("You teleported to Barrelchest Non-donators");
 		c.sendMessage("The Donators portal to barrelchest is 3 barrelchest bosses spawns!");
 		break;
 		case 13617:
-		c.getPA().movePlayer(2975, 9515, 5);
+		c.getPlayerAssistant ().movePlayer(2975, 9515, 5);
 		c.sendMessage("You teleported to Barrelchest Donators");
 		c.sendMessage("You will only see Donators here and 3 bosses!!");
 		break;
 		case 13620:
-		c.getPA().movePlayer(2721, 9450, 4);
+		c.getPlayerAssistant ().movePlayer(2721, 9450, 4);
 		c.sendMessage("You teleported to steel/iron donator only NPC's!");
 		c.sendMessage("You'll only be able to see Donators here, this makes it alot easier to train.");
 		break;
 		case 13615:
-		c.getPA().movePlayer(3115, 9838, 4);
+		c.getPlayerAssistant ().movePlayer(3115, 9838, 4);
 		c.sendMessage("You teleported to Hill Giants donator only NPC's!");
 		c.sendMessage("You'll only be able to see Donators here, this makes it alot easier to train.");
 		break;
 		case 1738:
-		c.getPA().movePlayer(2840, 3539, 2);
+		c.getPlayerAssistant ().movePlayer(2840, 3539, 2);
 		break;
 		case 15644:
 			if (c.objectX == 2855) {
 			if (c.absX == 2855 && c.absY == 3546) {
-		        c.getPA().movePlayer(2855, 3545, 0);
+		        c.getPlayerAssistant ().movePlayer(2855, 3545, 0);
 				} else {
-		        c.getPA().movePlayer(2855, 3546, 0);
+		        c.getPlayerAssistant ().movePlayer(2855, 3546, 0);
 				}
 				}
 			break;
 		case 15641:
 			if (c.objectX == 2854) {
 			if (c.absX == 2854 && c.absY == 3546) {
-		        c.getPA().movePlayer(2854, 3545, 0);
+		        c.getPlayerAssistant ().movePlayer(2854, 3545, 0);
 				} else {
-		        c.getPA().movePlayer(2854, 3546, 0);
+		        c.getPlayerAssistant ().movePlayer(2854, 3546, 0);
 				}
 			if (c.absX == 2847 && c.absY == 3540) {
-		        c.getPA().movePlayer(2854, 3546, 0);
+		        c.getPlayerAssistant ().movePlayer(2854, 3546, 0);
 				}
 				}
 			if (c.objectY == 3540) {
@@ -317,22 +313,22 @@ break;*/
 		case 2883:
 			if (c.objectX == 3268) {
 				if (c.absX < c.objectX) {
-					c.getPA().walkTo(1,0);
+					c.getPlayerAssistant ().walkTo(1,0);
 				} else {
-					c.getPA().walkTo(-1,0);
+					c.getPlayerAssistant ().walkTo(-1,0);
 				}
 			}
 		break;
 		case 272:
-			c.getPA().movePlayer(c.absX, c.absY, 1);
+			c.getPlayerAssistant ().movePlayer(c.absX, c.absY, 1);
 		break;
 		
 		case 273:
-			c.getPA().movePlayer(c.absX, c.absY, 0);
+			c.getPlayerAssistant ().movePlayer(c.absX, c.absY, 0);
 		break;
 
 		case 60:
-		        c.getPA().movePlayer(3086, 3493, 0);
+		        c.getPlayerAssistant ().movePlayer(3086, 3493, 0);
 		break;
 		case 26428:
 		      if (c.Zammy < 15 && c.absX == 2925 && c.absY == 5332) {
@@ -340,12 +336,12 @@ break;*/
 		       return;
 		       }	
 		       if(c.absX == 2925 && c.absY == 5332) {
-		        c.getPA().movePlayer(2925, 5331, 6);
+		        c.getPlayerAssistant ().movePlayer(2925, 5331, 6);
 		       c.Zammy -= 15;
 		       c.sendMessage("A magical force reseted your Zamorak kill count!");
 		      }
 		        if(c.absX == 2925 && c.absY == 5331) {
-		        c.getPA().movePlayer(2925, 5332, 2);
+		        c.getPlayerAssistant ().movePlayer(2925, 5332, 2);
 			c.autoRet = 0;
 			c.getCombat().resetPlayerAttack();
 		      }
@@ -356,18 +352,18 @@ break;*/
 		       return;
 		       }	
 		      if(c.absX == 2863 && c.absY == 5354) {
-	     	    	 c.getPA().movePlayer(2864, 5354, 6);
+	     	    	 c.getPlayerAssistant ().movePlayer(2864, 5354, 6);
 		       c.Band -= 15;
 		       c.sendMessage("A magical force reseted your Bandos kill count!");
 		      }
 		       if(c.absX == 2864 && c.absY == 5354) {
-	     	      c.getPA().movePlayer(2863, 5354, 2);
+	     	      c.getPlayerAssistant ().movePlayer(2863, 5354, 2);
 			c.autoRet = 0;
 			c.getCombat().resetPlayerAttack();
 		      }
 		break;
 		case 26303:
-		      c.getPA().movePlayer(2872, 5269, 2);
+		      c.getPlayerAssistant ().movePlayer(2872, 5269, 2);
 		break;
 		case 26426:
 		      if (c.Arma < 15 && c.absX == 2839 && c.absY == 5295) {
@@ -375,12 +371,12 @@ break;*/
 		       return;
 		       }		       
 		       if(c.absX == 2839 && c.absY == 5295) {
-		        c.getPA().movePlayer(2839, 5296, 6);
+		        c.getPlayerAssistant ().movePlayer(2839, 5296, 6);
 		       c.Arma -= 15;
 		       c.sendMessage("A magical force reseted your Armadyl kill count!");
 		      }
 		       if(c.absX == 2839 && c.absY == 5296) {
-		        c.getPA().movePlayer(2839, 5295, 2);
+		        c.getPlayerAssistant ().movePlayer(2839, 5295, 2);
 			c.autoRet = 0;
 			c.getCombat().resetPlayerAttack();
 		      }
@@ -393,10 +389,10 @@ break;*/
 		       if(c.absX == 2908 && c.absY == 5265) {
 		       c.Sara -= 15;
 		       c.sendMessage("A magical force reseted your Saradomin kill count!");
-		        c.getPA().movePlayer(2907, 5265, 4);
+		        c.getPlayerAssistant ().movePlayer(2907, 5265, 4);
 		      }
 		       if(c.absX == 2907 && c.absY == 5265) {
-		        c.getPA().movePlayer(2908, 5265, 0);
+		        c.getPlayerAssistant ().movePlayer(2908, 5265, 0);
 			c.autoRet = 0;
 			c.getCombat().resetPlayerAttack();
 		      }
@@ -427,16 +423,16 @@ break;*/
 	}
 			break;
 		case 245:
-			c.getPA().movePlayer(c.absX, c.absY + 2, 2);
+			c.getPlayerAssistant ().movePlayer(c.absX, c.absY + 2, 2);
 		break;
 		case 26293:
-			c.getPA().startTeleport(3086, 3493, 0, "modern");
+			c.getPlayerAssistant ().startTeleport(3086, 3493, 0, "modern");
 		break;
 		case 246:
-			c.getPA().movePlayer(c.absX, c.absY - 2, 1);
+			c.getPlayerAssistant ().movePlayer(c.absX, c.absY - 2, 1);
 		break;
 		case 1766:
-			c.getPA().movePlayer(3016, 3849, 0);
+			c.getPlayerAssistant ().movePlayer(3016, 3849, 0);
 		break;
 			case 410:
 			if (c.playerMagicBook == 0) {
@@ -446,7 +442,7 @@ break;*/
 				c.playerMagicBook = 2;
 				c.setSidebarInterface(6, 16640);
 				c.sendMessage("Your mind becomes stirred with thoughs of dreams.");
-				c.getPA().resetAutocast();
+				c.getPlayerAssistant ().resetAutocast();
 			} else {
 				if(c.playerEquipment[c.playerWeapon] == 4675 || c.playerEquipment[c.playerWeapon] == 15486 || c.playerEquipment[c.playerWeapon] == 15040) {
 				c.setSidebarInterface(0, 328);
@@ -455,7 +451,7 @@ break;*/
 				c.playerMagicBook = 0;
 				c.sendMessage("You feel a drain on your memory.");
 				c.autocastId = -1;
-				c.getPA().resetAutocast();
+				c.getPlayerAssistant ().resetAutocast();
 			}
 		break;
 
@@ -467,7 +463,7 @@ break;*/
 				c.playerMagicBook = 1;
 				c.setSidebarInterface(6, 12855);
 				c.sendMessage("An ancient wisdomin fills your mind.");
-				c.getPA().resetAutocast();
+				c.getPlayerAssistant ().resetAutocast();
 			} else {
 				if(c.playerEquipment[c.playerWeapon] == 4675 || c.playerEquipment[c.playerWeapon] == 15486 || c.playerEquipment[c.playerWeapon] == 15040) {
 				c.setSidebarInterface(0, 328);
@@ -476,24 +472,24 @@ break;*/
 				c.playerMagicBook = 0;
 				c.sendMessage("You feel a drain on your memory.");
 				c.autocastId = -1;
-				c.getPA().resetAutocast();
+				c.getPlayerAssistant ().resetAutocast();
 			}	
 		break;
 
 		
 		case 1816:
-			c.getPA().startTeleport2(2271, 4680, 0);			
+			c.getPlayerAssistant ().startTeleport2(2271, 4680, 0);
 		break;
 		case 1817:
-			c.getPA().startTeleport(3086, 3493, 0, "modern");
+			c.getPlayerAssistant ().startTeleport(3086, 3493, 0, "modern");
 		break;
 		case 1814:
 			//ardy lever
-			c.getPA().startTeleport(3153, 3923, 0, "modern");
+			c.getPlayerAssistant ().startTeleport(3153, 3923, 0, "modern");
 		break;
 		
 		case 9356:
-			c.getPA().enterCaves();
+			c.getPlayerAssistant ().enterCaves();
 			c.sendMessage("Relog to start the waves, if it bugs up, just relog!");
 		break;
 		case 12356:
@@ -502,31 +498,31 @@ break;*/
 			return;
 			}
 			if (c.getY() < 3500) {
-			c.getPA().enterRFD();
+			c.getPlayerAssistant ().enterRFD();
 			c.sendMessage("Note: this is not a Safe Minigame, you'll lose your items on death!");
 			for(int p = 0; p < c.PRAYER.length; p++) { // reset prayer glows 
 				c.prayerActive[p] = false;
-				c.getPA().sendFrame36(c.PRAYER_GLOW[p], 0);	
+				c.getPlayerAssistant ().sendFrame36(c.PRAYER_GLOW[p], 0);
 			}
 			} else {
-			c.getPA().resetRFD();
+			c.getPlayerAssistant ().resetRFD();
 			}
 		break;
 		case 1733:
-			c.getPA().movePlayer(c.absX, c.absY + 6393, 0);
+			c.getPlayerAssistant ().movePlayer(c.absX, c.absY + 6393, 0);
 		break;
 		
 		case 1734:
-			c.getPA().movePlayer(c.absX, c.absY - 6396, 0);
+			c.getPlayerAssistant ().movePlayer(c.absX, c.absY - 6396, 0);
 		break;
 		
 		case 9357:
-			c.getPA().resetTzhaar();
+			c.getPlayerAssistant ().resetTzhaar();
 		break;
 		
 		case 8959:
 			if (c.getX() == 2490 && (c.getY() == 10146 || c.getY() == 10148)) {
-				if (c.getPA().checkForPlayer(2490, c.getY() == 10146 ? 10148 : 10146)) {
+				if (c.getPlayerAssistant ().checkForPlayer(2490, c.getY() == 10146 ? 10148 : 10146)) {
 					new Object(6951, c.objectX, c.objectY, c.heightLevel, 1, 10, 8959, 15);	
 				}			
 			}
@@ -537,13 +533,13 @@ break;*/
 		case 11758:
 		case 3193:
 		case 26972:
-			c.getPA().openUpBank();
+			c.getPlayerAssistant ().openUpBank();
 		break;
 		
 		case 2996:
 if (c.getItems().playerHasItem(989,1) && c.getItems().freeSlots() >= 1) {
 c.getItems().deleteItem(989, 1);
-c.getItems().addItem(c.getPA().randomCrystal(), 1);
+c.getItems().addItem(c.getPlayerAssistant ().randomCrystal(), 1);
 c.getDH().sendDialogues(38, 945);
 } else {
 c.getDH().sendDialogues(37, 945); }
@@ -559,34 +555,34 @@ c.sendMessage("Dungeoneering will be much better once this update is finished.")
 break;
 		/* End of Dungeoneering */
 		case 10177:
-			c.getPA().movePlayer(1890, 4407, 0);
+			c.getPlayerAssistant ().movePlayer(1890, 4407, 0);
 		break;
 		case 10230:
-			c.getPA().movePlayer(2900, 4449, 0);
+			c.getPlayerAssistant ().movePlayer(2900, 4449, 0);
 		break;
 		case 10229:
-			c.getPA().movePlayer(1912, 4367, 0);
+			c.getPlayerAssistant ().movePlayer(1912, 4367, 0);
 		break;
 		case 2623:
 			if (c.absX >= c.objectX)
-				c.getPA().walkTo(-1,0);
+				c.getPlayerAssistant ().walkTo(-1,0);
 			else
-				c.getPA().walkTo(1,0);
+				c.getPlayerAssistant ().walkTo(1,0);
 		break;
 		//pc boat
 		case 14315:
-			c.getPA().movePlayer(2661,2639,0);
+			c.getPlayerAssistant ().movePlayer(2661,2639,0);
 		break;
 		case 14314:
-			c.getPA().movePlayer(2657,2639,0);
+			c.getPlayerAssistant ().movePlayer(2657,2639,0);
 		break;
 		
 		case 1596:
 		case 1597:
 		if (c.getY() >= c.objectY)
-			c.getPA().walkTo(0,-1);
+			c.getPlayerAssistant ().walkTo(0,-1);
 		else
-			c.getPA().walkTo(0,1);
+			c.getPlayerAssistant ().walkTo(0,1);
 		break;
 		
 		case 14235:
@@ -604,7 +600,7 @@ break;
 			if (c.absX <= 2585)
 				c.absY += 1;
 			else c.absY -= 1;
-			c.getPA().movePlayer(c.absX, c.absY, 0);
+			c.getPlayerAssistant ().movePlayer(c.absX, c.absY, 0);
 		break;
 		case 14829: case 14830: case 14827: case 14828: case 14826: case 14831:
 			//Server.objectHandler.startObelisk(objectType);
@@ -623,9 +619,9 @@ break;
 		case 9369:
 		
 			if (c.absX == 2399 && c.absY == 5177) {
-				c.getPA().walkTo(0, -2);
+				c.getPlayerAssistant ().walkTo(0, -2);
 			} else {
-				c.getPA().walkTo(0, 2);
+				c.getPlayerAssistant ().walkTo(0, 2);
 			}
 			break;
 		
@@ -633,7 +629,7 @@ break;
 
 			if (c.getY() < 5169) {
 				Server.fightPits.removePlayerFromPits(c.playerId);
-				c.getPA().movePlayer(2399, 5169, 0);
+				c.getPlayerAssistant ().movePlayer(2399, 5169, 0);
 			}	
 		break;
 		case 4411:
@@ -668,11 +664,11 @@ break;
 				c.barrowsNpcs[c.randomCoffin][1] = 1;
 			}
 			if((c.barrowsKillCount > 5 || c.barrowsNpcs[c.randomCoffin][1] == 2) && c.getItems().freeSlots() >= 2) {
-				c.getPA().resetBarrows();
-				c.getItems().addItem(c.getPA().randomRunes(), Misc.random(150) + 100);
+				c.getPlayerAssistant ().resetBarrows();
+				c.getItems().addItem(c.getPlayerAssistant ().randomRunes(), Misc.random(150) + 100);
 				if (Misc.random(2) == 1)
-					c.getItems().addItem(c.getPA().randomBarrows(), 1);
-				c.getPA().startTeleport(3564, 3288, 0, "modern");
+					c.getItems().addItem(c.getPlayerAssistant ().randomBarrows(), 1);
+				c.getPlayerAssistant ().startTeleport(3564, 3288, 0, "modern");
 			} else if(c.barrowsKillCount > 5 && c.getItems().freeSlots() <= 1) {
 				c.sendMessage("You need at least 2 inventory slot opened.");
 			}
@@ -680,20 +676,20 @@ break;
 		//doors
 		case 6749:
 			if(obX == 3562 && obY == 9678) {
-				c.getPA().object(3562, 9678, 6749, -3, 0);
-				c.getPA().object(3562, 9677, 6730, -1, 0);
+				c.getPlayerAssistant ().object(3562, 9678, 6749, -3, 0);
+				c.getPlayerAssistant ().object(3562, 9677, 6730, -1, 0);
 			} else if(obX == 3558 && obY == 9677) {
-				c.getPA().object(3558, 9677, 6749, -1, 0);
-				c.getPA().object(3558, 9678, 6730, -3, 0);
+				c.getPlayerAssistant ().object(3558, 9677, 6749, -1, 0);
+				c.getPlayerAssistant ().object(3558, 9678, 6730, -3, 0);
 			}
 			break;
 		case 6730:
 			if(obX == 3558 && obY == 9677) {
-				c.getPA().object(3562, 9678, 6749, -3, 0);
-				c.getPA().object(3562, 9677, 6730, -1, 0);
+				c.getPlayerAssistant ().object(3562, 9678, 6749, -3, 0);
+				c.getPlayerAssistant ().object(3562, 9677, 6730, -1, 0);
 			} else if(obX == 3558 && obY == 9678) {
-				c.getPA().object(3558, 9677, 6749, -1, 0);
-				c.getPA().object(3558, 9678, 6730, -3, 0);
+				c.getPlayerAssistant ().object(3558, 9677, 6749, -1, 0);
+				c.getPlayerAssistant ().object(3558, 9678, 6730, -3, 0);
 			}
 			break;
 		case 6727:
@@ -708,62 +704,62 @@ break;
 			break;
 		case 6748:
 			if(obX == 3545 && obY == 9678) {
-				c.getPA().object(3545, 9678, 6748, -3, 0);
-				c.getPA().object(3545, 9677, 6729, -1, 0);
+				c.getPlayerAssistant ().object(3545, 9678, 6748, -3, 0);
+				c.getPlayerAssistant ().object(3545, 9677, 6729, -1, 0);
 			} else if(obX == 3541 && obY == 9677) {
-				c.getPA().object(3541, 9677, 6748, -1, 0);
-				c.getPA().object(3541, 9678, 6729, -3, 0);
+				c.getPlayerAssistant ().object(3541, 9677, 6748, -1, 0);
+				c.getPlayerAssistant ().object(3541, 9678, 6729, -3, 0);
 			}
 			break;
 		case 6729:
 			if(obX == 3545 && obY == 9677){
-				c.getPA().object(3545, 9678, 6748, -3, 0);
-				c.getPA().object(3545, 9677, 6729, -1, 0);
+				c.getPlayerAssistant ().object(3545, 9678, 6748, -3, 0);
+				c.getPlayerAssistant ().object(3545, 9677, 6729, -1, 0);
 			} else if(obX == 3541 && obY == 9678) {
-				c.getPA().object(3541, 9677, 6748, -1, 0);
-				c.getPA().object(3541, 9678, 6729, -3, 0);
+				c.getPlayerAssistant ().object(3541, 9677, 6748, -1, 0);
+				c.getPlayerAssistant ().object(3541, 9678, 6729, -3, 0);
 			}
 			break;
 		case 6726:
 			if(obX == 3534 && obY == 9684) {
-				c.getPA().object(3534, 9684, 6726, -4, 0);
-				c.getPA().object(3535, 9684, 6745, -2, 0);
+				c.getPlayerAssistant ().object(3534, 9684, 6726, -4, 0);
+				c.getPlayerAssistant ().object(3535, 9684, 6745, -2, 0);
 			} else if(obX == 3535 && obY == 9688) {
-				c.getPA().object(3535, 9688, 6726, -2, 0);
-				c.getPA().object(3534, 9688, 6745, -4, 0);
+				c.getPlayerAssistant ().object(3535, 9688, 6726, -2, 0);
+				c.getPlayerAssistant ().object(3534, 9688, 6745, -4, 0);
 			}
 			break;
 		case 6745:
 			if(obX == 3535 && obY == 9684) {
-				c.getPA().object(3534, 9684, 6726, -4, 0);
-				c.getPA().object(3535, 9684, 6745, -2, 0);
+				c.getPlayerAssistant ().object(3534, 9684, 6726, -4, 0);
+				c.getPlayerAssistant ().object(3535, 9684, 6745, -2, 0);
 			} else if(obX == 3534 && obY == 9688) {
-				c.getPA().object(3535, 9688, 6726, -2, 0);
-				c.getPA().object(3534, 9688, 6745, -4, 0);
+				c.getPlayerAssistant ().object(3535, 9688, 6726, -2, 0);
+				c.getPlayerAssistant ().object(3534, 9688, 6745, -4, 0);
 			}
 			break;
 		case 6743:
 			if(obX == 3545 && obY == 9695) {
-				c.getPA().object(3545, 9694, 6724, -1, 0);
-				c.getPA().object(3545, 9695, 6743, -3, 0);
+				c.getPlayerAssistant ().object(3545, 9694, 6724, -1, 0);
+				c.getPlayerAssistant ().object(3545, 9695, 6743, -3, 0);
 			} else if(obX == 3541 && obY == 9694) {
-				c.getPA().object(3541, 9694, 6724, -1, 0);
-				c.getPA().object(3541, 9695, 6743, -3, 0);
+				c.getPlayerAssistant ().object(3541, 9694, 6724, -1, 0);
+				c.getPlayerAssistant ().object(3541, 9695, 6743, -3, 0);
 			}
 			break;
 		case 6724:
 			if(obX == 3545 && obY == 9694) {
-				c.getPA().object(3545, 9694, 6724, -1, 0);
-				c.getPA().object(3545, 9695, 6743, -3, 0);
+				c.getPlayerAssistant ().object(3545, 9694, 6724, -1, 0);
+				c.getPlayerAssistant ().object(3545, 9695, 6743, -3, 0);
 			} else if(obX == 3541 && obY == 9695) {
-				c.getPA().object(3541, 9694, 6724, -1, 0);
-				c.getPA().object(3541, 9695, 6743, -3, 0);
+				c.getPlayerAssistant ().object(3541, 9694, 6724, -1, 0);
+				c.getPlayerAssistant ().object(3541, 9695, 6743, -3, 0);
 			}
 			break; 
 		//end doors
 		//coffins
 		case 6707: // verac
-			c.getPA().movePlayer(3556, 3298, 0);
+			c.getPlayerAssistant ().movePlayer(3556, 3298, 0);
 			break;
 			
 		case 6823:
@@ -779,7 +775,7 @@ break;
 			break;
 
 		case 6706: // torag 
-			c.getPA().movePlayer(3553, 3283, 0);
+			c.getPlayerAssistant ().movePlayer(3553, 3283, 0);
 			break;
 			
 		case 6772:
@@ -796,7 +792,7 @@ break;
 			
 			
 		case 6705: // karil stairs
-			c.getPA().movePlayer(3565, 3276, 0);
+			c.getPlayerAssistant ().movePlayer(3565, 3276, 0);
 			break;
 		case 6822:
 			if(server.model.minigames.Barrows.selectCoffin(c, objectType)) {
@@ -811,7 +807,7 @@ break;
 			break;
 			
 		case 6704: // guthan stairs
-			c.getPA().movePlayer(3578, 3284, 0);
+			c.getPlayerAssistant ().movePlayer(3578, 3284, 0);
 			break;
 		case 6773:
 			if(server.model.minigames.Barrows.selectCoffin(c, objectType)) {
@@ -826,7 +822,7 @@ break;
 			break;
 			
 		case 6703: // dharok stairs
-			c.getPA().movePlayer(3574, 3298, 0);
+			c.getPlayerAssistant ().movePlayer(3574, 3298, 0);
 			break;
 		case 6771:
 			if(server.model.minigames.Barrows.selectCoffin(c, objectType)) {
@@ -841,7 +837,7 @@ break;
 			break;
 			
 		case 6702: // ahrim stairs
-			c.getPA().movePlayer(3565, 3290, 0);
+			c.getPlayerAssistant ().movePlayer(3565, 3290, 0);
 			break;
 		case 6821:
 			if(server.model.minigames.Barrows.selectCoffin(c, objectType)) {
@@ -989,9 +985,9 @@ break;
 		case 1519:
 			if (c.objectY == 9698) {
 				if (c.absY >= c.objectY)
-					c.getPA().walkTo(0,-1);
+					c.getPlayerAssistant ().walkTo(0,-1);
 				else
-					c.getPA().walkTo(0,1);
+					c.getPlayerAssistant ().walkTo(0,1);
 				break;
 			}
 		case 1530:
@@ -1012,51 +1008,51 @@ break;
 		
 		case 9319:
 			if (c.heightLevel == 0)
-				c.getPA().movePlayer(c.absX, c.absY, 1);
+				c.getPlayerAssistant ().movePlayer(c.absX, c.absY, 1);
 			else if (c.heightLevel == 1)
-				c.getPA().movePlayer(c.absX, c.absY, 2);
+				c.getPlayerAssistant ().movePlayer(c.absX, c.absY, 2);
 		break;
 		
 		case 9320:
 			if (c.heightLevel == 1)
-				c.getPA().movePlayer(c.absX, c.absY, 0);
+				c.getPlayerAssistant ().movePlayer(c.absX, c.absY, 0);
 			else if (c.heightLevel == 2)
-				c.getPA().movePlayer(c.absX, c.absY, 1);
+				c.getPlayerAssistant ().movePlayer(c.absX, c.absY, 1);
 		break;
 		
 		case 4496:
 		case 4494:
 			if (c.heightLevel == 2) {
-				c.getPA().movePlayer(c.absX - 5, c.absY, 1);
+				c.getPlayerAssistant ().movePlayer(c.absX - 5, c.absY, 1);
 			} else if (c.heightLevel == 1) {
-				c.getPA().movePlayer(c.absX + 5, c.absY, 0);
+				c.getPlayerAssistant ().movePlayer(c.absX + 5, c.absY, 0);
 			}
 		break;
 		
 		case 4493:
 			if (c.heightLevel == 0) {
-				c.getPA().movePlayer(c.absX - 5, c.absY, 1);
+				c.getPlayerAssistant ().movePlayer(c.absX - 5, c.absY, 1);
 			} else if (c.heightLevel == 1) {
-				c.getPA().movePlayer(c.absX + 5, c.absY, 2);
+				c.getPlayerAssistant ().movePlayer(c.absX + 5, c.absY, 2);
 			}
 		break;
 		
 		case 4495:
 			if (c.heightLevel == 1) {
-				c.getPA().movePlayer(c.absX + 5, c.absY, 2);
+				c.getPlayerAssistant ().movePlayer(c.absX + 5, c.absY, 2);
 			}
 		break;
 		
 		case 5126:
 			if (c.absY == 3554)
-				c.getPA().walkTo(0,1);
+				c.getPlayerAssistant ().walkTo(0,1);
 			else
-				c.getPA().walkTo(0,-1);
+				c.getPlayerAssistant ().walkTo(0,-1);
 		break;
 		
 		case 1759:
 			if (c.objectX == 2884 && c.objectY == 3397)
-				c.getPA().movePlayer(c.absX, c.absY + 6400, 0);				
+				c.getPlayerAssistant ().movePlayer(c.absX, c.absY + 6400, 0);
 		break;
 		case 3203: //dueling forfeit
 			if (c.duelCount > 0) {
@@ -1066,7 +1062,7 @@ break;
 			Client o = (Client) Server.playerHandler.players[c.duelingWith];				
 			if(o == null) {
 				c.getTradeAndDuel().resetDuel();
-				c.getPA().movePlayer(Config.DUELING_RESPAWN_X+(Misc.random(Config.RANDOM_DUELING_RESPAWN)), Config.DUELING_RESPAWN_Y+(Misc.random(Config.RANDOM_DUELING_RESPAWN)), 0);
+				c.getPlayerAssistant ().movePlayer(Config.DUELING_RESPAWN_X+(Misc.random(Config.RANDOM_DUELING_RESPAWN)), Config.DUELING_RESPAWN_Y+(Misc.random(Config.RANDOM_DUELING_RESPAWN)), 0);
 				break;
 			}
 			if(c.duelRule[0]) {
@@ -1074,8 +1070,8 @@ break;
 				break;
 			}
 			if(o != null) {
-				o.getPA().movePlayer(Config.DUELING_RESPAWN_X+(Misc.random(Config.RANDOM_DUELING_RESPAWN)), Config.DUELING_RESPAWN_Y+(Misc.random(Config.RANDOM_DUELING_RESPAWN)), 0);
-				c.getPA().movePlayer(Config.DUELING_RESPAWN_X+(Misc.random(Config.RANDOM_DUELING_RESPAWN)), Config.DUELING_RESPAWN_Y+(Misc.random(Config.RANDOM_DUELING_RESPAWN)), 0);
+				o.getPlayerAssistant ().movePlayer(Config.DUELING_RESPAWN_X+(Misc.random(Config.RANDOM_DUELING_RESPAWN)), Config.DUELING_RESPAWN_Y+(Misc.random(Config.RANDOM_DUELING_RESPAWN)), 0);
+				c.getPlayerAssistant ().movePlayer(Config.DUELING_RESPAWN_X+(Misc.random(Config.RANDOM_DUELING_RESPAWN)), Config.DUELING_RESPAWN_Y+(Misc.random(Config.RANDOM_DUELING_RESPAWN)), 0);
 				o.duelStatus = 6;
 				o.getTradeAndDuel().duelVictory();
 				c.getTradeAndDuel().resetDuel();
@@ -1105,11 +1101,11 @@ break;
 			break;
 
 			case 409:
-			if(c.playerLevel[5] < c.getPA().getLevelForXP(c.playerXP[5])) {
+			if(c.playerLevel[5] < c.getPlayerAssistant ().getLevelForXP(c.playerXP[5])) {
 				c.startAnimation(645);
-				c.playerLevel[5] = c.getPA().getLevelForXP(c.playerXP[5]);
+				c.playerLevel[5] = c.getPlayerAssistant ().getLevelForXP(c.playerXP[5]);
 				c.sendMessage("You recharge your prayer points.");
-				c.getPA().refreshSkill(5);
+				c.getPlayerAssistant ().refreshSkill(5);
 			} else {
 				c.sendMessage("You already have full prayer points.");
 			}
@@ -1130,28 +1126,28 @@ break;
 			}
 		break;
 		case 2879:
-			c.getPA().movePlayer(2538, 4716, 0);
+			c.getPlayerAssistant ().movePlayer(2538, 4716, 0);
 		break;
 		case 2878:
-			c.getPA().movePlayer(2509, 4689, 0);
+			c.getPlayerAssistant ().movePlayer(2509, 4689, 0);
 		break;
 		case 5960:
-			c.getPA().startTeleport2(3090, 3956, 0);
+			c.getPlayerAssistant ().startTeleport2(3090, 3956, 0);
 		break;
 		
 		case 1815:
-			c.getPA().startTeleport2(Config.EDGEVILLE_X, Config.EDGEVILLE_Y, 0);
+			c.getPlayerAssistant ().startTeleport2(Config.EDGEVILLE_X, Config.EDGEVILLE_Y, 0);
 		break;
 		
 		case 9706:
-			c.getPA().startTeleport2(3105, 3951, 0);
+			c.getPlayerAssistant ().startTeleport2(3105, 3951, 0);
 		break;
 		case 9707:
-			c.getPA().startTeleport2(3105, 3956, 0);
+			c.getPlayerAssistant ().startTeleport2(3105, 3956, 0);
 		break;
 		
 		case 5959:
-			c.getPA().startTeleport2(2539, 4712, 0);
+			c.getPlayerAssistant ().startTeleport2(2539, 4712, 0);
 		break;
 		
 		case 2558:
@@ -1160,24 +1156,24 @@ break;
 		
 		case 9294:
 			if (c.absX < c.objectX) {
-				c.getPA().movePlayer(c.objectX + 1, c.absY, 0);
+				c.getPlayerAssistant ().movePlayer(c.objectX + 1, c.absY, 0);
 			} else if (c.absX > c.objectX) {
-				c.getPA().movePlayer(c.objectX - 1, c.absY, 0);
+				c.getPlayerAssistant ().movePlayer(c.objectX - 1, c.absY, 0);
 			}
 		break;
 		case 9293:
 			if (c.absX < c.objectX) {
-				c.getPA().movePlayer(2892, 9799, 0);
+				c.getPlayerAssistant ().movePlayer(2892, 9799, 0);
 			} else {
-				c.getPA().movePlayer(2886, 9799, 0);
+				c.getPlayerAssistant ().movePlayer(2886, 9799, 0);
 			}
 		break;
 		case 10529:
 		case 10527:
 			if (c.absY <= c.objectY)
-				c.getPA().walkTo(0,1);
+				c.getPlayerAssistant ().walkTo(0,1);
 			else
-				c.getPA().walkTo(0,-1);
+				c.getPlayerAssistant ().walkTo(0,-1);
 		break;
 		case 3044:
 			c.getSmithing().sendSmelting();
@@ -1218,13 +1214,13 @@ break;
 			case 26289:
 			c.autoRet = 0;
 			c.getCombat().resetPlayerAttack();
-			c.getPA().movePlayer(2882, 5310, 2);
+			c.getPlayerAssistant ().movePlayer(2882, 5310, 2);
 			c.sendMessage("You teleported out of the god's chamber.");
 			break;
 			case 2213:
 			case 14367:
 			case 11758:
-				c.getPA().openUpBank();
+				c.getPlayerAssistant ().openUpBank();
 			break;
 			
 
@@ -1270,22 +1266,22 @@ break;
 						}
 					if (c.objectX == 3044 && c.objectY == 3956) {
 						if (c.absX == 3045) {
-							c.getPA().walkTo2(-1,0);
+							c.getPlayerAssistant ().walkTo2(-1,0);
 						} else if (c.absX == 3044) {
-							c.getPA().walkTo2(1,0);
+							c.getPlayerAssistant ().walkTo2(1,0);
 						}
 					
 					} else if (c.objectX == 3038 && c.objectY == 3956) {
 						if (c.absX == 3037) {
-							c.getPA().walkTo2(1,0);
+							c.getPlayerAssistant ().walkTo2(1,0);
 						} else if (c.absX == 3038) {
-							c.getPA().walkTo2(-1,0);
+							c.getPlayerAssistant ().walkTo2(-1,0);
 						}				
 					} else if (c.objectX == 3041 && c.objectY == 3959) {
 						if (c.absY == 3960) {
-							c.getPA().walkTo2(0,-1);
+							c.getPlayerAssistant ().walkTo2(0,-1);
 						} else if (c.absY == 3959) {
-							c.getPA().walkTo2(0,1);
+							c.getPlayerAssistant ().walkTo2(0,1);
 						}					
 					}
 				} else {
@@ -1562,7 +1558,7 @@ break;
                     c.fishreq2 = 46;
                 break;
 		case 3100: 
-		c.getPA().movePlayer(2717, 9801, 0);
+		c.getPlayerAssistant ().movePlayer(2717, 9801, 0);
 		c.sendMessage("Goodluck killing the creatures from hell!");
 		break;
 			case 4289:
@@ -1582,33 +1578,33 @@ break;
 				c.getDH().sendDialogues(110, npcType);
 			break;
 			case 2261:
-				c.getPA().walkableInterface(-1);
-				c.getPA().movePlayer(2885, 5330, 2);
+				c.getPlayerAssistant ().walkableInterface(-1);
+				c.getPlayerAssistant ().movePlayer(2885, 5330, 2);
 			break;
 
 			case 2259:
-				c.getPA().movePlayer(2885, 5345, 2);
-				c.getPA().walkableInterface(12418);
+				c.getPlayerAssistant ().movePlayer(2885, 5345, 2);
+				c.getPlayerAssistant ().walkableInterface(12418);
 				c.sendMessage("You have entered Zamorak, To leave talk to me on the other side.");
 			break;
 			case 398:
-				c.getPA().movePlayer(2918, 5273, 0);
+				c.getPlayerAssistant ().movePlayer(2918, 5273, 0);
 				c.sendMessage("You have entered Saradomin, To leave talk to me on the other side.");
 			break;
 			case 399:
-				c.getPA().movePlayer(2911, 5299, 2);
+				c.getPlayerAssistant ().movePlayer(2911, 5299, 2);
 			break;
 			case 1064:
-				c.getPA().movePlayer(2852, 5333, 2);
+				c.getPlayerAssistant ().movePlayer(2852, 5333, 2);
 			break;
 
 			case 1063:
-				c.getPA().movePlayer(2849, 5333, 2);
+				c.getPlayerAssistant ().movePlayer(2849, 5333, 2);
 				c.sendMessage("You have entered Bandos, To leave talk to me on the other side.");
 			break;
 
 			case 70:
-				c.getPA().movePlayer(2872, 5269, 2);
+				c.getPlayerAssistant ().movePlayer(2872, 5269, 2);
 				c.sendMessage("You have entered Armadyl, To leave click the Pillar.");
 				c.sendMessage("Note: Ruby bolts (e) and Diamond bolts (e) are recommended!");
 			break;
@@ -1641,7 +1637,7 @@ break;
 			break;
 			case 8000:
 			c.getDH().sendDialogues(505, npcType);
-			c.getPA().sendFrame126(""+c.dungPoints+"", 18071);
+			c.getPlayerAssistant ().sendFrame126(""+c.dungPoints+"", 18071);
 			c.sendMessage("You currently have <col=255>" + c.dungPoints + "</col> Dungeoneering Points.");
 			break;
             case 692:
@@ -1799,7 +1795,7 @@ break;
 				c.getDH().sendDialogues(70,npcType);
 			break;
 			case 494:
-				c.getPA().openUpBank();
+				c.getPlayerAssistant ().openUpBank();
 			break;
 			case 2566:
 				c.getShops().openSkillCape();
@@ -1833,7 +1829,7 @@ break;
 				c.getShops().openShop(1);
 			break;
 			case 599:
-				c.getPA().showInterface(3559);
+				c.getPlayerAssistant ().showInterface(3559);
 				c.canChangeAppearance = true;
 			break;
 			case 904:
@@ -1881,7 +1877,7 @@ break;
                 }
 		switch(npcType) {
 								case 252: 
-		c.getPA().showInterface(14040);
+		c.getPlayerAssistant ().showInterface(14040);
 			break;
 						case 2258:
 				c.getDH().sendDialogues(17, npcType);
@@ -1889,142 +1885,142 @@ break;
 			
 				case 251: //This is the npc, change if you want too
 for (int i = 0; i < 21; i++) {
-if(c.playerXP[i] <= c.getPA().getXPForLevel(10)) {
+if(c.playerXP[i] <= c.getPlayerAssistant ().getXPForLevel(10)) {
 c.sendMessage("You need level 10 in ALL LEVELS to view the lowest shop");
 return;
 }
 }
 for (int i = 0; i < 21; i++) {
-if(c.playerXP[i] >= c.getPA().getXPForLevel(10) && c.playerXP[i] <= c.getPA().getXPForLevel(20)) {
+if(c.playerXP[i] >= c.getPlayerAssistant ().getXPForLevel(10) && c.playerXP[i] <= c.getPlayerAssistant ().getXPForLevel(20)) {
 c.getShops().openShop(91); //this is one shop make in your shops.cfg (along with the others)
 return;
 }
 }
 for (int i = 0; i < 21; i++) {
-if(c.playerXP[i] >= c.getPA().getXPForLevel(20) && c.playerXP[i] <= c.getPA().getXPForLevel(30)) {
+if(c.playerXP[i] >= c.getPlayerAssistant ().getXPForLevel(20) && c.playerXP[i] <= c.getPlayerAssistant ().getXPForLevel(30)) {
 c.getShops().openShop(92);
 return;
 }
 }
 for (int i = 0; i < 21; i++) {
-if(c.playerXP[i] >= c.getPA().getXPForLevel(30) && c.playerXP[i] <= c.getPA().getXPForLevel(40)) {
+if(c.playerXP[i] >= c.getPlayerAssistant ().getXPForLevel(30) && c.playerXP[i] <= c.getPlayerAssistant ().getXPForLevel(40)) {
 c.getShops().openShop(93);
 return;
 }
 }
 for (int i = 0; i < 21; i++) {
-if(c.playerXP[i] >= c.getPA().getXPForLevel(40) && c.playerXP[i] <= c.getPA().getXPForLevel(50)) {
+if(c.playerXP[i] >= c.getPlayerAssistant ().getXPForLevel(40) && c.playerXP[i] <= c.getPlayerAssistant ().getXPForLevel(50)) {
 c.getShops().openShop(94);
 return;
 }
 }
 for (int i = 0; i < 21; i++) {
-if(c.playerXP[i] >= c.getPA().getXPForLevel(50) && c.playerXP[i] <= c.getPA().getXPForLevel(60)) {
+if(c.playerXP[i] >= c.getPlayerAssistant ().getXPForLevel(50) && c.playerXP[i] <= c.getPlayerAssistant ().getXPForLevel(60)) {
 c.getShops().openShop(95);
 return;
 }
 }
 for (int i = 0; i < 21; i++) {
-if(c.playerXP[i] >= c.getPA().getXPForLevel(60) && c.playerXP[i] <= c.getPA().getXPForLevel(70)) {
+if(c.playerXP[i] >= c.getPlayerAssistant ().getXPForLevel(60) && c.playerXP[i] <= c.getPlayerAssistant ().getXPForLevel(70)) {
 c.getShops().openShop(96);
 return;
 }
 }
 for (int i = 0; i < 21; i++) {
-if(c.playerXP[i] >= c.getPA().getXPForLevel(70) && c.playerXP[i] <= c.getPA().getXPForLevel(80)) {
+if(c.playerXP[i] >= c.getPlayerAssistant ().getXPForLevel(70) && c.playerXP[i] <= c.getPlayerAssistant ().getXPForLevel(80)) {
 c.getShops().openShop(97);
 return;
 }
 }
 for (int i = 0; i < 21; i++) {
-if(c.playerXP[i] >= c.getPA().getXPForLevel(80) && c.playerXP[i] <= c.getPA().getXPForLevel(90)) {
+if(c.playerXP[i] >= c.getPlayerAssistant ().getXPForLevel(80) && c.playerXP[i] <= c.getPlayerAssistant ().getXPForLevel(90)) {
 c.getShops().openShop(98);
 return;
 }
 }
 for (int i = 0; i < 21; i++) {
-if(c.playerXP[i] >= c.getPA().getXPForLevel(90) && c.playerXP[i] <= c.getPA().getXPForLevel(99)) {
+if(c.playerXP[i] >= c.getPlayerAssistant ().getXPForLevel(90) && c.playerXP[i] <= c.getPlayerAssistant ().getXPForLevel(99)) {
 c.getShops().openShop(99);
 return;
 }
 }
 for (int i = 0; i < 21; i++) {
-if(c.playerXP[i] >= c.getPA().getXPForLevel(99)){
+if(c.playerXP[i] >= c.getPlayerAssistant ().getXPForLevel(99)){
 c.getShops().openShop(100);
 }
 }
 break;
 		case 2244:
-			c.getPA().showInterface(26099);
-				c.getPA().sendFrame200(26101, 9847);//chatid
-				c.getPA().sendFrame185(26101);
+			c.getPlayerAssistant ().showInterface(26099);
+				c.getPlayerAssistant ().sendFrame200(26101, 9847);//chatid
+				c.getPlayerAssistant ().sendFrame185(26101);
 				if (c.KC > c.DC) {
-				c.getPA().sendFrame126("@or1@Kills: @gre@" +c.KC+" ", 26105);
-				c.getPA().sendFrame126("@or1@Deaths: @red@"+c.DC+"", 26106);
+				c.getPlayerAssistant ().sendFrame126("@or1@Kills: @gre@" +c.KC+" ", 26105);
+				c.getPlayerAssistant ().sendFrame126("@or1@Deaths: @red@"+c.DC+"", 26106);
 				}
 				if (c.KC < c.DC) {
-				c.getPA().sendFrame126("@or1@Kills: @red@"+c.KC+"", 26105);
-				c.getPA().sendFrame126("@or1@Deaths: @gre@"+c.DC+"", 26106);
+				c.getPlayerAssistant ().sendFrame126("@or1@Kills: @red@"+c.KC+"", 26105);
+				c.getPlayerAssistant ().sendFrame126("@or1@Deaths: @gre@"+c.DC+"", 26106);
 				}
-				c.getPA().sendFrame126("@or1@Name: @gre@"+c.playerName+"", 26107);
-				c.getPA().sendFrame126("@or1@Combat Level: @gre@"+c.combatLevel+"", 26108);
+				c.getPlayerAssistant ().sendFrame126("@or1@Name: @gre@"+c.playerName+"", 26107);
+				c.getPlayerAssistant ().sendFrame126("@or1@Combat Level: @gre@"+c.combatLevel+"", 26108);
 					if (c.playerRights == 0) {
-						c.getPA().sendFrame126("@or1@Rank: @gre@Player", 26109);
+						c.getPlayerAssistant ().sendFrame126("@or1@Rank: @gre@Player", 26109);
 					}
 					if (c.playerRights == 1) {
-						c.getPA().sendFrame126("@or1@Rank: @gre@Bronze Donator", 26109);
+						c.getPlayerAssistant ().sendFrame126("@or1@Rank: @gre@Bronze Donator", 26109);
 					}
 					if (c.playerRights == 2) {
-						c.getPA().sendFrame126("@or1@Rank: @gre@Iron Donator", 26109);
+						c.getPlayerAssistant ().sendFrame126("@or1@Rank: @gre@Iron Donator", 26109);
 					}
 					if (c.playerRights == 3) {
-						c.getPA().sendFrame126("@or1@Rank: @gre@Adamant Donator", 26109);
+						c.getPlayerAssistant ().sendFrame126("@or1@Rank: @gre@Adamant Donator", 26109);
 					}
 					if (c.playerRights == 4) {
-						c.getPA().sendFrame126("@or1@Rank: @gre@Rune Donator", 26109);
+						c.getPlayerAssistant ().sendFrame126("@or1@Rank: @gre@Rune Donator", 26109);
 					}
 					if (c.playerRights == 5) {
-						c.getPA().sendFrame126("@or1@Rank: @gre@Dragon Donator", 26109);
+						c.getPlayerAssistant ().sendFrame126("@or1@Rank: @gre@Dragon Donator", 26109);
 					}
 					if (c.playerRights == 6) {
-						c.getPA().sendFrame126("@or1@Rank: @gre@Dicer", 26109);
+						c.getPlayerAssistant ().sendFrame126("@or1@Rank: @gre@Dicer", 26109);
 					}
 					if (c.playerRights == 7) {
-						c.getPA().sendFrame126("@or1@Rank: @gre@Veteran", 26109);
+						c.getPlayerAssistant ().sendFrame126("@or1@Rank: @gre@Veteran", 26109);
 					}
 					if (c.playerRights == 8) {
-						c.getPA().sendFrame126("@or1@Rank: @gre@Helper", 26109);
+						c.getPlayerAssistant ().sendFrame126("@or1@Rank: @gre@Helper", 26109);
 					}
 					if (c.playerRights == 9) {
-						c.getPA().sendFrame126("@or1@Rank: @gre@Trial Moderator", 26109);
+						c.getPlayerAssistant ().sendFrame126("@or1@Rank: @gre@Trial Moderator", 26109);
 					}
 					if (c.playerRights == 10) {
-						c.getPA().sendFrame126("@or1@Rank: @gre@Moderator", 26109);
+						c.getPlayerAssistant ().sendFrame126("@or1@Rank: @gre@Moderator", 26109);
 					}
 					if (c.playerRights == 11) {
-						c.getPA().sendFrame126("@or1@Rank: @gre@Administrator", 26109);
+						c.getPlayerAssistant ().sendFrame126("@or1@Rank: @gre@Administrator", 26109);
 					}
 					if (c.playerRights == 12) {
-						c.getPA().sendFrame126("@or1@Rank: @gre@Co-Owner", 26109);
+						c.getPlayerAssistant ().sendFrame126("@or1@Rank: @gre@Co-Owner", 26109);
 					}
 					if (c.playerRights == 13) {
-						c.getPA().sendFrame126("@or1@Rank: @gre@Owner", 26109);
+						c.getPlayerAssistant ().sendFrame126("@or1@Rank: @gre@Owner", 26109);
 					}
 					if (c.playerRights == 14) {
-						c.getPA().sendFrame126("@or1@Rank: @gre@Developer", 26109);
+						c.getPlayerAssistant ().sendFrame126("@or1@Rank: @gre@Developer", 26109);
 					}
-				c.getPA().sendFrame126("@or1@Dung Points: @gre@" +c.dungPoints+" ", 26111);
-				c.getPA().sendFrame126("@or1@Slayer Points: @gre@"+c.SPoints+"", 26112);
-				c.getPA().sendFrame126("@or1@PK points: @gre@"+c.pkPoints+"  ", 26113);
-				c.getPA().sendFrame126("@or1@Vote Points: @gre@"+c.votePoints+"", 26115);
-				c.getPA().sendFrame126("@or1@Level Points: @gre@"+c.levelPoints+"  ", 26116);
-				c.getPA().sendFrame126("@or1@Donator Points: @gre@"+c.donatorPoints+"", 26117);
+				c.getPlayerAssistant ().sendFrame126("@or1@Dung Points: @gre@" +c.dungPoints+" ", 26111);
+				c.getPlayerAssistant ().sendFrame126("@or1@Slayer Points: @gre@"+c.SPoints+"", 26112);
+				c.getPlayerAssistant ().sendFrame126("@or1@PK points: @gre@"+c.pkPoints+"  ", 26113);
+				c.getPlayerAssistant ().sendFrame126("@or1@Vote Points: @gre@"+c.votePoints+"", 26115);
+				c.getPlayerAssistant ().sendFrame126("@or1@Level Points: @gre@"+c.levelPoints+"  ", 26116);
+				c.getPlayerAssistant ().sendFrame126("@or1@Donator Points: @gre@"+c.donatorPoints+"", 26117);
 				
-				c.getPA().sendFrame126("@or1@Pest Control Points: @gre@"+c.pcPoints+"", 26118);
-								c.getPA().sendFrame126("@or1@Suggest on forums.", 26119);
-				c.getPA().sendFrame126("@or1@Suggest on forums.", 26120);
-				c.getPA().sendFrame126("@or1@Suggest on forums.", 26121);
-				c.getPA().sendFrame126("@or1@Suggest on forums.", 26122);
+				c.getPlayerAssistant ().sendFrame126("@or1@Pest Control Points: @gre@"+c.pcPoints+"", 26118);
+								c.getPlayerAssistant ().sendFrame126("@or1@Suggest on forums.", 26119);
+				c.getPlayerAssistant ().sendFrame126("@or1@Suggest on forums.", 26120);
+				c.getPlayerAssistant ().sendFrame126("@or1@Suggest on forums.", 26121);
+				c.getPlayerAssistant ().sendFrame126("@or1@Suggest on forums.", 26122);
 				c.updateRequired = true;
 				c.appearanceUpdateRequired = true;
 					case 526:
@@ -2135,7 +2131,7 @@ break;
 				c.getShops().openVoid();
 			break;
 			case 494:
-				c.getPA().openUpBank();
+				c.getPlayerAssistant ().openUpBank();
 			break;
 			case 904:
 				c.getShops().openShop(17);
@@ -2154,7 +2150,7 @@ break;
 			break;
 				
 		    case 170:
-			    c.getPA().showInterface(802);
+			    c.getPlayerAssistant ().showInterface(802);
 			break;
 
 			case 2538:

@@ -3,9 +3,7 @@ package server.model.players.packets;
 import server.util.Misc;
 import server.model.players.Client;
 import server.model.players.PacketType;
-import server.model.players.Player;
 import server.model.players.AdvancedMysteryBox;
-import server.Server;
 
 
 /**
@@ -48,7 +46,7 @@ public class ClickItem implements PacketType {
 			c.dealDamage(1);
 			c.handleHitMask(1);
 			c.forcedChat("Ow! I nearly broke a tooth!");
-			c.getPA()
+			c.getPlayerAssistant ()
 			.refreshSkill(3);
 		}
 		if (itemId == 2677) {
@@ -134,7 +132,7 @@ c.getDH().sendDialogues(1338, 0);
 			c.getDH().sendDialogues(106, 4289);
 		}
 				if(itemId == 15707) {
-                   c.getPA().startTeleport(2417, 3526, 0, "dungtele");
+                   c.getPlayerAssistant ().startTeleport(2417, 3526, 0, "dungtele");
 				   c.sendMessage("Your Ring of Kinship takes you to Dungeoneering.");
                 }
               if(itemId == 8009) {
@@ -158,7 +156,7 @@ c.getDH().sendDialogues(1338, 0);
                    c.sendMessage("Teletabbing is Disabled, Use the Teleporting Interface.");
                 }
 		if(itemId == 4447) {	
-			c.getPA().addSkillXP(3000, 24);
+			c.getPlayerAssistant ().addSkillXP(3000, 24);
 			c.sendMessage("You rub the lamp and feel yourself further in the arts of dungeoneering.");
 			c.getItems().deleteItem(4447, 1);	
 }
@@ -224,16 +222,16 @@ c.gfx0(54);
 			c.playerLevel[3] = 99;
 			c.playerLevel[4] = 99;
 			c.playerLevel[6] = 99;
-			c.playerXP[0] = c.getPA().getXPForLevel(100);
-			c.playerXP[2] = c.getPA().getXPForLevel(100);
-			c.playerXP[3] = c.getPA().getXPForLevel(100);
-			c.playerXP[4] = c.getPA().getXPForLevel(100);
-			c.playerXP[6] = c.getPA().getXPForLevel(100);
-			c.getPA().refreshSkill(0);
-			c.getPA().refreshSkill(2);
-			c.getPA().refreshSkill(3);
-			c.getPA().refreshSkill(4);
-			c.getPA().refreshSkill(6);
+			c.playerXP[0] = c.getPlayerAssistant ().getXPForLevel(100);
+			c.playerXP[2] = c.getPlayerAssistant ().getXPForLevel(100);
+			c.playerXP[3] = c.getPlayerAssistant ().getXPForLevel(100);
+			c.playerXP[4] = c.getPlayerAssistant ().getXPForLevel(100);
+			c.playerXP[6] = c.getPlayerAssistant ().getXPForLevel(100);
+			c.getPlayerAssistant ().refreshSkill(0);
+			c.getPlayerAssistant ().refreshSkill(2);
+			c.getPlayerAssistant ().refreshSkill(3);
+			c.getPlayerAssistant ().refreshSkill(4);
+			c.getPlayerAssistant ().refreshSkill(6);
 			c.getItems().deleteItem(6796, 1);
 			c.logout();
 			}
@@ -250,19 +248,19 @@ c.gfx0(54);
 					c.playerLevel[3] = c.getLevelForXP(c.playerXP[3] + 10);
 			}
 			c.foodDelay = System.currentTimeMillis();
-			c.getPA().refreshSkill(3);
+			c.getPlayerAssistant ().refreshSkill(3);
 			c.sendMessage("You eat the Rocktail.");
 		}
  		//c.playerLevel[3] += 10;
 		if (c.playerLevel[3] > (c.getLevelForXP(c.playerXP[3])*1.11 + 1)) {
 			c.playerLevel[3] = (int)(c.getLevelForXP(c.playerXP[3])*1.11);
 		}
-		c.getPA().refreshSkill(3);
+		c.getPlayerAssistant ().refreshSkill(3);
 			return;
 		}
 		if (itemId == 2528) {
 		c.getItems().deleteItem(2528,1);
-		c.getPA().showInterface(2808);
+		c.getPlayerAssistant ().showInterface(2808);
 		}
 		if (itemId == 11850) {
 		c.getItems().deleteItem(11850,1);
@@ -411,7 +409,7 @@ c.gfx0(54);
 				pouch = 2;
 			if (a == 5514)
 				pouch = 3;
-			c.getPA().fillPouch(pouch);
+			c.getPlayerAssistant ().fillPouch(pouch);
 			return;
 		}
 		if (c.getHerblore().isUnidHerb(itemId))

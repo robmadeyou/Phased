@@ -22,7 +22,7 @@ public class RemoveItem implements PacketType {
 case 7423:
 if(c.occupied[removeSlot] == true && c.storeditems[removeSlot] == removeId) 
 {
-c.getPA().Frame34(7423, -1, removeSlot, 1);
+c.getPlayerAssistant ().Frame34(7423, -1, removeSlot, 1);
 c.getItems().addItem(removeId, 1);
 c.occupied[removeSlot] = false;
 c.storeditems[removeSlot] = 0;

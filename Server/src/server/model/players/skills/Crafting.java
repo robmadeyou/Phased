@@ -34,7 +34,7 @@ public class Crafting {
 				if (c.playerLevel[c.playerCrafting] >= gems[j][2]) {
 					c.getItems().deleteItem(id, c.getItems().getItemSlot(id),1);
 					c.getItems().addItem(gems[j][1], 1);
-					c.getPA().addSkillXP(gems[j][3] * Config.CRAFTING_EXPERIENCE, c.playerCrafting);
+					c.getPlayerAssistant ().addSkillXP(gems[j][3] * Config.CRAFTING_EXPERIENCE, c.playerCrafting);
 					break;
 				}			
 			}		
@@ -57,7 +57,7 @@ public class Crafting {
 			if (expsAndLevels[j][0] == hideType) {
 				if (c.playerLevel[c.playerCrafting] >= expsAndLevels[j][1]) {
 					if (c.getItems().playerHasItem(hideType, 1)) {
-						c.getPA().closeAllWindows();
+						c.getPlayerAssistant ().closeAllWindows();
 						exp = expsAndLevels[j][2];
 						index = j;
 						craftHides(hideType);
@@ -77,7 +77,7 @@ public class Crafting {
 			if (getItemToAdd() <= 0)
 				break;
 			c.getItems().addItem(getItemToAdd(), 1);
-			c.getPA().addSkillXP(exp * Config.CRAFTING_EXPERIENCE, c.playerCrafting);
+			c.getPlayerAssistant ().addSkillXP(exp * Config.CRAFTING_EXPERIENCE, c.playerCrafting);
 		}
 		resetCrafting();
 	}
@@ -113,44 +113,44 @@ public class Crafting {
 	
 	public void openLeather(int item) {
 		if (item == 1745) {
-			c.getPA().sendFrame164(8880); //green dhide
-         	c.getPA().sendFrame126("What would you like to make?", 8879);
-         	c.getPA().sendFrame246(8884, 250, 1099); // middle
-     		c.getPA().sendFrame246(8883, 250, 1065); // left picture
-     		c.getPA().sendFrame246(8885, 250, 1135); // right pic
-     		c.getPA().sendFrame126("Vambs", 8889);
-     		c.getPA().sendFrame126("Chaps", 8893);
-     		c.getPA().sendFrame126("Body", 8897);
+			c.getPlayerAssistant ().sendFrame164(8880); //green dhide
+         	c.getPlayerAssistant ().sendFrame126("What would you like to make?", 8879);
+         	c.getPlayerAssistant ().sendFrame246(8884, 250, 1099); // middle
+     		c.getPlayerAssistant ().sendFrame246(8883, 250, 1065); // left picture
+     		c.getPlayerAssistant ().sendFrame246(8885, 250, 1135); // right pic
+     		c.getPlayerAssistant ().sendFrame126("Vambs", 8889);
+     		c.getPlayerAssistant ().sendFrame126("Chaps", 8893);
+     		c.getPlayerAssistant ().sendFrame126("Body", 8897);
 			hideType = item;
 		} else if (item == 2505) {
-        	c.getPA().sendFrame164(8880); //blue
-         	c.getPA().sendFrame126("What would you like to make?", 8879);
-         	c.getPA().sendFrame246(8884, 250, 2493); // middle
-     		c.getPA().sendFrame246(8883, 250, 2487); // left picture
-     		c.getPA().sendFrame246(8885, 250, 2499); // right pic
-     		c.getPA().sendFrame126("Vambs", 8889);
-     		c.getPA().sendFrame126("Chaps", 8893);
-     		c.getPA().sendFrame126("Body", 8897);
+        	c.getPlayerAssistant ().sendFrame164(8880); //blue
+         	c.getPlayerAssistant ().sendFrame126("What would you like to make?", 8879);
+         	c.getPlayerAssistant ().sendFrame246(8884, 250, 2493); // middle
+     		c.getPlayerAssistant ().sendFrame246(8883, 250, 2487); // left picture
+     		c.getPlayerAssistant ().sendFrame246(8885, 250, 2499); // right pic
+     		c.getPlayerAssistant ().sendFrame126("Vambs", 8889);
+     		c.getPlayerAssistant ().sendFrame126("Chaps", 8893);
+     		c.getPlayerAssistant ().sendFrame126("Body", 8897);
 			hideType = item;			
 		} else if (item == 2507) {
-			c.getPA().sendFrame164(8880);
-         	c.getPA().sendFrame126("What would you like to make?", 8879);
-         	c.getPA().sendFrame246(8884, 250, 2495); // middle
-     		c.getPA().sendFrame246(8883, 250, 2489); // left picture
-     		c.getPA().sendFrame246(8885, 250, 2501); // right pic
-     		c.getPA().sendFrame126("Vambs", 8889);
-     		c.getPA().sendFrame126("Chaps", 8893);
-     		c.getPA().sendFrame126("Body", 8897);
+			c.getPlayerAssistant ().sendFrame164(8880);
+         	c.getPlayerAssistant ().sendFrame126("What would you like to make?", 8879);
+         	c.getPlayerAssistant ().sendFrame246(8884, 250, 2495); // middle
+     		c.getPlayerAssistant ().sendFrame246(8883, 250, 2489); // left picture
+     		c.getPlayerAssistant ().sendFrame246(8885, 250, 2501); // right pic
+     		c.getPlayerAssistant ().sendFrame126("Vambs", 8889);
+     		c.getPlayerAssistant ().sendFrame126("Chaps", 8893);
+     		c.getPlayerAssistant ().sendFrame126("Body", 8897);
 			hideType = item;
 		} else if (item == 2509) {
-			c.getPA().sendFrame164(8880);
-         	c.getPA().sendFrame126("What would you like to make?", 8879);
-         	c.getPA().sendFrame246(8884, 250, 2497); // middle
-     		c.getPA().sendFrame246(8883, 250, 2491); // left picture
-     		c.getPA().sendFrame246(8885, 250, 2503); // right pic
-     		c.getPA().sendFrame126("Vambs", 8889);
-     		c.getPA().sendFrame126("Chaps", 8893);
-     		c.getPA().sendFrame126("Body", 8897);
+			c.getPlayerAssistant ().sendFrame164(8880);
+         	c.getPlayerAssistant ().sendFrame126("What would you like to make?", 8879);
+         	c.getPlayerAssistant ().sendFrame246(8884, 250, 2497); // middle
+     		c.getPlayerAssistant ().sendFrame246(8883, 250, 2491); // left picture
+     		c.getPlayerAssistant ().sendFrame246(8885, 250, 2503); // right pic
+     		c.getPlayerAssistant ().sendFrame126("Vambs", 8889);
+     		c.getPlayerAssistant ().sendFrame126("Chaps", 8893);
+     		c.getPlayerAssistant ().sendFrame126("Body", 8897);
 			hideType = item;			
 		}
 		c.craftingLeather = true;

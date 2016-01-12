@@ -26,9 +26,9 @@ public class Cooking {
 		}
 	}
 	private void sendStatementTwo(String s) { // 1 line click here to continue chat box interface
-		c.getPA().sendFrame126(s, 357);
-		c.getPA().sendFrame126("Click here to continue", 358);
-		c.getPA().sendFrame164(356);
+		c.getPlayerAssistant ().sendFrame126(s, 357);
+		c.getPlayerAssistant ().sendFrame126("Click here to continue", 358);
+		c.getPlayerAssistant ().sendFrame164(356);
 	}
 	public void cookFish(int id, int slot) {
 		for (int j = 0; j < 28; j++) {
@@ -42,7 +42,7 @@ public class Cooking {
 					c.startAnimation(883);
 						c.getItems().deleteItem(id, c.getItems().getItemSlot(id), 1);
 						c.getItems().addItem(cookingItems[slot][1], 1);
-						c.getPA().addSkillXP(cookingItems[slot][4] * Config.COOKING_EXPERIENCE, c.playerCooking);
+						c.getPlayerAssistant ().addSkillXP(cookingItems[slot][4] * Config.COOKING_EXPERIENCE, c.playerCooking);
 					}
 				} else {
 					sendStatementTwo("You need a cooking level of " + cookingItems[slot][3] + " to cook this fish.");

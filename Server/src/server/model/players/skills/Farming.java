@@ -44,8 +44,8 @@ public class Farming {
 		}
 		if (c.getItems().playerHasItem(seedId,1)) {
 			c.getItems().deleteItem(seedId, c.getItems().getItemSlot(seedId), 1);
-			c.getPA().addSkillXP(SEED_PLANT_EXP[slot] * Config.FARMING_EXPERIENCE, c.playerFarming);
-			c.getPA().refreshSkill(c.playerFarming);
+			c.getPlayerAssistant ().addSkillXP(SEED_PLANT_EXP[slot] * Config.FARMING_EXPERIENCE, c.playerFarming);
+			c.getPlayerAssistant ().refreshSkill(c.playerFarming);
 			int herbAmount = Misc.random(5) + 3;
 			c.farm[0] = herbId;
 			c.farm[1] = herbAmount;
@@ -64,11 +64,11 @@ public class Farming {
 		if (c.farm[0] > 0 && c.farm[1] > 0) {
 			//make object here
 			//c.sendMessage("Make herbs...");
-			c.getPA().object(PATCH_HERBS,2813,3463,-1,10);
+			c.getPlayerAssistant ().object(PATCH_HERBS,2813,3463,-1,10);
 		} else {
 			//make weed patch here
 			//c.sendMessage("Make weeds...");
-			c.getPA().object(PATCH_WEEDS,2813,3463,-1,10);
+			c.getPlayerAssistant ().object(PATCH_WEEDS,2813,3463,-1,10);
 		}	
 	}
 	
@@ -76,13 +76,13 @@ public class Farming {
 		if (c.farm[0] > 0 && c.farm[1] > 0) {
 			if (c.getItems().addItem(c.farm[0], 1)) {
 				//c.startAnimation(2273);
-				c.getPA().addSkillXP(getExp() * Config.FARMING_EXPERIENCE, c.playerFarming);
+				c.getPlayerAssistant ().addSkillXP(getExp() * Config.FARMING_EXPERIENCE, c.playerFarming);
 				c.farm[1]--;
 				if (c.farm[1] == 0)
 					c.farm[0] = -1;
 				updateHerbPatch();
 				c.sendMessage("You pick a herb.");
-				c.getPA().resetAnimation();
+				c.getPlayerAssistant ().resetAnimation();
 			}		
 		}
 	}

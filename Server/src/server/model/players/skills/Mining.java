@@ -45,7 +45,7 @@ public class Mining {
 			resetMining();
 			c.sendMessage("You need a pickaxe to mine this rock.");
 			c.startAnimation(65535);
-			c.getPA().resetVariables();
+			c.getPlayerAssistant ().resetVariables();
 		}
 	}
 	
@@ -53,15 +53,15 @@ public class Mining {
 		if (c.getItems().addItem(oreType,1)) {
 			c.startAnimation(EMOTE);
 			c.sendMessage("You manage to mine some ore.");
-			c.getPA().addSkillXP(exp * Config.MINING_EXPERIENCE, c.playerMining);
-			c.getPA().refreshSkill(c.playerMining);
+			c.getPlayerAssistant ().addSkillXP(exp * Config.MINING_EXPERIENCE, c.playerMining);
+			c.getPlayerAssistant ().refreshSkill(c.playerMining);
 			c.miningTimer = getMiningTimer(oreType);
 			if (Misc.random(25) == 10) {
 				c.getItems().addItem(RANDOM_GEMS[(int)(RANDOM_GEMS.length * Math.random())], 1);
 				c.sendMessage("You find a gem!");
 			}
 		} else {
-			c.getPA().resetVariables();
+			c.getPlayerAssistant ().resetVariables();
 			c.startAnimation(65535);
 		}
 	}

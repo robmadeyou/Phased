@@ -1,7 +1,6 @@
 package server.model.players.packets;
 
 import server.Config;
-import server.Server;
 import server.model.players.Client;
 import server.model.players.PacketType;
 
@@ -48,7 +47,7 @@ public class DropItem implements PacketType {
 			if(droppable) {
 			if (c.getShops().getItemShopValue(itemId) > 0) {
 					c.droppedItem = itemId;
-					c.getPA().destroyInterface(itemId);
+					c.getPlayerAssistant ().destroyInterface(itemId);
 					return;
 			/*if(c.playerItemsN[slot] != 0 && itemId != -1 && c.playerItems[slot] == itemId + 1) {
 			if(!c.getItems().playerHasItem(itemId,1,slot)) {

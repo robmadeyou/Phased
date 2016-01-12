@@ -17,7 +17,7 @@ public class Resting {
 			public void execute(EventContainer e) {
 				if (player.isResting && player.runEnergy < 100) {
 					player.runEnergy += ENERGY_INCREASE;
-					player.getPA().sendFrame126("" + player.runEnergy, 149);
+					player.getPlayerAssistant ().sendFrame126("" + player.runEnergy, 149);
 				} else
 					e.stop();
 			}

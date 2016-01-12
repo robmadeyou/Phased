@@ -20,11 +20,11 @@ public class Walking implements PacketType {
 			c.npcIndex = 0;
 			c.playerIndex = 0;
 			if (c.followId > 0 || c.followId2 > 0 || c.follow2 > 0)
-				c.getPA().resetFollow();
+				c.getPlayerAssistant ().resetFollow();
 		}	
 		c.fishing = false;
 		if(!c.isBanking && !c.inTrade) {
-		c.getPA().removeAllWindows();
+		c.getPlayerAssistant ().removeAllWindows();
 		c.startAnimation(65535);
 		}
 		if (c.isBanking)

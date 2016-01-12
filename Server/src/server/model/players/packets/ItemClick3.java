@@ -3,7 +3,6 @@ package server.model.players.packets;
 import server.model.players.Client;
 import server.model.players.PacketType;
 import server.util.Misc;
-import server.Server;
 
 /**
  * Item Click 3 Or Alternative Item Option 1
@@ -41,7 +40,7 @@ public class ItemClick3 implements PacketType
         {
 
             case 1712:
-                c.getPA ().handleGlory ( itemId );
+                c.getPlayerAssistant ().handleGlory ( itemId );
                 break;
 
             case 12007:

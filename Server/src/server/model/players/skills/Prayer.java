@@ -2,9 +2,8 @@ package server.model.players.skills;
 
 
 import server.Config;
-import server.Server;
 import server.model.players.Client;
-import server.util.Misc;
+
 public class Prayer {
 
 	Client c;
@@ -19,7 +18,7 @@ public class Prayer {
 		if(System.currentTimeMillis() - c.buryDelay > 1500) {
 			c.getItems().deleteItem(id, slot, 1);
 			c.sendMessage("You bury the bones.");
-			c.getPA().addSkillXP(getExp(id)*Config.PRAYER_EXPERIENCE,5);
+			c.getPlayerAssistant ().addSkillXP(getExp(id)*Config.PRAYER_EXPERIENCE,5);
 			c.buryDelay = System.currentTimeMillis();
 			c.startAnimation(827);
 			//handleZombie();
@@ -44,7 +43,7 @@ public class Prayer {
 	public void bonesOnAltar(int id) {
 		c.getItems().deleteItem(id, c.getItems().getItemSlot(id), 1);
 		c.sendMessage("The gods are pleased with your offering.");
-		c.getPA().addSkillXP(getExp(id)*2*Config.PRAYER_EXPERIENCE, 5);
+		c.getPlayerAssistant ().addSkillXP(getExp(id)*2*Config.PRAYER_EXPERIENCE, 5);
 		//handleZombie();
 	}
 	

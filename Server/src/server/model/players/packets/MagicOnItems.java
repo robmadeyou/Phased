@@ -20,7 +20,7 @@ public class MagicOnItems implements PacketType {
 		if(c.playerItems[slot]-1 != itemId) { // cheat client
 			return;
 		}
-		c.getPA().magicOnItems(slot, itemId, spellId);
+		c.getPlayerAssistant ().magicOnItems(slot, itemId, spellId);
 		c.usingMagic = false;
 
 	}

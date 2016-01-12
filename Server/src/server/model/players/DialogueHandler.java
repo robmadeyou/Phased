@@ -1,9 +1,6 @@
 package server.model.players;
 
 import server.Server;
-import server.model.players.DialogueAnimation;
-import server.model.players.PlayerAssistant;
-import server.model.players.PlayerHandler;
 
 public class DialogueHandler {
 
@@ -408,7 +405,7 @@ public class DialogueHandler {
                case 415:
 			sendNpcChat2("Thank you so much for rescuing my brother, " + c.playerName + ",", "Here take this reward!",c.talkingNpc, "Hadley");
 			c.nomad += 1;
-			c.getPA().sendFrame126("@gre@The Ritual", 29162);
+			c.getPlayerAssistant ().sendFrame126("@gre@The Ritual", 29162);
 			c.nextChat = 417;
 
 
@@ -423,19 +420,19 @@ public class DialogueHandler {
 
 
                 case 417:
-			c.getPA().addSkillXP(300000, 22);
+			c.getPlayerAssistant ().addSkillXP(300000, 22);
 			c.getItems().addItem(995, 15000000);
 			c.getItems().addItem(18337, 1);
 			c.getItems().addItem(19314, 1);
 			c.nextChat = 0;
-		c.getPA().sendFrame126("You have completed The Ritual!",12144);
-		c.getPA().sendFrame126("300,000 Summoning Experience" ,12150);
-		c.getPA().sendFrame126("Bork's Bone Crusher" ,12151);
-		c.getPA().sendFrame126("15m Cash" ,12152);
-		c.getPA().sendFrame126("Third-Age Druidic Wreath" ,12153);
-		c.getPA().sendFrame126("" ,12154);
-		c.getPA().sendFrame126("" ,12155);
-		c.getPA().showInterface(12140);
+		c.getPlayerAssistant ().sendFrame126("You have completed The Ritual!",12144);
+		c.getPlayerAssistant ().sendFrame126("300,000 Summoning Experience" ,12150);
+		c.getPlayerAssistant ().sendFrame126("Bork's Bone Crusher" ,12151);
+		c.getPlayerAssistant ().sendFrame126("15m Cash" ,12152);
+		c.getPlayerAssistant ().sendFrame126("Third-Age Druidic Wreath" ,12153);
+		c.getPlayerAssistant ().sendFrame126("" ,12154);
+		c.getPlayerAssistant ().sendFrame126("" ,12155);
+		c.getPlayerAssistant ().showInterface(12140);
 		break;
 		case 252:
 			sendNpcChat4("H... h... help us.", "Please, someone! help us!.", "You, you please help us!", "The gods are back!", c.talkingNpc, "Weirdo");
@@ -613,7 +610,7 @@ public class DialogueHandler {
 			break;
 		case 0:
 			c.talkingNpc = -1;
-			c.getPA().removeAllWindows();
+			c.getPlayerAssistant ().removeAllWindows();
 			c.nextChat = 0;
 			break;
 		case 20:
@@ -791,12 +788,12 @@ public class DialogueHandler {
 	 */
 	
 	public void sendStartInfo(String text, String text1, String text2, String text3, String title) {
-		c.getPA().sendFrame126(title, 6180);
-		c.getPA().sendFrame126(text, 6181);
-		c.getPA().sendFrame126(text1, 6182);
-		c.getPA().sendFrame126(text2, 6183);
-		c.getPA().sendFrame126(text3, 6184);
-		c.getPA().sendFrame164(6179);
+		c.getPlayerAssistant ().sendFrame126(title, 6180);
+		c.getPlayerAssistant ().sendFrame126(text, 6181);
+		c.getPlayerAssistant ().sendFrame126(text1, 6182);
+		c.getPlayerAssistant ().sendFrame126(text2, 6183);
+		c.getPlayerAssistant ().sendFrame126(text3, 6184);
+		c.getPlayerAssistant ().sendFrame164(6179);
 	}
 	
 	/*
@@ -804,35 +801,35 @@ public class DialogueHandler {
 	 */
 	
 	private void sendOption(String s, String s1) {
-		c.getPA().sendFrame126("Select an Option", 2470);
-	 	c.getPA().sendFrame126(s, 2471);
-		c.getPA().sendFrame126(s1, 2472);
-		c.getPA().sendFrame126("Click here to continue", 2473);
-		c.getPA().sendFrame164(13758);
+		c.getPlayerAssistant ().sendFrame126("Select an Option", 2470);
+	 	c.getPlayerAssistant ().sendFrame126(s, 2471);
+		c.getPlayerAssistant ().sendFrame126(s1, 2472);
+		c.getPlayerAssistant ().sendFrame126("Click here to continue", 2473);
+		c.getPlayerAssistant ().sendFrame164(13758);
 	}	
 	
 	private void sendOption2(String s, String s1) {
-		c.getPA().sendFrame126("Select an Option", 2460);
-		c.getPA().sendFrame126(s, 2461);
-		c.getPA().sendFrame126(s1, 2462);
-		c.getPA().sendFrame164(2459);
+		c.getPlayerAssistant ().sendFrame126("Select an Option", 2460);
+		c.getPlayerAssistant ().sendFrame126(s, 2461);
+		c.getPlayerAssistant ().sendFrame126(s1, 2462);
+		c.getPlayerAssistant ().sendFrame164(2459);
 	}
 	
 	private void sendOption3(String s, String s1, String s2) {
-		c.getPA().sendFrame126("Select an Option", 2460);
-		c.getPA().sendFrame126(s, 2461);
-		c.getPA().sendFrame126(s1, 2462);
-		c.getPA().sendFrame126(s2, 2462);
-		c.getPA().sendFrame164(2459);
+		c.getPlayerAssistant ().sendFrame126("Select an Option", 2460);
+		c.getPlayerAssistant ().sendFrame126(s, 2461);
+		c.getPlayerAssistant ().sendFrame126(s1, 2462);
+		c.getPlayerAssistant ().sendFrame126(s2, 2462);
+		c.getPlayerAssistant ().sendFrame164(2459);
 	}
 	
 	public void sendOption4(String s, String s1, String s2, String s3) {
-		c.getPA().sendFrame126("Select an Option", 2481);
-		c.getPA().sendFrame126(s, 2482);
-		c.getPA().sendFrame126(s1, 2483);
-		c.getPA().sendFrame126(s2, 2484);
-		c.getPA().sendFrame126(s3, 2485);
-		c.getPA().sendFrame164(2480);
+		c.getPlayerAssistant ().sendFrame126("Select an Option", 2481);
+		c.getPlayerAssistant ().sendFrame126(s, 2482);
+		c.getPlayerAssistant ().sendFrame126(s1, 2483);
+		c.getPlayerAssistant ().sendFrame126(s2, 2484);
+		c.getPlayerAssistant ().sendFrame126(s3, 2485);
+		c.getPlayerAssistant ().sendFrame164(2480);
 	}
 	/**public void sendNpcChat(FacialAnimation anim, String... s) {
 		int animId = anim.getAnimationId();
@@ -851,13 +848,13 @@ public class DialogueHandler {
 		}
 	}**/
 	public void sendOption5(String s, String s1, String s2, String s3, String s4) {
-		c.getPA().sendFrame126("Select an Option", 2493);
-		c.getPA().sendFrame126(s, 2494);
-		c.getPA().sendFrame126(s1, 2495);
-		c.getPA().sendFrame126(s2, 2496);
-		c.getPA().sendFrame126(s3, 2497);
-		c.getPA().sendFrame126(s4, 2498);
-		c.getPA().sendFrame164(2492);
+		c.getPlayerAssistant ().sendFrame126("Select an Option", 2493);
+		c.getPlayerAssistant ().sendFrame126(s, 2494);
+		c.getPlayerAssistant ().sendFrame126(s1, 2495);
+		c.getPlayerAssistant ().sendFrame126(s2, 2496);
+		c.getPlayerAssistant ().sendFrame126(s3, 2497);
+		c.getPlayerAssistant ().sendFrame126(s4, 2498);
+		c.getPlayerAssistant ().sendFrame164(2492);
 	}
 
 	/*
@@ -865,9 +862,9 @@ public class DialogueHandler {
 	 */
 	
 	private void sendStatement(String s) { // 1 line click here to continue chat box interface
-		c.getPA().sendFrame126(s, 357);
-		c.getPA().sendFrame126("Click here to continue", 358);
-		c.getPA().sendFrame164(356);
+		c.getPlayerAssistant ().sendFrame126(s, 357);
+		c.getPlayerAssistant ().sendFrame126("Click here to continue", 358);
+		c.getPlayerAssistant ().sendFrame164(356);
 	}
 	
 	/*
@@ -875,34 +872,34 @@ public class DialogueHandler {
 	 */
 	
 	public void sendNpcChat2(String s, String s1, int ChatNpc, String name) {
-		c.getPA().sendFrame200(4888, 9847);
-		c.getPA().sendFrame126(name, 4889);
-		c.getPA().sendFrame126(s, 4890);
-		c.getPA().sendFrame126(s1, 4891);
-		c.getPA().sendFrame75(ChatNpc, 4888);
-		c.getPA().sendFrame164(4887);
+		c.getPlayerAssistant ().sendFrame200(4888, 9847);
+		c.getPlayerAssistant ().sendFrame126(name, 4889);
+		c.getPlayerAssistant ().sendFrame126(s, 4890);
+		c.getPlayerAssistant ().sendFrame126(s1, 4891);
+		c.getPlayerAssistant ().sendFrame75(ChatNpc, 4888);
+		c.getPlayerAssistant ().sendFrame164(4887);
 	}
 	
 	public void sendNpcChat3(String s, String s1, String s2, int ChatNpc, String name) {
-		c.getPA().sendFrame200(4894, 9847);	//Was 591
-		c.getPA().sendFrame126(name, 4895);
-		c.getPA().sendFrame126(s, 4896);
-		c.getPA().sendFrame126(s1, 4897);
-		c.getPA().sendFrame126(s2, 4898);
-		c.getPA().sendFrame75(ChatNpc, 4894);
-		c.getPA().sendFrame164(4893);
+		c.getPlayerAssistant ().sendFrame200(4894, 9847);	//Was 591
+		c.getPlayerAssistant ().sendFrame126(name, 4895);
+		c.getPlayerAssistant ().sendFrame126(s, 4896);
+		c.getPlayerAssistant ().sendFrame126(s1, 4897);
+		c.getPlayerAssistant ().sendFrame126(s2, 4898);
+		c.getPlayerAssistant ().sendFrame75(ChatNpc, 4894);
+		c.getPlayerAssistant ().sendFrame164(4893);
 	}
 	
 	
 	private void sendNpcChat4(String s, String s1, String s2, String s3, int ChatNpc, String name) {
-		c.getPA().sendFrame200(4901, 9847);
-		c.getPA().sendFrame126(name, 4902);
-		c.getPA().sendFrame126(s, 4903);
-		c.getPA().sendFrame126(s1, 4904);
-		c.getPA().sendFrame126(s2, 4905);
-		c.getPA().sendFrame126(s3, 4906);
-		c.getPA().sendFrame75(ChatNpc, 4901);
-		c.getPA().sendFrame164(4900);
+		c.getPlayerAssistant ().sendFrame200(4901, 9847);
+		c.getPlayerAssistant ().sendFrame126(name, 4902);
+		c.getPlayerAssistant ().sendFrame126(s, 4903);
+		c.getPlayerAssistant ().sendFrame126(s1, 4904);
+		c.getPlayerAssistant ().sendFrame126(s2, 4905);
+		c.getPlayerAssistant ().sendFrame126(s3, 4906);
+		c.getPlayerAssistant ().sendFrame75(ChatNpc, 4901);
+		c.getPlayerAssistant ().sendFrame164(4900);
 	}
 	
 	/*
@@ -910,53 +907,53 @@ public class DialogueHandler {
 	 */
 	
 	private void sendPlayerChat1(String s) {
-		c.getPA().sendFrame200(969, 591);
-		c.getPA().sendFrame126(c.playerName, 970);
-		c.getPA().sendFrame126(s, 971);
-		c.getPA().sendFrame185(969);
-		c.getPA().sendFrame164(968);
+		c.getPlayerAssistant ().sendFrame200(969, 591);
+		c.getPlayerAssistant ().sendFrame126(c.playerName, 970);
+		c.getPlayerAssistant ().sendFrame126(s, 971);
+		c.getPlayerAssistant ().sendFrame185(969);
+		c.getPlayerAssistant ().sendFrame164(968);
 	}
 	
 	private void sendPlayerChat2(String s, String s1) {
-		c.getPA().sendFrame200(974, 591);
-		c.getPA().sendFrame126(c.playerName, 975);
-		c.getPA().sendFrame126(s, 976);
-		c.getPA().sendFrame126(s1, 977);
-		c.getPA().sendFrame185(974);
-		c.getPA().sendFrame164(973);
+		c.getPlayerAssistant ().sendFrame200(974, 591);
+		c.getPlayerAssistant ().sendFrame126(c.playerName, 975);
+		c.getPlayerAssistant ().sendFrame126(s, 976);
+		c.getPlayerAssistant ().sendFrame126(s1, 977);
+		c.getPlayerAssistant ().sendFrame185(974);
+		c.getPlayerAssistant ().sendFrame164(973);
 	}
 
 	
 	private void sendPlayerChat3(String s, String s1, String s2) {
-		c.getPA().sendFrame200(980, 591);
-		c.getPA().sendFrame126(c.playerName, 981);
-		c.getPA().sendFrame126(s, 982);
-		c.getPA().sendFrame126(s1, 983);
-		c.getPA().sendFrame126(s2, 984);
-		c.getPA().sendFrame185(980);
-		c.getPA().sendFrame164(979);
+		c.getPlayerAssistant ().sendFrame200(980, 591);
+		c.getPlayerAssistant ().sendFrame126(c.playerName, 981);
+		c.getPlayerAssistant ().sendFrame126(s, 982);
+		c.getPlayerAssistant ().sendFrame126(s1, 983);
+		c.getPlayerAssistant ().sendFrame126(s2, 984);
+		c.getPlayerAssistant ().sendFrame185(980);
+		c.getPlayerAssistant ().sendFrame164(979);
 	}
 
 	public void talk(int face, String line1, String line2, String line3, String line4, int npcID) {
-		c.getPA().sendFrame200(4901, face);
-		c.getPA().sendFrame126(c.getPA().GetNpcName(npcID).replaceAll("_", " "), 4902);
-		c.getPA().sendFrame126(""+line1, 4903);
-		c.getPA().sendFrame126(""+line2, 4904);
-		c.getPA().sendFrame126(""+line3, 4905);
-		c.getPA().sendFrame126(""+line4, 4906);
-		c.getPA().sendFrame126("Click here to continue", 4907);
-		c.getPA().sendFrame75(npcID, 4901);
-		c.getPA().sendFrame164(4900);
+		c.getPlayerAssistant ().sendFrame200(4901, face);
+		c.getPlayerAssistant ().sendFrame126(c.getPlayerAssistant ().GetNpcName(npcID).replaceAll("_", " "), 4902);
+		c.getPlayerAssistant ().sendFrame126(""+line1, 4903);
+		c.getPlayerAssistant ().sendFrame126(""+line2, 4904);
+		c.getPlayerAssistant ().sendFrame126(""+line3, 4905);
+		c.getPlayerAssistant ().sendFrame126(""+line4, 4906);
+		c.getPlayerAssistant ().sendFrame126("Click here to continue", 4907);
+		c.getPlayerAssistant ().sendFrame75(npcID, 4901);
+		c.getPlayerAssistant ().sendFrame164(4900);
 	}
 	
 	private void sendPlayerChat4(String s, String s1, String s2, String s3) {
-		c.getPA().sendFrame200(987, 591);
-		c.getPA().sendFrame126(c.playerName, 988);
-		c.getPA().sendFrame126(s, 989);
-		c.getPA().sendFrame126(s1, 990);
-		c.getPA().sendFrame126(s2, 991);
-		c.getPA().sendFrame126(s3, 992);
-		c.getPA().sendFrame185(987);
-		c.getPA().sendFrame164(986);
+		c.getPlayerAssistant ().sendFrame200(987, 591);
+		c.getPlayerAssistant ().sendFrame126(c.playerName, 988);
+		c.getPlayerAssistant ().sendFrame126(s, 989);
+		c.getPlayerAssistant ().sendFrame126(s1, 990);
+		c.getPlayerAssistant ().sendFrame126(s2, 991);
+		c.getPlayerAssistant ().sendFrame126(s3, 992);
+		c.getPlayerAssistant ().sendFrame185(987);
+		c.getPlayerAssistant ().sendFrame164(986);
 	}
 }

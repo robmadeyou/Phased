@@ -5,22 +5,14 @@ import server.Server;
 import server.Connection;
 import server.model.npcs.NPCHandler;
 import server.util.Misc;
-import server.world.map.*;
 
 import java.util.Properties;
 
-import server.model.players.PlayerSave;
-
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.*;
-
-import server.model.minigames.FightPits;
 
 import java.util.GregorianCalendar;
 import java.util.Calendar;
@@ -28,7 +20,6 @@ import java.util.Calendar;
 import server.event.EventContainer;
 import server.event.Event;
 import server.event.EventManager;
-import server.model.players.Player;
 
 
 public class PlayerAssistant {
@@ -140,10 +131,10 @@ public class PlayerAssistant {
     }
 
     public void ditchJump(final Client c, final int x, final int y) {
-        c.getPA().walkTo(x, y);
+        c.getPlayerAssistant ().walkTo(x, y);
         c.isRunning2 = false;
         c.playerWalkIndex = 6132;
-        c.getPA().requestUpdates();
+        c.getPlayerAssistant ().requestUpdates();
     }
 
     public String getTotalAmount(Client c, int j) {
@@ -661,17 +652,17 @@ public class PlayerAssistant {
         c.clanId = -1;
         c.inAclan = false;
         c.CSLS = 0;
-        c.getPA().sendFrame126("chat: ", 18139);
-        c.getPA().sendFrame126("Clan Chat Owner: ", 18140);
+        c.getPlayerAssistant ().sendFrame126("chat: ", 18139);
+        c.getPlayerAssistant ().sendFrame126("Clan Chat Owner: ", 18140);
         for (int j = 18144; j < 18244; j++)
-            c.getPA().sendFrame126("", j);
+            c.getPlayerAssistant ().sendFrame126("", j);
     }
 
     public void resetAutocast() {
         c.autocastId = -1;
         c.autocasting = false;
         c.setSidebarInterface(0, 328);
-        c.getPA().sendFrame36(108, 0);
+        c.getPlayerAssistant ().sendFrame36(108, 0);
         c.getItems().sendWeapon(c.playerEquipment[c.playerWeapon], c.getItems().getItemName(c.playerEquipment[c.playerWeapon]));
     }
 
@@ -935,7 +926,7 @@ public class PlayerAssistant {
     public void removeAllWindows() {
         synchronized (c) {
             if (c.getOutStream() != null && c != null) {
-                c.getPA().resetVariables();
+                c.getPlayerAssistant ().resetVariables();
                 c.getOutStream().createFrame(219);
                 c.flushOutStream();
             }
@@ -1046,7 +1037,7 @@ public class PlayerAssistant {
                             if (c.distanceToPoint(person.getX(), person.getY()) <= 25) {
                                 person.getOutStream().createFrame(1);
                                 person.flushOutStream();
-                                person.getPA().requestUpdates();
+                                person.getPlayerAssistant ().requestUpdates();
                             }
                         }
                     }
@@ -1115,7 +1106,7 @@ public class PlayerAssistant {
                         if (person.getOutStream() != null) {
                             if (person.distanceToPoint(x, y) <= 25) {
                                 if (p.heightLevel == c.heightLevel)
-                                    person.getPA().createProjectile(x, y, offX, offY, angle, speed, gfxMoving, startHeight, endHeight, lockon, time);
+                                    person.getPlayerAssistant ().createProjectile(x, y, offX, offY, angle, speed, gfxMoving, startHeight, endHeight, lockon, time);
                             }
                         }
                     }
@@ -1133,7 +1124,7 @@ public class PlayerAssistant {
                     if (person != null) {
                         if (person.getOutStream() != null) {
                             if (person.distanceToPoint(x, y) <= 25) {
-                                person.getPA().createProjectile2(x, y, offX, offY, angle, speed, gfxMoving, startHeight, endHeight, lockon, time, slope);
+                                person.getPlayerAssistant ().createProjectile2(x, y, offX, offY, angle, speed, gfxMoving, startHeight, endHeight, lockon, time, slope);
                             }
                         }
                     }
@@ -1172,7 +1163,7 @@ public class PlayerAssistant {
                     if (person != null) {
                         if (person.getOutStream() != null) {
                             if (person.distanceToPoint(x, y) <= 25) {
-                                person.getPA().stillGfx(id, x, y, height, time);
+                                person.getPlayerAssistant ().stillGfx(id, x, y, height, time);
                             }
                         }
                     }
@@ -1282,7 +1273,7 @@ public class PlayerAssistant {
             if (p != null && p.isActive) {
                 Client o = (Client) p;
                 if (o != null) {
-                    o.getPA().updatePM(c.playerId, 1);
+                    o.getPlayerAssistant ().updatePM(c.playerId, 1);
                 }
             }
         }
@@ -1295,7 +1286,7 @@ public class PlayerAssistant {
                     if (p != null && p.isActive && Misc.playerNameToInt64(p.playerName) == c.friends[i]) {
                         Client o = (Client) p;
                         if (o != null) {
-                            if (c.playerRights >= 2 || p.privateChat == 0 || (p.privateChat == 1 && o.getPA().isInPM(Misc.playerNameToInt64(c.playerName)))) {
+                            if (c.playerRights >= 2 || p.privateChat == 0 || (p.privateChat == 1 && o.getPlayerAssistant ().isInPM(Misc.playerNameToInt64(c.playerName)))) {
                                 loadPM(c.friends[i], 1);
                                 pmLoaded = true;
                             }
@@ -1313,7 +1304,7 @@ public class PlayerAssistant {
                 if (p != null && p.isActive) {
                     Client o = (Client) p;
                     if (o != null) {
-                        o.getPA().updatePM(c.playerId, 1);
+                        o.getPlayerAssistant ().updatePM(c.playerId, 1);
                     }
                 }
             }
@@ -1345,7 +1336,7 @@ public class PlayerAssistant {
             for (int i = 0; i < c.friends.length; i++) {
                 if (c.friends[i] != 0) {
                     if (l == c.friends[i]) {
-                        if (o.getPA().isInPM(Misc.playerNameToInt64(c.playerName))) {
+                        if (o.getPlayerAssistant ().isInPM(Misc.playerNameToInt64(c.playerName))) {
                             loadPM(l, world);
                             return;
                         } else {
@@ -1805,7 +1796,7 @@ public class PlayerAssistant {
             if (Server.playerHandler.players[j] != null) {
                 if (Server.playerHandler.players[j].followId == c.playerId) {
                     Client c = (Client) Server.playerHandler.players[j];
-                    c.getPA().resetFollow();
+                    c.getPlayerAssistant ().resetFollow();
                 }
             }
         }
@@ -1827,20 +1818,20 @@ public class PlayerAssistant {
         if (c.playerRights == 8 && c.playerRights == 7) {
             for (int i = 0; i < 20; i++) {
                 c.playerLevel[i] = getLevelForXP(c.playerXP[i]);
-                c.getPA().refreshSkill(i);
+                c.getPlayerAssistant ().refreshSkill(i);
             }
             c.getCombat().resetPrayers();
 
             c.teleportToX = 3300;
             c.teleportToY = 3300;
             PlayerSave.saveGame(c);
-            c.getPA().resetTzhaar();
+            c.getPlayerAssistant ().resetTzhaar();
             requestUpdates();
             return;
 
         }
-        if (c.duelStatus <= 4 && !c.getPA().inPitsWait() && !c.getPA().isOwner() && !c.getPA().isAdmin()) {
-            if (!c.inPits && !c.inFightCaves() && !c.getPA().isOwner() && !c.getPA().isAdmin() && !c.inPcGame() && !c.inFunPk()) {
+        if (c.duelStatus <= 4 && !c.getPlayerAssistant ().inPitsWait() && !c.getPlayerAssistant ().isOwner() && !c.getPlayerAssistant ().isAdmin()) {
+            if (!c.inPits && !c.inFightCaves() && !c.getPlayerAssistant ().isOwner() && !c.getPlayerAssistant ().isAdmin() && !c.inPcGame() && !c.inFunPk()) {
                 c.getItems().resetKeepItems();
                 if ((c.playerRights == 8 && Config.ADMIN_DROP_ITEMS) || c.playerRights != 8) {
                     if (!c.isSkulled && !c.isInArd()) {    // what items to keep
@@ -1876,14 +1867,14 @@ public class PlayerAssistant {
         c.getCombat().resetPrayers();
         for (int i = 0; i < 25; i++) {
             c.playerLevel[i] = getLevelForXP(c.playerXP[i]);
-            c.getPA().refreshSkill(i);
+            c.getPlayerAssistant ().refreshSkill(i);
         }
         if (c.playerEquipment[c.playerRing] == 2570) {
             if (c.playerLevel[8] > 0 && c.playerLevel[3] <= c.getLevelForXP(c.playerXP[3]) / 10 && c.underAttackBy > 0) {
                 int wildlvl = (((c.absY - 3520) / 8) + 1);
                 if (wildlvl < 20) {
                     c.getItems().deleteEquipment(2570, c.playerRing);
-                    c.getPA().startTeleport(2831, 2973, 0, "modern");
+                    c.getPlayerAssistant ().startTeleport(2831, 2973, 0, "modern");
                 }
             }
         }
@@ -1895,11 +1886,11 @@ public class PlayerAssistant {
             c.skullTimer = 0;
             c.attackedPlayers.clear();
         } else if (c.inFightCaves()) {
-            c.getPA().resetTzhaar();
+            c.getPlayerAssistant ().resetTzhaar();
         } else { // we are in a duel, respawn outside of arena
             Client o = (Client) Server.playerHandler.players[c.duelingWith];
             if (o != null) {
-                o.getPA().createPlayerHints(10, -1);
+                o.getPlayerAssistant ().createPlayerHints(10, -1);
                 if (o.duelStatus == 6) {
                     o.getTradeAndDuel().duelVictory();
                 }
@@ -1921,7 +1912,7 @@ public class PlayerAssistant {
         c.headIconPk = -1;
         c.skullTimer = -1;
         c.damageTaken = new int[Config.MAX_PLAYERS];
-        c.getPA().requestUpdates();
+        c.getPlayerAssistant ().requestUpdates();
         removeAllWindows();
         c.tradeResetNeeded = true;
 
@@ -1971,7 +1962,7 @@ public class PlayerAssistant {
      * Teleporting
      **/
     public void spellTeleport(int x, int y, int height) {
-        c.getPA().startTeleport(x, y, height, c.playerMagicBook == 1 ? "ancient" : "modern");
+        c.getPlayerAssistant ().startTeleport(x, y, height, c.playerMagicBook == 1 ? "ancient" : "modern");
     }
 
     public void startMovement(int x, int y, int height) {
@@ -2185,7 +2176,7 @@ public class PlayerAssistant {
 
 	/*public void Player() {
 		if(Server.playerHandler.players[c.followId] == null || Server.playerHandler.players[c.followId].isDead) {
-			c.getPA().resetFollow();
+			c.getPlayerAssistant().resetFollow();
 			return;
 		}		
 		if(c.freezeTimer > 0) {
@@ -2200,7 +2191,7 @@ public class PlayerAssistant {
 		boolean sameSpot = (c.absX == otherX && c.absY == otherY);
 		if(!c.goodDistance(otherX, otherY, c.getX(), c.getY(), 25)) {
 			c.followId = 0;
-			c.getPA().resetFollow();
+			c.getPlayerAssistant().resetFollow();
 			return;
 		}
 		c.faceUpdate(c.followId+32768);
@@ -2646,7 +2637,7 @@ public class PlayerAssistant {
                 sendFrame126("Congratulations, you just advanced an attack level!", 6248);
                 sendFrame126("Your attack level is now " + getLevelForXP(c.playerXP[skill]) + ".", 6249);
                 c.sendMessage("Congratulations, you just advanced an attack level.");
-                c.getPA().sendFrame126("Combat Level: " + c.getCombatLevel() + "", 3983);
+                c.getPlayerAssistant ().sendFrame126("Combat Level: " + c.getCombatLevel() + "", 3983);
                 c.sendMessage("Because you leveled you received 5 Level Points.");
                 sendFrame164(6247);
                 break;
@@ -2656,7 +2647,7 @@ public class PlayerAssistant {
                 sendFrame126("Congratulations, you just advanced a defence level!", 6254);
                 sendFrame126("Your defence level is now " + getLevelForXP(c.playerXP[skill]) + ".", 6255);
                 c.sendMessage("Congratulations, you just advanced a defence level.");
-                c.getPA().sendFrame126("Combat Level: " + c.getCombatLevel() + "", 3983);
+                c.getPlayerAssistant ().sendFrame126("Combat Level: " + c.getCombatLevel() + "", 3983);
                 c.sendMessage("Because you leveled you received 5 Level Points.");
                 sendFrame164(6253);
                 break;
@@ -2666,7 +2657,7 @@ public class PlayerAssistant {
                 sendFrame126("Congratulations, you just advanced a strength level!", 6207);
                 sendFrame126("Your strength level is now " + getLevelForXP(c.playerXP[skill]) + ".", 6208);
                 c.sendMessage("Congratulations, you just advanced a strength level.");
-                c.getPA().sendFrame126("Combat Level: " + c.getCombatLevel() + "", 3983);
+                c.getPlayerAssistant ().sendFrame126("Combat Level: " + c.getCombatLevel() + "", 3983);
                 c.sendMessage("Because you leveled you received 5 Level Points.");
                 sendFrame164(6206);
                 break;
@@ -2676,7 +2667,7 @@ public class PlayerAssistant {
                 sendFrame126("Congratulations, you just advanced a hitpoints level!", 6217);
                 sendFrame126("Your hitpoints level is now " + getLevelForXP(c.playerXP[skill]) + ".", 6218);
                 c.sendMessage("Congratulations, you just advanced a hitpoints level.");
-                c.getPA().sendFrame126("Combat Level: " + c.getCombatLevel() + "", 3983);
+                c.getPlayerAssistant ().sendFrame126("Combat Level: " + c.getCombatLevel() + "", 3983);
                 c.sendMessage("Because you leveled you received 5 Level Points.");
                 sendFrame164(6216);
                 break;
@@ -2686,7 +2677,7 @@ public class PlayerAssistant {
                 sendFrame126("Congratulations, you just advanced a ranged level!", 5453);
                 sendFrame126("Your ranged level is now " + getLevelForXP(c.playerXP[skill]) + ".", 6114);
                 c.sendMessage("Congratulations, you just advanced a ranging level.");
-                c.getPA().sendFrame126("Combat Level: " + c.getCombatLevel() + "", 3983);
+                c.getPlayerAssistant ().sendFrame126("Combat Level: " + c.getCombatLevel() + "", 3983);
                 c.sendMessage("Because you leveled you received 5 Level Points.");
                 sendFrame164(4443);
                 break;
@@ -2696,7 +2687,7 @@ public class PlayerAssistant {
                 sendFrame126("Congratulations, you just advanced a prayer level!", 6243);
                 sendFrame126("Your prayer level is now " + getLevelForXP(c.playerXP[skill]) + ".", 6244);
                 c.sendMessage("Congratulations, you just advanced a prayer level.");
-                c.getPA().sendFrame126("Combat Level: " + c.getCombatLevel() + "", 3983);
+                c.getPlayerAssistant ().sendFrame126("Combat Level: " + c.getCombatLevel() + "", 3983);
                 c.sendMessage("Because you leveled you received 5 Level Points.");
                 sendFrame164(6242);
                 break;
@@ -2706,7 +2697,7 @@ public class PlayerAssistant {
                 sendFrame126("Congratulations, you just advanced a magic level!", 6212);
                 sendFrame126("Your magic level is now " + getLevelForXP(c.playerXP[skill]) + ".", 6213);
                 c.sendMessage("Congratulations, you just advanced a magic level.");
-                c.getPA().sendFrame126("Combat Level: " + c.getCombatLevel() + "", 3983);
+                c.getPlayerAssistant ().sendFrame126("Combat Level: " + c.getCombatLevel() + "", 3983);
                 c.sendMessage("Because you leveled you received 5 Level Points.");
                 sendFrame164(6211);
                 break;
@@ -3502,14 +3493,14 @@ public class PlayerAssistant {
         c.waveId = -1;
         c.tzhaarToKill = -1;
         c.tzhaarKilled = -1;
-        c.getPA().movePlayer(3087, 3495, 0);
+        c.getPlayerAssistant ().movePlayer(3087, 3495, 0);
     }
 
     public void resetRFD() {
         c.waveId = -1;
         c.RFDToKill = -1;
         c.RFDKilled = -1;
-        c.getPA().movePlayer(3091, 3486, 0);
+        c.getPlayerAssistant ().movePlayer(3091, 3486, 0);
     }
 
     public void enterRFD() {
@@ -3519,30 +3510,30 @@ public class PlayerAssistant {
         }
         if (c.Agrith == true && c.Flambeed == false) {
             c.waveId = 1;
-            c.getPA().movePlayer(1899, 5363, c.playerId * 4 + 2);
+            c.getPlayerAssistant ().movePlayer(1899, 5363, c.playerId * 4 + 2);
             Server.rfd.spawnNextWave(c);
             return;
         }
         if (c.Flambeed == true && c.Karamel == false) {
             c.waveId = 2;
-            c.getPA().movePlayer(1899, 5363, c.playerId * 4 + 2);
+            c.getPlayerAssistant ().movePlayer(1899, 5363, c.playerId * 4 + 2);
             Server.rfd.spawnNextWave(c);
             return;
         }
         if (c.Karamel == true && c.Dessourt == false) {
             c.waveId = 3;
-            c.getPA().movePlayer(1899, 5363, c.playerId * 4 + 2);
+            c.getPlayerAssistant ().movePlayer(1899, 5363, c.playerId * 4 + 2);
             Server.rfd.spawnNextWave(c);
             return;
         }
         if (c.Dessourt == true && c.Culin == false) {
             c.waveId = 4;
-            c.getPA().movePlayer(1899, 5363, c.playerId * 4 + 2);
+            c.getPlayerAssistant ().movePlayer(1899, 5363, c.playerId * 4 + 2);
             Server.rfd.spawnNextWave(c);
             return;
         }
         if (c.Agrith == false) {
-            c.getPA().movePlayer(1899, 5363, c.playerId * 4 + 2);
+            c.getPlayerAssistant ().movePlayer(1899, 5363, c.playerId * 4 + 2);
             c.waveId = 0;
             c.RFDToKill = -1;
             c.RFDKilled = -1;
@@ -3551,7 +3542,7 @@ public class PlayerAssistant {
     }
 
     public void enterCaves() {
-        c.getPA().movePlayer(2413, 5117, c.playerId * 4);
+        c.getPlayerAssistant ().movePlayer(2413, 5117, c.playerId * 4);
         c.waveId = 0;
         c.tzhaarToKill = -1;
         c.tzhaarKilled = -1;
@@ -3636,51 +3627,51 @@ public class PlayerAssistant {
 
     public void handleLoginText() {
         //modern
-        c.getPA().sendFrame126("Monster Teleport", 1300); //varrock
-        c.getPA().sendFrame126("Monsters of Aggroth", 1301); //varrock description
-        c.getPA().sendFrame126("Minigame Teleport", 1325); //lumbridge
-        c.getPA().sendFrame126("Minigames of Aggroth", 1326); //lumbridge description
-        c.getPA().sendFrame126("Boss Teleport", 1350); //falador
-        c.getPA().sendFrame126("Bosses of Aggroth", 1351); //falador description
-        c.getPA().sendFrame126("PKing Teleport", 1382); //camelot
-        c.getPA().sendFrame126("PK Areas of Aggroth", 1383); //camelot description
-        c.getPA().sendFrame126("Skill Teleport", 1415);    //ardougne
-        c.getPA().sendFrame126("Skill Area of Aggroth", 1416); //ardougne description
-        c.getPA().sendFrame126("City Teleports", 1454); //watchtower
-        c.getPA().sendFrame126("Citys of Aggroth", 1455); //watchtower description
-        c.getPA().sendFrame126("Advanced Skilling", 7457); //trollheim
-        c.getPA().sendFrame126("Aggroth Advanced Skilling Area", 7458); //trollheim description
-        c.getPA().sendFrame126("Advanced Bosses", 18472);    //ape atoll
-        c.getPA().sendFrame126("Advanced Bosses of Aggroth", 18473); //ape atoll description
+        c.getPlayerAssistant ().sendFrame126("Monster Teleport", 1300); //varrock
+        c.getPlayerAssistant ().sendFrame126("Monsters of Aggroth", 1301); //varrock description
+        c.getPlayerAssistant ().sendFrame126("Minigame Teleport", 1325); //lumbridge
+        c.getPlayerAssistant ().sendFrame126("Minigames of Aggroth", 1326); //lumbridge description
+        c.getPlayerAssistant ().sendFrame126("Boss Teleport", 1350); //falador
+        c.getPlayerAssistant ().sendFrame126("Bosses of Aggroth", 1351); //falador description
+        c.getPlayerAssistant ().sendFrame126("PKing Teleport", 1382); //camelot
+        c.getPlayerAssistant ().sendFrame126("PK Areas of Aggroth", 1383); //camelot description
+        c.getPlayerAssistant ().sendFrame126("Skill Teleport", 1415);    //ardougne
+        c.getPlayerAssistant ().sendFrame126("Skill Area of Aggroth", 1416); //ardougne description
+        c.getPlayerAssistant ().sendFrame126("City Teleports", 1454); //watchtower
+        c.getPlayerAssistant ().sendFrame126("Citys of Aggroth", 1455); //watchtower description
+        c.getPlayerAssistant ().sendFrame126("Advanced Skilling", 7457); //trollheim
+        c.getPlayerAssistant ().sendFrame126("Aggroth Advanced Skilling Area", 7458); //trollheim description
+        c.getPlayerAssistant ().sendFrame126("Advanced Bosses", 18472);    //ape atoll
+        c.getPlayerAssistant ().sendFrame126("Advanced Bosses of Aggroth", 18473); //ape atoll description
 
         //ancients
-        c.getPA().sendFrame126("Monster Teleport", 13037); //varrock pad
-        c.getPA().sendFrame126("Monsters of Aggroth", 13038); //varrock description
-        c.getPA().sendFrame126("Minigame Teleport", 13047); //lumbridge senn
-        c.getPA().sendFrame126("Minigames of Aggroth", 13048); //lumbridge description
-        c.getPA().sendFrame126("Boss Teleport", 13055); //falador kharuyl
-        c.getPA().sendFrame126("Bosses of Aggroth", 13056); //falador description
-        c.getPA().sendFrame126("PKing Teleport", 13063); //camelot lassar
-        c.getPA().sendFrame126("PK Areas of Aggroth", 1364); //camelot description
-        c.getPA().sendFrame126("Skill Teleport", 13071);    //ardougne dareek
-        c.getPA().sendFrame126("Skill Area of Aggroth", 13072); //ardougne description
-        c.getPA().sendFrame126("City Teleports", 13081); //watchtower carrqalang
-        c.getPA().sendFrame126("Citys of Aggroth", 13082); //watchtower description
-        c.getPA().sendFrame126("Advanced Skilling", 13089); //trollheim annark
-        c.getPA().sendFrame126("Aggroth Advanced Skilling Area", 13090); //trollheim description
-        c.getPA().sendFrame126("Advanced Bosses", 13097);    //ape atoll ghorrock
-        c.getPA().sendFrame126("Advanced Bosses of Aggroth", 13098); //ape atoll description
+        c.getPlayerAssistant ().sendFrame126("Monster Teleport", 13037); //varrock pad
+        c.getPlayerAssistant ().sendFrame126("Monsters of Aggroth", 13038); //varrock description
+        c.getPlayerAssistant ().sendFrame126("Minigame Teleport", 13047); //lumbridge senn
+        c.getPlayerAssistant ().sendFrame126("Minigames of Aggroth", 13048); //lumbridge description
+        c.getPlayerAssistant ().sendFrame126("Boss Teleport", 13055); //falador kharuyl
+        c.getPlayerAssistant ().sendFrame126("Bosses of Aggroth", 13056); //falador description
+        c.getPlayerAssistant ().sendFrame126("PKing Teleport", 13063); //camelot lassar
+        c.getPlayerAssistant ().sendFrame126("PK Areas of Aggroth", 1364); //camelot description
+        c.getPlayerAssistant ().sendFrame126("Skill Teleport", 13071);    //ardougne dareek
+        c.getPlayerAssistant ().sendFrame126("Skill Area of Aggroth", 13072); //ardougne description
+        c.getPlayerAssistant ().sendFrame126("City Teleports", 13081); //watchtower carrqalang
+        c.getPlayerAssistant ().sendFrame126("Citys of Aggroth", 13082); //watchtower description
+        c.getPlayerAssistant ().sendFrame126("Advanced Skilling", 13089); //trollheim annark
+        c.getPlayerAssistant ().sendFrame126("Aggroth Advanced Skilling Area", 13090); //trollheim description
+        c.getPlayerAssistant ().sendFrame126("Advanced Bosses", 13097);    //ape atoll ghorrock
+        c.getPlayerAssistant ().sendFrame126("Advanced Bosses of Aggroth", 13098); //ape atoll description
     }
 
     public void handleWeaponStyle() {
         if (c.fightMode == 0) {
-            c.getPA().sendFrame36(43, c.fightMode);
+            c.getPlayerAssistant ().sendFrame36(43, c.fightMode);
         } else if (c.fightMode == 1) {
-            c.getPA().sendFrame36(43, 3);
+            c.getPlayerAssistant ().sendFrame36(43, 3);
         } else if (c.fightMode == 2) {
-            c.getPA().sendFrame36(43, 1);
+            c.getPlayerAssistant ().sendFrame36(43, 1);
         } else if (c.fightMode == 3) {
-            c.getPA().sendFrame36(43, 2);
+            c.getPlayerAssistant ().sendFrame36(43, 2);
         }
     }
 

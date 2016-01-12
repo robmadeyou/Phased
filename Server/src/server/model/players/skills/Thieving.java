@@ -27,7 +27,7 @@ public class Thieving {
 			if (npcThieving[j][0] == id) {
 				if (c.playerLevel[c.playerThieving] >= npcThieving[j][1]) {
 					if (Misc.random(c.playerLevel[c.playerThieving] + 2 - npcThieving[j][1]) != 1) {
-						c.getPA().addSkillXP(npcThieving[j][2] * Config.THIEVING_EXPERIENCE, c.playerThieving);
+						c.getPlayerAssistant ().addSkillXP(npcThieving[j][2] * Config.THIEVING_EXPERIENCE, c.playerThieving);
 						c.getItems().addItem(995, npcThieving[j][3]);
 						c.startAnimation(881);
 						c.lastThieve = System.currentTimeMillis();
@@ -37,7 +37,7 @@ public class Thieving {
 						c.setHitDiff(npcThieving[j][4]);
 						c.setHitUpdateRequired(true);
 						c.playerLevel[3] -= npcThieving[j][4];
-						c.getPA().refreshSkill(3);
+						c.getPlayerAssistant ().refreshSkill(3);
 						c.lastThieve = System.currentTimeMillis() + 2000;
 						c.sendMessage("You fail to thieve the NPC.");
 						break;
@@ -67,7 +67,7 @@ public class Thieving {
 			c.getItems().addItem(id, 1);
 			c.startAnimation(832);
 			//c.getItems().addItem(995, c.playerLevel[c.playerThieving] * 150);
-			c.getPA().addSkillXP(xp * Config.THIEVING_EXPERIENCE, c.playerThieving);
+			c.getPlayerAssistant ().addSkillXP(xp * Config.THIEVING_EXPERIENCE, c.playerThieving);
 			c.lastThieve = System.currentTimeMillis();
 			c.sendMessage("You steal a " + server.model.items.Item.getItemName(id) + ".");
 			}		
@@ -79,7 +79,7 @@ public class Thieving {
 	public static void appendHit(int damage, Client c) {
 		Server.playerHandler.players[c.playerId].setHitDiff(damage);
 		Server.playerHandler.players[c.playerId].playerLevel[3] -= damage;
-		c.getPA().refreshSkill(3);
+		c.getPlayerAssistant ().refreshSkill(3);
 		Server.playerHandler.players[c.playerId].setHitUpdateRequired(true);	
 		Server.playerHandler.players[c.playerId].updateRequired = true;		
 	}	

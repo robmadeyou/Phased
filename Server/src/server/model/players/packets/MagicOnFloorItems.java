@@ -36,10 +36,10 @@ public class MagicOnFloorItems implements PacketType {
 			c.teleGrabDelay = System.currentTimeMillis();
 			c.startAnimation(c.MAGIC_SPELLS[51][2]);
 			c.gfx100(c.MAGIC_SPELLS[51][3]);
-			c.getPA().createPlayersStillGfx(144, itemX, itemY, 0, 72);
-			c.getPA().createPlayersProjectile(c.getX(), c.getY(), offX, offY, 50, 70, c.MAGIC_SPELLS[51][4], 50, 10, 0, 50);
-			c.getPA().addSkillXP(c.MAGIC_SPELLS[51][7], 6);
-			c.getPA().refreshSkill(6);
+			c.getPlayerAssistant().createPlayersStillGfx(144, itemX, itemY, 0, 72);
+			c.getPlayerAssistant().createPlayersProjectile(c.getX(), c.getY(), offX, offY, 50, 70, c.MAGIC_SPELLS[51][4], 50, 10, 0, 50);
+			c.getPlayerAssistant().addSkillXP(c.MAGIC_SPELLS[51][7], 6);
+			c.getPlayerAssistant().refreshSkill(6);
 			c.stopMovement();
 		}*/
 	}

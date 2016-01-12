@@ -14,9 +14,9 @@ public class ClickObject implements PacketType {
 	public void processPacket(Client c, int packetType, int packetSize) {		
 		c.clickObjectType = c.objectX = c.objectId = c.objectY = 0;
 		c.objectYOffset = c.objectXOffset = 0;
-		c.getPA().resetFollow();
+		c.getPlayerAssistant ().resetFollow();
 c.getCombat().resetPlayerAttack();
-c.getPA().requestUpdates();
+c.getPlayerAssistant ().requestUpdates();
 		switch(packetType) {
 			
 			case FIRST_CLICK:
@@ -171,14 +171,14 @@ case 23271:
 
 	
 				case 13999:
-					c.getPA().startTeleport(3087, 3498, 0, "modern");
+					c.getPlayerAssistant ().startTeleport(3087, 3498, 0, "modern");
 		c.teleportToX = 3093;
 		c.teleportToY = 3487;
 				
 				break;
 				case 13409:	
 				if(c.nomad == 7 || c.nomad == 8) {
-						c.getPA().startTeleport(2783, 10066, 0, "modern");
+						c.getPlayerAssistant ().startTeleport(2783, 10066, 0, "modern");
 					} else if(c.nomad == 4 && c.getItems().freeSlots() >= 1) {
 						c.getItems().addItem(685, 1);
 						c.getDH().sendDialogues(400, -1);

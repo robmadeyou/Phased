@@ -125,7 +125,7 @@ public class AttackPlayer implements PacketType {
 				c.followId = c.playerIndex;
 				if (!c.usingMagic && !usingBow && !usingOtherRangeWeapons) {
 					c.followDistance = 1;
-					c.getPA().followPlayer(c.playerIndex);
+					c.getPlayerAssistant ().followPlayer(c.playerIndex);
 				}	
 				if (c.attackTimer <= 0) {
 					//c.sendMessage("Tried to attack...");
@@ -165,7 +165,7 @@ public class AttackPlayer implements PacketType {
 			}		
 
 			if(castingSpellId == 30298) {
-			c.getPA().vengOther();
+			c.getPlayerAssistant ().vengOther();
 			break;
 			}
 			

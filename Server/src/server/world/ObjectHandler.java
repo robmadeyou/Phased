@@ -61,7 +61,7 @@ public class ObjectHandler {
 			if(c != null) {
 				if(c.heightLevel == o.getObjectHeight() && o.objectTicks == 0) {
 					if (c.distanceToPoint(o.getObjectX(), o.getObjectY()) <= 60) {
-						c.getPA().object(o.getObjectId(), o.getObjectX(), o.getObjectY(), o.getObjectFace(), o.getObjectType());
+						c.getPlayerAssistant ().object(o.getObjectId(), o.getObjectX(), o.getObjectY(), o.getObjectFace(), o.getObjectType());
 					}
 				}		
 			}
@@ -70,7 +70,7 @@ public class ObjectHandler {
 			c.getFarming().updateHerbPatch();
 		}
 		if (c.distanceToPoint(2961, 3389) <= 60) {
-			c.getPA().object(6552, 2961, 3389, -1, 10);		
+			c.getPlayerAssistant ().object(6552, 2961, 3389, -1, 10);
 		}
 	}
 	
@@ -85,7 +85,7 @@ public class ObjectHandler {
 				if(person != null){
 					if(person.heightLevel == o.getObjectHeight() && o.objectTicks == 0) {
 						if (person.distanceToPoint(o.getObjectX(), o.getObjectY()) <= 60) {
-							person.getPA().object(o.getObjectId(), o.getObjectX(), o.getObjectY(), o.getObjectFace(), o.getObjectType());
+							person.getPlayerAssistant ().object(o.getObjectId(), o.getObjectX(), o.getObjectY(), o.getObjectFace(), o.getObjectType());
 						}
 					}		
 				}
@@ -217,23 +217,23 @@ public class ObjectHandler {
 						if(person != null){
 							if(person.heightLevel == doorHeight) {
 								if (person.distanceToPoint(doorX, doorY) <= 60) {
-									person.getPA().object(-1, doors[i][0], doors[i][1], 0, 0);
+									person.getPlayerAssistant ().object(-1, doors[i][0], doors[i][1], 0, 0);
 									if(doors[i][3] == 0 && doors[i][4] == 1) {
-										person.getPA().object(doorId, doors[i][0], doors[i][1]+1, -1, 0);
+										person.getPlayerAssistant ().object(doorId, doors[i][0], doors[i][1]+1, -1, 0);
 									} else if(doors[i][3] == -1  && doors[i][4] == 1) {
-										person.getPA().object(doorId, doors[i][0]-1, doors[i][1], -2, 0);
+										person.getPlayerAssistant ().object(doorId, doors[i][0]-1, doors[i][1], -2, 0);
 									} else if(doors[i][3] == -2 && doors[i][4] == 1) {
-										person.getPA().object(doorId, doors[i][0], doors[i][1]-1, -3, 0);
+										person.getPlayerAssistant ().object(doorId, doors[i][0], doors[i][1]-1, -3, 0);
 									} else if(doors[i][3] == -3 && doors[i][4] == 1) {
-										person.getPA().object(doorId, doors[i][0]+1, doors[i][1], 0, 0);
+										person.getPlayerAssistant ().object(doorId, doors[i][0]+1, doors[i][1], 0, 0);
 									} else if(doors[i][3] == 0 && doors[i][4] == 0) {
-										person.getPA().object(doorId, doors[i][0]-1, doors[i][1], -3, 0);
+										person.getPlayerAssistant ().object(doorId, doors[i][0]-1, doors[i][1], -3, 0);
 									} else if(doors[i][3] == -1  && doors[i][4] == 0) {
-										person.getPA().object(doorId, doors[i][0], doors[i][1]-1, 0, 0);
+										person.getPlayerAssistant ().object(doorId, doors[i][0], doors[i][1]-1, 0, 0);
 									} else if(doors[i][3] == -2 && doors[i][4] == 0) {
-										person.getPA().object(doorId, doors[i][0]+1, doors[i][1], -1, 0);
+										person.getPlayerAssistant ().object(doorId, doors[i][0]+1, doors[i][1], -1, 0);
 									} else if(doors[i][3] == -3 && doors[i][4] == 0) {
-										person.getPA().object(doorId, doors[i][0], doors[i][1]+1, -2, 0);
+										person.getPlayerAssistant ().object(doorId, doors[i][0], doors[i][1]+1, -2, 0);
 									}
 								}
 							}		
@@ -359,7 +359,7 @@ public class ObjectHandler {
 			if (Server.playerHandler.players[j] != null) {
 				Client c = (Client)Server.playerHandler.players[j];
 				if (c.goodDistance(c.getX(), c.getY(), obeliskCoords[port][0] + 2, obeliskCoords[port][1] + 2, 1)) {
-					c.getPA().startTeleport2(obeliskCoords[random][0] + 2, obeliskCoords[random][1] + 2, 0);
+					c.getPlayerAssistant ().startTeleport2(obeliskCoords[random][0] + 2, obeliskCoords[random][1] + 2, 0);
 				}
 			}		
 		}

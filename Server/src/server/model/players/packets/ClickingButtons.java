@@ -3,17 +3,11 @@ package server.model.players.packets;
 import server.Config;
 import server.Server;
 import server.model.items.GameItem;
-import server.model.npcs.*;
 import server.model.players.Client;
-import server.model.players.SkillMenu;
 import server.model.players.PacketType;
 import server.model.players.Resting;
-import server.model.players.SkillGuides;
 import server.util.Misc;
-import server.event.EventContainer;
 import server.model.minigames.GnomeGlider;
-import server.event.Event;
-import server.event.EventManager;
 
 /**
  * Clicking most buttons
@@ -46,7 +40,7 @@ int[] spellIds = {4128,4130,4132,4134,4136,4139,4142,4145,4148,/*17774,*/4153,41
 				if(actionButtonId == spellIds[i]) {
 					if (c.autocasting) {
 						c.autocasting = false;
-						c.getPA().resetAutocast();
+						c.getPlayerAssistant ().resetAutocast();
 					} else {
 							c.autocasting = true;
 							c.autocastId = i;	
@@ -127,36 +121,36 @@ break;*/
                         c.takeAsNote = false;
                         break;
 			case 68244:
-c.getPA().startTeleport(2676, 3711, 0, "modern");
+c.getPlayerAssistant ().startTeleport(2676, 3711, 0, "modern");
 break;
         case 54221:
-		c.getPA().startTeleport(2897, 3618, 0, "modern");
+		c.getPlayerAssistant ().startTeleport(2897, 3618, 0, "modern");
 		c.sendMessage("Welcome to The God Bandos's chamber");
 		break;
 		
 		case 54231:
-		c.getPA().startTeleport(2897, 3618, 4, "modern");
+		c.getPlayerAssistant ().startTeleport(2897, 3618, 4, "modern");
 		c.sendMessage("Welcome to The God Saradomin's chamber");
 		break;
 		
 		case 54228:
-		c.getPA().startTeleport(2897, 3618, 8, "modern");
+		c.getPlayerAssistant ().startTeleport(2897, 3618, 8, "modern");
 		c.sendMessage("Welcome to The God Armadyl's chamber");
 		break;
 case 68247:
-c.getPA().startTeleport(2884, 9798, 0, "modern");
+c.getPlayerAssistant ().startTeleport(2884, 9798, 0, "modern");
 break;
 case 68250:
-c.getPA().startTeleport(3428, 3537, 0, "modern");
+c.getPlayerAssistant ().startTeleport(3428, 3537, 0, "modern");
 break;
 case 68253:
-c.getPA().startTeleport(2710, 9466, 0, "modern");
+c.getPlayerAssistant ().startTeleport(2710, 9466, 0, "modern");
 break;
 case 69000:
-c.getPA().startTeleport(2905, 9730, 0, "modern");
+c.getPlayerAssistant ().startTeleport(2905, 9730, 0, "modern");
 break;
 case 69003:
-c.getPA().startTeleport(2908, 9694, 0, "modern");
+c.getPlayerAssistant ().startTeleport(2908, 9694, 0, "modern");
 break;
 case 69006:
 if((c.playerLevel[21] < 90) && (c.playerLevel[16] < 90)) {
@@ -169,7 +163,7 @@ if((c.playerLevel[21] < 90) && (c.playerLevel[16] < 90)) {
 		c.sendMessage("You need 90 Hunter to enter the Strykworm's Cave");
 		} else {
 		if((c.playerLevel[21] > 89) && (c.playerLevel[16] >89)) {
-		c.getPA().startTeleport(2515, 4632, 0, "modern");
+		c.getPlayerAssistant ().startTeleport(2515, 4632, 0, "modern");
 		c.sendMessage("A sense of nervousness fills your body..");
 		c.sendMessage("you find yourself in a mystery cave!");
 		}
@@ -210,9 +204,9 @@ case 10252:
 					return;
 				}
 			}
-             c.playerXP[0] = c.getPA().getXPForLevel(1)+5;
+             c.playerXP[0] = c.getPlayerAssistant ().getXPForLevel(1)+5;
 			 c.playerLevel[0] = 1;
-             c.getPA().refreshSkill(0);
+             c.getPlayerAssistant ().refreshSkill(0);
 			 c.sendMessage("Your attack level has been reset.");
              break;
 			 case 10253:
@@ -223,8 +217,8 @@ case 10252:
 				}
 			}
              c.playerLevel[2] = 1;
-			 c.playerXP[2] = c.getPA().getXPForLevel(1)+5;
-             c.getPA().refreshSkill(2);
+			 c.playerXP[2] = c.getPlayerAssistant ().getXPForLevel(1)+5;
+             c.getPlayerAssistant ().refreshSkill(2);
 			 c.sendMessage("Your strength level has been reset.");
 			break;
             
@@ -239,8 +233,8 @@ case 10252:
 					}
 				}
              c.playerLevel[4] = 1;
-			 c.playerXP[4] = c.getPA().getXPForLevel(1)+5;
-             c.getPA().refreshSkill(4);
+			 c.playerXP[4] = c.getPlayerAssistant ().getXPForLevel(1)+5;
+             c.getPlayerAssistant ().refreshSkill(4);
 			 c.sendMessage("Your range level has been reset.");
              break;
 			 
@@ -252,8 +246,8 @@ case 10252:
 					}
 				}
              c.playerLevel[6] = 1;
-			 c.playerXP[6] = c.getPA().getXPForLevel(1)+5;
-             c.getPA().refreshSkill(6);
+			 c.playerXP[6] = c.getPlayerAssistant ().getXPForLevel(1)+5;
+             c.getPlayerAssistant ().refreshSkill(6);
 			 c.sendMessage("Your magic level has been reset.");
              break;
 			 
@@ -265,8 +259,8 @@ case 10252:
 				}
 			}
              c.playerLevel[1] = 1;
-			 c.playerXP[1] = c.getPA().getXPForLevel(1)+5;
-             c.getPA().refreshSkill(1);
+			 c.playerXP[1] = c.getPlayerAssistant ().getXPForLevel(1)+5;
+             c.getPlayerAssistant ().refreshSkill(1);
 			 c.sendMessage("Your defence level has been reset.");
              break;
 			 
@@ -278,8 +272,8 @@ case 10252:
 					}
 				}
              c.playerLevel[3] = 10;
-			 c.playerXP[3] = c.getPA().getXPForLevel(10)+5;
-             c.getPA().refreshSkill(3);
+			 c.playerXP[3] = c.getPlayerAssistant ().getXPForLevel(10)+5;
+             c.getPlayerAssistant ().refreshSkill(3);
 			 c.sendMessage("Your hitpoints level has been reset.");
              break;
 			 
@@ -291,8 +285,8 @@ case 10252:
 					}
 				}	
              c.playerLevel[5] = 1;
-			 c.playerXP[5] = c.getPA().getXPForLevel(1)+5;
-             c.getPA().refreshSkill(5);
+			 c.playerXP[5] = c.getPlayerAssistant ().getXPForLevel(1)+5;
+             c.getPlayerAssistant ().refreshSkill(5);
 			 c.sendMessage("Your prayer level has been reset.");
 			 break;
 			case 108032:
@@ -310,7 +304,7 @@ case 10252:
 				c.sendMessage("You are skulled and will only keep one item if you use the protect item prayer.");
 			}
 			c.getItems().sendItemsKept();
-c.getPA().showInterface(6960);
+c.getPlayerAssistant ().showInterface(6960);
 			c.getItems().resetKeepItems();
 			break;
 
@@ -348,17 +342,17 @@ c.getPA().showInterface(6960);
 		c.getItems().addItem(6737, 1);
 		c.getItems().addItem(8850, 1);
 		c.getItems().addItem(995, 50000000);
-                c.getPA().showInterface(3559);
-				c.getPA().addSkillXP((15000000), 0);
-				c.getPA().addSkillXP((15000000), 1);
-				c.getPA().addSkillXP((15000000), 2);
-				c.getPA().addSkillXP((15000000), 3);
-				c.getPA().addSkillXP((15000000), 4);
-				c.getPA().addSkillXP((15000000), 5);
-				c.getPA().addSkillXP((15000000), 6);
-				c.playerXP[3] = c.getPA().getXPForLevel(99)+5;
-				c.playerLevel[3] = c.getPA().getLevelForXP(c.playerXP[3]);
-				c.getPA().refreshSkill(3);
+                c.getPlayerAssistant().showInterface(3559);
+				c.getPlayerAssistant().addSkillXP((15000000), 0);
+				c.getPlayerAssistant().addSkillXP((15000000), 1);
+				c.getPlayerAssistant().addSkillXP((15000000), 2);
+				c.getPlayerAssistant().addSkillXP((15000000), 3);
+				c.getPlayerAssistant().addSkillXP((15000000), 4);
+				c.getPlayerAssistant().addSkillXP((15000000), 5);
+				c.getPlayerAssistant().addSkillXP((15000000), 6);
+				c.playerXP[3] = c.getPlayerAssistant().getXPForLevel(99)+5;
+				c.playerLevel[3] = c.getPlayerAssistant().getLevelForXP(c.playerXP[3]);
+				c.getPlayerAssistant().refreshSkill(3);
 				c.puremaster = 1;
 			break;
 			case 46234:
@@ -369,7 +363,7 @@ c.getPA().showInterface(6960);
 		c.getItems().addItem(18508, 1);
 		c.getItems().addItem(2462, 1);
 		c.getItems().addItem(995, 50000000);
-                c.getPA().showInterface(3559);
+                c.getPlayerAssistant().showInterface(3559);
 			break;
 			case 46227:
 		c.getItems().addItem(12222, 1);
@@ -382,15 +376,15 @@ c.getPA().showInterface(6960);
 		c.getItems().addItem(861, 1);
 		c.getItems().addItem(892, 1000);
 		c.getItems().addItem(995, 50000000);
-                c.getPA().showInterface(3559);
-				c.getPA().addSkillXP((15000000), 0);
-				c.getPA().addSkillXP((15000000), 2);
-				c.getPA().addSkillXP((15000000), 3);
-				c.getPA().addSkillXP((15000000), 4);
-				c.getPA().addSkillXP((15000000), 6);
-				c.playerXP[3] = c.getPA().getXPForLevel(99)+5;
-				c.playerLevel[3] = c.getPA().getLevelForXP(c.playerXP[3]);
-				c.getPA().refreshSkill(3);
+                c.getPlayerAssistant().showInterface(3559);
+				c.getPlayerAssistant().addSkillXP((15000000), 0);
+				c.getPlayerAssistant().addSkillXP((15000000), 2);
+				c.getPlayerAssistant().addSkillXP((15000000), 3);
+				c.getPlayerAssistant().addSkillXP((15000000), 4);
+				c.getPlayerAssistant().addSkillXP((15000000), 6);
+				c.playerXP[3] = c.getPlayerAssistant().getXPForLevel(99)+5;
+				c.playerLevel[3] = c.getPlayerAssistant().getLevelForXP(c.playerXP[3]);
+				c.getPlayerAssistant().refreshSkill(3);
 				c.puremaster = 1;
 			break;
 			
@@ -665,7 +659,7 @@ c.getPA().showInterface(6960);
 
 				case 107231:
 				if (c.playerRights >= 1) {
-					c.getPA().spellTeleport(2524, 4777, 0);
+					c.getPlayerAssistant ().spellTeleport(2524, 4777, 0);
 					c.sendMessage("<img=0>You teleported to donator Island a place to chill/relax, theres also alot of benefits.<img=0>");
 				} else {
 					c.sendMessage("You must be an donator to teleport to the donator Island!");
@@ -683,220 +677,220 @@ c.getPA().showInterface(6960);
 			break;
 			case 113244:
 		for(int i = 8144; i < 8195; i++) {
-			c.getPA().sendFrame126("", i);
+			c.getPlayerAssistant ().sendFrame126("", i);
 		}
-		c.getPA().sendFrame126("@dre@The Ritual", 8144);
-		c.getPA().sendFrame126("", 8145);
+		c.getPlayerAssistant ().sendFrame126("@dre@The Ritual", 8144);
+		c.getPlayerAssistant ().sendFrame126("", 8145);
 		if(c.nomad == 0) {
-			c.getPA().sendFrame126("To start the quest, you should speak to Wilough.", 8147);
-			c.getPA().sendFrame126("He can be found in the center of Canafis.", 8148);
-			c.getPA().sendFrame126("", 8149);
+			c.getPlayerAssistant ().sendFrame126("To start the quest, you should speak to Wilough.", 8147);
+			c.getPlayerAssistant ().sendFrame126("He can be found in the center of Canafis.", 8148);
+			c.getPlayerAssistant ().sendFrame126("", 8149);
 		} else if(c.nomad == 1) {
-			c.getPA().sendFrame126("@str@To start the quest, you should speak to Wilough.", 8147);
-			c.getPA().sendFrame126("@str@He can be found in the center of Canafis.", 8148);
-			c.getPA().sendFrame126("", 8149);
-			c.getPA().sendFrame126("You agreed to help the boys find their parents.", 8150);
-			c.getPA().sendFrame126("You should head off to Taverley to see if you can find them.", 8151);
-			c.getPA().sendFrame126("", 8152);
+			c.getPlayerAssistant ().sendFrame126("@str@To start the quest, you should speak to Wilough.", 8147);
+			c.getPlayerAssistant ().sendFrame126("@str@He can be found in the center of Canafis.", 8148);
+			c.getPlayerAssistant ().sendFrame126("", 8149);
+			c.getPlayerAssistant ().sendFrame126("You agreed to help the boys find their parents.", 8150);
+			c.getPlayerAssistant ().sendFrame126("You should head off to Taverley to see if you can find them.", 8151);
+			c.getPlayerAssistant ().sendFrame126("", 8152);
 		} else if(c.nomad == 2) {
-			c.getPA().sendFrame126("@str@To start the quest, you should speak to Wilough.", 8147);
-			c.getPA().sendFrame126("@str@He can be found in the center of Canafis.", 8148);
-			c.getPA().sendFrame126("", 8149);
-			c.getPA().sendFrame126("@str@You agreed to help the boys find their parents.", 8150);
-			c.getPA().sendFrame126("@str@You should head off to Taverley to see if you can find them.", 8151);
-			c.getPA().sendFrame126("", 8152);
-			c.getPA().sendFrame126("You found their parents, they asked you ", 8153);
-			c.getPA().sendFrame126("to pass on a message to their sons.", 8154);
-			c.getPA().sendFrame126("", 8155);
+			c.getPlayerAssistant ().sendFrame126("@str@To start the quest, you should speak to Wilough.", 8147);
+			c.getPlayerAssistant ().sendFrame126("@str@He can be found in the center of Canafis.", 8148);
+			c.getPlayerAssistant ().sendFrame126("", 8149);
+			c.getPlayerAssistant ().sendFrame126("@str@You agreed to help the boys find their parents.", 8150);
+			c.getPlayerAssistant ().sendFrame126("@str@You should head off to Taverley to see if you can find them.", 8151);
+			c.getPlayerAssistant ().sendFrame126("", 8152);
+			c.getPlayerAssistant ().sendFrame126("You found their parents, they asked you ", 8153);
+			c.getPlayerAssistant ().sendFrame126("to pass on a message to their sons.", 8154);
+			c.getPlayerAssistant ().sendFrame126("", 8155);
 		} else if(c.nomad == 3) {
-			c.getPA().sendFrame126("@str@To start the quest, you should speak to Wilough.", 8147);
-			c.getPA().sendFrame126("@str@He can be found in the center of Vanafis.", 8148);
-			c.getPA().sendFrame126("", 8149);
-			c.getPA().sendFrame126("@str@You agreed to help the boys find their parents.", 8150);
-			c.getPA().sendFrame126("@str@You should head off to Taverley to see if you can find them.", 8151);
-			c.getPA().sendFrame126("", 8152);
-			c.getPA().sendFrame126("@str@You found their parents, they asked you ", 8153);
-			c.getPA().sendFrame126("@str@to pass on a message to their sons.", 8154);
-			c.getPA().sendFrame126("", 8155);
-			c.getPA().sendFrame126("You accepted to help Wiloughs parents find his uncle.", 8156);
-			c.getPA().sendFrame126("You should go ask Wilough's dad where to look.", 8157);
-			c.getPA().sendFrame126("", 8158);
+			c.getPlayerAssistant ().sendFrame126("@str@To start the quest, you should speak to Wilough.", 8147);
+			c.getPlayerAssistant ().sendFrame126("@str@He can be found in the center of Vanafis.", 8148);
+			c.getPlayerAssistant ().sendFrame126("", 8149);
+			c.getPlayerAssistant ().sendFrame126("@str@You agreed to help the boys find their parents.", 8150);
+			c.getPlayerAssistant ().sendFrame126("@str@You should head off to Taverley to see if you can find them.", 8151);
+			c.getPlayerAssistant ().sendFrame126("", 8152);
+			c.getPlayerAssistant ().sendFrame126("@str@You found their parents, they asked you ", 8153);
+			c.getPlayerAssistant ().sendFrame126("@str@to pass on a message to their sons.", 8154);
+			c.getPlayerAssistant ().sendFrame126("", 8155);
+			c.getPlayerAssistant ().sendFrame126("You accepted to help Wiloughs parents find his uncle.", 8156);
+			c.getPlayerAssistant ().sendFrame126("You should go ask Wilough's dad where to look.", 8157);
+			c.getPlayerAssistant ().sendFrame126("", 8158);
 		} else if(c.nomad == 4) {
-			c.getPA().sendFrame126("@str@To start the quest, you should speak to Wilough.", 8147);
-			c.getPA().sendFrame126("@str@He can be found in the center of Canafis.", 8148);
-			c.getPA().sendFrame126("", 8149);
-			c.getPA().sendFrame126("@str@You agreed to help the boys find their parents.", 8150);
-			c.getPA().sendFrame126("@str@You should head off to Taverley to see if you can find them.", 8151);
-			c.getPA().sendFrame126("", 8152);
-			c.getPA().sendFrame126("@str@You found their parents, they asked you ", 8153);
-			c.getPA().sendFrame126("@str@to pass on a message to their sons.", 8154);
-			c.getPA().sendFrame126("", 8155);
-			c.getPA().sendFrame126("@str@You accepted to help Wiloughs parents find his uncle.", 8156);
-			c.getPA().sendFrame126("@str@You should go ask Wilough's dad where to look.", 8157);
-			c.getPA().sendFrame126("", 8158);
-			c.getPA().sendFrame126("Hadley has asked you to go look around white wolf mountain for anything", 8159);
-			c.getPA().sendFrame126("that looks suspicious", 8160);
-			c.getPA().sendFrame126("", 8161);
+			c.getPlayerAssistant ().sendFrame126("@str@To start the quest, you should speak to Wilough.", 8147);
+			c.getPlayerAssistant ().sendFrame126("@str@He can be found in the center of Canafis.", 8148);
+			c.getPlayerAssistant ().sendFrame126("", 8149);
+			c.getPlayerAssistant ().sendFrame126("@str@You agreed to help the boys find their parents.", 8150);
+			c.getPlayerAssistant ().sendFrame126("@str@You should head off to Taverley to see if you can find them.", 8151);
+			c.getPlayerAssistant ().sendFrame126("", 8152);
+			c.getPlayerAssistant ().sendFrame126("@str@You found their parents, they asked you ", 8153);
+			c.getPlayerAssistant ().sendFrame126("@str@to pass on a message to their sons.", 8154);
+			c.getPlayerAssistant ().sendFrame126("", 8155);
+			c.getPlayerAssistant ().sendFrame126("@str@You accepted to help Wiloughs parents find his uncle.", 8156);
+			c.getPlayerAssistant ().sendFrame126("@str@You should go ask Wilough's dad where to look.", 8157);
+			c.getPlayerAssistant ().sendFrame126("", 8158);
+			c.getPlayerAssistant ().sendFrame126("Hadley has asked you to go look around white wolf mountain for anything", 8159);
+			c.getPlayerAssistant ().sendFrame126("that looks suspicious", 8160);
+			c.getPlayerAssistant ().sendFrame126("", 8161);
 		} else if(c.nomad == 5) {
-			c.getPA().sendFrame126("@str@To start the quest, you should speak to Wilough.", 8147);
-			c.getPA().sendFrame126("@str@He can be found in the center of Canafis.", 8148);
-			c.getPA().sendFrame126("", 8149);
-			c.getPA().sendFrame126("@str@You agreed to help the boys find their parents.", 8150);
-			c.getPA().sendFrame126("@str@You should head off to Taverley to see if you can find them.", 8151);
-			c.getPA().sendFrame126("", 8152);
-			c.getPA().sendFrame126("@str@You found their parents, they asked you ", 8153);
-			c.getPA().sendFrame126("@str@to pass on a message to their sons.", 8154);
-			c.getPA().sendFrame126("", 8155);
-			c.getPA().sendFrame126("@str@You accepted to help Wiloughs parents find his uncle.", 8156);
-			c.getPA().sendFrame126("@str@You should go ask Wilough's dad where to look.", 8157);
-			c.getPA().sendFrame126("", 8158);
-			c.getPA().sendFrame126("@str@Hadley has asked you to go look around white wolf mountain for anything", 8159);
-			c.getPA().sendFrame126("@str@that looks suspicious", 8160);
-			c.getPA().sendFrame126("", 8161);
-			c.getPA().sendFrame126("You found a boot in the dungeon entrance, you should give", 8162);
-			c.getPA().sendFrame126("this to hadley and see what he has to say about it.", 8163);
-			c.getPA().sendFrame126("", 8164);
+			c.getPlayerAssistant ().sendFrame126("@str@To start the quest, you should speak to Wilough.", 8147);
+			c.getPlayerAssistant ().sendFrame126("@str@He can be found in the center of Canafis.", 8148);
+			c.getPlayerAssistant ().sendFrame126("", 8149);
+			c.getPlayerAssistant ().sendFrame126("@str@You agreed to help the boys find their parents.", 8150);
+			c.getPlayerAssistant ().sendFrame126("@str@You should head off to Taverley to see if you can find them.", 8151);
+			c.getPlayerAssistant ().sendFrame126("", 8152);
+			c.getPlayerAssistant ().sendFrame126("@str@You found their parents, they asked you ", 8153);
+			c.getPlayerAssistant ().sendFrame126("@str@to pass on a message to their sons.", 8154);
+			c.getPlayerAssistant ().sendFrame126("", 8155);
+			c.getPlayerAssistant ().sendFrame126("@str@You accepted to help Wiloughs parents find his uncle.", 8156);
+			c.getPlayerAssistant ().sendFrame126("@str@You should go ask Wilough's dad where to look.", 8157);
+			c.getPlayerAssistant ().sendFrame126("", 8158);
+			c.getPlayerAssistant ().sendFrame126("@str@Hadley has asked you to go look around white wolf mountain for anything", 8159);
+			c.getPlayerAssistant ().sendFrame126("@str@that looks suspicious", 8160);
+			c.getPlayerAssistant ().sendFrame126("", 8161);
+			c.getPlayerAssistant ().sendFrame126("You found a boot in the dungeon entrance, you should give", 8162);
+			c.getPlayerAssistant ().sendFrame126("this to hadley and see what he has to say about it.", 8163);
+			c.getPlayerAssistant ().sendFrame126("", 8164);
 		} else if(c.nomad == 6) {
-			c.getPA().sendFrame126("@str@To start the quest, you should speak to Wilough.", 8147);
-			c.getPA().sendFrame126("@str@He can be found in the center of Canafis.", 8148);
-			c.getPA().sendFrame126("", 8149);
-			c.getPA().sendFrame126("@str@You agreed to help the boys find their parents.", 8150);
-			c.getPA().sendFrame126("@str@You should head off to Taverley to see if you can find them.", 8151);
-			c.getPA().sendFrame126("", 8152);
-			c.getPA().sendFrame126("@str@You found their parents, they asked you ", 8153);
-			c.getPA().sendFrame126("@str@to pass on a message to their sons.", 8154);
-			c.getPA().sendFrame126("", 8155);
-			c.getPA().sendFrame126("@str@You accepted to help Wiloughs parents find his uncle.", 8156);
-			c.getPA().sendFrame126("@str@You should go ask Wilough's dad where to look.", 8157);
-			c.getPA().sendFrame126("", 8158);
-			c.getPA().sendFrame126("@str@Hadley has asked you to go look around white wolf mountain for anything", 8159);
-			c.getPA().sendFrame126("@str@that looks suspicious", 8160);
-			c.getPA().sendFrame126("", 8161);
-			c.getPA().sendFrame126("@str@You found a boot in the dungeon entrance, you should give", 8162);
-			c.getPA().sendFrame126("@str@this to hadley and see what he has to say about it.", 8163);
-			c.getPA().sendFrame126("", 8164);
-			c.getPA().sendFrame126("The boot was Mizgogs, you were asked to Gear up and go", 8165);
-			c.getPA().sendFrame126("into the dungeon.", 8166);
-			c.getPA().sendFrame126("", 8167);
+			c.getPlayerAssistant ().sendFrame126("@str@To start the quest, you should speak to Wilough.", 8147);
+			c.getPlayerAssistant ().sendFrame126("@str@He can be found in the center of Canafis.", 8148);
+			c.getPlayerAssistant ().sendFrame126("", 8149);
+			c.getPlayerAssistant ().sendFrame126("@str@You agreed to help the boys find their parents.", 8150);
+			c.getPlayerAssistant ().sendFrame126("@str@You should head off to Taverley to see if you can find them.", 8151);
+			c.getPlayerAssistant ().sendFrame126("", 8152);
+			c.getPlayerAssistant ().sendFrame126("@str@You found their parents, they asked you ", 8153);
+			c.getPlayerAssistant ().sendFrame126("@str@to pass on a message to their sons.", 8154);
+			c.getPlayerAssistant ().sendFrame126("", 8155);
+			c.getPlayerAssistant ().sendFrame126("@str@You accepted to help Wiloughs parents find his uncle.", 8156);
+			c.getPlayerAssistant ().sendFrame126("@str@You should go ask Wilough's dad where to look.", 8157);
+			c.getPlayerAssistant ().sendFrame126("", 8158);
+			c.getPlayerAssistant ().sendFrame126("@str@Hadley has asked you to go look around white wolf mountain for anything", 8159);
+			c.getPlayerAssistant ().sendFrame126("@str@that looks suspicious", 8160);
+			c.getPlayerAssistant ().sendFrame126("", 8161);
+			c.getPlayerAssistant ().sendFrame126("@str@You found a boot in the dungeon entrance, you should give", 8162);
+			c.getPlayerAssistant ().sendFrame126("@str@this to hadley and see what he has to say about it.", 8163);
+			c.getPlayerAssistant ().sendFrame126("", 8164);
+			c.getPlayerAssistant ().sendFrame126("The boot was Mizgogs, you were asked to Gear up and go", 8165);
+			c.getPlayerAssistant ().sendFrame126("into the dungeon.", 8166);
+			c.getPlayerAssistant ().sendFrame126("", 8167);
 		} else if(c.nomad == 7) {
-			c.getPA().sendFrame126("@str@To start the quest, you should speak to Wilough.", 8147);
-			c.getPA().sendFrame126("@str@He can be found in the center of Canafis.", 8148);
-			c.getPA().sendFrame126("", 8149);
-			c.getPA().sendFrame126("@str@You agreed to help the boys find their parents.", 8150);
-			c.getPA().sendFrame126("@str@You should head off to Taverley to see if you can find them.", 8151);
-			c.getPA().sendFrame126("", 8152);
-			c.getPA().sendFrame126("@str@You found their parents, they asked you ", 8153);
-			c.getPA().sendFrame126("@str@to pass on a message to their sons.", 8154);
-			c.getPA().sendFrame126("", 8155);
-			c.getPA().sendFrame126("@str@You accepted to help Wiloughs parents find his uncle.", 8156);
-			c.getPA().sendFrame126("@str@You should go ask Wilough's dad where to look.", 8157);
-			c.getPA().sendFrame126("", 8158);
-			c.getPA().sendFrame126("@str@Hadley has asked you to go look around white wolf mountain for anything", 8159);
-			c.getPA().sendFrame126("@str@that looks suspicious", 8160);
-			c.getPA().sendFrame126("", 8161);
-			c.getPA().sendFrame126("@str@You found a boot in the dungeon entrance, you should give", 8162);
-			c.getPA().sendFrame126("@str@this to hadley and see what he has to say about it.", 8163);
-			c.getPA().sendFrame126("", 8164);
-			c.getPA().sendFrame126("@str@The boot was Mizgogs, you were asked to Gear up and go", 8165);
-			c.getPA().sendFrame126("@str@into the dungeon.", 8166);
-			c.getPA().sendFrame126("", 8167);
-			c.getPA().sendFrame126("You now need to go into the dungeon, be prepared for a fight!", 8168);
-			c.getPA().sendFrame126("You'll need to defeat Bork in order to let Mizgog escape.", 8169);
-			c.getPA().sendFrame126("", 8170);
+			c.getPlayerAssistant ().sendFrame126("@str@To start the quest, you should speak to Wilough.", 8147);
+			c.getPlayerAssistant ().sendFrame126("@str@He can be found in the center of Canafis.", 8148);
+			c.getPlayerAssistant ().sendFrame126("", 8149);
+			c.getPlayerAssistant ().sendFrame126("@str@You agreed to help the boys find their parents.", 8150);
+			c.getPlayerAssistant ().sendFrame126("@str@You should head off to Taverley to see if you can find them.", 8151);
+			c.getPlayerAssistant ().sendFrame126("", 8152);
+			c.getPlayerAssistant ().sendFrame126("@str@You found their parents, they asked you ", 8153);
+			c.getPlayerAssistant ().sendFrame126("@str@to pass on a message to their sons.", 8154);
+			c.getPlayerAssistant ().sendFrame126("", 8155);
+			c.getPlayerAssistant ().sendFrame126("@str@You accepted to help Wiloughs parents find his uncle.", 8156);
+			c.getPlayerAssistant ().sendFrame126("@str@You should go ask Wilough's dad where to look.", 8157);
+			c.getPlayerAssistant ().sendFrame126("", 8158);
+			c.getPlayerAssistant ().sendFrame126("@str@Hadley has asked you to go look around white wolf mountain for anything", 8159);
+			c.getPlayerAssistant ().sendFrame126("@str@that looks suspicious", 8160);
+			c.getPlayerAssistant ().sendFrame126("", 8161);
+			c.getPlayerAssistant ().sendFrame126("@str@You found a boot in the dungeon entrance, you should give", 8162);
+			c.getPlayerAssistant ().sendFrame126("@str@this to hadley and see what he has to say about it.", 8163);
+			c.getPlayerAssistant ().sendFrame126("", 8164);
+			c.getPlayerAssistant ().sendFrame126("@str@The boot was Mizgogs, you were asked to Gear up and go", 8165);
+			c.getPlayerAssistant ().sendFrame126("@str@into the dungeon.", 8166);
+			c.getPlayerAssistant ().sendFrame126("", 8167);
+			c.getPlayerAssistant ().sendFrame126("You now need to go into the dungeon, be prepared for a fight!", 8168);
+			c.getPlayerAssistant ().sendFrame126("You'll need to defeat Bork in order to let Mizgog escape.", 8169);
+			c.getPlayerAssistant ().sendFrame126("", 8170);
 		} else if(c.nomad == 8) {
-			c.getPA().sendFrame126("@str@To start the quest, you should speak to Wilough.", 8147);
-			c.getPA().sendFrame126("@str@He can be found in the center of Canafis.", 8148);
-			c.getPA().sendFrame126("", 8149);
-			c.getPA().sendFrame126("@str@You agreed to help the boys find their parents.", 8150);
-			c.getPA().sendFrame126("@str@You should head off to Taverley to see if you can find them.", 8151);
-			c.getPA().sendFrame126("", 8152);
-			c.getPA().sendFrame126("@str@You found their parents, they asked you ", 8153);
-			c.getPA().sendFrame126("@str@to pass on a message to their sons.", 8154);
-			c.getPA().sendFrame126("", 8155);
-			c.getPA().sendFrame126("@str@You accepted to help Wiloughs parents find his uncle.", 8156);
-			c.getPA().sendFrame126("@str@You should go ask Wilough's dad where to look.", 8157);
-			c.getPA().sendFrame126("", 8158);
-			c.getPA().sendFrame126("@str@Hadley has asked you to go look around white wolf mountain for anything", 8159);
-			c.getPA().sendFrame126("@str@that looks suspicious", 8160);
-			c.getPA().sendFrame126("", 8161);
-			c.getPA().sendFrame126("@str@You found a boot in the dungeon entrance, you should give", 8162);
-			c.getPA().sendFrame126("@str@this to hadley and see what he has to say about it.", 8163);
-			c.getPA().sendFrame126("", 8164);
-			c.getPA().sendFrame126("@str@The boot was Mizgogs, you were asked to Gear up and go", 8165);
-			c.getPA().sendFrame126("@str@into the dungeon.", 8166);
-			c.getPA().sendFrame126("", 8167);
-			c.getPA().sendFrame126("@str@You now need to go into the dungeon, be prepared for a fight!", 8168);
-			c.getPA().sendFrame126("@str@You'll need to defeat Bork in order to let Mizgog escape.", 8169);
-			c.getPA().sendFrame126("", 8170);
-			c.getPA().sendFrame126("You found Mizgog, but Bork won't let him out!", 8171);
-			c.getPA().sendFrame126("You'll need to defeat Bork in order to let Mizgog escape.", 8172);
-			c.getPA().sendFrame126("", 8173);
+			c.getPlayerAssistant ().sendFrame126("@str@To start the quest, you should speak to Wilough.", 8147);
+			c.getPlayerAssistant ().sendFrame126("@str@He can be found in the center of Canafis.", 8148);
+			c.getPlayerAssistant ().sendFrame126("", 8149);
+			c.getPlayerAssistant ().sendFrame126("@str@You agreed to help the boys find their parents.", 8150);
+			c.getPlayerAssistant ().sendFrame126("@str@You should head off to Taverley to see if you can find them.", 8151);
+			c.getPlayerAssistant ().sendFrame126("", 8152);
+			c.getPlayerAssistant ().sendFrame126("@str@You found their parents, they asked you ", 8153);
+			c.getPlayerAssistant ().sendFrame126("@str@to pass on a message to their sons.", 8154);
+			c.getPlayerAssistant ().sendFrame126("", 8155);
+			c.getPlayerAssistant ().sendFrame126("@str@You accepted to help Wiloughs parents find his uncle.", 8156);
+			c.getPlayerAssistant ().sendFrame126("@str@You should go ask Wilough's dad where to look.", 8157);
+			c.getPlayerAssistant ().sendFrame126("", 8158);
+			c.getPlayerAssistant ().sendFrame126("@str@Hadley has asked you to go look around white wolf mountain for anything", 8159);
+			c.getPlayerAssistant ().sendFrame126("@str@that looks suspicious", 8160);
+			c.getPlayerAssistant ().sendFrame126("", 8161);
+			c.getPlayerAssistant ().sendFrame126("@str@You found a boot in the dungeon entrance, you should give", 8162);
+			c.getPlayerAssistant ().sendFrame126("@str@this to hadley and see what he has to say about it.", 8163);
+			c.getPlayerAssistant ().sendFrame126("", 8164);
+			c.getPlayerAssistant ().sendFrame126("@str@The boot was Mizgogs, you were asked to Gear up and go", 8165);
+			c.getPlayerAssistant ().sendFrame126("@str@into the dungeon.", 8166);
+			c.getPlayerAssistant ().sendFrame126("", 8167);
+			c.getPlayerAssistant ().sendFrame126("@str@You now need to go into the dungeon, be prepared for a fight!", 8168);
+			c.getPlayerAssistant ().sendFrame126("@str@You'll need to defeat Bork in order to let Mizgog escape.", 8169);
+			c.getPlayerAssistant ().sendFrame126("", 8170);
+			c.getPlayerAssistant ().sendFrame126("You found Mizgog, but Bork won't let him out!", 8171);
+			c.getPlayerAssistant ().sendFrame126("You'll need to defeat Bork in order to let Mizgog escape.", 8172);
+			c.getPlayerAssistant ().sendFrame126("", 8173);
 		} else if(c.nomad == 9) {
-			c.getPA().sendFrame126("@str@To start the quest, you should speak to Wilough.", 8147);
-			c.getPA().sendFrame126("@str@He can be found in the center of Canafis.", 8148);
-			c.getPA().sendFrame126("", 8149);
-			c.getPA().sendFrame126("@str@You agreed to help the boys find their parents.", 8150);
-			c.getPA().sendFrame126("@str@You should head off to Taverley to see if you can find them.", 8151);
-			c.getPA().sendFrame126("", 8152);
-			c.getPA().sendFrame126("@str@You found their parents, they asked you ", 8153);
-			c.getPA().sendFrame126("@str@to pass on a message to their sons.", 8154);
-			c.getPA().sendFrame126("", 8155);
-			c.getPA().sendFrame126("@str@You accepted to help Wiloughs parents find his uncle.", 8156);
-			c.getPA().sendFrame126("@str@You should go ask Wilough's dad where to look.", 8157);
-			c.getPA().sendFrame126("", 8158);
-			c.getPA().sendFrame126("@str@Hadley has asked you to go look around white wolf mountain for anything", 8159);
-			c.getPA().sendFrame126("@str@that looks suspicious", 8160);
-			c.getPA().sendFrame126("", 8161);
-			c.getPA().sendFrame126("@str@You found a boot in the dungeon entrance, you should give", 8162);
-			c.getPA().sendFrame126("@str@this to Hadley and see what he has to say about it.", 8163);
-			c.getPA().sendFrame126("", 8164);
-			c.getPA().sendFrame126("@str@The boot was Mizgogs, you were asked to Gear up and go", 8165);
-			c.getPA().sendFrame126("@str@into the dungeon.", 8166);
-			c.getPA().sendFrame126("", 8167);
-			c.getPA().sendFrame126("@str@You now need to go into the dungeon, be prepared for a fight!", 8168);
-			c.getPA().sendFrame126("@str@You'll need to defeat Bork in order to let Mizgog escape.", 8169);
-			c.getPA().sendFrame126("", 8170);
-			c.getPA().sendFrame126("@str@You found Mizgog, but Bork won't let him out!", 8171);
-			c.getPA().sendFrame126("@str@You'll need to defeat Bork in order to let Mizgog escape.", 8172);
-			c.getPA().sendFrame126("", 8173);
-			c.getPA().sendFrame126("You have defeated Bork!", 8174);
-			c.getPA().sendFrame126("Go to Hadley to collect your reward!", 8175);
-			c.getPA().sendFrame126("", 8176);
+			c.getPlayerAssistant ().sendFrame126("@str@To start the quest, you should speak to Wilough.", 8147);
+			c.getPlayerAssistant ().sendFrame126("@str@He can be found in the center of Canafis.", 8148);
+			c.getPlayerAssistant ().sendFrame126("", 8149);
+			c.getPlayerAssistant ().sendFrame126("@str@You agreed to help the boys find their parents.", 8150);
+			c.getPlayerAssistant ().sendFrame126("@str@You should head off to Taverley to see if you can find them.", 8151);
+			c.getPlayerAssistant ().sendFrame126("", 8152);
+			c.getPlayerAssistant ().sendFrame126("@str@You found their parents, they asked you ", 8153);
+			c.getPlayerAssistant ().sendFrame126("@str@to pass on a message to their sons.", 8154);
+			c.getPlayerAssistant ().sendFrame126("", 8155);
+			c.getPlayerAssistant ().sendFrame126("@str@You accepted to help Wiloughs parents find his uncle.", 8156);
+			c.getPlayerAssistant ().sendFrame126("@str@You should go ask Wilough's dad where to look.", 8157);
+			c.getPlayerAssistant ().sendFrame126("", 8158);
+			c.getPlayerAssistant ().sendFrame126("@str@Hadley has asked you to go look around white wolf mountain for anything", 8159);
+			c.getPlayerAssistant ().sendFrame126("@str@that looks suspicious", 8160);
+			c.getPlayerAssistant ().sendFrame126("", 8161);
+			c.getPlayerAssistant ().sendFrame126("@str@You found a boot in the dungeon entrance, you should give", 8162);
+			c.getPlayerAssistant ().sendFrame126("@str@this to Hadley and see what he has to say about it.", 8163);
+			c.getPlayerAssistant ().sendFrame126("", 8164);
+			c.getPlayerAssistant ().sendFrame126("@str@The boot was Mizgogs, you were asked to Gear up and go", 8165);
+			c.getPlayerAssistant ().sendFrame126("@str@into the dungeon.", 8166);
+			c.getPlayerAssistant ().sendFrame126("", 8167);
+			c.getPlayerAssistant ().sendFrame126("@str@You now need to go into the dungeon, be prepared for a fight!", 8168);
+			c.getPlayerAssistant ().sendFrame126("@str@You'll need to defeat Bork in order to let Mizgog escape.", 8169);
+			c.getPlayerAssistant ().sendFrame126("", 8170);
+			c.getPlayerAssistant ().sendFrame126("@str@You found Mizgog, but Bork won't let him out!", 8171);
+			c.getPlayerAssistant ().sendFrame126("@str@You'll need to defeat Bork in order to let Mizgog escape.", 8172);
+			c.getPlayerAssistant ().sendFrame126("", 8173);
+			c.getPlayerAssistant ().sendFrame126("You have defeated Bork!", 8174);
+			c.getPlayerAssistant ().sendFrame126("Go to Hadley to collect your reward!", 8175);
+			c.getPlayerAssistant ().sendFrame126("", 8176);
 		} else if(c.nomad == 10) {
-			c.getPA().sendFrame126("@str@To start the quest, you should speak to Wilough.", 8147);
-			c.getPA().sendFrame126("@str@He can be found in the center of Canafis.", 8148);
-			c.getPA().sendFrame126("", 8149);
-			c.getPA().sendFrame126("@str@You agreed to help the boys find their parents.", 8150);
-			c.getPA().sendFrame126("@str@You should head off to Taverley to see if you can find them.", 8151);
-			c.getPA().sendFrame126("", 8152);
-			c.getPA().sendFrame126("@str@You found their parents, they asked you ", 8153);
-			c.getPA().sendFrame126("@str@to pass on a message to their sons.", 8154);
-			c.getPA().sendFrame126("", 8155);
-			c.getPA().sendFrame126("@str@You accepted to help Wiloughs parents find his uncle.", 8156);
-			c.getPA().sendFrame126("@str@You should go ask Wilough's dad where to look.", 8157);
-			c.getPA().sendFrame126("", 8158);
-			c.getPA().sendFrame126("@str@Hadley has asked you to go look around white wolf mountain for anything", 8159);
-			c.getPA().sendFrame126("@str@that looks suspicious", 8160);
-			c.getPA().sendFrame126("", 8161);
-			c.getPA().sendFrame126("@str@You found a boot in the dungeon entrance, you should give", 8162);
-			c.getPA().sendFrame126("@str@this to hadley and see what he has to say about it.", 8163);
-			c.getPA().sendFrame126("", 8164);
-			c.getPA().sendFrame126("@str@The boot was Mizgogs, you were asked to Gear up and go", 8165);
-			c.getPA().sendFrame126("@str@into the dungeon.", 8166);
-			c.getPA().sendFrame126("", 8167);
-			c.getPA().sendFrame126("@str@You now need to go into the dungeon, be prepared for a fight!", 8168);
-			c.getPA().sendFrame126("@str@You'll need to defeat Bork in order to let Mizgog escape.", 8169);
-			c.getPA().sendFrame126("", 8170);
-			c.getPA().sendFrame126("@str@You found Mizgog, but Bork won't let him out!", 8171);
-			c.getPA().sendFrame126("@str@You'll need to defeat Bork in order to let Mizgog escape.", 8172);
-			c.getPA().sendFrame126("", 8173);
-			c.getPA().sendFrame126("@str@You have defeated Bork!", 8174);
-			c.getPA().sendFrame126("@str@Go to Hadley to collect your reward!", 8175);
-			c.getPA().sendFrame126("", 8176);
-			c.getPA().sendFrame126("@gre@Quest Complete", 8177);
+			c.getPlayerAssistant ().sendFrame126("@str@To start the quest, you should speak to Wilough.", 8147);
+			c.getPlayerAssistant ().sendFrame126("@str@He can be found in the center of Canafis.", 8148);
+			c.getPlayerAssistant ().sendFrame126("", 8149);
+			c.getPlayerAssistant ().sendFrame126("@str@You agreed to help the boys find their parents.", 8150);
+			c.getPlayerAssistant ().sendFrame126("@str@You should head off to Taverley to see if you can find them.", 8151);
+			c.getPlayerAssistant ().sendFrame126("", 8152);
+			c.getPlayerAssistant ().sendFrame126("@str@You found their parents, they asked you ", 8153);
+			c.getPlayerAssistant ().sendFrame126("@str@to pass on a message to their sons.", 8154);
+			c.getPlayerAssistant ().sendFrame126("", 8155);
+			c.getPlayerAssistant ().sendFrame126("@str@You accepted to help Wiloughs parents find his uncle.", 8156);
+			c.getPlayerAssistant ().sendFrame126("@str@You should go ask Wilough's dad where to look.", 8157);
+			c.getPlayerAssistant ().sendFrame126("", 8158);
+			c.getPlayerAssistant ().sendFrame126("@str@Hadley has asked you to go look around white wolf mountain for anything", 8159);
+			c.getPlayerAssistant ().sendFrame126("@str@that looks suspicious", 8160);
+			c.getPlayerAssistant ().sendFrame126("", 8161);
+			c.getPlayerAssistant ().sendFrame126("@str@You found a boot in the dungeon entrance, you should give", 8162);
+			c.getPlayerAssistant ().sendFrame126("@str@this to hadley and see what he has to say about it.", 8163);
+			c.getPlayerAssistant ().sendFrame126("", 8164);
+			c.getPlayerAssistant ().sendFrame126("@str@The boot was Mizgogs, you were asked to Gear up and go", 8165);
+			c.getPlayerAssistant ().sendFrame126("@str@into the dungeon.", 8166);
+			c.getPlayerAssistant ().sendFrame126("", 8167);
+			c.getPlayerAssistant ().sendFrame126("@str@You now need to go into the dungeon, be prepared for a fight!", 8168);
+			c.getPlayerAssistant ().sendFrame126("@str@You'll need to defeat Bork in order to let Mizgog escape.", 8169);
+			c.getPlayerAssistant ().sendFrame126("", 8170);
+			c.getPlayerAssistant ().sendFrame126("@str@You found Mizgog, but Bork won't let him out!", 8171);
+			c.getPlayerAssistant ().sendFrame126("@str@You'll need to defeat Bork in order to let Mizgog escape.", 8172);
+			c.getPlayerAssistant ().sendFrame126("", 8173);
+			c.getPlayerAssistant ().sendFrame126("@str@You have defeated Bork!", 8174);
+			c.getPlayerAssistant ().sendFrame126("@str@Go to Hadley to collect your reward!", 8175);
+			c.getPlayerAssistant ().sendFrame126("", 8176);
+			c.getPlayerAssistant ().sendFrame126("@gre@Quest Complete", 8177);
 			}
 
-		c.getPA().showInterface(8134);
+		c.getPlayerAssistant ().showInterface(8134);
 	
 	
 	break;
@@ -906,7 +900,7 @@ c.getPA().showInterface(6960);
 			c.sendMessage("You can't bank in the wilderness or in dung.");
 			return;
 			} else {
-				c.getPA().openUpBank();
+				c.getPlayerAssistant ().openUpBank();
 				}
 			break;
 					case 94142:
@@ -930,11 +924,11 @@ c.sendMessage("You do not have a familiar currently spawned");
 		
 			case 9190:
 										 if (c.teleAction == 46) {
-										 					c.getPA().spellTeleport(2336, 9794, 0);
+										 					c.getPlayerAssistant ().spellTeleport(2336, 9794, 0);
  c.sendMessage("You teleported to the nex, our strongest boss, GOOD LUCK!");
 																}
 							 if (c.teleAction == 45) {
-					c.getPA().spellTeleport(3089, 3489, 0);
+					c.getPlayerAssistant ().spellTeleport(3089, 3489, 0);
                                                                 c.sendMessage("You teleport to the Tormented Demons chamber!");
 																}
 				if (c.dialogueAction == 106) {
@@ -943,91 +937,91 @@ c.sendMessage("You do not have a familiar currently spawned");
 						c.getItems().addItem(15086, 1);
 						c.sendMessage("You get a six-sided die out of the dice bag.");
 					}
-					c.getPA().closeAllWindows();
+					c.getPlayerAssistant ().closeAllWindows();
 				} else if (c.dialogueAction == 107) {
 					if(c.getItems().playerHasItem(c.diceID, 1)) {
 						c.getItems().deleteItem(c.diceID, c.getItems().getItemSlot(c.diceID), 1);	
 						c.getItems().addItem(15092, 1);
 						c.sendMessage("You get a ten-sided die out of the dice bag.");
 					}
-					c.getPA().closeAllWindows();
+					c.getPlayerAssistant ().closeAllWindows();
 				}
 				if (c.teleAction == 1) {
 					//rock crabs
-					c.getPA().spellTeleport(2676, 3715, 0);
+					c.getPlayerAssistant ().spellTeleport(2676, 3715, 0);
 				} else if (c.teleAction == 2) {
 					//barrows
-					c.getPA().spellTeleport(3565, 3314, 0);
+					c.getPlayerAssistant ().spellTeleport(3565, 3314, 0);
 				} else if (c.teleAction == 3) {
                                         c.sendMessage("GodWars is under construction atm please wait untill its fixed");
                                 } else if (c.teleAction == 4) {
 					//varrock wildy
-					c.getPA().spellTeleport(2539, 4716, 0);
+					c.getPlayerAssistant ().spellTeleport(2539, 4716, 0);
 				} else if (c.teleAction == 5) {
-					c.getPA().spellTeleport(3046,9779,0);
+					c.getPlayerAssistant ().spellTeleport(3046,9779,0);
 				} else if (c.teleAction == 20) {
 					//lum
-					c.getPA().spellTeleport(3222, 3218, 0);//3222 3218 
+					c.getPlayerAssistant ().spellTeleport(3222, 3218, 0);//3222 3218
 				} else if (c.teleAction == 8) {
-					c.getPA().spellTeleport(2960, 9477, 0);//sea troll queen
+					c.getPlayerAssistant ().spellTeleport(2960, 9477, 0);//sea troll queen
 				}
 				
 				if (c.dialogueAction == 10) {
-					c.getPA().spellTeleport(2845, 4832, 0);
+					c.getPlayerAssistant ().spellTeleport(2845, 4832, 0);
 					c.dialogueAction = -1;
 				} else if (c.dialogueAction == 11) {
 					c.sendMessage("Fixed thanks to Sliadonii");
-					c.getPA().spellTeleport(2581, 4838, 0);
+					c.getPlayerAssistant ().spellTeleport(2581, 4838, 0);
 					c.dialogueAction = -1;
 				} else if (c.dialogueAction == 12) {
-					c.getPA().spellTeleport(2398, 4841, 0);
+					c.getPlayerAssistant ().spellTeleport(2398, 4841, 0);
 					c.dialogueAction = -1;
 				} else if (c.teleAction == 21) {
-					c.getPA().spellTeleport(2602, 4779, 0);
+					c.getPlayerAssistant ().spellTeleport(2602, 4779, 0);
 					c.dialogueAction = -1;
 				}
 				break;
 				case 62158:
-				c.getPA().showInterface(26099);
-				c.getPA().sendFrame200(26101, 9847);//chatid
-				c.getPA().sendFrame185(26101);
+				c.getPlayerAssistant ().showInterface(26099);
+				c.getPlayerAssistant ().sendFrame200(26101, 9847);//chatid
+				c.getPlayerAssistant ().sendFrame185(26101);
 				if (c.KC > c.DC) {
-				c.getPA().sendFrame126("@or1@Kills: @gre@"+c.KC+"", 26105);
-				c.getPA().sendFrame126("@or1@Deaths: @red@"+c.DC+"", 26106);
+				c.getPlayerAssistant ().sendFrame126("@or1@Kills: @gre@"+c.KC+"", 26105);
+				c.getPlayerAssistant ().sendFrame126("@or1@Deaths: @red@"+c.DC+"", 26106);
 				}
 				if (c.KC < c.DC) {
-				c.getPA().sendFrame126("@or1@Kills: @red@"+c.KC+"", 26105);
-				c.getPA().sendFrame126("@or1@Deaths: @gre@"+c.DC+"", 26106);
+				c.getPlayerAssistant ().sendFrame126("@or1@Kills: @red@"+c.KC+"", 26105);
+				c.getPlayerAssistant ().sendFrame126("@or1@Deaths: @gre@"+c.DC+"", 26106);
 				}
-				c.getPA().sendFrame126("@or1@Name: @gre@"+c.playerName+"", 26107);
-				c.getPA().sendFrame126("@or1@Combat Level: @gre@"+c.combatLevel+"", 26108);
+				c.getPlayerAssistant ().sendFrame126("@or1@Name: @gre@"+c.playerName+"", 26107);
+				c.getPlayerAssistant ().sendFrame126("@or1@Combat Level: @gre@"+c.combatLevel+"", 26108);
 					if (c.playerRights == 1) {
-						c.getPA().sendFrame126("@or1@Rank: @gre@Moderator", 26109);
+						c.getPlayerAssistant ().sendFrame126("@or1@Rank: @gre@Moderator", 26109);
 					}
 					if (c.playerRights == 2) {
-						c.getPA().sendFrame126("@or1@Rank: @gre@Admin", 26109);
+						c.getPlayerAssistant ().sendFrame126("@or1@Rank: @gre@Admin", 26109);
 					}
 					if (c.playerRights == 3) {
-						c.getPA().sendFrame126("@or1@Rank: @gre@Owner", 26109);
+						c.getPlayerAssistant ().sendFrame126("@or1@Rank: @gre@Owner", 26109);
 					}
 					if (c.playerRights == 0) {
-						c.getPA().sendFrame126("@or1@Rank: @gre@Player", 26109);
+						c.getPlayerAssistant ().sendFrame126("@or1@Rank: @gre@Player", 26109);
 					}
 					if(c.playerRights == 4) {
-						c.getPA().sendFrame126("@or1@Rank: @gre@Donator", 26109);
+						c.getPlayerAssistant ().sendFrame126("@or1@Rank: @gre@Donator", 26109);
 					}
-				c.getPA().sendFrame126("@or1@Source Points: @gre@0", 26111);
-				c.getPA().sendFrame126("@or1@Activity Points: @gre@"+c.pcPoints+"", 26112);
-				c.getPA().sendFrame126("@or1@PK Points: @gre@0", 26113);
-				c.getPA().sendFrame126("@or1@Boss Points: @gre@0", 26115);
-				c.getPA().sendFrame126("@or1@Pest Points: @gre@0", 26116);
-				c.getPA().sendFrame126("@or1@Assault Points: @gre@0", 26117);
+				c.getPlayerAssistant ().sendFrame126("@or1@Source Points: @gre@0", 26111);
+				c.getPlayerAssistant ().sendFrame126("@or1@Activity Points: @gre@"+c.pcPoints+"", 26112);
+				c.getPlayerAssistant ().sendFrame126("@or1@PK Points: @gre@0", 26113);
+				c.getPlayerAssistant ().sendFrame126("@or1@Boss Points: @gre@0", 26115);
+				c.getPlayerAssistant ().sendFrame126("@or1@Pest Points: @gre@0", 26116);
+				c.getPlayerAssistant ().sendFrame126("@or1@Assault Points: @gre@0", 26117);
 				
-				c.getPA().sendFrame126("@or1@Gambles Won: @gre@0", 26118);
-				c.getPA().sendFrame126("@or1@Gambles Lost: @gre@0", 26119);
-				c.getPA().sendFrame126("@or1@Battles Won: @gre@0", 26120);
-				c.getPA().sendFrame126("@or1@Battles Lost: @gre@0", 26121);
-				c.getPA().sendFrame126("@or1@NPC Kills: @gre@0", 26122);
+				c.getPlayerAssistant ().sendFrame126("@or1@Gambles Won: @gre@0", 26118);
+				c.getPlayerAssistant ().sendFrame126("@or1@Gambles Lost: @gre@0", 26119);
+				c.getPlayerAssistant ().sendFrame126("@or1@Battles Won: @gre@0", 26120);
+				c.getPlayerAssistant ().sendFrame126("@or1@Battles Lost: @gre@0", 26121);
+				c.getPlayerAssistant ().sendFrame126("@or1@NPC Kills: @gre@0", 26122);
 				c.updateRequired = true;
 				c.appearanceUpdateRequired = true;
 			break;
@@ -1134,14 +1128,14 @@ c.sendMessage("You do not have a familiar currently spawned");
 					if(c.playerLevel[3] > c.getLevelForXP(c.playerXP[3]))
 					c.playerLevel[3] = c.getLevelForXP(c.playerXP[3]);
 					c.sendMessage("Your Unicorn's Special Heals you for 250 HP!");
-					c.getPA().refreshSkill(3);
+					c.getPlayerAssistant ().refreshSkill(3);
 				} else if (c.lastsummon == 6814) {
 					c.playerLevel[3] += 13;
 					if(c.playerLevel[3] > c.getLevelForXP(c.playerXP[3]))
 					c.playerLevel[3] = c.getLevelForXP(c.playerXP[3]);
 					c.sendMessage("Your Bunyip's Special Heals you for 130 HP!");
 					
-					c.getPA().refreshSkill(3);
+					c.getPlayerAssistant ().refreshSkill(3);
 				} else if (c.lastsummon == 6870) {
 					c.playerLevel[3] += 15;
 					c.playerLevel[6] += 6;
@@ -1151,8 +1145,8 @@ c.sendMessage("You do not have a familiar currently spawned");
 					c.playerLevel[6] = c.getLevelForXP(c.playerXP[6])+6;
 					if(c.playerLevel[3] > c.getLevelForXP(c.playerXP[3]))
 					c.playerLevel[3] = c.getLevelForXP(c.playerXP[3]);
-					c.getPA().refreshSkill(3);
-					c.getPA().refreshSkill(6);
+					c.getPlayerAssistant ().refreshSkill(3);
+					c.getPlayerAssistant ().refreshSkill(6);
 				} else {
 					c.sendMessage("You have no familiar with special attack spawned!");
 				}
@@ -1170,16 +1164,16 @@ c.sendMessage("You do not have a familiar currently spawned");
                         return;
                         }
                         if(System.currentTimeMillis() - c.lastEmote >= 7000) {
-                        if(c.getPA().wearingCape(c.playerEquipment[c.playerCape])) {
+                        if(c.getPlayerAssistant ().wearingCape(c.playerEquipment[c.playerCape])) {
                                 c.stopMovement();
-                                c.gfx0(c.getPA().skillcapeGfx(c.playerEquipment[c.playerCape]));
-                                c.startAnimation(c.getPA().skillcapeEmote(c.playerEquipment[c.playerCape]));
+                                c.gfx0(c.getPlayerAssistant ().skillcapeGfx(c.playerEquipment[c.playerCape]));
+                                c.startAnimation(c.getPlayerAssistant ().skillcapeEmote(c.playerEquipment[c.playerCape]));
                 } else if(c.playerEquipment[c.playerCape] == 18743) {
-                        c.getPA().compemote(c);
+                        c.getPlayerAssistant ().compemote(c);
 				} else if(c.playerEquipment[c.playerCape] == 18509) {
-                        c.getPA().dungemote2(c);
+                        c.getPlayerAssistant ().dungemote2(c);
                 } else if(c.playerEquipment[c.playerCape] == 19709) {
-                        c.getPA().dungemote(c);
+                        c.getPlayerAssistant ().dungemote(c);
                 } else {
                                 c.sendMessage("You must be wearing a Skillcape to do this emote.");
                         }
@@ -1198,7 +1192,7 @@ c.sendMessage("You do not have a familiar currently spawned");
 																}
 
 																							 if (c.teleAction == 45) {
-					c.getPA().spellTeleport(2717, 9802, 0);
+					c.getPlayerAssistant ().spellTeleport(2717, 9802, 0);
                                                                 c.sendMessage("You teleport to the King Black Fucking Dragon chamber!");
 																}
 				if (c.dialogueAction == 106) {
@@ -1207,46 +1201,46 @@ c.sendMessage("You do not have a familiar currently spawned");
 						c.getItems().addItem(15088, 1);
 						c.sendMessage("You get two six-sided dice out of the dice bag.");
 					}
-					c.getPA().closeAllWindows();
+					c.getPlayerAssistant ().closeAllWindows();
 				} else if (c.dialogueAction == 107) {
 					if(c.getItems().playerHasItem(c.diceID, 1)) {
 						c.getItems().deleteItem(c.diceID, c.getItems().getItemSlot(c.diceID), 1);	
 						c.getItems().addItem(15094, 1);
 						c.sendMessage("You get a twelve-sided die out of the dice bag.");
 					}
-					c.getPA().closeAllWindows();
+					c.getPlayerAssistant ().closeAllWindows();
 				}
 				if (c.teleAction == 1) {
 					//tav dungeon
-					c.getPA().spellTeleport(2884, 9798, 0);
+					c.getPlayerAssistant ().spellTeleport(2884, 9798, 0);
 				} else if (c.teleAction == 2) {
 					//pest control
-					c.getPA().spellTeleport(2662, 2650, 0);
+					c.getPlayerAssistant ().spellTeleport(2662, 2650, 0);
 				} else if (c.teleAction == 3) {
 					//kbd
-					c.getPA().spellTeleport(3007, 3849, 0);
+					c.getPlayerAssistant ().spellTeleport(3007, 3849, 0);
 				} else if (c.teleAction == 4) {
 					//graveyard
-					c.getPA().spellTeleport(3243, 3517, 0);
+					c.getPlayerAssistant ().spellTeleport(3243, 3517, 0);
 				} else if (c.teleAction == 5) {
-					c.getPA().spellTeleport(3079, 9502,0);
+					c.getPlayerAssistant ().spellTeleport(3079, 9502,0);
 				
 				} else if (c.teleAction == 8) {
-					c.getPA().spellTeleport(2984,9630,0);
+					c.getPlayerAssistant ().spellTeleport(2984,9630,0);
 					c.sendMessage("Beware: Recommended team of 5 Players or More");
 				
 				} else if (c.teleAction == 20) {
-					c.getPA().spellTeleport(3210,3424,0);//3210 3424
+					c.getPlayerAssistant ().spellTeleport(3210,3424,0);//3210 3424
 				}
 				if (c.dialogueAction == 10) {
-					c.getPA().spellTeleport(2790, 4850, 0);
+					c.getPlayerAssistant ().spellTeleport(2790, 4850, 0);
 					c.dialogueAction = -1;
 				} else if (c.dialogueAction == 11) {
-					c.getPA().spellTeleport(2527, 4833, 0);
+					c.getPlayerAssistant ().spellTeleport(2527, 4833, 0);
 					c.dialogueAction = -1;
 				}
 				if (c.teleAction == 21) {
-					c.getPA().spellTeleport(2151, 5099, 0);
+					c.getPlayerAssistant ().spellTeleport(2151, 5099, 0);
 					c.dialogueAction = -1;
 				}
 				break;
@@ -1255,11 +1249,11 @@ c.sendMessage("You do not have a familiar currently spawned");
 
 			case 9192:
 																																	 if (c.teleAction == 46) {
-					c.getPA().spellTeleport(2916, 3628, 0);
+					c.getPlayerAssistant ().spellTeleport(2916, 3628, 0);
                                                                 c.sendMessage("The brutal avatar of destruction, yours to defeat.");
 																}																				 
 																										 if (c.teleAction == 45) {
-					c.getPA().spellTeleport(1910, 4367, 0);
+					c.getPlayerAssistant ().spellTeleport(1910, 4367, 0);
                                                                 c.sendMessage("You teleport to the Dagganoth lair!");
 																}
 				if (c.dialogueAction == 106) {
@@ -1268,63 +1262,63 @@ c.sendMessage("You do not have a familiar currently spawned");
 						c.getItems().addItem(15100, 1);
 						c.sendMessage("You get a four-sided die out of the dice bag.");
 					}
-					c.getPA().closeAllWindows();
+					c.getPlayerAssistant ().closeAllWindows();
 				} else if (c.dialogueAction == 107) {
 					if(c.getItems().playerHasItem(c.diceID, 1)) {
 						c.getItems().deleteItem(c.diceID, c.getItems().getItemSlot(c.diceID), 1);	
 						c.getItems().addItem(15096, 1);
 						c.sendMessage("You get a twenty-sided die out of the dice bag.");
 				}
-					c.getPA().closeAllWindows();
+					c.getPlayerAssistant ().closeAllWindows();
 				}
 				if (c.teleAction == 1) {
 					//slayer tower
-					c.getPA().spellTeleport(3428, 3537, 0);
+					c.getPlayerAssistant ().spellTeleport(3428, 3537, 0);
 				} else if (c.teleAction == 2) {
 					//tzhaar
-					c.getPA().spellTeleport(2438, 5168, 0);
+					c.getPlayerAssistant ().spellTeleport(2438, 5168, 0);
 					c.sendMessage("To fight Jad, enter the cave.");
 				} else if (c.teleAction == 3) {
 					//dag kings
-					c.getPA().spellTeleport(1910, 4367, 0);
+					c.getPlayerAssistant ().spellTeleport(1910, 4367, 0);
 					c.sendMessage("Climb down the ladder to get into the lair.");
 				} else if (c.teleAction == 4) {
 					//Lava Crossing
-					c.getPA().spellTeleport(3367, 3935, 0);
+					c.getPlayerAssistant ().spellTeleport(3367, 3935, 0);
 									
 				} else if (c.teleAction == 5) {
-					c.getPA().spellTeleport(2597,3408,0);
+					c.getPlayerAssistant ().spellTeleport(2597,3408,0);
 				}
 				  else if (c.teleAction == 21) {
-					c.getPA().spellTeleport(3022,9828,0);
+					c.getPlayerAssistant ().spellTeleport(3022,9828,0);
 				}
                                   else if (c.teleAction == 20) {
-					c.getPA().spellTeleport(2757,3477,0);
+					c.getPlayerAssistant ().spellTeleport(2757,3477,0);
 				}
 
 				if (c.dialogueAction == 10) {
-					c.getPA().spellTeleport(2713, 4836, 0);
+					c.getPlayerAssistant ().spellTeleport(2713, 4836, 0);
 					c.dialogueAction = -1;
 				} else if (c.dialogueAction == 11) {
-					c.getPA().spellTeleport(2162, 4833, 0);
+					c.getPlayerAssistant ().spellTeleport(2162, 4833, 0);
 					c.dialogueAction = -1;
 				} else if (c.dialogueAction == 12) {
-					c.getPA().spellTeleport(2207, 4836, 0);
+					c.getPlayerAssistant ().spellTeleport(2207, 4836, 0);
 					c.dialogueAction = -1;
 				}
 				if (c.teleAction == 8) {
-					c.getPA().startTeleport(3258, 9517, 2, "ancient");
+					c.getPlayerAssistant ().startTeleport(3258, 9517, 2, "ancient");
 					c.sendMessage("Approach Nomad with caution.");
 				}
 				break;
 
 			case 9193:
 																if (c.teleAction == 46) {
-					c.getPA().spellTeleport(2967, 9480, 0);
+					c.getPlayerAssistant ().spellTeleport(2967, 9480, 0);
                                                                 c.sendMessage("The Sea Troll Queen, yours to defeat!.");
 																}
 																														 if (c.teleAction == 45) {
-					c.getPA().spellTeleport(2984, 9630, 0);
+					c.getPlayerAssistant ().spellTeleport(2984, 9630, 0);
                                                                 c.sendMessage("You teleport to the Lahkrahnaz, 5 people recommended.");
 																}
 				if (c.dialogueAction == 106) {
@@ -1333,28 +1327,28 @@ c.sendMessage("You do not have a familiar currently spawned");
 						c.getItems().addItem(15090, 1);
 						c.sendMessage("You get an eight-sided die out of the dice bag.");
 					}
-					c.getPA().closeAllWindows();
+					c.getPlayerAssistant ().closeAllWindows();
 				} else if (c.dialogueAction == 107) {
 					if(c.getItems().playerHasItem(c.diceID, 1)) {
 						c.getItems().deleteItem(c.diceID, c.getItems().getItemSlot(c.diceID), 1);	
 						c.getItems().addItem(15098, 1);
 						c.sendMessage("You get the percentile dice out of the dice bag.");
 				}
-					c.getPA().closeAllWindows();
+					c.getPlayerAssistant ().closeAllWindows();
 				}
 				if (c.teleAction == 1) {
 					//brimhaven dungeon
-					c.getPA().spellTeleport(2710, 9466, 0);
+					c.getPlayerAssistant ().spellTeleport(2710, 9466, 0);
 					c.sendMessage("You teleported to brimhaven dungeon, be sure to bring antifire-shield.");
 				} else if (c.teleAction == 2) {
 					//duel arena
-					c.getPA().spellTeleport(3366, 3266, 0);
+					c.getPlayerAssistant ().spellTeleport(3366, 3266, 0);
 				} else if (c.teleAction == 3) {
 					//chaos elemental
-					c.getPA().spellTeleport(2717, 9805, 0);
+					c.getPlayerAssistant ().spellTeleport(2717, 9805, 0);
 				} else if (c.teleAction == 21) {
 				  if((c.playerLevel[10] >= 90)) {
-					c.getPA().spellTeleport(2611,3396,0);
+					c.getPlayerAssistant ().spellTeleport(2611,3396,0);
 					c.sendMessage("You teleport to the fishing guild ewww fishy!");
 				  }
 				 } else if (c.teleAction == 21) {
@@ -1363,14 +1357,14 @@ c.sendMessage("You do not have a familiar currently spawned");
 				  }
 				} else if (c.teleAction == 4) {
 					//Fala
-				c.getPA().spellTeleport(3086, 3516, 0);
+				c.getPlayerAssistant ().spellTeleport(3086, 3516, 0);
 
 				} else if (c.teleAction == 5) {
-					c.getPA().spellTeleport(2724,3484,0);
+					c.getPlayerAssistant ().spellTeleport(2724,3484,0);
 					c.sendMessage("For magic logs, try north of the duel arena.");
 				}
 				if (c.dialogueAction == 10) {
-					c.getPA().spellTeleport(2660, 4839, 0);
+					c.getPlayerAssistant ().spellTeleport(2660, 4839, 0);
 					c.dialogueAction = -1;
 				} else if (c.dialogueAction == 11) {
 					//c.getPA().spellTeleport(2527, 4833, 0); astrals here
@@ -1382,21 +1376,21 @@ c.sendMessage("You do not have a familiar currently spawned");
 					c.dialogueAction = -1;
 				
 				} else if (c.teleAction == 20) {
-					c.getPA().spellTeleport(2896,3456,0);
+					c.getPlayerAssistant ().spellTeleport(2896,3456,0);
 				}
 				if (c.teleAction == 8) {
-					c.getPA().startTeleport(2465, 4770, 0, "ancient");
+					c.getPlayerAssistant ().startTeleport(2465, 4770, 0, "ancient");
 					c.sendMessage("Beware of the Snakes!.");
 				}
 				break;
 			
 			case 9194:
 																														 if (c.teleAction == 46) {
-					c.getPA().spellTeleport(3303, 9375, 0);
+					c.getPlayerAssistant ().spellTeleport(3303, 9375, 0);
                                                                 c.sendMessage("You teleported to the Corporal Beast, dont die.");
 																}
 																														 if (c.teleAction == 45) {
-					c.getPA().spellTeleport(3258, 9517, 2);
+					c.getPlayerAssistant ().spellTeleport(3258, 9517, 2);
                                                                 c.sendMessage("You teleport to Nomad!");
 																}
 				if (c.dialogueAction == 107) {
@@ -1409,20 +1403,20 @@ c.sendMessage("You do not have a familiar currently spawned");
 					}
 				if (c.teleAction == 1) {
 					//island
-					c.getPA().spellTeleport(3117, 9847, 0);
+					c.getPlayerAssistant ().spellTeleport(3117, 9847, 0);
 				} else if (c.teleAction == 2) {
 					//last minigame spot
-					c.getPA().spellTeleport(2865,3546,0);
+					c.getPlayerAssistant ().spellTeleport(2865,3546,0);
 					//c.getPA().closeAllWindows();
 				} else if (c.teleAction == 3) {
-					c.getPA().spellTeleport(3302,9372,0);
+					c.getPlayerAssistant ().spellTeleport(3302,9372,0);
 					c.sendMessage("Enter the gate to fight the mighty Corporeal Beast!");
 					c.sendMessage("Note: Magic protect, Ruby bolts (e) and Diamond bolts (e) are recommended!");
-					c.getPA().closeAllWindows();
+					c.getPlayerAssistant ().closeAllWindows();
 				} else if (c.teleAction == 4) {
-					c.getPA().spellTeleport(2980, 3617, 0);
+					c.getPlayerAssistant ().spellTeleport(2980, 3617, 0);
 				} else if (c.teleAction == 5) {
-					c.getPA().spellTeleport(2812,3463,0);
+					c.getPlayerAssistant ().spellTeleport(2812,3463,0);
 				}
 				if (c.dialogueAction == 10 || c.dialogueAction == 11) {
 					c.dialogueId++;
@@ -1432,21 +1426,21 @@ c.sendMessage("You do not have a familiar currently spawned");
 					c.getDH().sendDialogues(c.dialogueId, 0);
 				
 				} else if (c.teleAction == 20) {
-					c.getPA().spellTeleport(3493,3484,0);
+					c.getPlayerAssistant ().spellTeleport(3493,3484,0);
 
                                 } else if (c.teleAction == 8) {
-					c.getPA().startTeleport(2916, 3628, 12, "ancient");
+					c.getPlayerAssistant ().startTeleport(2916, 3628, 12, "ancient");
 					c.sendMessage("The Brutal Avatar of Destruction, Good Luck!");
 				}
 				break;
 			
 			case 55096://This is the button id
-			c.getPA().removeAllWindows();//Choosing No will remove all the windows
+			c.getPlayerAssistant ().removeAllWindows();//Choosing No will remove all the windows
                         c.droppedItem = -1;
 			break;
 			
 			case 55095://This is the button id
-			c.getPA().destroyItem(c.droppedItem);//Choosing Yes will delete the item and make it dissapear
+			c.getPlayerAssistant ().destroyItem(c.droppedItem);//Choosing Yes will delete the item and make it dissapear
                         c.droppedItem = -1;
 			break;
 			
@@ -1686,11 +1680,11 @@ c.sendMessage("You do not have a familiar currently spawned");
 				}
 			break;
 			case 108005:
-			c.getPA().showInterface(19148);
+			c.getPlayerAssistant ().showInterface(19148);
 			break;
 			
 			case 59004:
-			c.getPA().removeAllWindows();
+			c.getPlayerAssistant ().removeAllWindows();
 			break;
 			
 			case 70212:
@@ -1731,7 +1725,7 @@ return;
 				return;
 				for (int j = 0; j < c.playerEquipment.length; j++) {
 				      if (c.playerEquipment[j] > 0) {
-				      c.getPA().closeAllWindows();
+				      c.getPlayerAssistant ().closeAllWindows();
 					   c.getDH().sendDialogues(420, npcType);
 					   return;
 				      }
@@ -1740,23 +1734,23 @@ return;
 					int skilld = 1;
 					int leveld = 1;
 					c.levelPoints = 0;
-					c.playerXP[skilld] = c.getPA().getXPForLevel(leveld)+5;
-					c.playerLevel[skilld] = c.getPA().getLevelForXP(c.playerXP[skilld]);
-					c.getPA().refreshSkill(skilld);
+					c.playerXP[skilld] = c.getPlayerAssistant ().getXPForLevel(leveld)+5;
+					c.playerLevel[skilld] = c.getPlayerAssistant ().getLevelForXP(c.playerXP[skilld]);
+					c.getPlayerAssistant ().refreshSkill(skilld);
 								//	c.getPA().closeAllWindows();
 				c.getDH().sendDialogues(230, npcType);
 				} catch (Exception e){}
 			}
                                 if (c.usingGlory)
-					c.getPA().startTeleport(Config.EDGEVILLE_X, Config.EDGEVILLE_Y, 0, "modern");
+					c.getPlayerAssistant ().startTeleport(Config.EDGEVILLE_X, Config.EDGEVILLE_Y, 0, "modern");
 				if (c.dialogueAction == 2)
-					c.getPA().startTeleport(3428, 3538, 0, "modern");
+					c.getPlayerAssistant ().startTeleport(3428, 3538, 0, "modern");
 				if (c.dialogueAction == 3)		
-					c.getPA().startTeleport(Config.EDGEVILLE_X, Config.EDGEVILLE_Y, 0, "modern");
+					c.getPlayerAssistant ().startTeleport(Config.EDGEVILLE_X, Config.EDGEVILLE_Y, 0, "modern");
 				if (c.dialogueAction == 4)
-					c.getPA().startTeleport(3565, 3314, 0, "modern");
+					c.getPlayerAssistant ().startTeleport(3565, 3314, 0, "modern");
 				if (c.dialogueAction == 20) {
-					c.getPA().startTeleport(2897, 3618, 4, "modern");
+					c.getPlayerAssistant ().startTeleport(2897, 3618, 4, "modern");
 				}
 				if(c.dialogueAction == 100) {
 					c.getDH().sendDialogues(25, 946);
@@ -1785,7 +1779,7 @@ return;
 				return;
 				for (int j = 0; j < c.playerEquipment.length; j++) {
 					if (c.playerEquipment[j] > 0) {
-					c.getPA().closeAllWindows();
+					c.getPlayerAssistant ().closeAllWindows();
 						c.getDH().sendDialogues(420, npcType);
 						return;
 					}
@@ -1793,24 +1787,24 @@ return;
 				try {
 					int skillp = 5;
 					int levelp = 1;
-					c.playerXP[skillp] = c.getPA().getXPForLevel(levelp)+5;
-					c.playerLevel[skillp] = c.getPA().getLevelForXP(c.playerXP[skillp]);
-					c.getPA().refreshSkill(skillp);
+					c.playerXP[skillp] = c.getPlayerAssistant ().getXPForLevel(levelp)+5;
+					c.playerLevel[skillp] = c.getPlayerAssistant ().getLevelForXP(c.playerXP[skillp]);
+					c.getPlayerAssistant ().refreshSkill(skillp);
 					c.levelPoints = 0;
 									//c.getPA().closeAllWindows();
 				c.getDH().sendDialogues(260, npcType);
 				} catch (Exception e){}
 			}
                                 if (c.usingGlory)
-					c.getPA().startTeleport(Config.AL_KHARID_X, Config.AL_KHARID_Y, 0, "modern");
+					c.getPlayerAssistant ().startTeleport(Config.AL_KHARID_X, Config.AL_KHARID_Y, 0, "modern");
 				if (c.dialogueAction == 2)
-					c.getPA().startTeleport(2884, 3395, 0, "modern");
+					c.getPlayerAssistant ().startTeleport(2884, 3395, 0, "modern");
 				if (c.dialogueAction == 3)
-					c.getPA().startTeleport(3243, 3513, 0, "modern");
+					c.getPlayerAssistant ().startTeleport(3243, 3513, 0, "modern");
 				if (c.dialogueAction == 4)
-					c.getPA().startTeleport(2444, 5170, 0, "modern");
+					c.getPlayerAssistant ().startTeleport(2444, 5170, 0, "modern");
 				if (c.dialogueAction == 20) {
-					c.getPA().startTeleport(2897, 3618, 12, "modern");
+					c.getPlayerAssistant ().startTeleport(2897, 3618, 12, "modern");
 				}
 				if(c.dialogueAction == 101) {
 					c.getDH().sendDialogues(21, 946);
@@ -1839,7 +1833,7 @@ return;
 			       return;
 			       for (int j = 0; j < c.playerEquipment.length; j++) {
 				     if (c.playerEquipment[j] > 0) {
-					c.getPA().closeAllWindows();
+					c.getPlayerAssistant ().closeAllWindows();
 					      c.getDH().sendDialogues(420, npcType);
 					      return;
 					}
@@ -1848,23 +1842,23 @@ return;
 					int skill = 0;
 					int levela = 1;
 					c.levelPoints = 0;
-					c.playerXP[skill] = c.getPA().getXPForLevel(levela)+5;
-					c.playerLevel[skill] = c.getPA().getLevelForXP(c.playerXP[skill]);
-					c.getPA().refreshSkill(skill);
+					c.playerXP[skill] = c.getPlayerAssistant ().getXPForLevel(levela)+5;
+					c.playerLevel[skill] = c.getPlayerAssistant ().getLevelForXP(c.playerXP[skill]);
+					c.getPlayerAssistant ().refreshSkill(skill);
 									//c.getPA().closeAllWindows();
 				c.getDH().sendDialogues(240, npcType);
 				} catch (Exception e){}
 			}
                                 if (c.usingGlory)
-					c.getPA().startTeleport(Config.KARAMJA_X, Config.KARAMJA_Y, 0, "modern");
+					c.getPlayerAssistant ().startTeleport(Config.KARAMJA_X, Config.KARAMJA_Y, 0, "modern");
 				if (c.dialogueAction == 2)
-					c.getPA().startTeleport(2471,10137, 0, "modern");	
+					c.getPlayerAssistant ().startTeleport(2471,10137, 0, "modern");
 				if (c.dialogueAction == 3)
-					c.getPA().startTeleport(3363, 3676, 0, "modern");
+					c.getPlayerAssistant ().startTeleport(3363, 3676, 0, "modern");
 				if (c.dialogueAction == 4)
-					c.getPA().startTeleport(2659, 2676, 0, "modern");
+					c.getPlayerAssistant ().startTeleport(2659, 2676, 0, "modern");
 				if (c.dialogueAction == 20) {
-					c.getPA().startTeleport(2897, 3618, 8, "modern");
+					c.getPlayerAssistant ().startTeleport(2897, 3618, 8, "modern");
 				}
 				if(c.dialogueAction == 101) {
 					c.getDH().sendDialogues(23, 946);
@@ -1872,7 +1866,7 @@ return;
 				if(c.dialogueAction == 100) {
 					if(!c.getItems().playerHasItem(995, 1000000)) {
 						c.sendMessage("You need at least 1M coins to play this game!");
-						c.getPA().removeAllWindows();
+						c.getPlayerAssistant ().removeAllWindows();
 						break;
 					}
 					c.getGamble().playGame(c);
@@ -1894,7 +1888,7 @@ return;
 			       return;
 			       for (int j = 0; j < c.playerEquipment.length; j++) {
 				     if (c.playerEquipment[j] > 0) {
-				     c.getPA().closeAllWindows();
+				     c.getPlayerAssistant ().closeAllWindows();
 					   c.getDH().sendDialogues(420, npcType);
 					   return;
 				      }
@@ -1903,51 +1897,51 @@ return;
 					int skill1 = 0;
 					int level = 1;
 					c.levelPoints = 0;
-					c.playerXP[skill1] = c.getPA().getXPForLevel(level)+5;
-					c.playerLevel[skill1] = c.getPA().getLevelForXP(c.playerXP[skill1]);
-					c.getPA().refreshSkill(skill1);
+					c.playerXP[skill1] = c.getPlayerAssistant ().getXPForLevel(level)+5;
+					c.playerLevel[skill1] = c.getPlayerAssistant ().getLevelForXP(c.playerXP[skill1]);
+					c.getPlayerAssistant ().refreshSkill(skill1);
 					int skill2 = 1;
 				//	int level = 1;
-					c.playerXP[skill2] = c.getPA().getXPForLevel(level)+5;
-					c.playerLevel[skill2] = c.getPA().getLevelForXP(c.playerXP[skill2]);
-					c.getPA().refreshSkill(skill2);
+					c.playerXP[skill2] = c.getPlayerAssistant ().getXPForLevel(level)+5;
+					c.playerLevel[skill2] = c.getPlayerAssistant ().getLevelForXP(c.playerXP[skill2]);
+					c.getPlayerAssistant ().refreshSkill(skill2);
 					int skill3 = 2;
 				//	int level = 1;
-					c.playerXP[skill3] = c.getPA().getXPForLevel(level)+5;
-					c.playerLevel[skill3] = c.getPA().getLevelForXP(c.playerXP[skill3]);
-					c.getPA().refreshSkill(skill3);
+					c.playerXP[skill3] = c.getPlayerAssistant ().getXPForLevel(level)+5;
+					c.playerLevel[skill3] = c.getPlayerAssistant ().getLevelForXP(c.playerXP[skill3]);
+					c.getPlayerAssistant ().refreshSkill(skill3);
 					int skill4 = 3;
 					level = 10;
-					c.playerXP[skill4] = c.getPA().getXPForLevel(level)+5;
-					c.playerLevel[skill4] = c.getPA().getLevelForXP(c.playerXP[skill4]);
-					c.getPA().refreshSkill(skill4);
+					c.playerXP[skill4] = c.getPlayerAssistant ().getXPForLevel(level)+5;
+					c.playerLevel[skill4] = c.getPlayerAssistant ().getLevelForXP(c.playerXP[skill4]);
+					c.getPlayerAssistant ().refreshSkill(skill4);
 					int skill5 = 4;
 					level = 1;
-					c.playerXP[skill5] = c.getPA().getXPForLevel(level)+5;
-					c.playerLevel[skill5] = c.getPA().getLevelForXP(c.playerXP[skill5]);
-					c.getPA().refreshSkill(skill5);
+					c.playerXP[skill5] = c.getPlayerAssistant ().getXPForLevel(level)+5;
+					c.playerLevel[skill5] = c.getPlayerAssistant ().getLevelForXP(c.playerXP[skill5]);
+					c.getPlayerAssistant ().refreshSkill(skill5);
 					int skill6 = 5;
 				//	int level = 1;
-					c.playerXP[skill6] = c.getPA().getXPForLevel(level)+5;
-					c.playerLevel[skill6] = c.getPA().getLevelForXP(c.playerXP[skill6]);
-					c.getPA().refreshSkill(skill6);
+					c.playerXP[skill6] = c.getPlayerAssistant ().getXPForLevel(level)+5;
+					c.playerLevel[skill6] = c.getPlayerAssistant ().getLevelForXP(c.playerXP[skill6]);
+					c.getPlayerAssistant ().refreshSkill(skill6);
 					int skill7 = 6;
 				//	int level = 1;
-					c.playerXP[skill7] = c.getPA().getXPForLevel(level)+5;
-					c.playerLevel[skill7] = c.getPA().getLevelForXP(c.playerXP[skill7]);
-					c.getPA().refreshSkill(skill7);
+					c.playerXP[skill7] = c.getPlayerAssistant ().getXPForLevel(level)+5;
+					c.playerLevel[skill7] = c.getPlayerAssistant ().getLevelForXP(c.playerXP[skill7]);
+					c.getPlayerAssistant ().refreshSkill(skill7);
 				//	c.getPA().closeAllWindows();
 				c.getDH().sendDialogues(250, npcType);
 				} catch (Exception e){}
 			}
                                 if (c.usingGlory)
-					c.getPA().startTeleport(Config.MAGEBANK_X, Config.MAGEBANK_Y, 0, "modern");
+					c.getPlayerAssistant ().startTeleport(Config.MAGEBANK_X, Config.MAGEBANK_Y, 0, "modern");
 				if (c.dialogueAction == 2)
-					c.getPA().startTeleport(2669,3714, 0, "modern");
+					c.getPlayerAssistant ().startTeleport(2669,3714, 0, "modern");
 				if (c.dialogueAction == 3)	
-					c.getPA().startTeleport(2540, 4716, 0, "modern");
+					c.getPlayerAssistant ().startTeleport(2540, 4716, 0, "modern");
 				if (c.dialogueAction == 4) {
-					c.getPA().startTeleport(3366, 3266, 0, "modern");
+					c.getPlayerAssistant ().startTeleport(3366, 3266, 0, "modern");
 					c.sendMessage("Dueling is at your own risk. Refunds will not be given for items lost due to glitches.");
 				}
 				if (c.dialogueAction == 20) {
@@ -1956,9 +1950,9 @@ return;
 					c.sendMessage("This will be added shortly");
 				} else if (c.dialogueAction == 10 || c.dialogueAction == 101) {
 					c.dialogueAction = 0;
-					c.getPA().removeAllWindows();
+					c.getPlayerAssistant ().removeAllWindows();
 				} else {
-					c.getPA().removeAllWindows();
+					c.getPlayerAssistant ().removeAllWindows();
 				}
 				c.dialogueAction = 0;
 				break;
@@ -1968,7 +1962,7 @@ return;
 			case 1097:
 			case 15486:
 				if (c.autocastId > 0) {
-					c.getPA().resetAutocast();
+					c.getPlayerAssistant ().resetAutocast();
 				} else {
 					if (c.playerMagicBook == 1) {
 						if (c.playerEquipment[c.playerWeapon] == 4675 || c.playerEquipment[c.playerWeapon] == 15486 || c.playerEquipment[c.playerWeapon] == 18355)
@@ -1991,7 +1985,7 @@ case 9157:
 	if (c.dialogueAction == 90) {
 					c.getDH().sendDialogues(366, 783);
 					c.nomad += 1;
-					c.getPA().sendFrame126("@yel@The Ritual", 29162);
+					c.getPlayerAssistant ().sendFrame126("@yel@The Ritual", 29162);
 					return;
 				} else if (c.dialogueAction == 91) {
 					c.getDH().sendDialogues(379, 302);
@@ -2020,7 +2014,7 @@ c.getItems().addItem(15706, 1);
 }
 if(c.teleAction == 1397) {
 if (c.getItems().playerHasItem(1917, 1)) {
-c.getPA().addSkillXP((100000), 24);
+c.getPlayerAssistant ().addSkillXP((100000), 24);
 c.getItems().deleteItem(1917, 1);
 c.sendMessage("The gods reward you with 100k dungeoneering XP!");
 c.gfx0(287);
@@ -2029,20 +2023,20 @@ c.gfx0(287);
 }
 }
 if(c.teleAction == 235) {
-c.getPA().movePlayer(3281, 2785, 0);
+c.getPlayerAssistant ().movePlayer(3281, 2785, 0);
 c.sendMessage("Watch out, the soldiers will attack you!");
 return;
 }
 if(c.teleAction == 1599) {
-c.getPA().movePlayer(3233, 2902, 0);
-c.getPA().closeAllWindows();
+c.getPlayerAssistant ().movePlayer(3233, 2902, 0);
+c.getPlayerAssistant ().closeAllWindows();
 c.sendMessage("<img=13>[Shaloxis] By the power of Aggroth, i have teleported you.<img=13>");
 return;
 }
 if(c.teleAction == 1335) {
 c.sendMessage("You have launched the website.");
-c.getPA().closeAllWindows();
-c.getPA().sendFrame126("www.aggroth.com", 12000);
+c.getPlayerAssistant ().closeAllWindows();
+c.getPlayerAssistant ().sendFrame126("www.aggroth.com", 12000);
 return;
 }
 if(c.teleAction == 1662) {
@@ -2057,71 +2051,71 @@ if (c.dialogueAction == 1338) {
 c.logout();
 }
 			if (c.dialogueAction == 253) {
-		c.getPA().showInterface(14040);
+		c.getPlayerAssistant ().showInterface(14040);
 }
 							if(c.dialogueAction == 4421) {
 			for (int i = 0; i < 21; i++) {
-if(c.playerXP[i] <= c.getPA().getXPForLevel(10)) {
+if(c.playerXP[i] <= c.getPlayerAssistant ().getXPForLevel(10)) {
 c.sendMessage("You need level 10 in ALL LEVELS to view the lowest shop");
 return;
 }
 }
 for (int i = 0; i < 21; i++) {
-if(c.playerXP[i] >= c.getPA().getXPForLevel(10) && c.playerXP[i] <= c.getPA().getXPForLevel(20)) {
+if(c.playerXP[i] >= c.getPlayerAssistant ().getXPForLevel(10) && c.playerXP[i] <= c.getPlayerAssistant ().getXPForLevel(20)) {
 c.getShops().openShop(91);
 return;
 }
 }
 for (int i = 0; i < 21; i++) {
-if(c.playerXP[i] >= c.getPA().getXPForLevel(20) && c.playerXP[i] <= c.getPA().getXPForLevel(30)) {
+if(c.playerXP[i] >= c.getPlayerAssistant ().getXPForLevel(20) && c.playerXP[i] <= c.getPlayerAssistant ().getXPForLevel(30)) {
 c.getShops().openShop(92);
 return;
 }
 }
 for (int i = 0; i < 21; i++) {
-if(c.playerXP[i] >= c.getPA().getXPForLevel(30) && c.playerXP[i] <= c.getPA().getXPForLevel(40)) {
+if(c.playerXP[i] >= c.getPlayerAssistant ().getXPForLevel(30) && c.playerXP[i] <= c.getPlayerAssistant ().getXPForLevel(40)) {
 c.getShops().openShop(93);
 return;
 }
 }
 for (int i = 0; i < 21; i++) {
-if(c.playerXP[i] >= c.getPA().getXPForLevel(40) && c.playerXP[i] <= c.getPA().getXPForLevel(50)) {
+if(c.playerXP[i] >= c.getPlayerAssistant ().getXPForLevel(40) && c.playerXP[i] <= c.getPlayerAssistant ().getXPForLevel(50)) {
 c.getShops().openShop(94);
 return;
 }
 }
 for (int i = 0; i < 21; i++) {
-if(c.playerXP[i] >= c.getPA().getXPForLevel(50) && c.playerXP[i] <= c.getPA().getXPForLevel(60)) {
+if(c.playerXP[i] >= c.getPlayerAssistant ().getXPForLevel(50) && c.playerXP[i] <= c.getPlayerAssistant ().getXPForLevel(60)) {
 c.getShops().openShop(95);
 return;
 }
 }
 for (int i = 0; i < 21; i++) {
-if(c.playerXP[i] >= c.getPA().getXPForLevel(60) && c.playerXP[i] <= c.getPA().getXPForLevel(70)) {
+if(c.playerXP[i] >= c.getPlayerAssistant ().getXPForLevel(60) && c.playerXP[i] <= c.getPlayerAssistant ().getXPForLevel(70)) {
 c.getShops().openShop(96);
 return;
 }
 }
 for (int i = 0; i < 21; i++) {
-if(c.playerXP[i] >= c.getPA().getXPForLevel(70) && c.playerXP[i] <= c.getPA().getXPForLevel(80)) {
+if(c.playerXP[i] >= c.getPlayerAssistant ().getXPForLevel(70) && c.playerXP[i] <= c.getPlayerAssistant ().getXPForLevel(80)) {
 c.getShops().openShop(97);
 return;
 }
 }
 for (int i = 0; i < 21; i++) {
-if(c.playerXP[i] >= c.getPA().getXPForLevel(80) && c.playerXP[i] <= c.getPA().getXPForLevel(90)) {
+if(c.playerXP[i] >= c.getPlayerAssistant ().getXPForLevel(80) && c.playerXP[i] <= c.getPlayerAssistant ().getXPForLevel(90)) {
 c.getShops().openShop(98);
 return;
 }
 }
 for (int i = 0; i < 21; i++) {
-if(c.playerXP[i] >= c.getPA().getXPForLevel(90) && c.playerXP[i] <= c.getPA().getXPForLevel(99)) {
+if(c.playerXP[i] >= c.getPlayerAssistant ().getXPForLevel(90) && c.playerXP[i] <= c.getPlayerAssistant ().getXPForLevel(99)) {
 c.getShops().openShop(99);
 return;
 }
 }
 for (int i = 0; i < 21; i++) {
-if(c.playerXP[i] >= c.getPA().getXPForLevel(99)){
+if(c.playerXP[i] >= c.getPlayerAssistant ().getXPForLevel(99)){
 c.getShops().openShop(100);
 }
 }
@@ -2131,46 +2125,46 @@ c.getShops().openShop(100);
 					//int r = Misc.random(3);
 					switch(r) {
 						case 0:
-							c.getPA().movePlayer(3534, 9677, 0);
+							c.getPlayerAssistant ().movePlayer(3534, 9677, 0);
 							break;
 						
 						case 1:
-							c.getPA().movePlayer(3534, 9712, 0);
+							c.getPlayerAssistant ().movePlayer(3534, 9712, 0);
 							break;
 						
 						case 2:
-							c.getPA().movePlayer(3568, 9712, 0);
+							c.getPlayerAssistant ().movePlayer(3568, 9712, 0);
 							break;
 						
 						case 3:
-							c.getPA().movePlayer(3568, 9677, 0);
+							c.getPlayerAssistant ().movePlayer(3568, 9677, 0);
 							break;
 						case 4:
-							c.getPA().movePlayer(3551, 9694, 0);
+							c.getPlayerAssistant ().movePlayer(3551, 9694, 0);
 							break;
 					}
 				} else if (c.dialogueAction == 2) {
-					c.getPA().movePlayer(2507, 4717, 0);		
+					c.getPlayerAssistant ().movePlayer(2507, 4717, 0);
 				} else if (c.dialogueAction == 5) {
 					c.getSlayer().giveTask();
 				} else if (c.dialogueAction == 6) {
 					c.getSlayer().giveTask2();
 				} else if (c.dialogueAction == 7) {
-					c.getPA().startTeleport(3088,3933,0,"modern");
+					c.getPlayerAssistant ().startTeleport(3088,3933,0,"modern");
 					c.sendMessage("NOTE: You are now in the wilderness...");
 				} else if (c.dialogueAction == 50) {
-					c.getPA().startTeleport(2661,3307,0,"modern");
+					c.getPlayerAssistant ().startTeleport(2661,3307,0,"modern");
 					c.sendMessage("This is PVP");
 			} else if (c.dialogueAction == 51) {
-					c.getPA().startTeleport(3007,3631,0,"modern");
+					c.getPlayerAssistant ().startTeleport(3007,3631,0,"modern");
 				} else if (c.dialogueAction == 8) {
-					c.getPA().resetBarrows();
+					c.getPlayerAssistant ().resetBarrows();
 					c.sendMessage("Your barrows have been reset.");
 				} else if (c.dialogueAction == 13) {
-					c.getPA().spellTeleport(1762, 5180, 0);
+					c.getPlayerAssistant ().spellTeleport(1762, 5180, 0);
 					c.dialogueAction = -1;
  } else if (c.dialogueAction == 27) {
-					c.getPA().movePlayer(3210, 3424, 0);
+					c.getPlayerAssistant ().movePlayer(3210, 3424, 0);
 					c.monkeyk0ed = 0;
 					c.Jail = false;
 		c.forcedText = "I swear to god that i will never break the rules anymore!";
@@ -2178,7 +2172,7 @@ c.getShops().openShop(100);
 		c.updateRequired = true;
 				}
 				c.dialogueAction = 0;
-				c.getPA().removeAllWindows();
+				c.getPlayerAssistant ().removeAllWindows();
 			break;
 case 9158:
 	if (c.dialogueAction == 90) {
@@ -2203,24 +2197,24 @@ c.getShops().openShop(2);
 return;
 }
 				if (c.dialogueAction == 50) {
-					c.getPA().startTeleport(2559,3089,0,"modern");
+					c.getPlayerAssistant ().startTeleport(2559,3089,0,"modern");
 					c.sendMessage("This is PVP!");
 			} else if (c.dialogueAction == 51) {
-					c.getPA().startTeleport(3243,3790,0,"modern");
+					c.getPlayerAssistant ().startTeleport(3243,3790,0,"modern");
 
 				} else if (c.dialogueAction == 13) {
-					c.getPA().spellTeleport(3202, 3859, 0);
+					c.getPlayerAssistant ().spellTeleport(3202, 3859, 0);
 					c.dialogueAction = -1;
 									} else if (c.dialogueAction == 34) {
-					c.getPA().removeAllWindows();
+					c.getPlayerAssistant ().removeAllWindows();
 					c.dialogueAction = -1;
 					}
 
 				if (c.dialogueAction == 8) {
-					c.getPA().fixAllBarrows();
+					c.getPlayerAssistant ().fixAllBarrows();
 				} else {
 				c.dialogueAction = 0;
-				c.getPA().removeAllWindows();
+				c.getPlayerAssistant ().removeAllWindows();
 				}
 				break;
 			case 9159:
@@ -2233,7 +2227,7 @@ c.getShops().openShop(73);
 return;
 }
 				if (c.dialogueAction == 51) {
-					c.getPA().startTeleport(3351,3659,0,"modern");
+					c.getPlayerAssistant ().startTeleport(3351,3659,0,"modern");
 					}
 				break;
 			case 107243:
@@ -2287,7 +2281,7 @@ return;
 				c.forcedChat("Raarrrrrgggggghhhhhhh!");
 				c.startAnimation(1056);
 				c.playerLevel[2] = c.getLevelForXP(c.playerXP[2]) + (c.getLevelForXP(c.playerXP[2]) * 15 / 100);
-				c.getPA().refreshSkill(2);
+				c.getPlayerAssistant ().refreshSkill(2);
 				c.getItems().updateSpecialBar();
 			} else {
 				c.sendMessage("You don't have the required special energy to use this attack.");
@@ -2316,7 +2310,7 @@ return;
 			c.usingSpecial = !c.usingSpecial;
 			c.sendMessage("All damage will be split into half for 1 minute.");
 			c.forcedChat("I am Protected By the Light!");
-			c.getPA().sendFrame126("@bla@S P E C I A L  A T T A C K", 7562);
+			c.getPlayerAssistant ().sendFrame126("@bla@S P E C I A L  A T T A C K", 7562);
 			} else {
 				c.sendMessage("You don't have the required special energy to use this attack.");
 			}	
@@ -2483,12 +2477,12 @@ return;
 				}
 				c.duelStatus = 2;
 				if(c.duelStatus == 2) {
-					c.getPA().sendFrame126("Waiting for other player...", 6684);
-					o.getPA().sendFrame126("Other player has accepted.", 6684);
+					c.getPlayerAssistant ().sendFrame126("Waiting for other player...", 6684);
+					o.getPlayerAssistant ().sendFrame126("Other player has accepted.", 6684);
 				}
 				if(o.duelStatus == 2) {
-					o.getPA().sendFrame126("Waiting for other player...", 6684);
-					c.getPA().sendFrame126("Other player has accepted.", 6684);
+					o.getPlayerAssistant ().sendFrame126("Waiting for other player...", 6684);
+					c.getPlayerAssistant ().sendFrame126("Other player has accepted.", 6684);
 				}
 				
 				if(c.duelStatus == 2 && o.duelStatus == 2) {
@@ -2534,8 +2528,8 @@ return;
 					c.duelDelay = System.currentTimeMillis();
 					o1.duelDelay = System.currentTimeMillis();
 				} else {
-					c.getPA().sendFrame126("Waiting for other player...", 6571);
-					o1.getPA().sendFrame126("Other player has accepted", 6571);
+					c.getPlayerAssistant ().sendFrame126("Waiting for other player...", 6571);
+					o1.getPlayerAssistant ().sendFrame126("Other player has accepted", 6571);
 				}
 			} else {
 					Client o = (Client) Server.playerHandler.players[c.duelingWith];
@@ -2596,7 +2590,7 @@ break;
 			case 4171:
 			case 50056:
 			String type = c.playerMagicBook == 0 ? "modern" : "ancient";
-			c.getPA().startTeleport(3094, 3469, 0, type);	
+			c.getPlayerAssistant ().startTeleport(3094, 3469, 0, type);
 			break;
 			
 			//case 4171:
@@ -2666,7 +2660,7 @@ break;
 			*/case 51013:
 			case 6004:	
 			case 117162:	
-			c.getPA().startTeleport(2852, 3432, 0, "modern");
+			c.getPlayerAssistant ().startTeleport(2852, 3432, 0, "modern");
 			//c.getDH().sendOption5("Mining", "Smithing", "Fishing/Cooking", "Woodcutting", "Farming");
 			//c.teleAction = 5;
 			break;
@@ -2712,7 +2706,7 @@ break;
 			case 1177: //hammer
 			c.fightMode = 0;
 			if (c.autocasting)
-				c.getPA().resetAutocast();
+				c.getPlayerAssistant ().resetAutocast();
 			break;
 			
 			case 9126: //Defensive
@@ -2728,7 +2722,7 @@ break;
 			case 30089: //stab (dagger)
 			c.fightMode = 1;
 			if (c.autocasting)
-				c.getPA().resetAutocast();
+				c.getPlayerAssistant ().resetAutocast();
 			break;
 			
 			case 9127: // Controlled
@@ -2742,7 +2736,7 @@ break;
 			case 17100: //longrange (darts)
 			c.fightMode = 3;
 			if (c.autocasting)
-				c.getPA().resetAutocast();
+				c.getPlayerAssistant ().resetAutocast();
 			break;
 			
 			case 9128: //Aggressive
@@ -2764,7 +2758,7 @@ break;
 			case 30090: //claws
 			c.fightMode = 2;
 			if (c.autocasting)
-				c.getPA().resetAutocast();
+				c.getPlayerAssistant ().resetAutocast();
 			break;
 
 			/**Prayers**/
@@ -2772,7 +2766,7 @@ case 87231: // thick skin
 			if(c.trade11 > 1) {
 			for(int p = 0; p < c.PRAYER.length; p++) { // reset prayer glows 
 				c.prayerActive[p] = false;
-				c.getPA().sendFrame36(c.PRAYER_GLOW[p], 0);	
+				c.getPlayerAssistant ().sendFrame36(c.PRAYER_GLOW[p], 0);
 			}
 			c.sendMessage("You must wait 15 minutes before using this!");
 			return;
@@ -2949,8 +2943,8 @@ case 87241: // berserker
 				c.sendMessage("Trade declined as the other player has disconnected.");
 				break;
 			}
-			c.getPA().sendFrame126("Waiting for other player...", 3431);
-			ot.getPA().sendFrame126("Other player has accepted", 3431);	
+			c.getPlayerAssistant ().sendFrame126("Waiting for other player...", 3431);
+			ot.getPlayerAssistant ().sendFrame126("Other player has accepted", 3431);
 			c.goodTrade= true;
 			ot.goodTrade= true;
 			
@@ -2961,12 +2955,12 @@ case 87241: // berserker
 						ot.sendMessage(c.playerName +" has to remove "+(c.getTradeAndDuel().offeredItems.size() - ot.getItems().freeSlots())+" items or you could offer them "+(c.getTradeAndDuel().offeredItems.size() - ot.getItems().freeSlots())+" items.");
 						c.goodTrade= false;
 						ot.goodTrade= false;
-						c.getPA().sendFrame126("Not enough inventory space...", 3431);
-						ot.getPA().sendFrame126("Not enough inventory space...", 3431);
+						c.getPlayerAssistant ().sendFrame126("Not enough inventory space...", 3431);
+						ot.getPlayerAssistant ().sendFrame126("Not enough inventory space...", 3431);
 							break;
 					} else {
-						c.getPA().sendFrame126("Waiting for other player...", 3431);				
-						ot.getPA().sendFrame126("Other player has accepted", 3431);
+						c.getPlayerAssistant ().sendFrame126("Waiting for other player...", 3431);
+						ot.getPlayerAssistant ().sendFrame126("Other player has accepted", 3431);
 						c.goodTrade= true;
 						ot.goodTrade= true;
 						}
@@ -3018,8 +3012,8 @@ case 87241: // berserker
 						ot1.sendMessage("Trade accepted.");
 						break;
 					}
-				ot1.getPA().sendFrame126("Other player has accepted.", 3535);
-				c.getPA().sendFrame126("Waiting for other player...", 3535);
+				ot1.getPlayerAssistant ().sendFrame126("Other player has accepted.", 3535);
+				c.getPlayerAssistant ().sendFrame126("Waiting for other player...", 3535);
 				}
 				
 			break;			
@@ -3027,14 +3021,14 @@ case 87241: // berserker
 			case 125011: //Click agree
 				if(!c.ruleAgreeButton) {
 					c.ruleAgreeButton = true;
-					c.getPA().sendFrame36(701, 1);
+					c.getPlayerAssistant ().sendFrame36(701, 1);
 				} else {
 					c.ruleAgreeButton = false;
-					c.getPA().sendFrame36(701, 0);
+					c.getPlayerAssistant ().sendFrame36(701, 0);
 				}
 				break;
 			case 67100://Accept
-					c.getPA().showInterface(3559);
+					c.getPlayerAssistant ().showInterface(3559);
 					c.newPlayer = false;
 					c.sendMessage("You need to click on you agree before you can continue on.");
 				break;
@@ -3046,100 +3040,100 @@ case 87241: // berserker
 			case 74176:
 				if(!c.mouseButton) {
 					c.mouseButton = true;
-					c.getPA().sendFrame36(500, 1);
-					c.getPA().sendFrame36(170,1);
+					c.getPlayerAssistant ().sendFrame36(500, 1);
+					c.getPlayerAssistant ().sendFrame36(170,1);
 				} else if(c.mouseButton) {
 					c.mouseButton = false;
-					c.getPA().sendFrame36(500, 0);
-					c.getPA().sendFrame36(170,0);					
+					c.getPlayerAssistant ().sendFrame36(500, 0);
+					c.getPlayerAssistant ().sendFrame36(170,0);
 				}
 				break;
 			case 74184:
 				if(!c.splitChat) {
 					c.splitChat = true;
-					c.getPA().sendFrame36(502, 1);
-					c.getPA().sendFrame36(287, 1);
+					c.getPlayerAssistant ().sendFrame36(502, 1);
+					c.getPlayerAssistant ().sendFrame36(287, 1);
 				} else {
 					c.splitChat = false;
-					c.getPA().sendFrame36(502, 0);
-					c.getPA().sendFrame36(287, 0);
+					c.getPlayerAssistant ().sendFrame36(502, 0);
+					c.getPlayerAssistant ().sendFrame36(287, 0);
 				}
 				break;
 			case 100231:
 				if(!c.chatEffects) {
 					c.chatEffects = true;
-					c.getPA().sendFrame36(501, 1);
-					c.getPA().sendFrame36(171, 0);
+					c.getPlayerAssistant ().sendFrame36(501, 1);
+					c.getPlayerAssistant ().sendFrame36(171, 0);
 				} else {
 					c.chatEffects = false;
-					c.getPA().sendFrame36(501, 0);
-					c.getPA().sendFrame36(171, 1);
+					c.getPlayerAssistant ().sendFrame36(501, 0);
+					c.getPlayerAssistant ().sendFrame36(171, 1);
 				}
 				break;
 			case 100237:
 				if(!c.acceptAid) {
 					c.acceptAid = true;
-					c.getPA().sendFrame36(503, 1);
-					c.getPA().sendFrame36(427, 1);
+					c.getPlayerAssistant ().sendFrame36(503, 1);
+					c.getPlayerAssistant ().sendFrame36(427, 1);
 				} else {
 					c.acceptAid = false;
-					c.getPA().sendFrame36(503, 0);
-					c.getPA().sendFrame36(427, 0);
+					c.getPlayerAssistant ().sendFrame36(503, 0);
+					c.getPlayerAssistant ().sendFrame36(427, 0);
 				}
 				break;
 			case 74201://brightness1
-				c.getPA().sendFrame36(505, 1);
-				c.getPA().sendFrame36(506, 0);
-				c.getPA().sendFrame36(507, 0);
-				c.getPA().sendFrame36(508, 0);
-				c.getPA().sendFrame36(166, 1);
+				c.getPlayerAssistant ().sendFrame36(505, 1);
+				c.getPlayerAssistant ().sendFrame36(506, 0);
+				c.getPlayerAssistant ().sendFrame36(507, 0);
+				c.getPlayerAssistant ().sendFrame36(508, 0);
+				c.getPlayerAssistant ().sendFrame36(166, 1);
 				break;
 			case 74203://brightness2
-				c.getPA().sendFrame36(505, 0);
-				c.getPA().sendFrame36(506, 1);
-				c.getPA().sendFrame36(507, 0);
-				c.getPA().sendFrame36(508, 0);
-				c.getPA().sendFrame36(166,2);
+				c.getPlayerAssistant ().sendFrame36(505, 0);
+				c.getPlayerAssistant ().sendFrame36(506, 1);
+				c.getPlayerAssistant ().sendFrame36(507, 0);
+				c.getPlayerAssistant ().sendFrame36(508, 0);
+				c.getPlayerAssistant ().sendFrame36(166,2);
 				break;
 
 			case 74204://brightness3
-				c.getPA().sendFrame36(505, 0);
-				c.getPA().sendFrame36(506, 0);
-				c.getPA().sendFrame36(507, 1);
-				c.getPA().sendFrame36(508, 0);
-				c.getPA().sendFrame36(166,3);
+				c.getPlayerAssistant ().sendFrame36(505, 0);
+				c.getPlayerAssistant ().sendFrame36(506, 0);
+				c.getPlayerAssistant ().sendFrame36(507, 1);
+				c.getPlayerAssistant ().sendFrame36(508, 0);
+				c.getPlayerAssistant ().sendFrame36(166,3);
 				break;
 
 			case 74205://brightness4
-				c.getPA().sendFrame36(505, 0);
-				c.getPA().sendFrame36(506, 0);
-				c.getPA().sendFrame36(507, 0);
-				c.getPA().sendFrame36(508, 1);
-				c.getPA().sendFrame36(166,4);
+				c.getPlayerAssistant ().sendFrame36(505, 0);
+				c.getPlayerAssistant ().sendFrame36(506, 0);
+				c.getPlayerAssistant ().sendFrame36(507, 0);
+				c.getPlayerAssistant ().sendFrame36(508, 1);
+				c.getPlayerAssistant ().sendFrame36(166,4);
 				break;
 			case 74206://area1
-				c.getPA().sendFrame36(509, 1);
-				c.getPA().sendFrame36(510, 0);
-				c.getPA().sendFrame36(511, 0);
-				c.getPA().sendFrame36(512, 0);
+				c.getPlayerAssistant ().sendFrame36(509, 1);
+				c.getPlayerAssistant ().sendFrame36(510, 0);
+				c.getPlayerAssistant ().sendFrame36(511, 0);
+				c.getPlayerAssistant ().sendFrame36(512, 0);
 				break;
 			case 74207://area2
-				c.getPA().sendFrame36(509, 0);
-				c.getPA().sendFrame36(510, 1);
-				c.getPA().sendFrame36(511, 0);
-				c.getPA().sendFrame36(512, 0);
+				c.getPlayerAssistant ().sendFrame36(509, 0);
+				c.getPlayerAssistant ().sendFrame36(510, 1);
+				c.getPlayerAssistant ().sendFrame36(511, 0);
+				c.getPlayerAssistant ().sendFrame36(512, 0);
 				break;
 			case 74208://area3
-				c.getPA().sendFrame36(509, 0);
-				c.getPA().sendFrame36(510, 0);
-				c.getPA().sendFrame36(511, 1);
-				c.getPA().sendFrame36(512, 0);
+				c.getPlayerAssistant ().sendFrame36(509, 0);
+				c.getPlayerAssistant ().sendFrame36(510, 0);
+				c.getPlayerAssistant ().sendFrame36(511, 1);
+				c.getPlayerAssistant ().sendFrame36(512, 0);
 				break;
 			case 74209://area4
-				c.getPA().sendFrame36(509, 0);
-				c.getPA().sendFrame36(510, 0);
-				c.getPA().sendFrame36(511, 0);
-				c.getPA().sendFrame36(512, 1);
+				c.getPlayerAssistant ().sendFrame36(509, 0);
+				c.getPlayerAssistant ().sendFrame36(510, 0);
+				c.getPlayerAssistant ().sendFrame36(511, 0);
+				c.getPlayerAssistant ().sendFrame36(512, 1);
 				break;
 			case 168:
                 c.startAnimation(855);		c.stopMovement();
@@ -3272,133 +3266,133 @@ return;
 				
 				break;
 case 118098:
-c.getPA().castVeng();
+c.getPlayerAssistant ().castVeng();
 break; 
 			
 			case 27209:			
-			c.forcedText = "[QC] My Slayer level is  " + c.getPA().getLevelForXP(c.playerXP[18]) + ".";
+			c.forcedText = "[QC] My Slayer level is  " + c.getPlayerAssistant ().getLevelForXP(c.playerXP[18]) + ".";
 			c.sendMessage("I must slay another " + c.taskAmount + " " + Server.npcHandler.getNpcListName(c.slayerTask));
 			c.forcedChatUpdateRequired = true;
 			c.updateRequired = true;
 			break;
 			
 	case 27211:
-		c.forcedText = "[QC] My Hunter level is  " + c.getPA().getLevelForXP(c.playerXP[21]) + ".";
+		c.forcedText = "[QC] My Hunter level is  " + c.getPlayerAssistant ().getLevelForXP(c.playerXP[21]) + ".";
 		c.forcedChatUpdateRequired = true;
 		c.updateRequired = true;
 	break;
 	case 27190:
-		c.forcedText = "[QC] My Attack level is  " + c.getPA().getLevelForXP(c.playerXP[0]) + ".";
+		c.forcedText = "[QC] My Attack level is  " + c.getPlayerAssistant ().getLevelForXP(c.playerXP[0]) + ".";
 		c.forcedChatUpdateRequired = true;
 		c.updateRequired = true;
 	break;
 	case 27193:
-		c.forcedText = "[QC] My Strength level is  " + c.getPA().getLevelForXP(c.playerXP[2]) + ".";
+		c.forcedText = "[QC] My Strength level is  " + c.getPlayerAssistant ().getLevelForXP(c.playerXP[2]) + ".";
 		c.forcedChatUpdateRequired = true;
 		c.updateRequired = true;
 	break;
 	case 27196:
-		c.forcedText = "[QC] My Defence level is  " + c.getPA().getLevelForXP(c.playerXP[1]) + ".";
+		c.forcedText = "[QC] My Defence level is  " + c.getPlayerAssistant ().getLevelForXP(c.playerXP[1]) + ".";
 		c.forcedChatUpdateRequired = true;
 		c.updateRequired = true;
 	break;
 	case 27191:
-		c.forcedText = "[QC] My Hitpoints level is  " + c.getPA().getLevelForXP(c.playerXP[3]) + ".";
+		c.forcedText = "[QC] My Hitpoints level is  " + c.getPlayerAssistant ().getLevelForXP(c.playerXP[3]) + ".";
 		c.forcedChatUpdateRequired = true;
 		c.updateRequired = true;
 	break;
 	case 27199:
-		c.forcedText = "[QC] My Range level is  " + c.getPA().getLevelForXP(c.playerXP[4]) + ".";
+		c.forcedText = "[QC] My Range level is  " + c.getPlayerAssistant ().getLevelForXP(c.playerXP[4]) + ".";
 		c.forcedChatUpdateRequired = true;
 		c.updateRequired = true;
 	break;
 	case 27202:
-		c.forcedText = "[QC] My Prayer level is  " + c.getPA().getLevelForXP(c.playerXP[5]) + ".";
+		c.forcedText = "[QC] My Prayer level is  " + c.getPlayerAssistant ().getLevelForXP(c.playerXP[5]) + ".";
 		c.forcedChatUpdateRequired = true;
 		c.updateRequired = true;
 	break;
 	case 27205:
-		c.forcedText = "[QC] My Magic level is  " + c.getPA().getLevelForXP(c.playerXP[6]) + ".";
+		c.forcedText = "[QC] My Magic level is  " + c.getPlayerAssistant ().getLevelForXP(c.playerXP[6]) + ".";
 		c.forcedChatUpdateRequired = true;
 		c.updateRequired = true;
 	break;
 	case 27201:
-		c.forcedText = "[QC] My Cooking level is  " + c.getPA().getLevelForXP(c.playerXP[7]) + ".";
+		c.forcedText = "[QC] My Cooking level is  " + c.getPlayerAssistant ().getLevelForXP(c.playerXP[7]) + ".";
 		c.forcedChatUpdateRequired = true;
 		c.updateRequired = true;
 	break;
 	case 27207:
-		c.forcedText = "[QC] My Woodcutting level is  " + c.getPA().getLevelForXP(c.playerXP[8]) + ".";
+		c.forcedText = "[QC] My Woodcutting level is  " + c.getPlayerAssistant ().getLevelForXP(c.playerXP[8]) + ".";
 		c.forcedChatUpdateRequired = true;
 		c.updateRequired = true;
 	break;
 	case 27206:
-		c.forcedText = "[QC] My Fletching level is  " + c.getPA().getLevelForXP(c.playerXP[9]) + ".";
+		c.forcedText = "[QC] My Fletching level is  " + c.getPlayerAssistant ().getLevelForXP(c.playerXP[9]) + ".";
 		c.forcedChatUpdateRequired = true;
 		c.updateRequired = true;
 	break;
 	case 27198:
-		c.forcedText = "[QC] My Fishing level is  " + c.getPA().getLevelForXP(c.playerXP[10]) + ".";
+		c.forcedText = "[QC] My Fishing level is  " + c.getPlayerAssistant ().getLevelForXP(c.playerXP[10]) + ".";
 		c.forcedChatUpdateRequired = true;
 		c.updateRequired = true;
 	break;
 	case 27204:
-		c.forcedText = "[QC] My Firemaking level is  " + c.getPA().getLevelForXP(c.playerXP[11]) + ".";
+		c.forcedText = "[QC] My Firemaking level is  " + c.getPlayerAssistant ().getLevelForXP(c.playerXP[11]) + ".";
 		c.forcedChatUpdateRequired = true;
 		c.updateRequired = true;
 	break;
 	case 27203:
-		c.forcedText = "[QC] My Crafting level is  " + c.getPA().getLevelForXP(c.playerXP[12]) + ".";
+		c.forcedText = "[QC] My Crafting level is  " + c.getPlayerAssistant ().getLevelForXP(c.playerXP[12]) + ".";
 		c.forcedChatUpdateRequired = true;
 		c.updateRequired = true;
 	break;
 	case 27195:
-		c.forcedText = "[QC] My Smithing level is  " + c.getPA().getLevelForXP(c.playerXP[13]) + ".";
+		c.forcedText = "[QC] My Smithing level is  " + c.getPlayerAssistant ().getLevelForXP(c.playerXP[13]) + ".";
 		c.forcedChatUpdateRequired = true;
 		c.updateRequired = true;
 	break;
 	case 27192:
-		c.forcedText = "[QC] My Mining level is  " + c.getPA().getLevelForXP(c.playerXP[14]) + ".";
+		c.forcedText = "[QC] My Mining level is  " + c.getPlayerAssistant ().getLevelForXP(c.playerXP[14]) + ".";
 		c.forcedChatUpdateRequired = true;
 		c.updateRequired = true;
 	break;
 	case 27197:
-		c.forcedText = "[QC] My Herblore level is  " + c.getPA().getLevelForXP(c.playerXP[15]) + ".";
+		c.forcedText = "[QC] My Herblore level is  " + c.getPlayerAssistant ().getLevelForXP(c.playerXP[15]) + ".";
 		c.forcedChatUpdateRequired = true;
 		c.updateRequired = true;
 	break;
 	case 27194:
-		c.forcedText = "[QC] My Agility level is  " + c.getPA().getLevelForXP(c.playerXP[16]) + ".";
+		c.forcedText = "[QC] My Agility level is  " + c.getPlayerAssistant ().getLevelForXP(c.playerXP[16]) + ".";
 		c.forcedChatUpdateRequired = true;
 		c.updateRequired = true;
 	break;
 	case 27200:
-		c.forcedText = "[QC] My Thieving level is  " + c.getPA().getLevelForXP(c.playerXP[17]) + ".";
+		c.forcedText = "[QC] My Thieving level is  " + c.getPlayerAssistant ().getLevelForXP(c.playerXP[17]) + ".";
 		c.forcedChatUpdateRequired = true;
 		c.updateRequired = true;
 	break;
 	case 27210:
-		c.forcedText = "[QC] My Farming level is  " + c.getPA().getLevelForXP(c.playerXP[19]) + ".";
+		c.forcedText = "[QC] My Farming level is  " + c.getPlayerAssistant ().getLevelForXP(c.playerXP[19]) + ".";
 		c.forcedChatUpdateRequired = true;
 		c.updateRequired = true;
 	break;
 	case 27208:
-		c.forcedText = "[QC] My Runecrafting level is  " + c.getPA().getLevelForXP(c.playerXP[20]) + ".";
+		c.forcedText = "[QC] My Runecrafting level is  " + c.getPlayerAssistant ().getLevelForXP(c.playerXP[20]) + ".";
 		c.forcedChatUpdateRequired = true;
 		c.updateRequired = true;
 	break;
 	case 27212:
-		c.forcedText = "[QC] My Summoning level is  " + c.getPA().getLevelForXP(c.playerXP[22]) + ".";
+		c.forcedText = "[QC] My Summoning level is  " + c.getPlayerAssistant ().getLevelForXP(c.playerXP[22]) + ".";
 		c.forcedChatUpdateRequired = true;
 		c.updateRequired = true;
 	break;
 	case 27213:
-		c.forcedText = "[QC] My PK'ing level is  " + c.getPA().getLevelForXP(c.playerXP[23]) + ".";
+		c.forcedText = "[QC] My PK'ing level is  " + c.getPlayerAssistant ().getLevelForXP(c.playerXP[23]) + ".";
 		c.forcedChatUpdateRequired = true;
 		c.updateRequired = true;
 	break;
 	case 27214:
-		c.forcedText = "[QC] My Dungeoneering level is  " + c.getPA().getLevelForXP(c.playerXP[24]) + ".";
+		c.forcedText = "[QC] My Dungeoneering level is  " + c.getPlayerAssistant ().getLevelForXP(c.playerXP[24]) + ".";
 		c.forcedChatUpdateRequired = true;
 		c.updateRequired = true;
 	break;
@@ -3601,7 +3595,7 @@ c.sendMessage("You do not have a npc currently spawned");
 		c.getItems().addItem(566, 50000);
 		c.playerMagicBook = 1;
 		c.setSidebarInterface(6, 12855);
-		c.getPA().closeAllWindows();
+		c.getPlayerAssistant ().closeAllWindows();
 		c.sendMessage("You have received Mage equipment and 2M.");
 		}
 	}
@@ -3624,7 +3618,7 @@ c.sendMessage("You do not have a npc currently spawned");
 		c.getItems().addItem(19892, 1);
 		c.getItems().addItem(391, 3);
 		c.getItems().addItem(995, 2000000);
-		c.getPA().closeAllWindows();
+		c.getPlayerAssistant ().closeAllWindows();
 		c.sendMessage("You have received Melee equipment and 2M.");
 		}
 	
@@ -3649,23 +3643,23 @@ c.sendMessage("You do not have a npc currently spawned");
 		c.getItems().addItem(892, 10000);
 		c.getItems().addItem(397, 3);
 		c.getItems().addItem(995, 2000000);
-		c.getPA().closeAllWindows();
+		c.getPlayerAssistant ().closeAllWindows();
 		c.sendMessage("You have received Ranged equipment and 2M.");
 		}
 	}
 		break;
 		//Dungeoneering finish
 		case 177190:
-		c.getPA().showInterface(14040);
+		c.getPlayerAssistant ().showInterface(14040);
 		break;
 		case 177206:
-		c.getPA().spellTeleport(3007, 3849, 0);
+		c.getPlayerAssistant ().spellTeleport(3007, 3849, 0);
 		break;
 		case 177209:
-		c.getPA().spellTeleport(1910, 4367, 0);
+		c.getPlayerAssistant ().spellTeleport(1910, 4367, 0);
 		break;
 		case 177212:
-		c.getPA().spellTeleport(2717, 9805, 0);
+		c.getPlayerAssistant ().spellTeleport(2717, 9805, 0);
 		break;
 		case 177221:
 		c.setSidebarInterface(6, c.playerMagicBook == 0 ? 1151 : c.playerMagicBook == 1 ? 12855 : c.playerMagicBook == 2 ? 16640 : 12855);
@@ -3677,55 +3671,55 @@ c.sendMessage("You do not have a npc currently spawned");
 		c.setSidebarInterface(6, c.playerMagicBook == 0 ? 1151 : c.playerMagicBook == 1 ? 12855 : c.playerMagicBook == 2 ? 16640 : 12855);
 		break;
 		case 178034:
-		c.getPA().spellTeleport(2539, 4716, 0);
+		c.getPlayerAssistant ().spellTeleport(2539, 4716, 0);
 		break;
 		case 178050:
-		c.getPA().spellTeleport(3243, 3517, 0);
+		c.getPlayerAssistant ().spellTeleport(3243, 3517, 0);
 		break;
 		case 178053:
-		c.getPA().spellTeleport(3367, 3935, 0);
+		c.getPlayerAssistant ().spellTeleport(3367, 3935, 0);
 		break;
 		case 178056:
-		c.getPA().spellTeleport(3086, 3516, 0);
+		c.getPlayerAssistant ().spellTeleport(3086, 3516, 0);
 		break;
 		case 178059:
-		c.getPA().spellTeleport(3344, 3667, 0);
+		c.getPlayerAssistant ().spellTeleport(3344, 3667, 0);
 		break;
 		case 176162:
-		c.getPA().spellTeleport(3565, 3314, 0);
+		c.getPlayerAssistant ().spellTeleport(3565, 3314, 0);
 		break;
 		case 176168:
-		c.getPA().spellTeleport(2438, 5172, 0);
+		c.getPlayerAssistant ().spellTeleport(2438, 5172, 0);
 		break;
 		case 176146:
-		c.getPA().spellTeleport(3366, 3266, 0);
+		c.getPlayerAssistant ().spellTeleport(3366, 3266, 0);
 		break;
 		case 176165:
-		c.getPA().spellTeleport(2662, 2650, 0);
+		c.getPlayerAssistant ().spellTeleport(2662, 2650, 0);
 		break;		
 		case 176171:
-		c.getPA().spellTeleport(2865, 3546, 0);
+		c.getPlayerAssistant ().spellTeleport(2865, 3546, 0);
 		break;
 		case 176246:
-		c.getPA().spellTeleport(2676, 3715, 0);
+		c.getPlayerAssistant ().spellTeleport(2676, 3715, 0);
 		break;
 		case 177006:
-		c.getPA().spellTeleport(2884, 9798, 0);
+		c.getPlayerAssistant ().spellTeleport(2884, 9798, 0);
 		break;
 		case 177009:
-		c.getPA().spellTeleport(2710, 9466, 0);
+		c.getPlayerAssistant ().spellTeleport(2710, 9466, 0);
 		break;
 		case 177012:
-		c.getPA().spellTeleport(3428, 3527, 0);
+		c.getPlayerAssistant ().spellTeleport(3428, 3527, 0);
 		break;
 		case 177015:
-		c.getPA().spellTeleport(3117, 9847, 0);
+		c.getPlayerAssistant ().spellTeleport(3117, 9847, 0);
 		break;
 		case 177021:
 		c.setSidebarInterface(6, c.playerMagicBook == 0 ? 1151 : c.playerMagicBook == 1 ? 12855 : c.playerMagicBook == 2 ? 16640 : 12855);
 		break;
 		case 177215:
-		c.getPA().spellTeleport(3303, 9375, 0);
+		c.getPlayerAssistant ().spellTeleport(3303, 9375, 0);
 		break;
 
 case 69009:
@@ -3741,14 +3735,14 @@ case 189118:
 	if(c.Wheel == 0) {
 		c.sendMessage("You Need More Points!");
 	} else {
-		c.getItems().addItem(c.getPA().Wheel(), 1);
+		c.getItems().addItem(c.getPlayerAssistant ().Wheel(), 1);
 		c.Wheel = (c.Wheel - 1);
 		c.sendMessage("You Have Just Won A Radom Item From The Wheel!");
-		c.getPA().closeAllWindows();
+		c.getPlayerAssistant ().closeAllWindows();
 		}
 	break;
 			case 24017:
-				c.getPA().resetAutocast();
+				c.getPlayerAssistant ().resetAutocast();
 				//c.sendFrame246(329, 200, c.playerEquipment[c.playerWeapon]);
 				c.getItems().sendWeapon(c.playerEquipment[c.playerWeapon], c.getItems().getItemName(c.playerEquipment[c.playerWeapon]));
 				//c.setSidebarInterface(0, 328);

@@ -21,8 +21,8 @@ public class Fletching {
 						c.getItems().deleteItem(item1, c.getItems().getItemSlot(item1), 15);
 						c.getItems().deleteItem(item2, c.getItems().getItemSlot(item2), 15);
 						c.getItems().addItem(arrows[j][2], 15);
-						c.getPA().closeAllWindows();
-						c.getPA().addSkillXP(arrows[j][3] * Config.FLETCHING_EXPERIENCE, c.playerFletching);
+						c.getPlayerAssistant ().closeAllWindows();
+						c.getPlayerAssistant ().addSkillXP(arrows[j][3] * Config.FLETCHING_EXPERIENCE, c.playerFletching);
 					} else {
 						c.sendMessage("You need a fletching level of " + arrows[j][4] + " to fletch this.");
 					}
@@ -59,8 +59,8 @@ public class Fletching {
 				if (c.playerLevel[c.playerFletching] >= reqs[index] || fletchType == 3) {
 					c.getItems().deleteItem(logType[index], c.getItems().getItemSlot(logType[index]),1);
 					c.getItems().addItem(toAdd, amountToAdd);
-						c.getPA().closeAllWindows();
-					c.getPA().addSkillXP(getExp(index) * Config.FLETCHING_EXPERIENCE, c.playerFletching);
+						c.getPlayerAssistant ().closeAllWindows();
+					c.getPlayerAssistant ().addSkillXP(getExp(index) * Config.FLETCHING_EXPERIENCE, c.playerFletching);
 				} else {
 					c.sendMessage("You need a fletching level of " + reqs[index] + " to fletch this item.");
 					break;
@@ -117,64 +117,64 @@ public class Fletching {
 	
 	public void openFletching(int item) {
 		if (item == 1511) {
-			c.getPA().sendFrame164(8880);
-         	c.getPA().sendFrame126("What would you like to make?", 8879);
-         	c.getPA().sendFrame246(8884, 250, 839); // middle
-     		c.getPA().sendFrame246(8883, 250, 841); // left picture
-     		c.getPA().sendFrame246(8885, 250, 52); // right pic
-     		c.getPA().sendFrame126("Shortbow", 8889);
-     		c.getPA().sendFrame126("Longbow", 8893);
-     		c.getPA().sendFrame126("Arrow Shafts", 8897);
+			c.getPlayerAssistant ().sendFrame164(8880);
+         	c.getPlayerAssistant ().sendFrame126("What would you like to make?", 8879);
+         	c.getPlayerAssistant ().sendFrame246(8884, 250, 839); // middle
+     		c.getPlayerAssistant ().sendFrame246(8883, 250, 841); // left picture
+     		c.getPlayerAssistant ().sendFrame246(8885, 250, 52); // right pic
+     		c.getPlayerAssistant ().sendFrame126("Shortbow", 8889);
+     		c.getPlayerAssistant ().sendFrame126("Longbow", 8893);
+     		c.getPlayerAssistant ().sendFrame126("Arrow Shafts", 8897);
 			log = item;
 		} else if (item == 1521) {
-        	c.getPA().sendFrame164(8880);
-         	c.getPA().sendFrame126("What would you like to make?", 8879);
-         	c.getPA().sendFrame246(8884, 250, 845); // middle
-     		c.getPA().sendFrame246(8883, 250, 843); // left picture
-     		c.getPA().sendFrame246(8885, 250, 52); // right pic
-     		c.getPA().sendFrame126("Oak Shortbow", 8889);
-     		c.getPA().sendFrame126("Oak Longbow", 8893);
-     		c.getPA().sendFrame126("Arrow Shafts", 8897);
+        	c.getPlayerAssistant ().sendFrame164(8880);
+         	c.getPlayerAssistant ().sendFrame126("What would you like to make?", 8879);
+         	c.getPlayerAssistant ().sendFrame246(8884, 250, 845); // middle
+     		c.getPlayerAssistant ().sendFrame246(8883, 250, 843); // left picture
+     		c.getPlayerAssistant ().sendFrame246(8885, 250, 52); // right pic
+     		c.getPlayerAssistant ().sendFrame126("Oak Shortbow", 8889);
+     		c.getPlayerAssistant ().sendFrame126("Oak Longbow", 8893);
+     		c.getPlayerAssistant ().sendFrame126("Arrow Shafts", 8897);
 			log = item;			
 		} else if (item == 1519) {
-			c.getPA().sendFrame164(8880);
-         	c.getPA().sendFrame126("What would you like to make?", 8879);
-         	c.getPA().sendFrame246(8884, 250, 847); // middle
-     		c.getPA().sendFrame246(8883, 250, 849); // left picture
-     		c.getPA().sendFrame246(8885, 250, 52); // right pic
-     		c.getPA().sendFrame126("Willow Shortbow", 8889);
-     		c.getPA().sendFrame126("Willow Longbow", 8893);
-     		c.getPA().sendFrame126("Arrow Shafts", 8897);
+			c.getPlayerAssistant ().sendFrame164(8880);
+         	c.getPlayerAssistant ().sendFrame126("What would you like to make?", 8879);
+         	c.getPlayerAssistant ().sendFrame246(8884, 250, 847); // middle
+     		c.getPlayerAssistant ().sendFrame246(8883, 250, 849); // left picture
+     		c.getPlayerAssistant ().sendFrame246(8885, 250, 52); // right pic
+     		c.getPlayerAssistant ().sendFrame126("Willow Shortbow", 8889);
+     		c.getPlayerAssistant ().sendFrame126("Willow Longbow", 8893);
+     		c.getPlayerAssistant ().sendFrame126("Arrow Shafts", 8897);
 			log = item;
 		} else if (item == 1517) {
-			c.getPA().sendFrame164(8880);
-         	c.getPA().sendFrame126("What would you like to make?", 8879);
-         	c.getPA().sendFrame246(8884, 250, 851); // middle
-     		c.getPA().sendFrame246(8883, 250, 853); // left picture
-     		c.getPA().sendFrame246(8885, 250, 52); // right pic
-     		c.getPA().sendFrame126("Maple Shortbow", 8889);
-     		c.getPA().sendFrame126("Maple Longbow", 8893);
-     		c.getPA().sendFrame126("Arrow Shafts", 8897);
+			c.getPlayerAssistant ().sendFrame164(8880);
+         	c.getPlayerAssistant ().sendFrame126("What would you like to make?", 8879);
+         	c.getPlayerAssistant ().sendFrame246(8884, 250, 851); // middle
+     		c.getPlayerAssistant ().sendFrame246(8883, 250, 853); // left picture
+     		c.getPlayerAssistant ().sendFrame246(8885, 250, 52); // right pic
+     		c.getPlayerAssistant ().sendFrame126("Maple Shortbow", 8889);
+     		c.getPlayerAssistant ().sendFrame126("Maple Longbow", 8893);
+     		c.getPlayerAssistant ().sendFrame126("Arrow Shafts", 8897);
 			log = item;
 		} else if (item == 1515) {
-			c.getPA().sendFrame164(8880);
-         	c.getPA().sendFrame126("What would you like to make?", 8879);
-         	c.getPA().sendFrame246(8884, 250, 855); // middle
-     		c.getPA().sendFrame246(8883, 250, 857); // left picture
-     		c.getPA().sendFrame246(8885, 250, 52); // right pic
-     		c.getPA().sendFrame126("Yew Shortbow", 8889);
-     		c.getPA().sendFrame126("Yew Longbow", 8893);
-     		c.getPA().sendFrame126("Arrow Shafts", 8897);
+			c.getPlayerAssistant ().sendFrame164(8880);
+         	c.getPlayerAssistant ().sendFrame126("What would you like to make?", 8879);
+         	c.getPlayerAssistant ().sendFrame246(8884, 250, 855); // middle
+     		c.getPlayerAssistant ().sendFrame246(8883, 250, 857); // left picture
+     		c.getPlayerAssistant ().sendFrame246(8885, 250, 52); // right pic
+     		c.getPlayerAssistant ().sendFrame126("Yew Shortbow", 8889);
+     		c.getPlayerAssistant ().sendFrame126("Yew Longbow", 8893);
+     		c.getPlayerAssistant ().sendFrame126("Arrow Shafts", 8897);
 			log = item;
 		} else if (item == 1513) {
-			c.getPA().sendFrame164(8880);
-         	c.getPA().sendFrame126("What would you like to make?", 8879);
-         	c.getPA().sendFrame246(8884, 250, 859); // middle
-     		c.getPA().sendFrame246(8883, 250, 861); // left picture
-     		c.getPA().sendFrame246(8885, 250, 52); // right pic
-     		c.getPA().sendFrame126("Magic Shortbow", 8889);
-     		c.getPA().sendFrame126("Magic Longbow", 8893);
-     		c.getPA().sendFrame126("Arrow Shafts", 8897);
+			c.getPlayerAssistant ().sendFrame164(8880);
+         	c.getPlayerAssistant ().sendFrame126("What would you like to make?", 8879);
+         	c.getPlayerAssistant ().sendFrame246(8884, 250, 859); // middle
+     		c.getPlayerAssistant ().sendFrame246(8883, 250, 861); // left picture
+     		c.getPlayerAssistant ().sendFrame246(8885, 250, 52); // right pic
+     		c.getPlayerAssistant ().sendFrame126("Magic Shortbow", 8889);
+     		c.getPlayerAssistant ().sendFrame126("Magic Longbow", 8893);
+     		c.getPlayerAssistant ().sendFrame126("Arrow Shafts", 8897);
 			log = item;
 		}
 		fletching = true;

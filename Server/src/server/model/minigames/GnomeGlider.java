@@ -27,19 +27,19 @@ public class GnomeGlider {
 	}
 
 	public static void handleFlight(final Client c, final int flightId) {
-		c.getPA().showInterface(802);
-		c.getPA().sendFrame36(153, getMove(flightId));
+		c.getPlayerAssistant ().showInterface(802);
+		c.getPlayerAssistant ().sendFrame36(153, getMove(flightId));
 		EventManager.getSingleton().addEvent(new Event() {
 			public void execute(EventContainer e) {
-				c.getPA().movePlayer(getX(flightId), getY(flightId),
+				c.getPlayerAssistant ().movePlayer(getX(flightId), getY(flightId),
 						getH(flightId));
 				e.stop();
 			}
 		}, 1800);
 		EventManager.getSingleton().addEvent(new Event() {
 			public void execute(EventContainer e) {
-				c.getPA().closeAllWindows();
-				c.getPA().sendFrame36(153, -1);
+				c.getPlayerAssistant ().closeAllWindows();
+				c.getPlayerAssistant ().sendFrame36(153, -1);
 				e.stop();
 			}
 		}, 2400);

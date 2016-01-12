@@ -437,7 +437,7 @@ public class PlayerHandler
                 Client o = ( Client ) Server.playerHandler.players[ i ];
                 if ( o != null )
                 {
-                    o.getPA ().updatePM ( plr.playerId, 0 );
+                    o.getPlayerAssistant ().updatePM ( plr.playerId, 0 );
                 }
             }
         }

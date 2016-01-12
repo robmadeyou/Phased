@@ -30,7 +30,7 @@ public class SkillGuides {
 					int item7ItemId, int item7lvl, String item7lvldef, 
 					int item8ItemId, int item8lvl, String item8lvldef) {
 
-		client.getPA().sendFrame126("@dre@"+skill, 8716);
+		client.getPlayerAssistant ().sendFrame126("@dre@"+skill, 8716);
 		for(int i = 0;i<31;i++) {
 			item[i] = 0;
 		}
@@ -43,46 +43,46 @@ public class SkillGuides {
 		item[6] = item7ItemId;
 		item[7] = item8ItemId;
 		if(item1lvl > 0)
-		client.getPA().sendFrame126(""+item1lvl,8720);
-		client.getPA().sendFrame126(""+item1lvldef,8760);
+		client.getPlayerAssistant ().sendFrame126(""+item1lvl,8720);
+		client.getPlayerAssistant ().sendFrame126(""+item1lvldef,8760);
 		if(item2lvl > 0)
-		client.getPA().sendFrame126(""+item2lvl,8721);
-		client.getPA().sendFrame126(""+item2lvldef, 8761);
+		client.getPlayerAssistant ().sendFrame126(""+item2lvl,8721);
+		client.getPlayerAssistant ().sendFrame126(""+item2lvldef, 8761);
 		if(item3lvl > 0)
-		client.getPA().sendFrame126(""+item3lvl,8722);
-		client.getPA().sendFrame126(""+item3lvldef,8762);
+		client.getPlayerAssistant ().sendFrame126(""+item3lvl,8722);
+		client.getPlayerAssistant ().sendFrame126(""+item3lvldef,8762);
 		if(item4lvl > 0)
-		client.getPA().sendFrame126(""+item4lvl,8723);
-		client.getPA().sendFrame126(""+item4lvldef, 8763);
+		client.getPlayerAssistant ().sendFrame126(""+item4lvl,8723);
+		client.getPlayerAssistant ().sendFrame126(""+item4lvldef, 8763);
 		if(item5lvl > 0)
-		client.getPA().sendFrame126(""+item5lvl,8724);
-		client.getPA().sendFrame126(""+item5lvldef, 8764);
+		client.getPlayerAssistant ().sendFrame126(""+item5lvl,8724);
+		client.getPlayerAssistant ().sendFrame126(""+item5lvldef, 8764);
 		if(item6lvl > 0)
-		client.getPA().sendFrame126(""+item6lvl,8725);
-		client.getPA().sendFrame126(""+item6lvldef,8765);
+		client.getPlayerAssistant ().sendFrame126(""+item6lvl,8725);
+		client.getPlayerAssistant ().sendFrame126(""+item6lvldef,8765);
 		if(item7lvl > 0)
-		client.getPA().sendFrame126(""+item7lvl,8726);
-		client.getPA().sendFrame126(""+item7lvldef, 8766);
+		client.getPlayerAssistant ().sendFrame126(""+item7lvl,8726);
+		client.getPlayerAssistant ().sendFrame126(""+item7lvldef, 8766);
 		if(item8lvl > 0)
-		client.getPA().sendFrame126(""+item8lvl,8727);
-		client.getPA().sendFrame126(""+item8lvldef, 8767);
-		client.getPA().sendFrame126("",8849);
-		client.getPA().sendFrame126("Attack",8846);
-		client.getPA().sendFrame126("Strength",8823);
-		client.getPA().sendFrame126("Defence",8824);
-		client.getPA().sendFrame126("Hitpoints",8827);
-		client.getPA().sendFrame126("Ranged",8837);
-		client.getPA().sendFrame126("Magic",8840);
-		client.getPA().sendFrame126("Prayer",8843);
-		client.getPA().sendFrame126("RuneCraf",8859);
-		client.getPA().sendFrame126("Agility",8862);
-		client.getPA().sendFrame126("Herblore",8865);
-		client.getPA().sendFrame126("Thieving",15303);
-		client.getPA().sendFrame126("Crafting",15306);
-		client.getPA().sendFrame126("Slayer",15309);
+		client.getPlayerAssistant ().sendFrame126(""+item8lvl,8727);
+		client.getPlayerAssistant ().sendFrame126(""+item8lvldef, 8767);
+		client.getPlayerAssistant ().sendFrame126("",8849);
+		client.getPlayerAssistant ().sendFrame126("Attack",8846);
+		client.getPlayerAssistant ().sendFrame126("Strength",8823);
+		client.getPlayerAssistant ().sendFrame126("Defence",8824);
+		client.getPlayerAssistant ().sendFrame126("Hitpoints",8827);
+		client.getPlayerAssistant ().sendFrame126("Ranged",8837);
+		client.getPlayerAssistant ().sendFrame126("Magic",8840);
+		client.getPlayerAssistant ().sendFrame126("Prayer",8843);
+		client.getPlayerAssistant ().sendFrame126("RuneCraf",8859);
+		client.getPlayerAssistant ().sendFrame126("Agility",8862);
+		client.getPlayerAssistant ().sendFrame126("Herblore",8865);
+		client.getPlayerAssistant ().sendFrame126("Thieving",15303);
+		client.getPlayerAssistant ().sendFrame126("Crafting",15306);
+		client.getPlayerAssistant ().sendFrame126("Slayer",15309);
 		
 		sendSkillInterface(client, item);
-		client.getPA().showInterface(8714);
+		client.getPlayerAssistant ().showInterface(8714);
 	}
 	public static void atkInterface(Client client) {
 		skillsInterface(client, "Attack", 

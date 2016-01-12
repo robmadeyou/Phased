@@ -1,7 +1,6 @@
 package server.model.players.skills;
 
 import server.model.players.Client;
-import server.util.Misc;
 
 /*
  * @Revised for Project Insanity by It0ken.
@@ -30,8 +29,8 @@ public class Agility {
 		if (c.absX == a && c.absY == b) { 
 		c.fmwalkto(x, y);
 		//c.startAnimation(emote);
-		c.getPA().addSkillXP(xp, c.playerAgility);
-		c.getPA().refreshSkill(c.playerAgility);
+		c.getPlayerAssistant ().addSkillXP(xp, c.playerAgility);
+		c.getPlayerAssistant ().refreshSkill(c.playerAgility);
 		}
 	}
 
@@ -50,8 +49,8 @@ public class Agility {
 		c.heightLevel = h;
 		c.updateRequired = true;
 		c.appearanceUpdateRequired = true;
-		c.getPA().addSkillXP(xp, c.playerAgility);
-		c.getPA().refreshSkill(c.playerAgility);
+		c.getPlayerAssistant ().addSkillXP(xp, c.playerAgility);
+		c.getPlayerAssistant ().refreshSkill(c.playerAgility);
 		c.turnPlayerTo(c.getX()- 1, c.getY());
 		}
 	}
@@ -69,8 +68,8 @@ public class Agility {
 		c.teleportToX = x;
 		c.teleportToY = y;
 		c.heightLevel = h;
-		c.getPA().addSkillXP(xp, c.playerAgility);
-		c.getPA().refreshSkill(c.playerAgility);
+		c.getPlayerAssistant ().addSkillXP(xp, c.playerAgility);
+		c.getPlayerAssistant ().refreshSkill(c.playerAgility);
 		}
 	}
 
@@ -92,8 +91,8 @@ public class Agility {
 	{
 		c.fmwalkto(x, y);
 		c.turnPlayerTo(c.getX(), c.getY()+ 1);
-		c.getPA().addSkillXP(360, c.playerAgility);
-		c.getPA().refreshSkill(c.playerAgility);
+		c.getPlayerAssistant ().addSkillXP(360, c.playerAgility);
+		c.getPlayerAssistant ().refreshSkill(c.playerAgility);
 		c.getItems().addItem(add, amount);
 		c.sendMessage("Congradulations, for completing course, here is "+ amount +" tickets, and 360 exp!");
 		bonus = false;
@@ -105,8 +104,8 @@ public class Agility {
 		c.ag6 = 0;
 	} else {
 		c.fmwalkto(x, y);
-		c.getPA().addSkillXP(xp, c.playerAgility);
-		c.getPA().refreshSkill(c.playerAgility);
+		c.getPlayerAssistant ().addSkillXP(xp, c.playerAgility);
+		c.getPlayerAssistant ().refreshSkill(c.playerAgility);
 		c.getItems().addItem(add, 10);
 		c.turnPlayerTo(c.getX(), c.getY()+ 1);
 		bonus = false;
@@ -122,8 +121,8 @@ public class Agility {
 		if (ticket.equals("1"))
 		{
 			c.getItems().deleteItem2(remove, amount);
-			c.getPA().addSkillXP(xp, c.playerAgility);
-			c.getPA().refreshSkill(c.playerAgility);
+			c.getPlayerAssistant ().addSkillXP(xp, c.playerAgility);
+			c.getPlayerAssistant ().refreshSkill(c.playerAgility);
 			c.sendMessage("You got "+ xp + " Agility Exp!");
 		}
 	}
@@ -131,8 +130,8 @@ public class Agility {
 		if (ticket.equals("10"))
 		{
 			c.getItems().deleteItem2(remove, amount);
-			c.getPA().addSkillXP(xp, c.playerAgility);
-			c.getPA().refreshSkill(c.playerAgility);
+			c.getPlayerAssistant ().addSkillXP(xp, c.playerAgility);
+			c.getPlayerAssistant ().refreshSkill(c.playerAgility);
 			c.sendMessage("You got "+ xp + " Agility Exp!");
 		}
 	}
@@ -140,8 +139,8 @@ public class Agility {
 		if (ticket.equals("25"))
 		{
 			c.getItems().deleteItem2(remove, amount);
-			c.getPA().addSkillXP(xp, c.playerAgility);
-			c.getPA().refreshSkill(c.playerAgility);
+			c.getPlayerAssistant ().addSkillXP(xp, c.playerAgility);
+			c.getPlayerAssistant ().refreshSkill(c.playerAgility);
 			c.sendMessage("You got "+ xp + " Agility Exp!");
 		}
 	}
@@ -149,8 +148,8 @@ public class Agility {
 		if (ticket.equals("100"))
 		{
 			c.getItems().deleteItem2(remove, amount);
-			c.getPA().addSkillXP(xp, c.playerAgility);
-			c.getPA().refreshSkill(c.playerAgility);
+			c.getPlayerAssistant ().addSkillXP(xp, c.playerAgility);
+			c.getPlayerAssistant ().refreshSkill(c.playerAgility);
 			c.sendMessage("You got "+ xp + " Agility Exp!");
 		}
 	}
@@ -158,8 +157,8 @@ public class Agility {
 		if (ticket.equals("1000"))
 		{
 			c.getItems().deleteItem2(remove, amount);
-			c.getPA().addSkillXP(xp, c.playerAgility);
-			c.getPA().refreshSkill(c.playerAgility);
+			c.getPlayerAssistant ().addSkillXP(xp, c.playerAgility);
+			c.getPlayerAssistant ().refreshSkill(c.playerAgility);
 			c.sendMessage("You got "+ xp + " Agility Exp!");
 		}
 	}

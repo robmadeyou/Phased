@@ -35,14 +35,14 @@ public class Woodcutting {
 				c.wcTimer = getWcTimer();
 				c.startAnimation(EMOTE);
 			} else {
-				c.getPA().resetVariables();
+				c.getPlayerAssistant ().resetVariables();
 				c.startAnimation(65535);
 				c.sendMessage("You need a woodcutting level of " + levelReq + " to cut this tree.");
 			}		
 		} else {
 			c.startAnimation(65535);
 			c.sendMessage("You need an axe to cut this tree.");
-			c.getPA().resetVariables();
+			c.getPlayerAssistant ().resetVariables();
 		}
 	}
 	
@@ -58,11 +58,11 @@ public class Woodcutting {
 		if (c.getItems().addItem(logType,1)) {
 			c.startAnimation(EMOTE);
 			c.sendMessage("You get some logs.");
-			c.getPA().addSkillXP(exp * Config.WOODCUTTING_EXPERIENCE, c.playerWoodcutting);
-			c.getPA().refreshSkill(c.playerWoodcutting);
+			c.getPlayerAssistant ().addSkillXP(exp * Config.WOODCUTTING_EXPERIENCE, c.playerWoodcutting);
+			c.getPlayerAssistant ().refreshSkill(c.playerWoodcutting);
 			c.wcTimer = getWcTimer();
 		} else {
-			c.getPA().resetVariables();
+			c.getPlayerAssistant ().resetVariables();
 		}
 	}
 	

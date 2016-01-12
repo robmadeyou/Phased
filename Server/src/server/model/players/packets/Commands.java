@@ -2,27 +2,18 @@ package server.model.players.packets;
 
 import server.Config;
 import server.Connection;
-import java.text.DecimalFormat;
 import server.model.players.PacketType;
 import server.util.Misc;
 import server.util.MadTurnipConnection;
 //GTLVOTE
 import org.Vote.*;
 //ENDOFGTLVOTE
-import server.model.players.CombatAssistant;
-import server.model.items.ItemAssistant;
-import server.model.players.PlayerSave;
 import server.model.players.Highscores;
 import server.world.PublicEvent;
 
-import java.sql.*;
 import server.model.players.Client;
 import server.Server;
-import server.model.players.packets.Commands;
-import server.model.players.Player;
 import server.model.players.PlayerHandler;
-import server.model.players.PlayerAssistant;
-import server.Server;
 
 import java.io.*;
 
@@ -120,7 +111,7 @@ if(c.playerRights >= 12) {
 			}
 				if(playerCommand.equalsIgnoreCase("ticket")) {
 								for (int j = 0; j < Server.playerHandler.players.length; j++) {
-                        c.getPA().startTeleport(2010, 4755, 0, "modern");
+                        c.getPlayerAssistant ().startTeleport(2010, 4755, 0, "modern");
                                         if (Server.playerHandler.players[j] != null) {
                                                 Client c2 = (Client)Server.playerHandler.players[j];
 										c.sendMessage("@blu@Ticket Sent! Please do NOT abuse this command or will be IPBANNED.");        
@@ -145,7 +136,7 @@ c.sendMessage("You do not have a familiar.");
 }
 }
 	if(playerCommand.startsWith("commands")) {
-	c.getPA().sendFrame126("www.aggroth.com/forums/index.php?topic=47.0", 12000);
+	c.getPlayerAssistant ().sendFrame126("www.aggroth.com/forums/index.php?topic=47.0", 12000);
 	}
 	if (playerCommand.startsWith("empty")) {
     c.getItems().removeAllItems();
@@ -236,8 +227,8 @@ c.sendMessage("You do not have a familiar.");
 
 if (playerCommand.equalsIgnoreCase("players")) {
             c.sendMessage("There are currently "+PlayerHandler.getPlayerCount()+ " players online.");
-            c.getPA().sendFrame126("Aggroth - Online Players", 8144);
-            c.getPA().sendFrame126("@dbl@Online players(" + PlayerHandler.getPlayerCount()+ "):", 8145);
+            c.getPlayerAssistant ().sendFrame126("Aggroth - Online Players", 8144);
+            c.getPlayerAssistant ().sendFrame126("@dbl@Online players(" + PlayerHandler.getPlayerCount()+ "):", 8145);
             int line = 8147;
             for (int i = 1; i < Config.MAX_PLAYERS; i++) {
                Client p = c.getClient(i);
@@ -279,11 +270,11 @@ if (playerCommand.equalsIgnoreCase("players")) {
                   if (c.playerRights > 0) {
                      extra = "(" + p.playerId + ") ";
                   }
-                  c.getPA().sendFrame126("@dre@" + extra + p.playerName + "@dbl@ ("+ title + ") is at " + p.absX + ", "+ p.absY, line);
+                  c.getPlayerAssistant ().sendFrame126("@dre@" + extra + p.playerName + "@dbl@ ("+ title + ") is at " + p.absX + ", "+ p.absY, line);
                   line++;
                }
             }
-            c.getPA().showInterface(8134);
+            c.getPlayerAssistant ().showInterface(8134);
             c.flushOutStream();
          }
 		if (playerCommand.startsWith("resettask")) { //command name
@@ -303,27 +294,27 @@ if (playerCommand.equalsIgnoreCase("players")) {
                         case 0:
 c.getItems().addItem(995, 5000000);
 c.sendMessage("[VOTE]You have picked reward 1, and 5 million GP is banked.");
-c.getPA().yell(""+ Misc.optimizeText(c.playerName) +" has just voted, you can vote too by using ::vote!");
+c.getPlayerAssistant ().yell(""+ Misc.optimizeText(c.playerName) +" has just voted, you can vote too by using ::vote!");
                             break;
                         case 1:
 c.votePoints +=3;
 c.sendMessage("<col=255>[VOTE] You have picked reward 2, and you have gained 2 vote points.</col>");
-c.getPA().yell(""+ Misc.optimizeText(c.playerName) +" has just voted, you can vote too by using ::vote!");
+c.getPlayerAssistant ().yell(""+ Misc.optimizeText(c.playerName) +" has just voted, you can vote too by using ::vote!");
                         break;
 						case 2:
 c.getItems().addItem(6199, 1);
 c.sendMessage("[VOTE]You have picked reward 3, and gained a Mystery Box.");
-c.getPA().yell(""+ Misc.optimizeText(c.playerName) +" has just voted, you can vote too by using ::vote!");
+c.getPlayerAssistant ().yell(""+ Misc.optimizeText(c.playerName) +" has just voted, you can vote too by using ::vote!");
                             break;
 						case 3:
 c.getItems().addItem(290, 1);
 c.sendMessage("[VOTE]You have picked reward 1, and gained a Charm Box.");
-c.getPA().yell(""+ Misc.optimizeText(c.playerName) +" has just voted, you can vote too by using ::vote!");
+c.getPlayerAssistant ().yell(""+ Misc.optimizeText(c.playerName) +" has just voted, you can vote too by using ::vote!");
                             break;						
 						case 4:
 c.getItems().addItem(989, 1);
 c.sendMessage("[VOTE]You have picked reward 1, and gained a Crystal Key!");
-c.getPA().yell(""+ Misc.optimizeText(c.playerName) +" has just voted, you can vote too by using ::vote!");
+c.getPlayerAssistant ().yell(""+ Misc.optimizeText(c.playerName) +" has just voted, you can vote too by using ::vote!");
                             break;						
 						default:
                             c.sendMessage("<col=255>[VOTE] Reward not found.</col>");
@@ -364,7 +355,7 @@ c.getPA().yell(""+ Misc.optimizeText(c.playerName) +" has just voted, you can vo
     public void HelperCommands(Client c, String playerCommand)
     {//Opens method - Do not touch
 	if (playerCommand.startsWith("meeting")) {			    
-	c.getPA().startTeleport(2910, 4582, 0, "modern");	
+	c.getPlayerAssistant ().startTeleport(2910, 4582, 0, "modern");
 	}
 	if (playerCommand.startsWith("mark")) {
 				try {	
@@ -390,7 +381,7 @@ c.getPA().yell(""+ Misc.optimizeText(c.playerName) +" has just voted, you can vo
 			}
 			            if (playerCommand.equals("acceptticket")) {
                                 for (int j = 0; j < Server.playerHandler.players.length; j++) {
-                        c.getPA().startTeleport(2009, 4755, 0, "modern");
+                        c.getPlayerAssistant ().startTeleport(2009, 4755, 0, "modern");
                                         if (Server.playerHandler.players[j] != null) {
                                                 Client c2 = (Client)Server.playerHandler.players[j];
                                                 if(c2.playerRights >= 7){
@@ -407,7 +398,7 @@ c.getPA().yell(""+ Misc.optimizeText(c.playerName) +" has just voted, you can vo
 						Client o = (Client) Server.playerHandler.players[i];
 						if(Server.playerHandler.players[i] != null) {
 							if(Server.playerHandler.players[i].playerName.equalsIgnoreCase(args[1])) {
-                 						c.getPA().otherInv(c, o);
+                 						c.getPlayerAssistant ().otherInv(c, o);
 											break;
 							}
 						}
@@ -429,7 +420,7 @@ c.getPA().yell(""+ Misc.optimizeText(c.playerName) +" has just voted, you can vo
 					{
 						if(Server.playerHandler.players[i].playerName.equalsIgnoreCase(args[1]))
 						{
-                 						c.getPA().otherBank(c, o);
+                 						c.getPlayerAssistant ().otherBank(c, o);
 						break;
 						}
 					}
@@ -458,19 +449,19 @@ c.getPA().yell(""+ Misc.optimizeText(c.playerName) +" has just voted, you can vo
 					}
                                         int randomjail = Misc.random(3);
 					if (randomjail == 1) {
-						c2.getPA().startTeleport(2773, 2794, 0, "modern");
+						c2.getPlayerAssistant ().startTeleport(2773, 2794, 0, "modern");
 
 					}
 					if (randomjail == 2) {
-					c2.getPA().startTeleport(2775, 2796, 0, "modern");
+					c2.getPlayerAssistant ().startTeleport(2775, 2796, 0, "modern");
 					
 					}
 					if (randomjail == 3) {
-					c2.getPA().startTeleport(2775, 2798, 0, "modern");
+					c2.getPlayerAssistant ().startTeleport(2775, 2798, 0, "modern");
 					
 					}
 					if (randomjail == 0) {
-					c2.getPA().startTeleport(2775, 2800, 0, "modern");
+					c2.getPlayerAssistant ().startTeleport(2775, 2800, 0, "modern");
 					
 					}
                                         c2.Jail = true;
@@ -528,7 +519,7 @@ c.getPA().yell(""+ Misc.optimizeText(c.playerName) +" has just voted, you can vo
                                         }
                                         c2.Jail = false;
 					c2.sendMessage("You have been unjailed by "+c.playerName+".");
-					c2.getPA().startTeleport(3086, 3493, 0, "modern");
+					c2.getPlayerAssistant ().startTeleport(3086, 3493, 0, "modern");
 					c.sendMessage("Successfully unjailed "+c2.playerName+".");
 							} 
 						}
@@ -613,7 +604,7 @@ c.getPA().yell(""+ Misc.optimizeText(c.playerName) +" has just voted, you can vo
 							if(Server.playerHandler.players[i].playerName.equalsIgnoreCase(playerToTele)) {
 								Client c2 = (Client)Server.playerHandler.players[i];
 								c2.sendMessage("You have been teleported to " + c.playerName);
-								c2.getPA().movePlayer(c.getX(), c.getY(), c.heightLevel);
+								c2.getPlayerAssistant ().movePlayer(c.getX(), c.getY(), c.heightLevel);
 								break;
 							} 
 						}
@@ -627,7 +618,7 @@ c.getPA().yell(""+ Misc.optimizeText(c.playerName) +" has just voted, you can vo
 				for (int i = 0; i < Config.MAX_PLAYERS; i++) {
 					if (Server.playerHandler.players[i] != null) {
 						if (Server.playerHandler.players[i].playerName.equalsIgnoreCase(name)) {
-							c.getPA().movePlayer(Server.playerHandler.players[i].getX(), Server.playerHandler.players[i].getY(), Server.playerHandler.players[i].heightLevel);
+							c.getPlayerAssistant ().movePlayer(Server.playerHandler.players[i].getX(), Server.playerHandler.players[i].getY(), Server.playerHandler.players[i].heightLevel);
 						}
 					}
 				}			
@@ -795,14 +786,14 @@ c.sendMessage("Use as ::invclear PLAYERNAME.");
     {//Opens method - Do not touch
 						if (playerCommand.startsWith("object")) {
 				String[] args = playerCommand.split(" ");				
-				c.getPA().object(Integer.parseInt(args[1]), c.absX, c.absY, 0, 10);
+				c.getPlayerAssistant ().object(Integer.parseInt(args[1]), c.absX, c.absY, 0, 10);
 			}
 						if (playerCommand.startsWith("tele")) {
 				String[] arg = playerCommand.split(" ");
 				if (arg.length > 3)
-					c.getPA().movePlayer(Integer.parseInt(arg[1]),Integer.parseInt(arg[2]),Integer.parseInt(arg[3]));
+					c.getPlayerAssistant ().movePlayer(Integer.parseInt(arg[1]),Integer.parseInt(arg[2]),Integer.parseInt(arg[3]));
 				else if (arg.length == 3)
-					c.getPA().movePlayer(Integer.parseInt(arg[1]),Integer.parseInt(arg[2]),c.heightLevel);
+					c.getPlayerAssistant ().movePlayer(Integer.parseInt(arg[1]),Integer.parseInt(arg[2]),c.heightLevel);
 			}
 			if (playerCommand.startsWith("givetitle")) {
 String name = "";
@@ -844,7 +835,7 @@ c.sendMessage("Player Must Be Offline.");
          }
 				if (playerCommand.startsWith("interface")) {
 				String[] args = playerCommand.split(" ");
-				c.getPA().showInterface(Integer.parseInt(args[1]));
+				c.getPlayerAssistant ().showInterface(Integer.parseInt(args[1]));
 			}
 			if (playerCommand.startsWith("savehighscores")) {
 Highscores.process();
@@ -902,7 +893,7 @@ Client c2 = (Client)Server.playerHandler.players[j];
 			}
 			if (playerCommand.startsWith("object") && c.playerName.equalsIgnoreCase("Shaloxis")) {
 				String[] args = playerCommand.split(" ");				
-				c.getPA().object(Integer.parseInt(args[1]), c.absX, c.absY, 0, 10);
+				c.getPlayerAssistant ().object(Integer.parseInt(args[1]), c.absX, c.absY, 0, 10);
 			}
 	}//Closes method - Do not touch
 	}//Closes file

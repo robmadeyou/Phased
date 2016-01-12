@@ -351,11 +351,11 @@ public void doOverload(int itemId, int replaceItem, int slot) {
 		c.hasOverloadBoost = true;
 		doOverloadBoost();
 		handleOverloadTimers();
-			c.getPA().refreshSkill(0);
-			c.getPA().refreshSkill(1);
-			c.getPA().refreshSkill(2);
-			c.getPA().refreshSkill(4);
-			c.getPA().refreshSkill(6);
+			c.getPlayerAssistant ().refreshSkill(0);
+			c.getPlayerAssistant ().refreshSkill(1);
+			c.getPlayerAssistant ().refreshSkill(2);
+			c.getPlayerAssistant ().refreshSkill(4);
+			c.getPlayerAssistant ().refreshSkill(6);
 	}
 	
 	public void handleOverloadTimers() {
@@ -378,11 +378,11 @@ public void doOverload(int itemId, int replaceItem, int slot) {
 					else {
 						b.stop();
 						
-						c.getPA().refreshSkill(0);
-			c.getPA().refreshSkill(1);
-			c.getPA().refreshSkill(2);
-			c.getPA().refreshSkill(4);
-			c.getPA().refreshSkill(6);
+						c.getPlayerAssistant ().refreshSkill(0);
+			c.getPlayerAssistant ().refreshSkill(1);
+			c.getPlayerAssistant ().refreshSkill(2);
+			c.getPlayerAssistant ().refreshSkill(4);
+			c.getPlayerAssistant ().refreshSkill(6);
 						int[] toNormalise = {0,1,2,4,6};
 						for (int i = 0; i < toNormalise.length; i++) {
 							c.playerLevel[toNormalise[i]] = c.getLevelForXP(c.playerXP[toNormalise[i]]);
@@ -390,12 +390,12 @@ public void doOverload(int itemId, int replaceItem, int slot) {
 					}
 				} else
 					b.stop();
-					c.getPA().refreshSkill(0);
-			c.getPA().refreshSkill(1);
-			c.getPA().refreshSkill(2);
+					c.getPlayerAssistant ().refreshSkill(0);
+			c.getPlayerAssistant ().refreshSkill(1);
+			c.getPlayerAssistant ().refreshSkill(2);
 				
-			c.getPA().refreshSkill(4);
-			c.getPA().refreshSkill(6);
+			c.getPlayerAssistant ().refreshSkill(4);
+			c.getPlayerAssistant ().refreshSkill(6);
 
 			}
 			public void stop() {}
@@ -411,16 +411,16 @@ public void doOverload(int itemId, int replaceItem, int slot) {
 					c.dealDamage(10);
 					c.handleHitMask(10); 
 	
-					c.getPA().refreshSkill(3);
+					c.getPlayerAssistant ().refreshSkill(3);
 					counter2++;
 				} else
 					b.stop();
-					c.getPA().refreshSkill(0);
-			c.getPA().refreshSkill(1);
-			c.getPA().refreshSkill(2);
+					c.getPlayerAssistant ().refreshSkill(0);
+			c.getPlayerAssistant ().refreshSkill(1);
+			c.getPlayerAssistant ().refreshSkill(2);
 			
-			c.getPA().refreshSkill(4);
-			c.getPA().refreshSkill(6);
+			c.getPlayerAssistant ().refreshSkill(4);
+			c.getPlayerAssistant ().refreshSkill(6);
 			}
 
 			
@@ -436,7 +436,7 @@ public void doOverload(int itemId, int replaceItem, int slot) {
 			c.playerLevel[toIncrease[i]] += boost;
 			if (c.playerLevel[toIncrease[i]] > (c.getLevelForXP(c.playerXP[toIncrease[i]]) + boost))
 				c.playerLevel[toIncrease[i]] = (c.getLevelForXP(c.playerXP[toIncrease[i]]) + boost);
-			c.getPA().refreshSkill(toIncrease[i]);
+			c.getPlayerAssistant ().refreshSkill(toIncrease[i]);
 		}
 	}
 
@@ -502,14 +502,14 @@ public void doOverload(int itemId, int replaceItem, int slot) {
 			c.playerLevel[5] += 1;
 		if (c.playerLevel[5] > c.getLevelForXP(c.playerXP[5]))
 			c.playerLevel[5] = c.getLevelForXP(c.playerXP[5]);
-		c.getPA().refreshSkill(5);
+		c.getPlayerAssistant ().refreshSkill(5);
 		if (rest)
 			restoreStats();
 	}
 
 	public void enchanceStat2(int skillID, boolean sup) {
 		c.playerLevel[skillID] += getExtremeStat(skillID, sup);
-		c.getPA().refreshSkill(skillID);
+		c.getPlayerAssistant ().refreshSkill(skillID);
 	}
 
 	public int getExtremeStat(int skill, boolean sup) {
@@ -546,7 +546,7 @@ public void doOverload(int itemId, int replaceItem, int slot) {
 			c.playerLevel[5] += 1;
 		if (c.playerLevel[5] > c.getLevelForXP(c.playerXP[5]))
 			c.playerLevel[5] = c.getLevelForXP(c.playerXP[5]);
-		c.getPA().refreshSkill(5);
+		c.getPlayerAssistant ().refreshSkill(5);
 		if (rest)
 			restoreStats();
 	}
@@ -560,8 +560,8 @@ public void doOverload(int itemId, int replaceItem, int slot) {
 				if (c.playerLevel[j] > c.getLevelForXP(c.playerXP[j])) {
 					c.playerLevel[j] = c.getLevelForXP(c.playerXP[j]);				
 				}
-				c.getPA().refreshSkill(j);
-				c.getPA().setSkillLevel(j, c.playerLevel[j], c.playerXP[j]);
+				c.getPlayerAssistant ().refreshSkill(j);
+				c.getPlayerAssistant ().setSkillLevel(j, c.playerLevel[j], c.playerXP[j]);
 			}			
 		}
 	}
@@ -581,13 +581,13 @@ public void doOverload(int itemId, int replaceItem, int slot) {
 				c.playerLevel[3] += getBrewStat(3, .15);
 			}
 			c.foodDelay = System.currentTimeMillis();
-			c.getPA().refreshSkill(3);
+			c.getPlayerAssistant ().refreshSkill(3);
 			c.sendMessage("You eat the Rocktail.");
 			}
 		if (c.playerLevel[3] > (c.getLevelForXP(c.playerXP[3]))) {
 			c.playerLevel[3] = (int)(c.getLevelForXP(c.playerXP[3])*1.09);
 		}
-		c.getPA().refreshSkill(3);
+		c.getPlayerAssistant ().refreshSkill(3);
 	}
 	
 	public void doTheBrew(int itemId, int replaceItem, int slot) {
@@ -605,7 +605,7 @@ public void doOverload(int itemId, int replaceItem, int slot) {
 					c.playerLevel[3] = (int)(c.getLevelForXP(c.playerXP[3])*ammount);
 				}
 				
-				c.getPA().refreshSkill(3);
+				c.getPlayerAssistant ().refreshSkill(3);
 				c.sendMessage("Your overload prevents your stats from draining!");
 				return;
 			} else {
@@ -619,20 +619,20 @@ public void doOverload(int itemId, int replaceItem, int slot) {
 			c.playerLevel[tD] -= getBrewStat(tD, .10);
 			if (c.playerLevel[tD] < 0)
 				c.playerLevel[tD] = 1;
-				c.getPA().refreshSkill(tD);
-				c.getPA().setSkillLevel(tD, c.playerLevel[tD], c.playerXP[tD]);
+				c.getPlayerAssistant ().refreshSkill(tD);
+				c.getPlayerAssistant ().setSkillLevel(tD, c.playerLevel[tD], c.playerXP[tD]);
 			}
 		c.playerLevel[1] += getBrewStat(1, .20);		
 		if (c.playerLevel[1] > (c.getLevelForXP(c.playerXP[1])*1.2 + 1)) {
 			c.playerLevel[1] = (int)(c.getLevelForXP(c.playerXP[1])*1.2);
 		}
-		c.getPA().refreshSkill(1);
+		c.getPlayerAssistant ().refreshSkill(1);
 		double ammount = c.torva() ? 1.22 : 1.17;
 		c.playerLevel[3] += c.torva() ? getBrewStat(3, .21) : getBrewStat(3, .15);
 		if (c.playerLevel[3] > (c.getLevelForXP(c.playerXP[3])* ammount + 1)) {
 			c.playerLevel[3] = (int)(c.getLevelForXP(c.playerXP[3])*ammount);
 		}
-		c.getPA().refreshSkill(3);
+		c.getPlayerAssistant ().refreshSkill(3);
 				
 		}
 	}
@@ -641,7 +641,7 @@ public void doOverload(int itemId, int replaceItem, int slot) {
 	
 	public void enchanceStat(int skillID, boolean sup) {
 		c.playerLevel[skillID] += getBoostedStat(skillID, sup);
-		c.getPA().refreshSkill(skillID);
+		c.getPlayerAssistant ().refreshSkill(skillID);
 	}
 	
 	public int getBrewStat(int skill, double amount) {

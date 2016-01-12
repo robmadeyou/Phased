@@ -57,7 +57,7 @@ public class Herblore {
 			if (c.playerLevel[c.playerHerblore] >= information[slot][2]) {
 					c.getItems().deleteItem(information[slot][0],c.getItems().getItemSlot(information[slot][0]),1);
 					c.getItems().addItem(information[slot][1],1);
-					c.getPA().addSkillXP(information[slot][3] * Config.HERBLORE_EXPERIENCE,c.playerHerblore);
+					c.getPlayerAssistant ().addSkillXP(information[slot][3] * Config.HERBLORE_EXPERIENCE,c.playerHerblore);
 					c.sendMessage("You identify the herb as a " + c.getItems().getItemName(information[slot][1]) + ".");
 			} else {
 				c.sendMessage("You need a herblore level of " + information[slot][2] + " to identify this herb.");
@@ -78,7 +78,7 @@ public class Herblore {
 					c.getItems().addItem(information2[slot][2],1);
 					c.sendMessage("You make a " + c.getItems().getItemName(information2[slot][2]) + ".");
 				//}
-				c.getPA().addSkillXP(information2[slot][4] * Config.HERBLORE_EXPERIENCE,c.playerHerblore);
+				c.getPlayerAssistant ().addSkillXP(information2[slot][4] * Config.HERBLORE_EXPERIENCE,c.playerHerblore);
 			} else {
 				c.sendMessage("You need a herblore level of " + information2[slot][3] + " to make this pot.");
 			}				

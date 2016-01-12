@@ -84,10 +84,10 @@ public class TradeAndDuel{
 		else if(o.playerRights == 2) {
 			out = "@cr2@" + out;
 		}
-		c.getPA().sendFrame126("Trading with: " + o.playerName+" who has @gre@"+o.getItems().freeSlots()+"" ,3417);
-		c.getPA().sendFrame126("", 3431);
-		c.getPA().sendFrame126("Are you sure you want to make this trade?", 3535);
-		c.getPA().sendFrame248(3323, 3321);
+		c.getPlayerAssistant ().sendFrame126("Trading with: " + o.playerName+" who has @gre@"+o.getItems().freeSlots()+"" ,3417);
+		c.getPlayerAssistant ().sendFrame126("", 3431);
+		c.getPlayerAssistant ().sendFrame126("Are you sure you want to make this trade?", 3535);
+		c.getPlayerAssistant ().sendFrame248(3323, 3321);
 	}	
 	
 	
@@ -180,8 +180,8 @@ public boolean fromTrade(int itemID, int fromSlot, int amount) {
 			resetTItems(3415);
 			o.getTradeAndDuel().resetOTItems(3416);
 			//displayWAndI(c);
-			c.getPA().sendFrame126("", 3431);
-			o.getPA().sendFrame126("", 3431);
+			c.getPlayerAssistant ().sendFrame126("", 3431);
+			o.getPlayerAssistant ().sendFrame126("", 3431);
 		} catch (Exception e) {
 
 		}
@@ -213,15 +213,15 @@ public boolean fromTrade(int itemID, int fromSlot, int amount) {
 				if(c.getItems().playerHasItem(itemID, 1)) {
 					offeredItems.add(new GameItem(itemID, 1));	
 					c.getItems().deleteItem(itemID, c.getItems().getItemSlot(itemID), 1);
-					o.getPA().sendFrame126("Trading with: " + c.playerName+" who has @gre@"+c.getItems().freeSlots()+"" ,3417);	
+					o.getPlayerAssistant ().sendFrame126("Trading with: " + c.playerName+" who has @gre@"+c.getItems().freeSlots()+"" ,3417);
 				}
 			}
-			o.getPA().sendFrame126("Trading with: " + c.playerName+" who has @gre@"+c.getItems().freeSlots()+"" ,3417);	
+			o.getPlayerAssistant ().sendFrame126("Trading with: " + c.playerName+" who has @gre@"+c.getItems().freeSlots()+"" ,3417);
 			c.getItems().resetItems(3322);
 			resetTItems(3415);
 			o.getTradeAndDuel().resetOTItems(3416);
-			c.getPA().sendFrame126("", 3431);
-			o.getPA().sendFrame126("", 3431);
+			c.getPlayerAssistant ().sendFrame126("", 3431);
+			o.getPlayerAssistant ().sendFrame126("", 3431);
 		}
 		if (c.getItems().getItemCount(itemID) < amount) {
 			amount = c.getItems().getItemCount(itemID);
@@ -242,7 +242,7 @@ public boolean fromTrade(int itemID, int fromSlot, int amount) {
 					inTrade = true;
 					item.amount += amount;
 					c.getItems().deleteItem2(itemID, amount);
-					o.getPA().sendFrame126("Trading with: " + c.playerName+" who has @gre@"+c.getItems().freeSlots()+"" ,3417);	
+					o.getPlayerAssistant ().sendFrame126("Trading with: " + c.playerName+" who has @gre@"+c.getItems().freeSlots()+"" ,3417);
 					break;	
 				}
 			}
@@ -250,15 +250,15 @@ public boolean fromTrade(int itemID, int fromSlot, int amount) {
 			if(!inTrade) {
 				offeredItems.add(new GameItem(itemID, amount));
 				c.getItems().deleteItem2(itemID, amount);
-				o.getPA().sendFrame126("Trading with: " + c.playerName+" who has @gre@"+c.getItems().freeSlots()+"" ,3417);	
+				o.getPlayerAssistant ().sendFrame126("Trading with: " + c.playerName+" who has @gre@"+c.getItems().freeSlots()+"" ,3417);
 			}
 		}
-		o.getPA().sendFrame126("Trading with: " + c.playerName+" who has @gre@"+c.getItems().freeSlots()+"" ,3417);	
+		o.getPlayerAssistant ().sendFrame126("Trading with: " + c.playerName+" who has @gre@"+c.getItems().freeSlots()+"" ,3417);
 		c.getItems().resetItems(3322);
 		resetTItems(3415);
 		o.getTradeAndDuel().resetOTItems(3416);
-		c.getPA().sendFrame126("", 3431);
-		o.getPA().sendFrame126("", 3431);
+		c.getPlayerAssistant ().sendFrame126("", 3431);
+		o.getPlayerAssistant ().sendFrame126("", 3431);
 		return true;
 		}
 	
@@ -271,9 +271,9 @@ public boolean fromTrade(int itemID, int fromSlot, int amount) {
 		c.tradeConfirmed = false;
 		c.tradeConfirmed2 = false;
 		c.acceptedTrade = false;
-		c.getPA().removeAllWindows();
+		c.getPlayerAssistant ().removeAllWindows();
 		c.tradeResetNeeded = false;
-		c.getPA().sendFrame126("Are you sure you want to make this trade?", 3535);
+		c.getPlayerAssistant ().sendFrame126("Are you sure you want to make this trade?", 3535);
 	}
 	public void declineTrade() {
 		c.tradeStatus = 0;
@@ -282,7 +282,7 @@ public boolean fromTrade(int itemID, int fromSlot, int amount) {
 	
 
 	public void declineTrade(boolean tellOther) {
-		c.getPA().removeAllWindows();
+		c.getPlayerAssistant ().removeAllWindows();
 		Client o = (Client) Server.playerHandler.players[c.tradeWith];
 		if (o == null) {
 			return;
@@ -290,7 +290,7 @@ public boolean fromTrade(int itemID, int fromSlot, int amount) {
 		
 		if(tellOther){
 			o.getTradeAndDuel().declineTrade(false);
-			o.getTradeAndDuel().c.getPA().removeAllWindows();
+			o.getTradeAndDuel().c.getPlayerAssistant ().removeAllWindows();
 		}
 			
 		for(GameItem item : offeredItems) {
@@ -380,7 +380,7 @@ public boolean fromTrade(int itemID, int fromSlot, int amount) {
 		    }
 		}
 		
-		c.getPA().sendFrame126(SendTrade, 3557);
+		c.getPlayerAssistant ().sendFrame126(SendTrade, 3557);
 		SendTrade = "Absolutely nothing!";
 		SendAmount = "";
 		Count = 0;
@@ -407,9 +407,9 @@ public boolean fromTrade(int itemID, int fromSlot, int amount) {
 				Count++;
 		    }
 		}
-		c.getPA().sendFrame126(SendTrade, 3558);
+		c.getPlayerAssistant ().sendFrame126(SendTrade, 3558);
 		//TODO: find out what 197 does eee 3213
-		c.getPA().sendFrame248(3443, 197);
+		c.getPlayerAssistant ().sendFrame248(3443, 197);
 	}
 	
 	
@@ -427,7 +427,7 @@ public boolean fromTrade(int itemID, int fromSlot, int amount) {
 				}
 			}
 			
-			c.getPA().removeAllWindows();
+			c.getPlayerAssistant ().removeAllWindows();
 			c.tradeResetNeeded = true;
 			} catch(Exception e){
 			}
@@ -481,9 +481,9 @@ public boolean fromTrade(int itemID, int fromSlot, int amount) {
 		for (int i = 0; i < c.playerEquipment.length; i++) {
 			sendDuelEquipment(c.playerEquipment[i], c.playerEquipmentN[i], i);
 		}
-		c.getPA().sendFrame126("Dueling with: " + o.playerName + " (level-" + o.combatLevel + ")", 6671);
-		c.getPA().sendFrame126("", 6684);
-		c.getPA().sendFrame248(6575, 3321);
+		c.getPlayerAssistant ().sendFrame126("Dueling with: " + o.playerName + " (level-" + o.combatLevel + ")", 6671);
+		c.getPlayerAssistant ().sendFrame126("", 6684);
+		c.getPlayerAssistant ().sendFrame248(6575, 3321);
 		c.getItems().resetItems(3322);
 	}
 	
@@ -511,7 +511,7 @@ public boolean fromTrade(int itemID, int fromSlot, int amount) {
 		for(int i = 0; i < c.duelRule.length; i++) {	
 			c.duelRule[i] = false;
 		}
-		c.getPA().sendFrame87(286, 0);
+		c.getPlayerAssistant ().sendFrame87(286, 0);
 		c.duelOption = 0;
 	}
 	
@@ -633,8 +633,8 @@ if(!c.getItems().playerHasItem(itemID, amount))
 			o.getItems().resetItems(3322);
 			refreshDuelScreen();
 			o.getTradeAndDuel().refreshDuelScreen();
-			c.getPA().sendFrame126("", 6684);
-			o.getPA().sendFrame126("", 6684);
+			c.getPlayerAssistant ().sendFrame126("", 6684);
+			o.getPlayerAssistant ().sendFrame126("", 6684);
 		}
 		
 		if(!c.getItems().playerHasItem(itemID, amount)) {
@@ -662,8 +662,8 @@ if(!c.getItems().playerHasItem(itemID, amount))
 		o.getItems().resetItems(3322);
 		refreshDuelScreen();
 		o.getTradeAndDuel().refreshDuelScreen();
-		c.getPA().sendFrame126("", 6684);
-		o.getPA().sendFrame126("", 6684);
+		c.getPlayerAssistant ().sendFrame126("", 6684);
+		o.getPlayerAssistant ().sendFrame126("", 6684);
 		return true;
 	}
 	
@@ -731,7 +731,7 @@ if(!c.getItems().playerHasItem(itemID, amount))
 					o.getItems().resetItems(3322);
 					c.getTradeAndDuel().refreshDuelScreen();
 					o.getTradeAndDuel().refreshDuelScreen();
-					o.getPA().sendFrame126("", 6684);
+					o.getPlayerAssistant ().sendFrame126("", 6684);
 				}
 			}		
 		}
@@ -760,7 +760,7 @@ if(!c.getItems().playerHasItem(itemID, amount))
 		o.getItems().resetItems(3322);
 		c.getTradeAndDuel().refreshDuelScreen();
 		o.getTradeAndDuel().refreshDuelScreen();
-		o.getPA().sendFrame126("", 6684);
+		o.getPlayerAssistant ().sendFrame126("", 6684);
 		if(!goodSpace) {
 			c.sendMessage("You have too many rules set to remove that item.");
 			return true;
@@ -782,7 +782,7 @@ if(!c.getItems().playerHasItem(itemID, amount))
 				itemId += c.getItems().getItemName(item.id) + "\\n";
 			}
 		}
-		c.getPA().sendFrame126(itemId, 6516);
+		c.getPlayerAssistant ().sendFrame126(itemId, 6516);
 		itemId = "";
 		for(GameItem item : o.getTradeAndDuel().stakedItems) {
 			if(Item.itemStackable[item.id] || Item.itemIsNote[item.id]) {
@@ -791,37 +791,37 @@ if(!c.getItems().playerHasItem(itemID, amount))
 				itemId += c.getItems().getItemName(item.id) +"\\n";
 			}
 		}
-		c.getPA().sendFrame126(itemId, 6517);
-		c.getPA().sendFrame126("", 8242);
+		c.getPlayerAssistant ().sendFrame126(itemId, 6517);
+		c.getPlayerAssistant ().sendFrame126("", 8242);
 		for(int i = 8238; i <= 8253; i++) {
-			c.getPA().sendFrame126("", i);
+			c.getPlayerAssistant ().sendFrame126("", i);
 		}
-		c.getPA().sendFrame126("Hitpoints will be restored.", 8250);
-		c.getPA().sendFrame126("Boosted stats will be restored.", 8238);
+		c.getPlayerAssistant ().sendFrame126("Hitpoints will be restored.", 8250);
+		c.getPlayerAssistant ().sendFrame126("Boosted stats will be restored.", 8238);
 		if(c.duelRule[8]) {
-			c.getPA().sendFrame126("There will be obstacles in the arena.", 8239);
+			c.getPlayerAssistant ().sendFrame126("There will be obstacles in the arena.", 8239);
 		} 
-		c.getPA().sendFrame126("", 8240);
-		c.getPA().sendFrame126("", 8241);
+		c.getPlayerAssistant ().sendFrame126("", 8240);
+		c.getPlayerAssistant ().sendFrame126("", 8241);
 		
 		String[] rulesOption = {"Players cannot forfeit!", "Players cannot move.", "Players cannot use range.", "Players cannot use melee.", "Players cannot use magic.",  "Players cannot drink pots.",  "Players cannot eat food.", "Players cannot use prayer."};
 		
 		int lineNumber = 8242;
 		for(int i = 0; i < 8; i++) {
 			if(c.duelRule[i]) {
-				c.getPA().sendFrame126(""+rulesOption[i], lineNumber);
+				c.getPlayerAssistant ().sendFrame126(""+rulesOption[i], lineNumber);
 				lineNumber ++;
 			}
 		}
-		c.getPA().sendFrame126("", 6571);
-		c.getPA().sendFrame248(6412, 197);
+		c.getPlayerAssistant ().sendFrame126("", 6571);
+		c.getPlayerAssistant ().sendFrame248(6412, 197);
 		//c.getPA().showInterface(6412);
 	}
 	
 	
 	public void startDuel() {
 		c.freezeTimer = 2;
-		c.getPA().resetFollow();
+		c.getPlayerAssistant ().resetFollow();
 		Client o = (Client) Server.playerHandler.players[c.duelingWith];
 		if (o.disconnected) {
 		duelVictory();
@@ -835,10 +835,10 @@ if(!c.getItems().playerHasItem(itemID, amount))
 		if(c.duelRule[7]){
 			for(int p = 0; p < c.PRAYER.length; p++) { // reset prayer glows 
 				c.prayerActive[p] = false;
-				c.getPA().sendFrame36(c.PRAYER_GLOW[p], 0);		
+				c.getPlayerAssistant ().sendFrame36(c.PRAYER_GLOW[p], 0);
 			}
 			c.headIcon = -1;
-			c.getPA().requestUpdates();
+			c.getPlayerAssistant ().requestUpdates();
 		}		
 		if(c.duelRule[11]) {
 			c.getItems().removeItem(c.playerEquipment[0], 0);
@@ -874,70 +874,70 @@ if(!c.getItems().playerHasItem(itemID, amount))
 			c.getItems().removeItem(c.playerEquipment[13], 13);
 		}		
 		c.duelStatus = 5;
-		c.getPA().removeAllWindows();
+		c.getPlayerAssistant ().removeAllWindows();
 		c.specAmount = 10;
 		c.getItems().addSpecialBar(c.playerEquipment[c.playerWeapon]);
 		
 		if(c.duelRule[8]){	
 			if(c.duelRule[1]) {
-				c.getPA().movePlayer(c.duelTeleX, c.duelTeleY, 0);
+				c.getPlayerAssistant ().movePlayer(c.duelTeleX, c.duelTeleY, 0);
 			} else {
-				c.getPA().movePlayer(3366 + Misc.random(12), 3246 + Misc.random(6), 0);
+				c.getPlayerAssistant ().movePlayer(3366 + Misc.random(12), 3246 + Misc.random(6), 0);
 			}
 		} else {
 			if(c.duelRule[1]) {
-				c.getPA().movePlayer(c.duelTeleX, c.duelTeleY, 0);
+				c.getPlayerAssistant ().movePlayer(c.duelTeleX, c.duelTeleY, 0);
 			} else {	
-				c.getPA().movePlayer(3335 + Misc.random(12), 3246 + Misc.random(6), 0);
+				c.getPlayerAssistant ().movePlayer(3335 + Misc.random(12), 3246 + Misc.random(6), 0);
 			}
 		}
 
-		c.getPA().createPlayerHints(10, o.playerId);
-		c.getPA().showOption(3, 0, "Attack", 1);
+		c.getPlayerAssistant ().createPlayerHints(10, o.playerId);
+		c.getPlayerAssistant ().showOption(3, 0, "Attack", 1);
 		for (int i = 0; i < 20; i++) {
-			c.playerLevel[i] = c.getPA().getLevelForXP(c.playerXP[i]);
-			c.getPA().refreshSkill(i);
+			c.playerLevel[i] = c.getPlayerAssistant ().getLevelForXP(c.playerXP[i]);
+			c.getPlayerAssistant ().refreshSkill(i);
 		}
 		for(GameItem item : o.getTradeAndDuel().stakedItems) {
 			otherStakedItems.add(new GameItem(item.id, item.amount));
 		}
-		c.getPA().requestUpdates();			
+		c.getPlayerAssistant ().requestUpdates();
 	}
 
 	
 	public void duelVictory() {
 		Client o = (Client) Server.playerHandler.players[c.duelingWith];
 		if(o != null) {
-			c.getPA().sendFrame126(""+o.combatLevel, 6839);
-			c.getPA().sendFrame126(o.playerName, 6840);
+			c.getPlayerAssistant ().sendFrame126(""+o.combatLevel, 6839);
+			c.getPlayerAssistant ().sendFrame126(o.playerName, 6840);
 			o.duelStatus = 0;
 			c.freezeTimer = 3;
 		} else {
-			c.getPA().sendFrame126("", 6839);
-			c.getPA().sendFrame126("", 6840);
+			c.getPlayerAssistant ().sendFrame126("", 6839);
+			c.getPlayerAssistant ().sendFrame126("", 6840);
 		}
 		c.duelStatus = 6;
 		c.getCombat().resetPrayers();
 		for (int i = 0; i < 20; i++) {
-			c.playerLevel[i] = c.getPA().getLevelForXP(c.playerXP[i]);
-			c.getPA().refreshSkill(i);
+			c.playerLevel[i] = c.getPlayerAssistant ().getLevelForXP(c.playerXP[i]);
+			c.getPlayerAssistant ().refreshSkill(i);
 		}
-		c.getPA().refreshSkill(3);
+		c.getPlayerAssistant ().refreshSkill(3);
 		//c.getPA().refreshSkill(i);
 		c.specAmount = 10;
 		c.getItems().addSpecialBar(c.playerEquipment[c.playerWeapon]);	
 		duelRewardInterface();
 		PlayerSave.saveGame(c);
-		c.getPA().showInterface(6733);
-		c.getPA().movePlayer(3362, 3263, 0);	
-		c.getPA().requestUpdates();
-		c.getPA().showOption(3, 0, "Challenge", 3);
-		c.getPA().createPlayerHints(10, -1);
+		c.getPlayerAssistant ().showInterface(6733);
+		c.getPlayerAssistant ().movePlayer(3362, 3263, 0);
+		c.getPlayerAssistant ().requestUpdates();
+		c.getPlayerAssistant ().showOption(3, 0, "Challenge", 3);
+		c.getPlayerAssistant ().createPlayerHints(10, -1);
 		c.canOffer = true;
 		c.duelSpaceReq = 0;
 		c.duelingWith = 0;
 		c.freezeTimer = 1;
-		c.getPA().resetFollow();
+		c.getPlayerAssistant ().resetFollow();
 		c.getCombat().resetPlayerAttack();
 		c.duelRequested = false;
 	}	
@@ -1004,7 +1004,7 @@ if(!c.getItems().playerHasItem(itemID, amount))
 	}
 	
 	public void declineDuel() {
-		c.getPA().removeAllWindows();
+		c.getPlayerAssistant ().removeAllWindows();
 		c.canOffer = true;
 		c.duelStatus = 0;
 		c.duelingWith = 0;
@@ -1025,19 +1025,19 @@ if(!c.getItems().playerHasItem(itemID, amount))
 	}
 
 	public void resetDuel() {
-		c.getPA().showOption(3, 0, "Challenge", 3);
+		c.getPlayerAssistant ().showOption(3, 0, "Challenge", 3);
 		c.headIconHints = 0;
 		for (int i = 0; i < c.duelRule.length; i++) { 
 			c.duelRule[i] = false;
 		}
-		c.getPA().createPlayerHints(10, -1);
+		c.getPlayerAssistant ().createPlayerHints(10, -1);
 		c.duelStatus = 0;
 		c.canOffer = true;
 		c.duelSpaceReq = 0;
 		c.duelingWith = 0;
 		c.freezeTimer = 1;
-		c.getPA().resetFollow();
-		c.getPA().requestUpdates();
+		c.getPlayerAssistant ().resetFollow();
+		c.getPlayerAssistant ().requestUpdates();
 		c.getCombat().resetPlayerAttack();
 		c.duelRequested = false;
 	}
@@ -1054,8 +1054,8 @@ if(!c.getItems().playerHasItem(itemID, amount))
 		}
 		o.duelStatus = 1;
 		c.duelStatus = 1;
-		o.getPA().sendFrame126("", 6684);
-		c.getPA().sendFrame126("", 6684);
+		o.getPlayerAssistant ().sendFrame126("", 6684);
+		c.getPlayerAssistant ().sendFrame126("", 6684);
 	}
 	
 	
@@ -1106,10 +1106,10 @@ if(!c.getItems().playerHasItem(itemID, amount))
 			c.duelOption -= c.DUEL_RULE_ID[i];
 		}
 
-		c.getPA().sendFrame87(286, c.duelOption);
+		c.getPlayerAssistant ().sendFrame87(286, c.duelOption);
 		o.duelOption = c.duelOption;
 		o.duelRule[i] = c.duelRule[i];
-		o.getPA().sendFrame87(286, o.duelOption);
+		o.getPlayerAssistant ().sendFrame87(286, o.duelOption);
 		
 		if(c.duelRule[8]){	
 			if(c.duelRule[1]) {

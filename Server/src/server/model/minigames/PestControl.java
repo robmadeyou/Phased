@@ -90,7 +90,7 @@ public class PestControl {
 			if (Server.playerHandler.players[j] != null) {
 				if (Server.playerHandler.players[j].inPcGame()) {
 					Client c = (Client)Server.playerHandler.players[j];
-					c.getPA().movePlayer(2657, 2639, 0);
+					c.getPlayerAssistant ().movePlayer(2657, 2639, 0);
 					if (won && c.pcDamage > 4) {
 						c.sendMessage("You have won the pest control game and have been awarded 4 pest control points.");
 						c.pcPoints += 4;
@@ -98,8 +98,8 @@ public class PestControl {
 						c.playerLevel[5] = c.getLevelForXP(c.playerXP[5]);
 						c.specAmount = 10;
 						c.getItems().addItem(995, c.combatLevel * 50);
-						c.getPA().refreshSkill(3);
-						c.getPA().refreshSkill(5);
+						c.getPlayerAssistant ().refreshSkill(3);
+						c.getPlayerAssistant ().refreshSkill(5);
 					} else if (won) {
 						c.sendMessage("The void knights notice your lack of zeal.");
 					} else {
@@ -124,26 +124,26 @@ public class PestControl {
 			if (PlayerHandler.players[j] != null) {
 				if (PlayerHandler.players[j].inPcBoat()) {
 					Client c = (Client) PlayerHandler.players[j];
-					c.getPA().sendFrame126("Next Departure: "+waitTimer+"", 21006);
-					c.getPA().sendFrame126("Players Ready: "+playersInBoat()+"", 21007);
-					c.getPA().sendFrame126("(Need 3 to 25 players)", 21008);
-					c.getPA().sendFrame126("Points: "+c.pcPoints+"", 21009);
-			  c.getPA().walkableInterface(21005);
+					c.getPlayerAssistant ().sendFrame126("Next Departure: "+waitTimer+"", 21006);
+					c.getPlayerAssistant ().sendFrame126("Players Ready: "+playersInBoat()+"", 21007);
+					c.getPlayerAssistant ().sendFrame126("(Need 3 to 25 players)", 21008);
+					c.getPlayerAssistant ().sendFrame126("Points: "+c.pcPoints+"", 21009);
+			  c.getPlayerAssistant ().walkableInterface(21005);
 				}
 				if (PlayerHandler.players[j].inPcGame()) {
 					Client c = (Client) PlayerHandler.players[j];
 					for (j = 0; j < NPCHandler.npcs.length; j++) {
 						if (NPCHandler.npcs[j] != null) {
 							if (NPCHandler.npcs[j].npcType == 6145)
-								c.getPA().sendFrame126("" + NPCHandler.npcs[j].HP + "", 21114);
+								c.getPlayerAssistant ().sendFrame126("" + NPCHandler.npcs[j].HP + "", 21114);
 						}
 					}
 
-					c.getPA().sendFrame126("PORTAL", 21110);
-					c.getPA().sendFrame126(""+c.pcDamage+"", 21115);
-					c.getPA().sendFrame126("500", 21116);
-					c.getPA().sendFrame126("Time remaining: "+gameTimer+"", 21117);
-					 c.getPA().walkableInterface(21100);
+					c.getPlayerAssistant ().sendFrame126("PORTAL", 21110);
+					c.getPlayerAssistant ().sendFrame126(""+c.pcDamage+"", 21115);
+					c.getPlayerAssistant ().sendFrame126("500", 21116);
+					c.getPlayerAssistant ().sendFrame126("Time remaining: "+gameTimer+"", 21117);
+					 c.getPlayerAssistant ().walkableInterface(21100);
 				}
 			}
 		}
@@ -167,7 +167,7 @@ public class PestControl {
 			c.sendMessage("You must be at least 10 combat level to enter this boat.");
 			return;
 		}
-		c.getPA().movePlayer(2658,2611,0);
+		c.getPlayerAssistant ().movePlayer(2658,2611,0);
 	}
 	
 	public void spawnNpcs() {

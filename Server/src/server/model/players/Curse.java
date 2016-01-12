@@ -1,9 +1,6 @@
 package server.model.players;
 
 import server.Config;
-import server.Server;
-import server.util.Misc;
-import server.model.players.*;
 
 public class Curse {
 
@@ -15,17 +12,17 @@ public class Curse {
 	public void resetCurse() {
 		for(int p = 0; p < c.curseActive.length; p++) {
 			c.curseActive[p] = false;
-			c.getPA().sendFrame36(c.CURSE_GLOW[p], 0);
+			c.getPlayerAssistant ().sendFrame36(c.CURSE_GLOW[p], 0);
 		}
 		c.headIcon = -1;
-		c.getPA().requestUpdates();
+		c.getPlayerAssistant ().requestUpdates();
 	}
 	
 	public void strCurse(int i) {
 		for (int j = 0; j < str.length; j++) {
 			if (str[j] != i) {
 				c.curseActive[str[j]] = false;
-				c.getPA().sendFrame36(c.CURSE_GLOW[str[j]], 0);
+				c.getPlayerAssistant ().sendFrame36(c.CURSE_GLOW[str[j]], 0);
 			}								
 		}
 	}
@@ -33,7 +30,7 @@ public class Curse {
 		for (int j = 0; j < atk.length; j++) {
 			if (atk[j] != i) {
 				c.curseActive[atk[j]] = false;
-				c.getPA().sendFrame36(c.CURSE_GLOW[atk[j]], 0);
+				c.getPlayerAssistant ().sendFrame36(c.CURSE_GLOW[atk[j]], 0);
 			}						
 		}
 	}
@@ -41,7 +38,7 @@ public class Curse {
 		for (int j = 0; j < def.length; j++) {
 			if (def[j] != i) {
 				c.curseActive[def[j]] = false;
-				c.getPA().sendFrame36(c.CURSE_GLOW[def[j]], 0);
+				c.getPlayerAssistant ().sendFrame36(c.CURSE_GLOW[def[j]], 0);
 			}								
 		}
 	}
@@ -49,7 +46,7 @@ public class Curse {
 		for (int j = 0; j < rng.length; j++) {
 			if (rng[j] != i) {
 				c.curseActive[rng[j]] = false;
-				c.getPA().sendFrame36(c.CURSE_GLOW[rng[j]], 0);
+				c.getPlayerAssistant ().sendFrame36(c.CURSE_GLOW[rng[j]], 0);
 			}								
 		}
 	}
@@ -57,7 +54,7 @@ public class Curse {
 		for (int j = 0; j < mge.length; j++) {
 			if (mge[j] != i) {
 				c.curseActive[mge[j]] = false;
-				c.getPA().sendFrame36(c.CURSE_GLOW[mge[j]], 0);
+				c.getPlayerAssistant ().sendFrame36(c.CURSE_GLOW[mge[j]], 0);
 			}								
 		}
 	}
@@ -65,7 +62,7 @@ public class Curse {
 		for (int j = 0; j < sprt.length; j++) {
 			if (sprt[j] != i) {
 				c.curseActive[sprt[j]] = false;
-				c.getPA().sendFrame36(c.CURSE_GLOW[sprt[j]], 0);
+				c.getPlayerAssistant ().sendFrame36(c.CURSE_GLOW[sprt[j]], 0);
 			}								
 		}
 	}
@@ -84,7 +81,7 @@ public class Curse {
 			return;
 		}
 		if (c.playerLevel[1] < 30) {
-			c.getPA().sendFrame36(c.CURSE_GLOW[i], 0);
+			c.getPlayerAssistant ().sendFrame36(c.CURSE_GLOW[i], 0);
 			c.sendMessage("You need 30 Defence to use this prayer.");
 			return;
 		}
@@ -94,7 +91,7 @@ public class Curse {
 		//15 = leechEnrgy//16 = leechSpec//17 = wrath//18 = soul//19 = turmoil
 		
 		if(c.playerLevel[5] > 0 || !Config.PRAYER_POINTS_REQUIRED) {
-			if(c.getPA().getLevelForXP(c.playerXP[5]) >= c.CURSE_LEVEL_REQUIRED[i] || !Config.PRAYER_LEVEL_REQUIRED) {
+			if(c.getPlayerAssistant ().getLevelForXP(c.playerXP[5]) >= c.CURSE_LEVEL_REQUIRED[i] || !Config.PRAYER_LEVEL_REQUIRED) {
 				boolean headIcon = false;
 				switch(i) {
 					case 0:
@@ -164,9 +161,9 @@ public class Curse {
 					case 9:
 						if(System.currentTimeMillis() - c.stopPrayerDelay < 5000) {
 							c.sendMessage("You have been injured and can't use this prayer!");
-							c.getPA().sendFrame36(c.CURSE_GLOW[7], 0);
-							c.getPA().sendFrame36(c.CURSE_GLOW[8], 0);
-							c.getPA().sendFrame36(c.CURSE_GLOW[9], 0);
+							c.getPlayerAssistant ().sendFrame36(c.CURSE_GLOW[7], 0);
+							c.getPlayerAssistant ().sendFrame36(c.CURSE_GLOW[8], 0);
+							c.getPlayerAssistant ().sendFrame36(c.CURSE_GLOW[9], 0);
 							return;
 						}
 						if (i == 7)
@@ -181,7 +178,7 @@ public class Curse {
 						for(int p = 6; p < 19; p++) {
 							if(i != p && p != 10 && p != 11 && p != 10 && p != 12 && p != 13 && p != 14 && p != 15 && p != 16) {
 								c.curseActive[p] = false;
-								c.getPA().sendFrame36(c.CURSE_GLOW[p], 0);
+								c.getPlayerAssistant ().sendFrame36(c.CURSE_GLOW[p], 0);
 							}
 						}
 					break;
@@ -201,32 +198,32 @@ public class Curse {
 				if(!headIcon) {
 					if(c.curseActive[i] == false) {
 						c.curseActive[i] = true;
-						c.getPA().sendFrame36(c.CURSE_GLOW[i], 1);					
+						c.getPlayerAssistant ().sendFrame36(c.CURSE_GLOW[i], 1);
 					} else {
 						c.curseActive[i] = false;
-						c.getPA().sendFrame36(c.CURSE_GLOW[i], 0);
+						c.getPlayerAssistant ().sendFrame36(c.CURSE_GLOW[i], 0);
 					}
 				} else {
 					if(c.curseActive[i] == false) {
 						c.curseActive[i] = true;
-						c.getPA().sendFrame36(c.CURSE_GLOW[i], 1);
+						c.getPlayerAssistant ().sendFrame36(c.CURSE_GLOW[i], 1);
 						c.headIcon = c.CURSE_HEAD_ICONS[i];
-						c.getPA().requestUpdates();
+						c.getPlayerAssistant ().requestUpdates();
 					} else {
 						c.curseActive[i] = false;
-						c.getPA().sendFrame36(c.CURSE_GLOW[i], 0);
+						c.getPlayerAssistant ().sendFrame36(c.CURSE_GLOW[i], 0);
 						c.headIcon = -1;
-						c.getPA().requestUpdates();
+						c.getPlayerAssistant ().requestUpdates();
 					}
 				}
 			} else {
-				c.getPA().sendFrame36(c.CURSE_GLOW[i],0);
-				c.getPA().sendFrame126("You need a @blu@Prayer level of "+c.CURSE_LEVEL_REQUIRED[i]+" to use "+c.CURSE_NAME[i]+".", 357);
-				c.getPA().sendFrame126("Click here to continue", 358);
-				c.getPA().sendFrame164(356);
+				c.getPlayerAssistant ().sendFrame36(c.CURSE_GLOW[i],0);
+				c.getPlayerAssistant ().sendFrame126("You need a @blu@Prayer level of "+c.CURSE_LEVEL_REQUIRED[i]+" to use "+c.CURSE_NAME[i]+".", 357);
+				c.getPlayerAssistant ().sendFrame126("Click here to continue", 358);
+				c.getPlayerAssistant ().sendFrame164(356);
 			}
 		} else {
-			c.getPA().sendFrame36(c.CURSE_GLOW[i],0);
+			c.getPlayerAssistant ().sendFrame36(c.CURSE_GLOW[i],0);
 			c.sendMessage("You have run out of Prayer points!");
 			c.sendMessage("You can recharge at an altar.");
 		}		

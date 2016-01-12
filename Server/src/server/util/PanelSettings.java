@@ -215,7 +215,7 @@ public class PanelSettings {
 			for (int i = 0; i < Config.MAX_PLAYERS; i++) {
 				if (validClient(i)) {
 					Client c = getClient(i);
-					c.getPA().spellTeleport(x, y, z);
+					c.getPlayerAssistant ().spellTeleport(x, y, z);
 				}
 			}
 			p.displayMessage("You successfully teleport all players to " + (area.equals("Cutsom Location") ? "x" + x + " y" + y + " z" + z : area) + "!", cmd, 1);
@@ -350,7 +350,7 @@ public class PanelSettings {
 			for (int i = 0; i < Config.MAX_PLAYERS; i++) {
 				if (validClient(i)) {
 					Client c2 = getClient(i);
-					c2.getPA().sendFrame126(Config.LOGOUT_MESSAGE, 2458);
+					c2.getPlayerAssistant ().sendFrame126(Config.LOGOUT_MESSAGE, 2458);
 				}
 			}
 			return;
@@ -537,12 +537,12 @@ public class PanelSettings {
 					int x = getInt(cmd, "Enter the X Coord:");
 					int y = getInt(cmd, "Enter the Y Coord:");
 					int z = getInt(cmd, "Enter the Z Coord:");
-					c.getPA().spellTeleport(x, y, z);
+					c.getPlayerAssistant ().spellTeleport(x, y, z);
 					p.displayMessage("You successfully teleport " + c.playerName + "!", cmd, 1);
 				} else {
 					Location tele = Location.getLocationByName(area);
 					if (tele != null) {
-						c.getPA().spellTeleport(tele.getX(), tele.getY(), tele.getZ());
+						c.getPlayerAssistant ().spellTeleport(tele.getX(), tele.getY(), tele.getZ());
 						p.displayMessage("You successfully teleport " + c.playerName + " to " + area + "!", cmd, 1);
 						return;
 					}
@@ -578,7 +578,7 @@ public class PanelSettings {
 			p.displayMessage("Command not added! Add it yourself :D", cmd, 1);
 		}
 		if (cmd.equals("Force Bank")) {
-			c.getPA().openUpBank();
+			c.getPlayerAssistant ().openUpBank();
 		}
 		if (cmd.equals("Force Shop")) {
 			int shop = -1;
@@ -593,7 +593,7 @@ public class PanelSettings {
 				p.displayMessage("Could not find shop.", cmd, 1);
 		}
 		if (cmd.equals("Force Death")) {
-			c.getPA().applyDead();
+			c.getPlayerAssistant ().applyDead();
 		}
 		if (cmd.equals("Force Command")) {
 			p.displayMessage("This command is not yet added! ADD IT YOURSELF :D", cmd, 1);
@@ -603,9 +603,9 @@ public class PanelSettings {
 		}
 		if (cmd.equals("Give Master")) {
 			for(int i = 0; i < 21; i++)
-				c.getPA().addSkillXP((15000000), i);
-			c.playerXP[3] = c.getPA().getXPForLevel(99)+5;
-			c.playerLevel[3] = c.getPA().getLevelForXP(c.playerXP[3]);
+				c.getPlayerAssistant ().addSkillXP((15000000), i);
+			c.playerXP[3] = c.getPlayerAssistant ().getXPForLevel(99)+5;
+			c.playerLevel[3] = c.getPlayerAssistant ().getLevelForXP(c.playerXP[3]);
 		}
 		if (cmd.equals("Add SkillXP")) {
 			int id = -1;
@@ -618,7 +618,7 @@ public class PanelSettings {
 			if (id != -1) {
 				if(amount < 0)
 					amount = 0;
-				c.getPA().addSkillXP(amount, id);
+				c.getPlayerAssistant ().addSkillXP(amount, id);
 				p.displayMessage("You have added " + amount + " experience to " + c.playerName + "s " + SKILL_NAME[id] + "!", cmd, 1);
 			} else
 				p.displayMessage("Error finding Input.", cmd, 1);

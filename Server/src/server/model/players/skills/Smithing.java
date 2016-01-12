@@ -34,9 +34,9 @@ public class Smithing {
 	
 	public void sendSmelting() {
 		for (int j = 0; j < SMELT_FRAME.length; j++) {
-			c.getPA().sendFrame246(SMELT_FRAME[j], 150, SMELT_BARS[j]);
+			c.getPlayerAssistant ().sendFrame246(SMELT_FRAME[j], 150, SMELT_BARS[j]);
 		}
-		c.getPA().sendFrame164(2400);
+		c.getPlayerAssistant ().sendFrame164(2400);
 		c.smeltInterface = true;	
 	}
 	public void startSmelting(int barType) {
@@ -52,31 +52,31 @@ c.smeltAmount = c.getItems().getItemAmount(getOre(barType));
 smelt(barType);	
 } else {
 c.sendMessage("You do not have the required ores to smelt this.");
-c.getPA().resetVariables();
+c.getPlayerAssistant ().resetVariables();
 }
 } else {
 c.sendMessage("You must have a higher smithing level to smith this.");
-c.getPA().resetVariables();
+c.getPlayerAssistant ().resetVariables();
 }
 }
 	public void smelt(int barType) {
 		if (c.smeltAmount > 0) {
-			c.getPA().closeAllWindows();
+			c.getPlayerAssistant ().closeAllWindows();
 			if (hasOres(barType)) {
 				c.getItems().deleteItem(oreId, c.getItems().getItemSlot(oreId), 1);
 				if (oreId2 > 0)
 					c.getItems().deleteItem(oreId2, c.getItems().getItemSlot(oreId2), 1);
 				c.getItems().addItem(barId,1);
-				c.getPA().addSkillXP(exp * Config.SMITHING_EXPERIENCE, c.playerSmithing);
-				c.getPA().refreshSkill(c.playerSmithing);
+				c.getPlayerAssistant ().addSkillXP(exp * Config.SMITHING_EXPERIENCE, c.playerSmithing);
+				c.getPlayerAssistant ().refreshSkill(c.playerSmithing);
 				c.smeltAmount--;
 				c.smeltTimer = 1;
 			} else {
 				c.sendMessage("You do not have the required ores to smelt this.");
-				c.getPA().removeAllWindows();
+				c.getPlayerAssistant ().removeAllWindows();
 			}
 		} else {
-			c.getPA().resetVariables();
+			c.getPlayerAssistant ().resetVariables();
 		}
 	}
 	public int getExp(int barType) {
@@ -1214,7 +1214,7 @@ remove = 2361;
 	}
 	public boolean doaction(Client c, int toadd, int toremove, int toremove2, int timestomake, int NOTUSED, int NOTUSED2, int xp) {
 		int maketimes = timestomake;
-		c.getPA().closeAllWindows();
+		c.getPlayerAssistant ().closeAllWindows();
 		if (c.getItems().playerHasItem(toremove, toremove2))
 		{
 			c.startAnimation(898);
@@ -1255,8 +1255,8 @@ remove = 2361;
 		{
 		c.getItems().addItem(toadd, 1);
 		}
-		c.getPA().addSkillXP(xp * Config.SMITHING_EXPERIENCE, 13);
-		c.getPA().refreshSkill(13);
+		c.getPlayerAssistant ().addSkillXP(xp * Config.SMITHING_EXPERIENCE, 13);
+		c.getPlayerAssistant ().refreshSkill(13);
 		maketimes--;
 			}
 			else

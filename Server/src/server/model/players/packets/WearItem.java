@@ -35,7 +35,7 @@ public class WearItem implements PacketType {
 				pouch = 2;
 			if (a == 5514)
 				pouch = 3;
-			c.getPA().emptyPouch(pouch);
+			c.getPlayerAssistant ().emptyPouch(pouch);
 			return;
 		}
 			if(c.wearId == 7927) {

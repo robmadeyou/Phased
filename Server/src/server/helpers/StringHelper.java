@@ -71,4 +71,14 @@ public class StringHelper
         }
         return tmp;
     }
+
+    /**
+     *
+     * @param val String
+     * @return ArrayList<String>
+     */
+    public static ArrayList<String> explodeOnSpaceRemoveEmpty( String val )
+    {
+        return removeEmptyArrayEntries ( val.split ( " " ) );
+    }
 }

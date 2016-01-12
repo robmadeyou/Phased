@@ -25,7 +25,7 @@ public static void checkPotential(Client c) {
 		if (c.inWild()) {
 			if (++c.epDelay == 450) {
 			if (!c.inFunPk()) {
-			if(c.getItems().getCarriedWealth() > 5000000 || c.getPA().getWearingAmount2() > 200000) {
+			if(c.getItems().getCarriedWealth() > 5000000 || c.getPlayerAssistant ().getWearingAmount2() > 200000) {
 				c.earningPotential += 13 + Misc.random(12);
 				if (c.earningPotential > 100) 
 					c.earningPotential = 100;
@@ -53,7 +53,7 @@ public static void checkPotential(Client c) {
                 Client o = (Client) Server.playerHandler.players[c.killerId];
 		Client pl = (Client) Server.playerHandler.players[c.killerId];
 			if (c.inWild() && c2.inWild()) {
-			if(c2.getItems().getCarriedWealth() > 300000 || c2.getPA().getWearingAmount2() > 200000) {
+			if(c2.getItems().getCarriedWealth() > 300000 || c2.getPlayerAssistant ().getWearingAmount2() > 200000) {
 /*		if (c.earningPotential >= 0 && c.earningPotential <= 9) {
 				c.earningPotential -= 0 + Misc.random(7);
 				if (c.earningPotential < 0)

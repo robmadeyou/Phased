@@ -1,8 +1,6 @@
 package server.model.players;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,7 +12,6 @@ import server.model.npcs.NPCHandler;
 import server.util.ISAACRandomGen;
 import server.util.Misc;
 import server.util.Stream;
-import server.world.map.*;
 //import server.model.players.Hit.CombatType;
 
 public abstract class Player {
@@ -448,7 +445,7 @@ public abstract class Player {
                 int wildlvl = (((c.absY - 3526) / 8) + 1);
                 if (wildlvl < 20) {
                     c.getItems().deleteEquipment(2570, c.playerRing);
-                    c.getPA().startTeleport(2831, 2973, 0, "modern");
+                    c.getPlayerAssistant ().startTeleport(2831, 2973, 0, "modern");
                 }
             }
         }
@@ -473,11 +470,11 @@ public abstract class Player {
                 Client c = (Client) Server.playerHandler.players[this.playerId];
                 autocasting = true;
                 autocastId = autocastIds[j + 1];
-                c.getPA().sendFrame36(108, 1);
+                c.getPlayerAssistant ().sendFrame36(108, 1);
                 c.setSidebarInterface(0, 328);
                 //spellName = getSpellName(autocastId);
                 //spellName = spellName;
-                //c.getPA().sendFrame126(spellName, 354);
+                //c.getPlayerAssistant().sendFrame126(spellName, 354);
                 c = null;
                 break;
             }

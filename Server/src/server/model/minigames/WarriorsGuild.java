@@ -65,7 +65,7 @@ public class WarriorsGuild {
 	 *
 	 */
 	private void animateArmor(Client c, int[] usedArmor, int npcId, int hitPoints, int maxHit, int attack, int defence) {
-		c.getPA().walkTo(0, 3);
+		c.getPlayerAssistant ().walkTo(0, 3);
 		for(int i = 0; i < 3; i++) {
 			c.getItems().deleteItem(usedArmor[i], 1);
 		}
@@ -121,7 +121,7 @@ public class WarriorsGuild {
 				c.sendMessage("You need 100 tokens to go in!");
 				return;
 			}
-				c.getPA().movePlayer(2848, 3541, 2);
+				c.getPlayerAssistant ().movePlayer(2848, 3541, 2);
 				executeCyclopsTimer(c);
 					c.UsedTimer = 1;
 					c.UsedTimer2 = 1;
@@ -130,7 +130,7 @@ public class WarriorsGuild {
 				}
 
 				if(c.UsedTimer == 1 && c.UsedTimer2 == 1) {
-				c.getPA().movePlayer(2846, 3540, 2);
+				c.getPlayerAssistant ().movePlayer(2846, 3540, 2);
 					c.UsedTimer = 1;
 					c.UsedTimer2 = 2;
 					c.inCyclops = false;
@@ -151,7 +151,7 @@ public class WarriorsGuild {
 					c.UsedTimer = 1;
 					c.UsedTimer2 = 1;
 					c.inCyclops = true;
-				c.getPA().movePlayer(2848, 3541, 2);
+				c.getPlayerAssistant ().movePlayer(2848, 3541, 2);
 				return;
 				}	
 		}
@@ -172,7 +172,7 @@ public class WarriorsGuild {
 					if(!c.InDung());
 						c.inCyclops = false;
 						c.sendMessage("You have ran out of tokens!");
-						c.getPA().startTeleport(2846, 3541, 2, "modern");
+						c.getPlayerAssistant ().startTeleport(2846, 3541, 2, "modern");
 					c.UsedTimer = 0;
 					c.UsedTimer2 = 0;
 						e.stop();

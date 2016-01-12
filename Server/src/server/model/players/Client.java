@@ -3,36 +3,13 @@ package server.model.players;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import server.model.players.Highscores;
 import server.util.MadTurnipConnection;
 
 import java.util.concurrent.Future;
-import java.net.URL;
-import java.net.URL;
-import java.net.MalformedURLException;
-
-import server.model.players.ConnectedFrom;
-
-import java.io.InputStreamReader;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.io.InputStreamReader;
-import java.io.BufferedReader;
-import java.io.IOException;
 
 import org.apache.mina.common.IoSession;
 import server.Config;
 import server.Server;
-
-import java.net.URL;
-
-import server.model.npcs.*;
-
-import java.net.MalformedURLException;
-import java.io.InputStreamReader;
-import java.io.BufferedReader;
-import java.io.IOException;
 
 import server.model.items.ItemAssistant;
 import server.model.shops.ShopAssistant;
@@ -43,12 +20,9 @@ import server.util.Misc;
 import server.util.PlayersOnline;
 import server.model.players.skills.Summoning;
 import server.util.Stream;
-import server.util.MadTurnipConnection;
 import server.model.players.skills.*;
 import server.event.EventManager;
 import server.event.Event;
-import server.model.players.PlayerSave;
-import server.model.players.PlayerHandler;
 import server.event.EventContainer;
 import server.model.npcs.NPC;
 import server.model.minigames.WarriorsGuild;
@@ -135,21 +109,21 @@ public class Client extends Player
     public void walk (int EndX, int EndY, int Emote)
     {
         walkToEmote ( Emote );
-        getPA ().walkTo2 ( EndX, EndY );
+        getPlayerAssistant ().walkTo2 ( EndX, EndY );
     }
 
     public void walkToEmote (int id)
     {
         isRunning2 = false;
         playerWalkIndex = id;
-        getPA ().requestUpdates (); //this was needed to make the agility work
+        getPlayerAssistant ().requestUpdates (); //this was needed to make the agility work
     }
 
     public void stopEmote ()
     {
         playerWalkIndex = 0x333;
         agilityEmote = false;
-        getPA ().requestUpdates (); //this was needed to make the agility work
+        getPlayerAssistant ().requestUpdates (); //this was needed to make the agility work
     }
 
     public void obsticle (int Emote, int Req, int newX, int newY, final int agilityTimer, int amtEXP, String message)
@@ -159,7 +133,7 @@ public class Client extends Player
             agilityEmote = true;
             walk ( newX, newY, Emote );
             sendMessage ( message );
-            getPA ().addSkillXP ( amtEXP, playerAgility );
+            getPlayerAssistant ().addSkillXP ( amtEXP, playerAgility );
             EventManager.getSingleton ().addEvent ( new Event ()
             {
                 public void execute (EventContainer c)
@@ -181,12 +155,12 @@ public class Client extends Player
             sendMessage ( message );
             startAnimation ( Emote );
             agilityEmote = true;
-            getPA ().addSkillXP ( amtEXP, playerAgility );
+            getPlayerAssistant ().addSkillXP ( amtEXP, playerAgility );
             EventManager.getSingleton ().addEvent ( new Event ()
             {
                 public void execute (EventContainer c)
                 {
-                    getPA ().movePlayer ( X, Y, H );
+                    getPlayerAssistant ().movePlayer ( X, Y, H );
                     agilityEmote = false;
                     c.stop ();
                 }
@@ -199,15 +173,15 @@ public class Client extends Player
 
     public void highscores ()
     {
-        getPA ().sendFrame126 ( "  Massacred World Top Skillers", 6399 );
+        getPlayerAssistant ().sendFrame126 ( "  Massacred World Top Skillers", 6399 );
         for ( int i = 0; i < 10; i++ )
         {
             if ( ranks[ i ] > 0 )
             {
-                getPA ().sendFrame126 ( "Rank " + ( i + 1 ) + ": " + rankPpl[ i ] + "- Total Level: " + ranks[ i ], 6402 + i );
+                getPlayerAssistant ().sendFrame126 ( "Rank " + ( i + 1 ) + ": " + rankPpl[ i ] + "- Total Level: " + ranks[ i ], 6402 + i );
             }
         }
-        getPA ().showInterface ( 6308 );
+        getPlayerAssistant ().showInterface ( 6308 );
         flushOutStream ();
         resetRanks ();
     }
@@ -431,12 +405,12 @@ public class Client extends Player
 	*/
     public void wildyWarning ()
     {
-        getPA ().sendFrame126 ( "WARNING!", 6940 );
+        getPlayerAssistant ().sendFrame126 ( "WARNING!", 6940 );
         //Edit the below if you want to change the text, and delete the slashes.
-        getPA ().sendFrame126 ( "Proceed with caution. If you go much further north you will enter the\nwilderness. This is a very dangerous area where other players can attack you!", 6939 );
-        getPA ().sendFrame126 ( "The further north you go the more dangerous it becomes, but there is more\ntreasure to be found.", 6941 );
-        getPA ().sendFrame126 ( "In the wilderness an indicator at the bottom-right of the screen\nwill show the current level of danger.", 6942 );
-        getPA ().showInterface ( 1908 );
+        getPlayerAssistant ().sendFrame126 ( "Proceed with caution. If you go much further north you will enter the\nwilderness. This is a very dangerous area where other players can attack you!", 6939 );
+        getPlayerAssistant ().sendFrame126 ( "The further north you go the more dangerous it becomes, but there is more\ntreasure to be found.", 6941 );
+        getPlayerAssistant ().sendFrame126 ( "In the wilderness an indicator at the bottom-right of the screen\nwill show the current level of danger.", 6942 );
+        getPlayerAssistant ().showInterface ( 1908 );
     }
 
     public void degradeVls ()
@@ -667,7 +641,7 @@ public class Client extends Player
 
     public void jadSpawn ()
     {
-        //getPA().movePlayer(absX, absY, playerId * 4);
+        //getPlayerAssistant().movePlayer(absX, absY, playerId * 4);
         getDH ().sendDialogues ( 41, 2618 );
         EventManager.getSingleton ().addEvent ( new Event ()
         {
@@ -700,7 +674,7 @@ public class Client extends Player
     			getItems().resetBonus();
 				getItems().getBonus();
 				getItems().writeBonus();
-				getPA().requestUpdates();getOutStream().createFrame(34);
+				getPlayerAssistant().requestUpdates();getOutStream().createFrame(34);
 				getOutStream().writeWord(6);
 				getOutStream().writeWord(1688);
 				getOutStream().writeByte(playerWeapon);
@@ -747,11 +721,11 @@ public class Client extends Player
     {
         for ( int iD = 29172; iD <= 29264; iD++ )
         {
-            getPA ().sendFrame126 ( "", iD );
+            getPlayerAssistant ().sendFrame126 ( "", iD );
         }
-        getPA ().sendFrame126 ( " @whi@Your Information:", 29161 ); //1st section title
-        getPA ().sendFrame126 ( "@whi@Name: " + playerName + "", 29162 ); //1rd section content
-        getPA ().sendFrame126 ( " @whi@Combat: " + getCombatLevel () + "", 29163 ); //2nd section title
+        getPlayerAssistant ().sendFrame126 ( " @whi@Your Information:", 29161 ); //1st section title
+        getPlayerAssistant ().sendFrame126 ( "@whi@Name: " + playerName + "", 29162 ); //1rd section content
+        getPlayerAssistant ().sendFrame126 ( " @whi@Combat: " + getCombatLevel () + "", 29163 ); //2nd section title
     }
 
     public int specRestore = 0;
@@ -780,21 +754,21 @@ public class Client extends Player
         {
             int Low = 3;
             int High = combatLevel + 12;
-            getPA ().sendFrame126 ( "@gre@" + Low + "@yel@ - @red@" + High + "", 199 );
+            getPlayerAssistant ().sendFrame126 ( "@gre@" + Low + "@yel@ - @red@" + High + "", 199 );
 
         }
         if ( combatLevel > 15 && combatLevel < 114 )
         {
             int Low = combatLevel - 12;
             int High = combatLevel + 12;
-            getPA ().sendFrame126 ( "@gre@" + Low + "@yel@ - @red@" + High + "", 199 );
+            getPlayerAssistant ().sendFrame126 ( "@gre@" + Low + "@yel@ - @red@" + High + "", 199 );
 
         }
         if ( combatLevel > 114 )
         {
             int Low = combatLevel - 12;
             int High = 138;
-            getPA ().sendFrame126 ( "@gre@" + Low + "@yel@ - @red@" + High + "", 199 );
+            getPlayerAssistant ().sendFrame126 ( "@gre@" + Low + "@yel@ - @red@" + High + "", 199 );
 
         }
     }
@@ -872,7 +846,7 @@ public class Client extends Player
             PlayerSave.saveGame ( this );
             if ( clanId >= 0 )
                 Server.clanChat.leaveClan ( playerId, clanId );
-            getPA ().removeFromCW ();
+            getPlayerAssistant ().removeFromCW ();
             if ( inPits )
             {
                 Server.fightPits.removePlayerFromPits ( playerId );
@@ -953,13 +927,13 @@ public class Client extends Player
                             sendMessage ( "You caught a GIGANTIC Impling and gained triple Experience!" ); //looks like player got a net
                             getItems ().addItem ( 722, 1 ); //itemid is different so its defined in the method
                             startAnimation ( 6999 ); //this always stays 6999, no need to change this
-                            getPA ().addSkillXP ( AmtExp * 3, 21 ); //AmtExp is different so its defined in the method
+                            getPlayerAssistant ().addSkillXP ( AmtExp * 3, 21 ); //AmtExp is different so its defined in the method
                         } else
                         {
                             sendMessage ( "You Catched an Impling!" ); //looks like player got a net
                             getItems ().addItem ( itemId, 1 ); //itemid is different so its defined in the method
                             startAnimation ( 6999 ); //this always stays 6999, no need to change this
-                            getPA ().addSkillXP ( AmtExp, 21 ); //AmtExp is different so its defined in the method
+                            getPlayerAssistant ().addSkillXP ( AmtExp, 21 ); //AmtExp is different so its defined in the method
                         }
                     } else
                     {
@@ -997,13 +971,13 @@ public class Client extends Player
                             sendMessage ( "You caught a GIGANTIC butterfly and gained triple Experience!" ); //looks like player got a net
                             getItems ().addItem ( 722, 1 ); //itemid is different so its defined in the method
                             startAnimation ( 6999 ); //this always stays 6999, no need to change this
-                            getPA ().addSkillXP ( AmtExp * 3, 21 ); //AmtExp is different so its defined in the method
+                            getPlayerAssistant ().addSkillXP ( AmtExp * 3, 21 ); //AmtExp is different so its defined in the method
                         } else
                         {
                             sendMessage ( "You Caught a Butterfly!" ); //looks like player got a net
                             getItems ().addItem ( itemId, 1 ); //itemid is different so its defined in the method
                             startAnimation ( 6999 ); //this always stays 6999, no need to change this
-                            getPA ().addSkillXP ( AmtExp, 21 ); //AmtExp is different so its defined in the method
+                            getPlayerAssistant ().addSkillXP ( AmtExp, 21 ); //AmtExp is different so its defined in the method
                         }
                     } else
                     {
@@ -1073,41 +1047,41 @@ public class Client extends Player
             }
             for ( int i = 0; i < 25; i++ )
             {
-                getPA ().setSkillLevel ( i, playerLevel[ i ], playerXP[ i ] );
-                getPA ().refreshSkill ( i );
+                getPlayerAssistant ().setSkillLevel ( i, playerLevel[ i ], playerXP[ i ] );
+                getPlayerAssistant ().refreshSkill ( i );
             }
             for ( int p = 0; p < PRAYER.length; p++ )
             { // reset prayer glows 
                 prayerActive[ p ] = false;
-                getPA ().sendFrame36 ( PRAYER_GLOW[ p ], 0 );
+                getPlayerAssistant ().sendFrame36 ( PRAYER_GLOW[ p ], 0 );
             }
             for ( int p = 0; p < CURSE.length; p++ )
             { // reset prayer glows 
                 curseActive[ p ] = false;
-                getPA ().sendFrame36 ( CURSE_GLOW[ p ], 0 );
+                getPlayerAssistant ().sendFrame36 ( CURSE_GLOW[ p ], 0 );
             }
-            getPA ().sendCrashFrame ();
-            getPA ().handleWeaponStyle ();
-            getPA ().handleLoginText ();
-            accountFlagged = getPA ().checkForFlags ();
-            //getPA().sendFrame36(43, fightMode-1);
-            getPA ().sendFrame36 ( 505, 0 );
-            getPA ().sendFrame36 ( 506, 0 );
-            getPA ().sendFrame36 ( 507, 0 );
-            getPA ().sendFrame36 ( 508, 1 );
-            getPA ().sendFrame36 ( 166, 4 );
-            getPA ().sendFrame36 ( 108, 0 );//resets autocast button
-            getPA ().sendFrame36 ( 172, 1 );
-            getPA ().sendFrame36 ( 287, 1 );
-            getPA ().sendFrame107 (); // reset screen
-            getPA ().setChatOptions ( 0, 0, 0 ); // reset private messaging options
+            getPlayerAssistant ().sendCrashFrame ();
+            getPlayerAssistant ().handleWeaponStyle ();
+            getPlayerAssistant ().handleLoginText ();
+            accountFlagged = getPlayerAssistant ().checkForFlags ();
+            //getPlayerAssistant().sendFrame36(43, fightMode-1);
+            getPlayerAssistant ().sendFrame36 ( 505, 0 );
+            getPlayerAssistant ().sendFrame36 ( 506, 0 );
+            getPlayerAssistant ().sendFrame36 ( 507, 0 );
+            getPlayerAssistant ().sendFrame36 ( 508, 1 );
+            getPlayerAssistant ().sendFrame36 ( 166, 4 );
+            getPlayerAssistant ().sendFrame36 ( 108, 0 );//resets autocast button
+            getPlayerAssistant ().sendFrame36 ( 172, 1 );
+            getPlayerAssistant ().sendFrame36 ( 287, 1 );
+            getPlayerAssistant ().sendFrame107 (); // reset screen
+            getPlayerAssistant ().setChatOptions ( 0, 0, 0 ); // reset private messaging options
             setSidebarInterface ( 1, 31110 );//718 Skilltab - EPIC - by Shaloxis
             //setSidebarInterface(1, 7101);//Remove the // in front of this, and comment out the 718 Skilltab above to use old one
             setSidebarInterface ( 2, 638 );
             setSidebarInterface ( 3, 3213 );
             setSidebarInterface ( 4, 1644 );
             setSidebarInterface ( 5, 5608 );
-            getPA ().totallevelsupdate ();
+            getPlayerAssistant ().totallevelsupdate ();
             if ( playerMagicBook == 0 )
             {
                 setSidebarInterface ( 6, 1151 ); //modern
@@ -1158,25 +1132,25 @@ public class Client extends Player
             }
             if ( inWarriorG () && heightLevel == 2 )
             {
-                getPA ().movePlayer ( 2846, 3540, 2 );
+                getPlayerAssistant ().movePlayer ( 2846, 3540, 2 );
             }
             //MadTurnipConnection.addDonateItems(this,playerName);
             if ( playerName.equalsIgnoreCase ( "james" ) )
             {
-                getPA ().loadAnnouncements ();
-                getPA ().showOption ( 4, 0, "Stalk", 4 );
-                getPA ().showOption ( 5, 0, "Rape", 3 );
-                getPA ().showOption ( 6, 0, "Rape", 3 );
+                getPlayerAssistant ().loadAnnouncements ();
+                getPlayerAssistant ().showOption ( 4, 0, "Stalk", 4 );
+                getPlayerAssistant ().showOption ( 5, 0, "Rape", 3 );
+                getPlayerAssistant ().showOption ( 6, 0, "Rape", 3 );
             }
-            getPA ().loadAnnouncements ();
-            getPA ().showOption ( 4, 0, "Follow", 4 );
-            getPA ().showOption ( 5, 0, "Trade With", 3 );
+            getPlayerAssistant ().loadAnnouncements ();
+            getPlayerAssistant ().showOption ( 4, 0, "Follow", 4 );
+            getPlayerAssistant ().showOption ( 5, 0, "Trade With", 3 );
             safeTimer = 0;
             getItems ().resetItems ( 3214 );
             getItems ().sendWeapon ( playerEquipment[ playerWeapon ], getItems ().getItemName ( playerEquipment[ playerWeapon ] ) );
             getItems ().resetBonus ();
             getItems ().getBonus ();
-            getPA ().sendFrame126 ( "Combat Level: " + getCombatLevel () + "", 3983 );
+            getPlayerAssistant ().sendFrame126 ( "Combat Level: " + getCombatLevel () + "", 3983 );
             getItems ().writeBonus ();
             getItems ().setEquipment ( playerEquipment[ playerHat ], 1, playerHat );
             getItems ().setEquipment ( playerEquipment[ playerCape ], 1, playerCape );
@@ -1190,7 +1164,7 @@ public class Client extends Player
             getItems ().setEquipment ( playerEquipment[ playerRing ], 1, playerRing );
             getItems ().setEquipment ( playerEquipment[ playerWeapon ], playerEquipmentN[ playerWeapon ], playerWeapon );
             getCombat ().getPlayerAnimIndex ( getItems ().getItemName ( playerEquipment[ playerWeapon ] ).toLowerCase () );
-            getPA ().logIntoPM ();
+            getPlayerAssistant ().logIntoPM ();
             getItems ().addSpecialBar ( playerEquipment[ playerWeapon ] );
             saveTimer = Config.SAVE_TIMER;
             saveCharacter = true;
@@ -1199,33 +1173,33 @@ public class Client extends Player
             handler.updatePlayer ( this, outStream );
             handler.updateNPC ( this, outStream );
             flushOutStream ();
-            getPA ().clearClanChat ();
+            getPlayerAssistant ().clearClanChat ();
             if ( addStarter )
-                getPA ().addStarter ();
+                getPlayerAssistant ().addStarter ();
             if ( autoRet == 1 )
-                getPA ().sendFrame36 ( 172, 1 );
+                getPlayerAssistant ().sendFrame36 ( 172, 1 );
             else
-                getPA ().sendFrame36 ( 172, 0 );
+                getPlayerAssistant ().sendFrame36 ( 172, 0 );
         }
         if ( acceptAid )
         {
             acceptAid = false;
-            getPA ().sendFrame36 ( 503, 0 );
-            getPA ().sendFrame36 ( 427, 0 );
+            getPlayerAssistant ().sendFrame36 ( 503, 0 );
+            getPlayerAssistant ().sendFrame36 ( 427, 0 );
 
         } else
 
             acceptAid = true;
-        getPA ().sendFrame36 ( 503, 1 );
-        getPA ().sendFrame36 ( 427, 1 );
+        getPlayerAssistant ().sendFrame36 ( 503, 1 );
+        getPlayerAssistant ().sendFrame36 ( 427, 1 );
     }
 
     public void RefreshAllSkills ()
     {
         for ( int i = 0; i < 25; i++ )
         {
-            getPA ().setSkillLevel ( i, playerLevel[ i ], playerXP[ i ] );
-            getPA ().refreshSkill ( i );
+            getPlayerAssistant ().setSkillLevel ( i, playerLevel[ i ], playerXP[ i ] );
+            getPlayerAssistant ().refreshSkill ( i );
         }
     }
 
@@ -1331,7 +1305,7 @@ public class Client extends Player
         {
             dungRest--;
         }
-        getPA ().sendFrame126 ( "" + dungPoints + "", 18071 );
+        getPlayerAssistant ().sendFrame126 ( "" + dungPoints + "", 18071 );
         FetchDice ();
         int totalz = ( getLevelForXP ( playerXP[ 0 ] ) + getLevelForXP ( playerXP[ 1 ] ) + getLevelForXP ( playerXP[ 2 ] ) + getLevelForXP ( playerXP[ 3 ] ) + getLevelForXP ( playerXP[ 4 ] ) + getLevelForXP ( playerXP[ 5 ] ) + getLevelForXP ( playerXP[ 6 ] ) + getLevelForXP ( playerXP[ 7 ] ) + getLevelForXP ( playerXP[ 8 ] ) + getLevelForXP ( playerXP[ 9 ] ) + getLevelForXP ( playerXP[ 10 ] ) + getLevelForXP ( playerXP[ 11 ] ) + getLevelForXP ( playerXP[ 12 ] ) + getLevelForXP ( playerXP[ 13 ] ) + getLevelForXP ( playerXP[ 14 ] ) + getLevelForXP ( playerXP[ 15 ] ) + getLevelForXP ( playerXP[ 16 ] ) + getLevelForXP ( playerXP[ 17 ] ) + getLevelForXP ( playerXP[ 18 ] ) + getLevelForXP ( playerXP[ 19 ] ) + getLevelForXP ( playerXP[ 20 ] ) );
         ;
@@ -1374,120 +1348,120 @@ public class Client extends Player
         {
             safeTimer--;
         }
-        getPA ().sendFrame126 ( "@whi@Killcount", 29164 );
-        getPA ().sendFrame126 ( " @gre@" + KC + "", 663 );
-        getPA ().sendFrame126 ( "@whi@Deathcount", 29165 );
-        getPA ().sendFrame126 ( "@gre@" + DC + "", 29166 );
-        getPA ().sendFrame126 ( "@whi@Your Rank", 29167 );
+        getPlayerAssistant ().sendFrame126 ( "@whi@Killcount", 29164 );
+        getPlayerAssistant ().sendFrame126 ( " @gre@" + KC + "", 663 );
+        getPlayerAssistant ().sendFrame126 ( "@whi@Deathcount", 29165 );
+        getPlayerAssistant ().sendFrame126 ( "@gre@" + DC + "", 29166 );
+        getPlayerAssistant ().sendFrame126 ( "@whi@Your Rank", 29167 );
         if ( playerRights == 0 )
-            getPA ().sendFrame126 ( "@gre@Player", 29168 );
+            getPlayerAssistant ().sendFrame126 ( "@gre@Player", 29168 );
         else if ( playerRights == 1 )
-            getPA ().sendFrame126 ( "@gre@Bronze Donator", 29168 );
+            getPlayerAssistant ().sendFrame126 ( "@gre@Bronze Donator", 29168 );
         else if ( playerRights == 2 )
-            getPA ().sendFrame126 ( "@gre@Iron Donator", 29168 );
+            getPlayerAssistant ().sendFrame126 ( "@gre@Iron Donator", 29168 );
         else if ( playerRights == 3 )
-            getPA ().sendFrame126 ( "@gre@Adamant Donator", 29168 );
+            getPlayerAssistant ().sendFrame126 ( "@gre@Adamant Donator", 29168 );
         else if ( playerRights == 4 )
-            getPA ().sendFrame126 ( "@gre@Rune Donator", 29168 );
+            getPlayerAssistant ().sendFrame126 ( "@gre@Rune Donator", 29168 );
         else if ( playerRights == 5 )
-            getPA ().sendFrame126 ( "@gre@Dragon Donator", 29168 );
+            getPlayerAssistant ().sendFrame126 ( "@gre@Dragon Donator", 29168 );
         else if ( playerRights == 6 )
-            getPA ().sendFrame126 ( "@gre@Dicer", 29168 );
+            getPlayerAssistant ().sendFrame126 ( "@gre@Dicer", 29168 );
         else if ( playerRights == 7 )
-            getPA ().sendFrame126 ( "@gre@Veteran", 29168 );
+            getPlayerAssistant ().sendFrame126 ( "@gre@Veteran", 29168 );
         else if ( playerRights == 8 )
-            getPA ().sendFrame126 ( "@gre@Helper", 29168 );
+            getPlayerAssistant ().sendFrame126 ( "@gre@Helper", 29168 );
         else if ( playerRights == 9 )
-            getPA ().sendFrame126 ( "@gre@Test-Moderator", 29168 );
+            getPlayerAssistant ().sendFrame126 ( "@gre@Test-Moderator", 29168 );
         else if ( playerRights == 10 )
-            getPA ().sendFrame126 ( "@gre@Moderator", 29168 );
+            getPlayerAssistant ().sendFrame126 ( "@gre@Moderator", 29168 );
         else if ( playerRights == 11 )
-            getPA ().sendFrame126 ( "@gre@Administrator", 29168 );
+            getPlayerAssistant ().sendFrame126 ( "@gre@Administrator", 29168 );
         else if ( playerRights == 12 )
-            getPA ().sendFrame126 ( "@gre@Co-Owner", 29168 );
+            getPlayerAssistant ().sendFrame126 ( "@gre@Co-Owner", 29168 );
         else if ( playerRights == 13 )
-            getPA ().sendFrame126 ( "@gre@Owner", 29168 );
+            getPlayerAssistant ().sendFrame126 ( "@gre@Owner", 29168 );
         else if ( playerRights == 14 )
-            getPA ().sendFrame126 ( "@gre@Developer", 29168 );
-        getPA ().sendFrame126 ( "@whi@Loyalty level:", 29169 );
+            getPlayerAssistant ().sendFrame126 ( "@gre@Developer", 29168 );
+        getPlayerAssistant ().sendFrame126 ( "@whi@Loyalty level:", 29169 );
         if ( loyaltyTitle == 0 )
-            getPA ().sendFrame126 ( "@gre@None", 29170 );
+            getPlayerAssistant ().sendFrame126 ( "@gre@None", 29170 );
         else if ( loyaltyTitle == 1 )
-            getPA ().sendFrame126 ( "@gre@Scout", 29170 );
+            getPlayerAssistant ().sendFrame126 ( "@gre@Scout", 29170 );
         else if ( loyaltyTitle == 2 )
-            getPA ().sendFrame126 ( "@gre@Corporal", 29170 );
+            getPlayerAssistant ().sendFrame126 ( "@gre@Corporal", 29170 );
         else if ( loyaltyTitle == 3 )
-            getPA ().sendFrame126 ( "@gre@Kolonel", 29170 );
+            getPlayerAssistant ().sendFrame126 ( "@gre@Kolonel", 29170 );
         else if ( loyaltyTitle == 4 )
-            getPA ().sendFrame126 ( "@gre@General", 29170 );
+            getPlayerAssistant ().sendFrame126 ( "@gre@General", 29170 );
         else if ( loyaltyTitle == 5 )
-            getPA ().sendFrame126 ( "@gre@Skiller", 29170 );
+            getPlayerAssistant ().sendFrame126 ( "@gre@Skiller", 29170 );
         else if ( loyaltyTitle == 6 )
-            getPA ().sendFrame126 ( "@gre@Lord", 29170 );
+            getPlayerAssistant ().sendFrame126 ( "@gre@Lord", 29170 );
         else if ( loyaltyTitle == 7 )
-            getPA ().sendFrame126 ( "@gre@Lady", 29170 );
+            getPlayerAssistant ().sendFrame126 ( "@gre@Lady", 29170 );
         else if ( loyaltyTitle == 8 )
-            getPA ().sendFrame126 ( "@gre@King", 29170 );
+            getPlayerAssistant ().sendFrame126 ( "@gre@King", 29170 );
         else if ( loyaltyTitle == 9 )
-            getPA ().sendFrame126 ( "@gre@Queen", 29170 );
+            getPlayerAssistant ().sendFrame126 ( "@gre@Queen", 29170 );
         else if ( loyaltyTitle == 10 )
-            getPA ().sendFrame126 ( "@gre@God", 29170 );
+            getPlayerAssistant ().sendFrame126 ( "@gre@God", 29170 );
         else if ( loyaltyTitle == 11 )
-            getPA ().sendFrame126 ( "@gre@Godess", 29170 );
+            getPlayerAssistant ().sendFrame126 ( "@gre@Godess", 29170 );
         else if ( loyaltyTitle == 12 )
-            getPA ().sendFrame126 ( "@gre@The Fallen", 29170 );
+            getPlayerAssistant ().sendFrame126 ( "@gre@The Fallen", 29170 );
         else if ( loyaltyTitle == 13 )
-            getPA ().sendFrame126 ( "@gre@Bronze Donator", 29170 );
+            getPlayerAssistant ().sendFrame126 ( "@gre@Bronze Donator", 29170 );
         else if ( loyaltyTitle == 14 )
-            getPA ().sendFrame126 ( "@gre@Iron Donator", 29170 );
+            getPlayerAssistant ().sendFrame126 ( "@gre@Iron Donator", 29170 );
         else if ( loyaltyTitle == 15 )
-            getPA ().sendFrame126 ( "@gre@Adamant Donator", 29170 );
+            getPlayerAssistant ().sendFrame126 ( "@gre@Adamant Donator", 29170 );
         else if ( loyaltyTitle == 16 )
-            getPA ().sendFrame126 ( "@gre@Rune Donator", 29170 );
+            getPlayerAssistant ().sendFrame126 ( "@gre@Rune Donator", 29170 );
         else if ( loyaltyTitle == 17 )
-            getPA ().sendFrame126 ( "@gre@Dragon Donator", 29170 );
+            getPlayerAssistant ().sendFrame126 ( "@gre@Dragon Donator", 29170 );
         else if ( loyaltyTitle == 18 )
-            getPA ().sendFrame126 ( "@gre@Dicer", 29170 );
+            getPlayerAssistant ().sendFrame126 ( "@gre@Dicer", 29170 );
         else if ( loyaltyTitle == 19 )
-            getPA ().sendFrame126 ( "@gre@Veteran", 29170 );
+            getPlayerAssistant ().sendFrame126 ( "@gre@Veteran", 29170 );
         else if ( loyaltyTitle == 20 )
-            getPA ().sendFrame126 ( "@gre@Helper", 29170 );
+            getPlayerAssistant ().sendFrame126 ( "@gre@Helper", 29170 );
         else if ( loyaltyTitle == 21 )
-            getPA ().sendFrame126 ( "@gre@Trial Moderator", 29170 );
+            getPlayerAssistant ().sendFrame126 ( "@gre@Trial Moderator", 29170 );
         else if ( loyaltyTitle == 22 )
-            getPA ().sendFrame126 ( "@gre@Moderator", 29170 );
+            getPlayerAssistant ().sendFrame126 ( "@gre@Moderator", 29170 );
         else if ( loyaltyTitle == 23 )
-            getPA ().sendFrame126 ( "@gre@Administrator", 29170 );
+            getPlayerAssistant ().sendFrame126 ( "@gre@Administrator", 29170 );
         else if ( loyaltyTitle == 24 )
-            getPA ().sendFrame126 ( "@gre@Co Owner", 29170 );
+            getPlayerAssistant ().sendFrame126 ( "@gre@Co Owner", 29170 );
         else if ( loyaltyTitle == 25 )
-            getPA ().sendFrame126 ( "@gre@Owner", 29170 );
+            getPlayerAssistant ().sendFrame126 ( "@gre@Owner", 29170 );
         else if ( loyaltyTitle == 26 )
-            getPA ().sendFrame126 ( "@gre@Developer", 29170 );
-        getPA ().sendFrame126 ( "@whi@Quests:", 29171 );
+            getPlayerAssistant ().sendFrame126 ( "@gre@Developer", 29170 );
+        getPlayerAssistant ().sendFrame126 ( "@whi@Quests:", 29171 );
         if ( nomad == 0 )
         {
-            getPA ().sendFrame126 ( "The Ritual", 29172 ); //1rd section content
+            getPlayerAssistant ().sendFrame126 ( "The Ritual", 29172 ); //1rd section content
         } else if ( nomad > 0 && nomad < 10 )
         {
-            getPA ().sendFrame126 ( "@yel@The Ritual", 29172 );
+            getPlayerAssistant ().sendFrame126 ( "@yel@The Ritual", 29172 );
         } else
         {
-            getPA ().sendFrame126 ( "@gre@The Ritual", 29172 );
+            getPlayerAssistant ().sendFrame126 ( "@gre@The Ritual", 29172 );
         }
         //Different tab - Points handler
-        getPA ().sendFrame126 ( "Your Points", 29266 ); //Title of tab
-        getPA ().sendFrame126 ( "@gre@Slayer Points", 29295 );
-        getPA ().sendFrame126 ( "@gre@Dung Points", 29296 );
-        getPA ().sendFrame126 ( "@gre@Donator Points", 29297 );
-        getPA ().sendFrame126 ( "@gre@Level Points", 29298 );
-        getPA ().sendFrame126 ( "@gre@Vote Points", 29299 );
-        getPA ().sendFrame126 ( "@gre@Pest Control Points", 29300 );
-        getPA ().sendFrame126 ( "@gre@PK Points", 29301 );
-        getPA ().sendFrame126 ( "@red@Donator Chest Points", 29302 );
-        getPA ().sendFrame126 ( "@red@-", 29303 );
-        getPA ().sendFrame126 ( "@red@-", 29304 );
-        getPA ().sendFrame126 ( "@red@-", 29305 );
+        getPlayerAssistant ().sendFrame126 ( "Your Points", 29266 ); //Title of tab
+        getPlayerAssistant ().sendFrame126 ( "@gre@Slayer Points", 29295 );
+        getPlayerAssistant ().sendFrame126 ( "@gre@Dung Points", 29296 );
+        getPlayerAssistant ().sendFrame126 ( "@gre@Donator Points", 29297 );
+        getPlayerAssistant ().sendFrame126 ( "@gre@Level Points", 29298 );
+        getPlayerAssistant ().sendFrame126 ( "@gre@Vote Points", 29299 );
+        getPlayerAssistant ().sendFrame126 ( "@gre@Pest Control Points", 29300 );
+        getPlayerAssistant ().sendFrame126 ( "@gre@PK Points", 29301 );
+        getPlayerAssistant ().sendFrame126 ( "@red@Donator Chest Points", 29302 );
+        getPlayerAssistant ().sendFrame126 ( "@red@-", 29303 );
+        getPlayerAssistant ().sendFrame126 ( "@red@-", 29304 );
+        getPlayerAssistant ().sendFrame126 ( "@red@-", 29305 );
         //End of custom tab by Shaloxis
         if ( getItems ().updateInventory )
             getItems ().updateInventory ();
@@ -1498,7 +1472,7 @@ public class Client extends Player
             dealDamage ( 10 );
             handleHitMask ( 10 );
             SpeDelay -= 1;
-            getPA ().refreshSkill ( 3 );
+            getPlayerAssistant ().refreshSkill ( 3 );
         }
 
 
@@ -1695,10 +1669,10 @@ public class Client extends Player
 
         if ( followId > 0 )
         {
-            getPA ().followPlayer ( playerIndex );
+            getPlayerAssistant ().followPlayer ( playerIndex );
         } else if ( followId2 > 0 )
         {
-            getPA ().followNpc ();
+            getPlayerAssistant ().followNpc ();
         }
         getFishing ().FishingProcess ();
         getCombat ().handlePrayerDrain ();
@@ -1724,8 +1698,8 @@ public class Client extends Player
                     if ( level != 5 && level != 23 )
                     { // prayer doesn't restore
                         playerLevel[ level ] += 1;
-                        getPA ().setSkillLevel ( level, playerLevel[ level ], playerXP[ level ] );
-                        getPA ().refreshSkill ( level );
+                        getPlayerAssistant ().setSkillLevel ( level, playerLevel[ level ], playerXP[ level ] );
+                        getPlayerAssistant ().refreshSkill ( level );
                     }
                 } else if ( playerLevel[ level ] > getLevelForXP ( playerXP[ level ] ) )
                 {
@@ -1735,8 +1709,8 @@ public class Client extends Player
                             continue;
                     }
                     playerLevel[ level ] -= 1;
-                    getPA ().setSkillLevel ( level, playerLevel[ level ], playerXP[ level ] );
-                    getPA ().refreshSkill ( level );
+                    getPlayerAssistant ().setSkillLevel ( level, playerLevel[ level ], playerXP[ level ] );
+                    getPlayerAssistant ().refreshSkill ( level );
                 }
             }
         }
@@ -1754,91 +1728,91 @@ public class Client extends Player
             int modY = absY > 6400 ? absY - 6400 : absY;
             wildLevel = ( ( ( modY - 3520 ) / 8 ) + 1 );
             EarningPotential.checkPotential ( this );
-            getPA ().walkableInterface ( 197 );
+            getPlayerAssistant ().walkableInterface ( 197 );
             if ( Config.SINGLE_AND_MULTI_ZONES )
             {
                 if ( inMulti () )
                 {
-                    getPA ().sendFrame126 ( "@yel@Level: " + wildLevel, 199 );
+                    getPlayerAssistant ().sendFrame126 ( "@yel@Level: " + wildLevel, 199 );
                 } else
                 {
-                    getPA ().sendFrame126 ( "@yel@Level: " + wildLevel, 199 );
+                    getPlayerAssistant ().sendFrame126 ( "@yel@Level: " + wildLevel, 199 );
                 }
             } else
             {
-                getPA ().multiWay ( -1 );
-                getPA ().sendFrame126 ( "@yel@Level: " + wildLevel, 199 );
+                getPlayerAssistant ().multiWay ( -1 );
+                getPlayerAssistant ().sendFrame126 ( "@yel@Level: " + wildLevel, 199 );
             }
-            getPA ().showOption ( 3, 0, "Attack", 1 );
+            getPlayerAssistant ().showOption ( 3, 0, "Attack", 1 );
         } else if ( !inWild () && !inDuelArena () && safeTimer <= 0 && !inGWD () && !inPcBoat () && !inPcGame () )
         { //this makes it so attack option is visible on wild and challenge in duel =)
-            getPA ().showOption ( 3, 0, "View shop", 1 );
-            getPA ().walkableInterface ( -1 );
+            getPlayerAssistant ().showOption ( 3, 0, "View shop", 1 );
+            getPlayerAssistant ().walkableInterface ( -1 );
         } else if ( !inWild () && safeTimer > 0 )
         {
-            getPA ().walkableInterface ( 197 );
+            getPlayerAssistant ().walkableInterface ( 197 );
             wildLevel = ( 60 );
-            getPA ().showOption ( 3, 0, "Attack", 1 );
-            getPA ().sendFrame126 ( "@or1@" + safeTimer, 199 );
+            getPlayerAssistant ().showOption ( 3, 0, "Attack", 1 );
+            getPlayerAssistant ().sendFrame126 ( "@or1@" + safeTimer, 199 );
         } else if ( inPcBoat () )
         {
-            getPA ().walkableInterface ( 21005 );
+            getPlayerAssistant ().walkableInterface ( 21005 );
         } else if ( inFunPk () )
         {
-            getPA ().walkableInterface ( 197 );
-            getPA ().sendFrame126 ( "@yel@FunPk", 199 );
-            getPA ().showOption ( 3, 0, "Attack", 1 );
+            getPlayerAssistant ().walkableInterface ( 197 );
+            getPlayerAssistant ().sendFrame126 ( "@yel@FunPk", 199 );
+            getPlayerAssistant ().showOption ( 3, 0, "Attack", 1 );
             wildLevel = 55;
         } else if ( inPcGame () )
         {
-            getPA ().walkableInterface ( 21100 );
+            getPlayerAssistant ().walkableInterface ( 21100 );
         } else if ( inDuelArena () )
         {
-            getPA ().walkableInterface ( 201 );
+            getPlayerAssistant ().walkableInterface ( 201 );
             if ( duelStatus == 5 )
             {
-                getPA ().showOption ( 3, 0, "Attack", 1 );
+                getPlayerAssistant ().showOption ( 3, 0, "Attack", 1 );
             } else
             {
-                getPA ().showOption ( 3, 0, "Challenge", 1 );
+                getPlayerAssistant ().showOption ( 3, 0, "Challenge", 1 );
             }
         } else if ( inFunPk () )
         {
-            getPA ().walkableInterface ( 197 );
-            getPA ().sendFrame126 ( "@yel@FunPk", 199 );
-            getPA ().showOption ( 3, 0, "Attack", 1 );
+            getPlayerAssistant ().walkableInterface ( 197 );
+            getPlayerAssistant ().sendFrame126 ( "@yel@FunPk", 199 );
+            getPlayerAssistant ().showOption ( 3, 0, "Attack", 1 );
         } else if ( inBarrows () )
         {
-            getPA ().sendFrame99 ( 2 );
-            getPA ().sendFrame126 ( "Kill Count: " + barrowsKillCount, 4536 );
-            getPA ().walkableInterface ( 4535 );
+            getPlayerAssistant ().sendFrame99 ( 2 );
+            getPlayerAssistant ().sendFrame126 ( "Kill Count: " + barrowsKillCount, 4536 );
+            getPlayerAssistant ().walkableInterface ( 4535 );
 
         } else if ( InDung () )
         {
-            getPA ().sendFrame126 ( "@gre@Dungeoneering", 199 );
+            getPlayerAssistant ().sendFrame126 ( "@gre@Dungeoneering", 199 );
 
         } else if ( inGWD () )
         {
-            getPA ().GWKC ();
+            getPlayerAssistant ().GWKC ();
 
 
         } else if ( safeZone () )
         {
-            getPA ().walkableInterface ( 197 );
-            getPA ().showOption ( 3, 0, "Attack", 1 );
+            getPlayerAssistant ().walkableInterface ( 197 );
+            getPlayerAssistant ().showOption ( 3, 0, "Attack", 1 );
             if ( Config.SINGLE_AND_MULTI_ZONES )
             {
                 if ( inMulti () )
                 {
-                    getPA ().sendFrame126 ( "@gre@SafeZone", 199 );
+                    getPlayerAssistant ().sendFrame126 ( "@gre@SafeZone", 199 );
                 } else
                 {
-                    getPA ().sendFrame126 ( "@gre@SafeZone", 199 );
+                    getPlayerAssistant ().sendFrame126 ( "@gre@SafeZone", 199 );
                 }
             } else
             {
-                getPA ().multiWay ( -1 );
-                getPA ().sendFrame126 ( "@gre@SafeZone", 199 );
+                getPlayerAssistant ().multiWay ( -1 );
+                getPlayerAssistant ().sendFrame126 ( "@gre@SafeZone", 199 );
             }
 
 
@@ -1846,8 +1820,8 @@ public class Client extends Player
         {
             int modY = absY > 6400 ? absY - 6400 : absY;
             wildLevel = 12;
-            getPA ().walkableInterface ( 197 );
-            getPA ().showOption ( 3, 0, "Attack", 1 );
+            getPlayerAssistant ().walkableInterface ( 197 );
+            getPlayerAssistant ().showOption ( 3, 0, "Attack", 1 );
             if ( Config.SINGLE_AND_MULTI_ZONES )
             {
                 if ( inMulti () )
@@ -1862,8 +1836,8 @@ public class Client extends Player
         {
             int modY = absY > 6400 ? absY - 6400 : absY;
             wildLevel = 12;
-            getPA ().walkableInterface ( 197 );
-            getPA ().showOption ( 3, 0, "Attack", 1 );
+            getPlayerAssistant ().walkableInterface ( 197 );
+            getPlayerAssistant ().showOption ( 3, 0, "Attack", 1 );
             if ( Config.SINGLE_AND_MULTI_ZONES )
             {
                 if ( inMulti () )
@@ -1878,8 +1852,8 @@ public class Client extends Player
         {
             int modY = absY > 6400 ? absY - 6400 : absY;
             wildLevel = 12;
-            getPA ().walkableInterface ( 197 );
-            getPA ().showOption ( 3, 0, "Attack", 1 );
+            getPlayerAssistant ().walkableInterface ( 197 );
+            getPlayerAssistant ().showOption ( 3, 0, "Attack", 1 );
             if ( Config.SINGLE_AND_MULTI_ZONES )
             {
                 if ( inMulti () )
@@ -1891,33 +1865,33 @@ public class Client extends Player
                 }
             } else
             {
-                getPA ().multiWay ( -1 );
+                getPlayerAssistant ().multiWay ( -1 );
                 HighAndLow ();
             }
-            getPA ().showOption ( 3, 0, "Attack", 1 );
+            getPlayerAssistant ().showOption ( 3, 0, "Attack", 1 );
         } else if ( inCwGame || inPits )
         {
-            getPA ().showOption ( 3, 0, "Attack", 1 );
-        } else if ( getPA ().inPitsWait () )
+            getPlayerAssistant ().showOption ( 3, 0, "Attack", 1 );
+        } else if ( getPlayerAssistant ().inPitsWait () )
         {
-            getPA ().showOption ( 3, 0, "Loading...", 1 );
+            getPlayerAssistant ().showOption ( 3, 0, "Loading...", 1 );
         } else if ( !inCwWait )
         {
-            getPA ().sendFrame99 ( 0 );
-            getPA ().walkableInterface ( -1 );
-            getPA ().showOption ( 3, 0, "Loading...", 1 );
+            getPlayerAssistant ().sendFrame99 ( 0 );
+            getPlayerAssistant ().walkableInterface ( -1 );
+            getPlayerAssistant ().showOption ( 3, 0, "Loading...", 1 );
         }
 
         if ( !hasMultiSign && inMulti () )
         {
             hasMultiSign = true;
-            getPA ().multiWay ( 1 );
+            getPlayerAssistant ().multiWay ( 1 );
         }
 
         if ( hasMultiSign && !inMulti () )
         {
             hasMultiSign = false;
-            getPA ().multiWay ( -1 );
+            getPlayerAssistant ().multiWay ( -1 );
         }
 
         if ( skullTimer > 0 )
@@ -1929,13 +1903,13 @@ public class Client extends Player
                 attackedPlayers.clear ();
                 headIconPk = -1;
                 skullTimer = -1;
-                getPA ().requestUpdates ();
+                getPlayerAssistant ().requestUpdates ();
             }
         }
 
         if ( isDead && respawnTimer == -6 )
         {
-            getPA ().applyDead ();
+            getPlayerAssistant ().applyDead ();
         }
         if ( specRestore > 0 )
         {
@@ -1946,7 +1920,7 @@ public class Client extends Player
         if ( respawnTimer == 7 )
         {
             respawnTimer = -6;
-            getPA ().giveLife ();
+            getPlayerAssistant ().giveLife ();
         } else if ( respawnTimer == 12 )
         {
             respawnTimer--;
@@ -1988,12 +1962,12 @@ public class Client extends Player
                 if ( teleTimer == 1 && newLocation > 0 )
                 {
                     teleTimer = 0;
-                    getPA ().changeLocation ();
+                    getPlayerAssistant ().changeLocation ();
                 }
                 if ( teleTimer == 5 )
                 {
                     teleTimer--;
-                    getPA ().processTeleport ();
+                    getPlayerAssistant ().processTeleport ();
                 }
                 if ( teleTimer == 9 && teleGfx > 0 )
                 {
@@ -2254,7 +2228,7 @@ public class Client extends Player
         return itemAssistant;
     }
 
-    public PlayerAssistant getPA ()
+    public PlayerAssistant getPlayerAssistant ()
     {
         return playerAssistant;
     }
@@ -2504,11 +2478,11 @@ public class Client extends Player
     {
         if ( inPcGame () )
         {
-            getPA ().movePlayer ( 2657, 2639, 0 );
+            getPlayerAssistant ().movePlayer ( 2657, 2639, 0 );
         }
         if ( inFightCaves () )
         {
-            getPA ().movePlayer ( absX, absY, playerId * 4 );
+            getPlayerAssistant ().movePlayer ( absX, absY, playerId * 4 );
             sendMessage ( "Your wave will start in 10 seconds." );
             EventManager.getSingleton ().addEvent ( new Event ()
             {
@@ -2523,7 +2497,7 @@ public class Client extends Player
 
         if ( inRFD () )
         {
-            getPA ().movePlayer ( 1899, 5363, playerId * 4 + 2 );
+            getPlayerAssistant ().movePlayer ( 1899, 5363, playerId * 4 + 2 );
             sendMessage ( "Your wave will start in 10 seconds." );
             EventManager.getSingleton ().addEvent ( new Event ()
             {

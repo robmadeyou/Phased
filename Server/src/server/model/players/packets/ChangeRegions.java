@@ -20,7 +20,7 @@ public class ChangeRegions implements PacketType {
 		if(c.skullTimer > 0) {
 			c.isSkulled = true;	
 			c.headIconPk = 0;
-			c.getPA().requestUpdates();
+			c.getPlayerAssistant ().requestUpdates();
 		}
 
 	}
