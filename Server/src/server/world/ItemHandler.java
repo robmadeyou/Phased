@@ -3,8 +3,6 @@ package server.world;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.File;
-import java.util.Scanner;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,8 +35,7 @@ public class ItemHandler
         {
             ItemList[ i ] = null;
         }
-        loadItemList ( "item.cfg" );
-        loadItemPrices ( "prices.txt" );
+        loadItemList ( "items.json" );
     }
 
     /**
@@ -368,30 +365,6 @@ public class ItemHandler
         ItemList[ slot ] = newItemList;
     }
 
-    public void loadItemPrices (String filename)
-    {
-        JsonArray obj = JsonHelper.getJsonArrayFromFilename ( "./Data/cfg/" + filename );
-        for( int i = 0; i < obj.size (); i++ )
-        {
-
-        }
-
-        try
-        {
-            Scanner s = new Scanner ( new File ( "./Data/cfg/" + filename ) );
-            while ( s.hasNextLine () )
-            {
-                String[] line = s.nextLine ().split ( " " );
-                ItemList temp = getItemList ( Integer.parseInt ( line[ 0 ] ) );
-                if ( temp != null )
-                    temp.ShopValue = Integer.parseInt ( line[ 1 ] );
-            }
-        } catch ( IOException e )
-        {
-            e.printStackTrace ();
-        }
-    }
-
     public ItemList getItemList (int i)
     {
         for ( int j = 0; j < ItemList.length; j++ )
@@ -409,88 +382,33 @@ public class ItemHandler
 
     public boolean loadItemList (String FileName)
     {
-        String line = "";
-        String token = "";
-        String token2 = "";
-        String token2_2 = "";
-        String[] token3 = new String[ 10 ];
-        boolean EndOfFile = false;
-        int ReadMode = 0;
-        BufferedReader characterfile = null;
-        try
+        JsonArray objects = JsonHelper.getJsonArrayFromFilename( "./Data/cfg/" + FileName );
+        for( int i = 0; i < objects.size(); i++ )
         {
-            characterfile = new BufferedReader ( new FileReader ( "./Data/cfg/" + FileName ) );
-        } catch ( FileNotFoundException fileex )
-        {
-            Misc.println ( FileName + ": file not found." );
-            return false;
+            JsonObject obj = objects.get( i ).getAsJsonObject();
+            int[] bonuses = {
+                    obj.get( "AStab" ).getAsInt(),
+                    obj.get( "ASlash" ).getAsInt(),
+                    obj.get( "ACrush" ).getAsInt(),
+                    obj.get( "AMagic" ).getAsInt(),
+                    obj.get( "ARange" ).getAsInt(),
+                    obj.get( "DStab" ).getAsInt(),
+                    obj.get( "DSlash" ).getAsInt(),
+                    obj.get( "DCrush" ).getAsInt(),
+                    obj.get( "DMagic" ).getAsInt(),
+                    obj.get( "DRange" ).getAsInt(),
+                    obj.get( "OStrength" ).getAsInt(),
+                    obj.get( "OPrayer" ).getAsInt(),
+            };
+            newItemList(
+                    obj.get( "ItemID" ).getAsInt(),
+                    obj.get( "Name" ).getAsString(),
+                    obj.get( "Examine" ).getAsString(),
+                    obj.get( "Price").getAsDouble(),
+                    obj.get( "LowAlch" ).getAsDouble(),
+                    obj.get( "HighAlch" ).getAsDouble(),
+                    bonuses );
         }
-        try
-        {
-            line = characterfile.readLine ();
-        } catch ( IOException ioexception )
-        {
-            Misc.println ( FileName + ": error loading file." );
-            return false;
-        }
-        while ( EndOfFile == false && line != null )
-        {
-            line = line.trim ();
-            int spot = line.indexOf ( "=" );
-            if ( spot > -1 )
-            {
-                token = line.substring ( 0, spot );
-                token = token.trim ();
-                token2 = line.substring ( spot + 1 );
-                token2 = token2.trim ();
-                token2_2 = token2.replaceAll ( "\t\t", "\t" );
-                token2_2 = token2_2.replaceAll ( "\t\t", "\t" );
-                token2_2 = token2_2.replaceAll ( "\t\t", "\t" );
-                token2_2 = token2_2.replaceAll ( "\t\t", "\t" );
-                token2_2 = token2_2.replaceAll ( "\t\t", "\t" );
-                token3 = token2_2.split ( "\t" );
-                if ( token.equals ( "item" ) )
-                {
-                    int[] Bonuses = new int[ 12 ];
-                    for ( int i = 0; i < 12; i++ )
-                    {
-                        if ( token3[ ( 6 + i ) ] != null )
-                        {
-                            Bonuses[ i ] = Integer.parseInt ( token3[ ( 6 + i ) ] );
-                        } else
-                        {
-                            break;
-                        }
-                    }
-                    newItemList ( Integer.parseInt ( token3[ 0 ] ), token3[ 1 ].replaceAll ( "_", " " ), token3[ 2 ].replaceAll ( "_", " " ), Double.parseDouble ( token3[ 4 ] ), Double.parseDouble ( token3[ 4 ] ), Double.parseDouble ( token3[ 6 ] ), Bonuses );
-                }
-            } else
-            {
-                if ( line.equals ( "[ENDOFITEMLIST]" ) )
-                {
-                    try
-                    {
-                        characterfile.close ();
-                    } catch ( IOException ioexception )
-                    {
-                    }
-                    return true;
-                }
-            }
-            try
-            {
-                line = characterfile.readLine ();
-            } catch ( IOException ioexception1 )
-            {
-                EndOfFile = true;
-            }
-        }
-        try
-        {
-            characterfile.close ();
-        } catch ( IOException ioexception )
-        {
-        }
-        return false;
+        return true;
     }
 }
