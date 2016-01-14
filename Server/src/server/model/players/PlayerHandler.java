@@ -251,8 +251,6 @@ public class PlayerHandler
                         players[ i ] = null;
                     } else
                     {
-                        Client o = ( Client ) Server.playerHandler.players[ i ];
-                        //if(o.g) {
                         if ( !players[ i ].initialized )
                         {
                             players[ i ].initialize ();
@@ -261,7 +259,6 @@ public class PlayerHandler
                         {
                             players[ i ].update ();
                         }
-                        //}
                     }
                 } catch ( Exception e )
                 {
@@ -297,7 +294,6 @@ public class PlayerHandler
 
     public void updateNPC (Player plr, Stream str)
     {
-        //synchronized(plr) {
         updateBlock.currentOffset = 0;
 
         str.createFrameVarSizeWord ( 65 );
@@ -308,7 +304,7 @@ public class PlayerHandler
         plr.npcListSize = 0;
         for ( int i = 0; i < size; i++ )
         {
-            if ( plr.RebuildNPCList == false && plr.withinDistance ( plr.npcList[ i ] ) == true )
+            if ( !plr.RebuildNPCList && plr.withinDistance ( plr.npcList[ i ] ) )
             {
                 plr.npcList[ i ].updateNPCMovement ( str );
                 plr.npcList[ i ].appendNPCUpdateBlock ( updateBlock );
@@ -353,14 +349,12 @@ public class PlayerHandler
             str.finishBitAccess ();
         }
         str.endFrameVarSizeWord ();
-        //}
     }
 
     private Stream updateBlock = new Stream ( new byte[ Config.BUFFER_SIZE ] );
 
     public void updatePlayer (Player plr, Stream str)
     {
-        //synchronized(plr) {
         updateBlock.currentOffset = 0;
         if ( updateRunning && !updateAnnounced )
         {
