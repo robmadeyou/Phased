@@ -837,7 +837,7 @@ public class DialogueHandler {
 			player.getActionSender().sendInterfaceAnimation(
 					sendNpcChatBase[s.length - 1], animId);
 			player.getActionSender().sendChatboxText(
-					NpcHandler.getNpcListName(c.talkingNpc),
+					NpcHandler.getNpcName(c.talkingNpc),
 					sendNpcChatBase[s.length - 1] + 1);
 			player.getActionSender().sendChatboxText(s[i],
 					sendNpcChatBase[s.length - 1] + i + 2);

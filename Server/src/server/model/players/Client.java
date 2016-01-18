@@ -913,7 +913,7 @@ public class Client extends Player
 
     public void CatchimpNpc (String npcName, int Net, int npcId, int itemId, int AmtExp, int Req, int playerId)
     {
-        npcName = Server.npcHandler.getNpcListName ( npcId );
+        npcName = Server.npcHandler.getNpcName(npcId);
         if ( System.currentTimeMillis () - foodDelay >= 1500 )
         { //anti spamm
             if ( playerLevel[ 21 ] >= Req )
@@ -957,7 +957,7 @@ public class Client extends Player
 
     public void CatchHunterNpc (String npcName, int Net, int npcId, int itemId, int AmtExp, int Req, int playerId)
     {
-        npcName = Server.npcHandler.getNpcListName ( npcId );
+        npcName = Server.npcHandler.getNpcName(npcId);
         if ( System.currentTimeMillis () - foodDelay >= 1500 )
         { //anti spamm
             if ( playerLevel[ 21 ] >= Req )

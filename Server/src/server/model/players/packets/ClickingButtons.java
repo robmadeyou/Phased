@@ -3271,7 +3271,7 @@ break;
 			
 			case 27209:			
 			c.forcedText = "[QC] My Slayer level is  " + c.getPlayerAssistant ().getLevelForXP(c.playerXP[18]) + ".";
-			c.sendMessage("I must slay another " + c.taskAmount + " " + Server.npcHandler.getNpcListName(c.slayerTask));
+			c.sendMessage("I must slay another " + c.taskAmount + " " + Server.npcHandler.getNpcName(c.slayerTask));
 			c.forcedChatUpdateRequired = true;
 			c.updateRequired = true;
 			break;

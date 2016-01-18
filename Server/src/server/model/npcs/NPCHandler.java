@@ -1,13 +1,13 @@
 package server.model.npcs;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import server.Config;
 import server.Server;
+import server.helpers.JsonHelper;
 import server.model.players.Client;
 import server.util.Misc;
 import server.world.map.VirtualWorld;
@@ -17,12 +17,10 @@ import server.event.EventContainer;
 
 public class NPCHandler
 {
-    public static int maxNPCs = 10000;
-    public static int maxListedNPCs = 10000;
+    public static int maxNPCs = 1000000;
     public static int random;
     public static int maxNPCDrops = 10000;
     public static NPC npcs[] = new NPC[ maxNPCs ];
-    public static NPCList NpcList[] = new NPCList[ maxListedNPCs ];
 
     public NPCHandler ()
     {
@@ -30,12 +28,8 @@ public class NPCHandler
         {
             npcs[ i ] = null;
         }
-        for ( int i = 0; i < maxListedNPCs; i++ )
-        {
-            NpcList[ i ] = null;
-        }
-        loadNPCList ( "./Data/cfg/npc.cfg" );
-        loadAutoSpawn ( "./Data/cfg/spawn-config.cfg" );
+
+        loadNPCList ( "./Data/cfg/npcs.json" );
     }
 
 
@@ -106,7 +100,7 @@ public class NPCHandler
         npcs[ slot ] = newNPC;
     }
 
-	
+
 /*public void spawnNpc3(Client c, int npcType, int x, int y, int heightLevel, int WalkingType, int HP, int maxHit, int attack, int defence, boolean attackPlayer, boolean headIcon, boolean summonFollow) {
 		// first, search for a free slot
 		int slot = -1;
@@ -135,7 +129,7 @@ public class NPCHandler
 		newNPC.spawnedBy = c.getId();
 		newNPC.underAttack = true;
 		newNPC.facePlayer(c.playerId);
-		if(headIcon) 
+		if(headIcon)
 			c.getPlayerAssistant().drawHeadicon(1, slot, 0, 0);
 		if (summonFollow) {
 			newNPC.summoner = true;
@@ -145,7 +139,7 @@ public class NPCHandler
 		}
 		if(attackPlayer) {
 			newNPC.underAttack = true;
-			if(c != null) {			
+			if(c != null) {
 				newNPC.killerId = c.playerId;
 			}
 		}
@@ -473,7 +467,7 @@ public class NPCHandler
     {
         switch ( npcs[ i ].npcType )
         {
-            case 7133://bork		
+            case 7133://bork
             case 3375:
             case 3934: //sea snake
             case 6032:// Nex
@@ -1313,12 +1307,12 @@ public class NPCHandler
             case 6297://Warped Tortoise
                 return 7091;
 
-            case 5229://Penance ranger 
-            case 5230://Penance ranger 
-            case 5231://Penance ranger 
-            case 5232://Penance ranger 
-            case 5233://Penance ranger 
-            case 5234://Penance ranger 
+            case 5229://Penance ranger
+            case 5230://Penance ranger
+            case 5231://Penance ranger
+            case 5232://Penance ranger
+            case 5233://Penance ranger
+            case 5234://Penance ranger
             case 5235://Penance ranger
             case 5236://Penance ranger
             case 5237://Penance ranger
@@ -1334,7 +1328,7 @@ public class NPCHandler
             case 5248://Queen Spawn
                 return 5093;
 
-            case 5452://Icelord 
+            case 5452://Icelord
             case 5453://Icelord
             case 5454://Icelord
             case 5455://Icelord
@@ -1346,11 +1340,11 @@ public class NPCHandler
 
             case 5691://Undead Lumberjack
             case 5699://Undead Lumberjack
-            case 5707://Undead Lumberjack 
-            case 5715://Undead Lumberjack 
-            case 5723://Undead Lumberjack 
-            case 5731://Undead Lumberjack 
-            case 5739://Undead Lumberjack 
+            case 5707://Undead Lumberjack
+            case 5715://Undead Lumberjack
+            case 5723://Undead Lumberjack
+            case 5731://Undead Lumberjack
+            case 5739://Undead Lumberjack
             case 5747://Undead Lumberjack
                 return 5972;
 
@@ -1389,18 +1383,18 @@ public class NPCHandler
 
             case 5176://Ogre Shaman
             case 5181://Ogre Shaman
-            case 5184://Ogre Shaman 
-            case 5187://Ogre Shaman 
-            case 5190://Ogre Shaman 
-            case 5193://Ogre Shaman 
+            case 5184://Ogre Shaman
+            case 5187://Ogre Shaman
+            case 5190://Ogre Shaman
+            case 5193://Ogre Shaman
                 return 361;
 
-            case 5214://Penance Fighter 
-            case 5215://Penance Fighter 
-            case 5216://Penance Fighter  
-            case 5217://Penance Fighter  
-            case 5218://Penance Fighter  
-            case 5219://Penance Fighter 
+            case 5214://Penance Fighter
+            case 5215://Penance Fighter
+            case 5216://Penance Fighter
+            case 5217://Penance Fighter
+            case 5218://Penance Fighter
+            case 5219://Penance Fighter
                 return 5098;
 
             case 1831://Cave Slime
@@ -1543,7 +1537,7 @@ public class NPCHandler
             case 9437://Decaying Avatar
                 return 11204;
 
-            case 1160://Kalphite Queen                 
+            case 1160://Kalphite Queen
                 return 6233;
 
             case 10775://Frost Dragon
@@ -1730,18 +1724,18 @@ public class NPCHandler
 
             case 1633://Pyrefiend
             case 1634://Pyrefiend
-            case 1635://Pyrefiend 
+            case 1635://Pyrefiend
             case 1636://Pyrefiend
                 return 1580;
 
             case 1648://Crawling Hand
             case 1649://Crawling Hand
             case 1650://Crawling Hand
-            case 1651://Crawling Hand 
+            case 1651://Crawling Hand
             case 1652://Crawling Hand
-            case 1654://Crawling Hand 
-            case 1655://Crawling Hand 
-            case 1656://Crawling Hand 
+            case 1654://Crawling Hand
+            case 1655://Crawling Hand
+            case 1656://Crawling Hand
             case 1657://Crawling Hand
                 return 9125;
 
@@ -2222,19 +2216,8 @@ public class NPCHandler
     }
 
 
-    public void newNPC (int npcType, int x, int y, int heightLevel, int WalkingType, int HP, int maxHit, int attack, int defence)
+    public void newNPC (int slot, int npcType, int x, int y, int heightLevel, int WalkingType, int HP, int maxHit, int attack, int defence, String name, int npcCombat )
     {
-        int slot = -1;
-        for ( int i = 1; i < maxNPCs; i++ )
-        {
-            if ( npcs[ i ] == null )
-            {
-                slot = i;
-                break;
-            }
-        }
-        if ( slot == -1 )
-            return;
         NPC newNPC = new NPC ( slot, npcType );
         newNPC.absX = x;
         newNPC.absY = y;
@@ -2247,29 +2230,10 @@ public class NPCHandler
         newNPC.maxHit = maxHit;
         newNPC.attack = attack;
         newNPC.defence = defence;
+        newNPC.name = name;
+        newNPC.npcCombat = npcCombat;
         npcs[ slot ] = newNPC;
     }
-
-    public void newNPCList (int npcType, String npcName, int combat, int HP)
-    {
-        int slot = -1;
-        for ( int i = 0; i < maxListedNPCs; i++ )
-        {
-            if ( NpcList[ i ] == null )
-            {
-                slot = i;
-                break;
-            }
-        }
-        if ( slot == -1 )
-            return;
-        NPCList newNPCList = new NPCList ( npcType );
-        newNPCList.npcName = npcName;
-        newNPCList.npcCombat = combat;
-        newNPCList.npcHealth = HP;
-        NpcList[ slot ] = newNPCList;
-    }
-
 
     public void process ()
     {
@@ -2693,7 +2657,7 @@ public class NPCHandler
                             }
                         }
 
-                    } else if ( npcs[ i ].actionTimer == 0 && npcs[ i ].needRespawn == true )
+                    } else if ( npcs[ i ].actionTimer == 0 && npcs[ i ].needRespawn )
                     {
                         if ( npcs[ i ].spawnedBy > 0 )
                         {
@@ -2717,9 +2681,11 @@ public class NPCHandler
                             int mHit = npcs[ i ].maxHit;
                             int attack = npcs[ i ].attack;
                             int defence = npcs[ i ].defence;
+                            String name =  npcs[ i ].name;
+                            int combat = npcs[ i ].npcCombat;
 
                             npcs[ i ] = null;
-                            newNPC ( type, x, y, height, walk, mHp, mHit, attack, defence );
+                            newNPC ( i, type, x, y, height, walk, mHp, mHit, attack, defence, name, combat );
                         }
                     }
                 }
@@ -4705,7 +4671,7 @@ public class NPCHandler
     }
 
     public boolean specialCase (Client c, int i)
-    { //responsible for npcs that much 
+    { //responsible for npcs that much
         if ( goodDistance ( npcs[ i ].getX (), npcs[ i ].getY (), c.getX (), c.getY (), 8 ) && !goodDistance ( npcs[ i ].getX (), npcs[ i ].getY (), c.getX (), c.getY (), distanceRequired ( i ) ) )
             return true;
         return false;
@@ -4881,7 +4847,7 @@ public class NPCHandler
                 c.playerLevel[ 3 ] -= damage;
                 c.getPlayerAssistant ().refreshSkill ( 3 );
                 c.updateRequired = true;
-                //c.setHitUpdateRequired(true);	
+                //c.setHitUpdateRequired(true);
             }
         }
     }
@@ -4985,188 +4951,38 @@ public class NPCHandler
     }
 
 
-    public boolean loadAutoSpawn (String FileName)
+    public String getNpcName(int npcId)
     {
-        String line = "";
-        String token = "";
-        String token2 = "";
-        String token2_2 = "";
-        String[] token3 = new String[ 10 ];
-        boolean EndOfFile = false;
-        int ReadMode = 0;
-        BufferedReader characterfile = null;
-        try
+        if( npcs[ npcId ] != null  )
         {
-            characterfile = new BufferedReader ( new FileReader ( "./" + FileName ) );
-        } catch ( FileNotFoundException fileex )
-        {
-            Misc.println ( FileName + ": file not found." );
-            return false;
-        }
-        try
-        {
-            line = characterfile.readLine ();
-        } catch ( IOException ioexception )
-        {
-            Misc.println ( FileName + ": error loading file." );
-            return false;
-        }
-        while ( EndOfFile == false && line != null )
-        {
-            line = line.trim ();
-            int spot = line.indexOf ( "=" );
-            if ( spot > -1 )
-            {
-                token = line.substring ( 0, spot );
-                token = token.trim ();
-                token2 = line.substring ( spot + 1 );
-                token2 = token2.trim ();
-                token2_2 = token2.replaceAll ( "\t\t", "\t" );
-                token2_2 = token2_2.replaceAll ( "\t\t", "\t" );
-                token2_2 = token2_2.replaceAll ( "\t\t", "\t" );
-                token2_2 = token2_2.replaceAll ( "\t\t", "\t" );
-                token2_2 = token2_2.replaceAll ( "\t\t", "\t" );
-                token3 = token2_2.split ( "\t" );
-                if ( token.equals ( "spawn" ) )
-                {
-                    newNPC ( Integer.parseInt ( token3[ 0 ] ), Integer.parseInt ( token3[ 1 ] ), Integer.parseInt ( token3[ 2 ] ), Integer.parseInt ( token3[ 3 ] ), Integer.parseInt ( token3[ 4 ] ), getNpcListHP ( Integer.parseInt ( token3[ 0 ] ) ), Integer.parseInt ( token3[ 5 ] ), Integer.parseInt ( token3[ 6 ] ), Integer.parseInt ( token3[ 7 ] ) );
-
-                }
-            } else
-            {
-                if ( line.equals ( "[ENDOFSPAWNLIST]" ) )
-                {
-                    try
-                    {
-                        characterfile.close ();
-                    } catch ( IOException ioexception )
-                    {
-                    }
-                    return true;
-                }
-            }
-            try
-            {
-                line = characterfile.readLine ();
-            } catch ( IOException ioexception1 )
-            {
-                EndOfFile = true;
-            }
-        }
-        try
-        {
-            characterfile.close ();
-        } catch ( IOException ioexception )
-        {
-        }
-        return false;
-    }
-
-    public int getNpcListHP (int npcId)
-    {
-        for ( int i = 0; i < maxListedNPCs; i++ )
-        {
-            if ( NpcList[ i ] != null )
-            {
-                if ( NpcList[ i ].npcId == npcId )
-                {
-                    return NpcList[ i ].npcHealth;
-                }
-            }
-        }
-        return 0;
-    }
-
-    public String getNpcListName (int npcId)
-    {
-        for ( int i = 0; i < maxListedNPCs; i++ )
-        {
-            if ( NpcList[ i ] != null )
-            {
-                if ( NpcList[ i ].npcId == npcId )
-                {
-                    return NpcList[ i ].npcName;
-                }
-            }
+            return npcs[ npcId ].name;
         }
         return "nothing";
     }
 
-    public boolean loadNPCList (String FileName)
+    public boolean loadNPCList (String fileName)
     {
-        String line = "";
-        String token = "";
-        String token2 = "";
-        String token2_2 = "";
-        String[] token3 = new String[ 10 ];
-        boolean EndOfFile = false;
-        int ReadMode = 0;
-        BufferedReader characterfile = null;
-        try
+        JsonArray array = JsonHelper.getJsonArrayFromFilename( fileName );
+
+        for( int i = 0; i < array.size(); i++ )
         {
-            characterfile = new BufferedReader ( new FileReader ( "./" + FileName ) );
-        } catch ( FileNotFoundException fileex )
-        {
-            Misc.println ( FileName + ": file not found." );
-            return false;
+            JsonObject obj = array.get( i ).getAsJsonObject();
+            newNPC (
+                    obj.get( "NpcID" ).getAsInt(),
+                    obj.get( "NpcID" ).getAsInt(),
+                    obj.get( "SpawnX" ).getAsInt(),
+                    obj.get( "SpawnY" ).getAsInt(),
+                    obj.get( "Height" ).getAsInt(),
+                    obj.get( "Walk" ).getAsInt(),
+                    obj.get( "Health" ).getAsInt(),
+                    obj.get( "MaxHit" ).getAsInt(),
+                    obj.get( "Attack" ).getAsInt(),
+                    obj.get( "Defence" ).getAsInt(),
+                    obj.get( "NpcName" ).getAsString(),
+                    obj.get( "Combat" ).getAsInt()
+                    );
         }
-        try
-        {
-            line = characterfile.readLine ();
-        } catch ( IOException ioexception )
-        {
-            Misc.println ( FileName + ": error loading file." );
-            return false;
-        }
-        while ( EndOfFile == false && line != null )
-        {
-            line = line.trim ();
-            int spot = line.indexOf ( "=" );
-            if ( spot > -1 )
-            {
-                token = line.substring ( 0, spot );
-                token = token.trim ();
-                token2 = line.substring ( spot + 1 );
-                token2 = token2.trim ();
-                token2_2 = token2.replaceAll ( "\t\t", "\t" );
-                token2_2 = token2_2.replaceAll ( "\t\t", "\t" );
-                token2_2 = token2_2.replaceAll ( "\t\t", "\t" );
-                token2_2 = token2_2.replaceAll ( "\t\t", "\t" );
-                token2_2 = token2_2.replaceAll ( "\t\t", "\t" );
-                token3 = token2_2.split ( "\t" );
-                if ( token.equals ( "npc" ) )
-                {
-                    newNPCList ( Integer.parseInt ( token3[ 0 ] ), token3[ 1 ], Integer.parseInt ( token3[ 2 ] ), Integer.parseInt ( token3[ 3 ] ) );
-                }
-            } else
-            {
-                if ( line.equals ( "[ENDOFNPCLIST]" ) )
-                {
-                    try
-                    {
-                        characterfile.close ();
-                    } catch ( IOException ioexception )
-                    {
-                    }
-                    return true;
-                }
-            }
-            try
-            {
-                line = characterfile.readLine ();
-            } catch ( IOException ioexception1 )
-            {
-                EndOfFile = true;
-            }
-        }
-        try
-        {
-            characterfile.close ();
-        } catch ( IOException ioexception )
-        {
-        }
-        return false;
+
+       return true;
     }
-
-
 }

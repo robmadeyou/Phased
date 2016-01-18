@@ -517,15 +517,8 @@ public class PlayerAssistant {
         c.poimiX = k;
     }
 
-    public String GetNpcName(int NpcID) {
-        for (int i = 0; i < NPCHandler.maxListedNPCs; i++) {
-            if (NPCHandler.NpcList[i] != null) {
-                if (NPCHandler.NpcList[i].npcId == NpcID) {
-                    return NPCHandler.NpcList[i].npcName;
-                }
-            }
-        }
-        return "NPC Not Listed" + NpcID;
+    public String GetNpcName( int npcID ) {
+        return Server.npcHandler.getNpcName( npcID );
     }
 
     public void sendQuest(String s, int id) {

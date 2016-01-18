@@ -48,6 +48,8 @@ public class NPC
     public int lastsummon;
     public int npcslot;
     public String forcedText;
+    public String name;
+    public int npcCombat;
 
 
     public NPC (int _npcId, int _npcType)
