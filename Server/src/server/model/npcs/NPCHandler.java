@@ -29,7 +29,7 @@ public class NPCHandler
             npcs[ i ] = null;
         }
 
-        loadNPCList ( "./Data/cfg/npcs.json" );
+        loadNPCList ( );
     }
 
 
@@ -4960,9 +4960,9 @@ public class NPCHandler
         return "nothing";
     }
 
-    public boolean loadNPCList (String fileName)
+    public boolean loadNPCList ()
     {
-        JsonArray array = JsonHelper.getJsonArrayFromFilename( fileName );
+        JsonArray array = JsonHelper.getJsonArrayFromFilename( "./Data/cfg/npcs.json" );
 
         for( int i = 0; i < array.size(); i++ )
         {
