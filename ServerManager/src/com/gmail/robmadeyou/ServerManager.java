@@ -20,10 +20,15 @@ public class ServerManager
         }
         try
         {
-            sock = new Socket ( "192.168.0.17", 4412 );
+            sock = new Socket ( args[0], Integer.parseInt ( args[1] ) );
 
+            String[] params = new String[args.length - 2];
+            for( int i = 2; i < args.length; i++ )
+            {
+                params[ i - 2 ] = args[ i ];
+            }
             PrintWriter os = new PrintWriter(sock.getOutputStream(), true);
-            os.println ( ServerManager.combine ( args, " " ) );
+            os.println ( ServerManager.combine ( params, " " ) );
 
             BufferedReader is = new BufferedReader(
                     new InputStreamReader( sock.getInputStream () ) );
