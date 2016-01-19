@@ -70,7 +70,8 @@ public class InputManager implements Runnable
         } ) );
 
         commands.add ( new Command ( "npc", (Command c) -> {
-            c.getArgs ().addArgument ( (String s) -> Server.npcDrops.reloadNpcDrops (), "-reload" );
+            c.getArgs ().addArgument ( (String s) -> Server.npcDrops.reloadNpcDrops (), "-reload-drops" );
+            c.getArgs ().addArgument( (String s ) -> Server.npcHandler.loadNPCList (  ), "-reload-npcs" );
         } ) );
     }
 
