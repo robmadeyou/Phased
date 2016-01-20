@@ -17,7 +17,7 @@ import server.event.EventContainer;
 
 public class NPCHandler
 {
-    public static int maxNPCs = 1000000;
+    public static int maxNPCs = 20000;
     public static int random;
     public static int maxNPCDrops = 10000;
     public static NPC npcs[] = new NPC[ maxNPCs ];
@@ -2216,8 +2216,23 @@ public class NPCHandler
     }
 
 
-    public void newNPC (int slot, int npcType, int x, int y, int heightLevel, int WalkingType, int HP, int maxHit, int attack, int defence, String name, int npcCombat )
+    public void newNPC ( int npcType, int x, int y, int heightLevel, int WalkingType, int HP, int maxHit, int attack, int defence, String name, int npcCombat )
     {
+        int slot = -1;
+        for ( int i = 1; i < maxNPCs; i++ )
+        {
+            if ( npcs[ i ] == null )
+            {
+                slot = i;
+                break;
+            }
+        }
+        if ( slot == -1 )
+        {
+            //Misc.println("No Free Slot");
+            return;        // no free slot found
+        }
+
         NPC newNPC = new NPC ( slot, npcType );
         newNPC.absX = x;
         newNPC.absY = y;
@@ -2685,7 +2700,7 @@ public class NPCHandler
                             int combat = npcs[ i ].npcCombat;
 
                             npcs[ i ] = null;
-                            newNPC ( i, type, x, y, height, walk, mHp, mHit, attack, defence, name, combat );
+                            newNPC ( type, x, y, height, walk, mHp, mHit, attack, defence, name, combat );
                         }
                     }
                 }
@@ -4968,7 +4983,6 @@ public class NPCHandler
         {
             JsonObject obj = array.get( i ).getAsJsonObject();
             newNPC (
-                    obj.get( "NpcID" ).getAsInt(),
                     obj.get( "NpcID" ).getAsInt(),
                     obj.get( "SpawnX" ).getAsInt(),
                     obj.get( "SpawnY" ).getAsInt(),
