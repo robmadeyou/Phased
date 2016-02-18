@@ -784,6 +784,7 @@ public class Client extends Player
             byte[] temp = new byte[ outStream.currentOffset ];
             System.arraycopy ( outStream.buffer, 0, temp, 0, temp.length );
             out.addBytes ( temp );
+            int id = out.toPacket ().getId ();
             session.write ( out.toPacket () );
             outStream.currentOffset = 0;
         }

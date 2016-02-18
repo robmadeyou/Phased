@@ -91,6 +91,11 @@ public class InputManager implements Runnable
         return "";
     }
 
+    public ArrayList<Command> getCommands()
+    {
+        return this.commands;
+    }
+
     public void run ()
     {
         Socket socket;

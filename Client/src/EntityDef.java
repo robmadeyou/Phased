@@ -11,23 +11,23 @@ public final class EntityDef
     public static Client clientInstance;
     public static MRUNodes mruNodes = new MRUNodes ( 30 );
     public final int anInt64 = 1834;
-    public int anInt55;
+    public int walkRightAnim;
     public int anInt57;
-    public int anInt58;
+    public int walkBackAnim;
     public int anInt59;
     public int combatLevel;
     public String name;
     public String itemActions[];
-    public int anInt67;
+    public int walkAnim;
     public byte aByte68;
     public int anIntArray70[];
     public int anIntArray73[];
     public int anInt75;
     public int anIntArray76[];
-    public int anInt77;
+    public int standAnim;
     public long interfaceType;
     public int anInt79;
-    public int anInt83;
+    public int walkLeftAnim;
     public boolean aBoolean84;
     public int anInt85;
     public int anInt86;
@@ -37,22 +37,22 @@ public final class EntityDef
     public int anInt91;
     public int anInt92;
     public boolean aBoolean93;
-    public int anIntArray94[];
+    public int armour[];
 
     public EntityDef ()
     {
-        anInt55 = -1;
+        walkRightAnim = -1;
         anInt57 = -1;
-        anInt58 = -1;
+        walkBackAnim = -1;
         anInt59 = -1;
         combatLevel = -1;
-        anInt67 = -1;
+        walkAnim = -1;
         aByte68 = 1;
         anInt75 = -1;
-        anInt77 = -1;
+        standAnim = -1;
         interfaceType = -1L;
         anInt79 = 32;
-        anInt83 = -1;
+        walkLeftAnim = -1;
         aBoolean84 = true;
         anInt86 = 128;
         aBoolean87 = true;
@@ -62,7 +62,6 @@ public final class EntityDef
 
     public static EntityDef forID (int i)
     {
-        //TODO move this over to a more appropriate location E.g npc config...
         for ( int j = 0; j < 20; j++ )
         {
             if ( cache[ j ].interfaceType == ( long ) i )
@@ -83,199 +82,25 @@ public final class EntityDef
             entitydef.readValues ( stream ); // Collect original NPC data
             entitydef.itemActions = new String[ 5 ];
             entitydef.itemActions[ 0 ] = "Talk To";
-            entitydef.anIntArray94 = new int[ 9 ];
-            entitydef.anIntArray94[ 0 ] = 65300;//Npc's Cape
-            entitydef.anIntArray94[ 1 ] = 65291;//Npc's Head
-            entitydef.anIntArray94[ 2 ] = 62746;//Npc's Plate
-            entitydef.anIntArray94[ 3 ] = 62743;//Npc's Legs
-            entitydef.anIntArray94[ 5 ] = 13319;//Npc's Gloves
-            entitydef.anIntArray94[ 6 ] = 53327;//Npc's Boots
-            entitydef.anIntArray94[ 7 ] = 53327;//Npc's Darkness(Shadow)
-            entitydef.anIntArray94[ 8 ] = 20147;//Npc's Arms(You Dont Have To Edit)
-            entitydef.anIntArray94[ 4 ] = 53327;//Weapon
-            entitydef.anInt67 = 7046; //Walk anim
-            entitydef.anInt58 = 7046; //Walkback anim
-            entitydef.anInt83 = 7046; //Walk left anim
-            entitydef.anInt55 = 7046; //walk right anim
+            entitydef.armour = new int[ 9 ];
+            entitydef.armour[ 0 ] = 65300;//Npc's Cape
+            entitydef.armour[ 1 ] = 65291;//Npc's Head
+            entitydef.armour[ 2 ] = 62746;//Npc's Plate
+            entitydef.armour[ 3 ] = 62743;//Npc's Legs
+            entitydef.armour[ 5 ] = 13319;//Npc's Gloves
+            entitydef.armour[ 6 ] = 53327;//Npc's Boots
+            entitydef.armour[ 7 ] = 53327;//Npc's Darkness(Shadow)
+            entitydef.armour[ 8 ] = 20147;//Npc's Arms(You Dont Have To Edit)
+            entitydef.armour[ 4 ] = 53327;//Weapon
+            entitydef.walkAnim = 7046; //Walk anim
+            entitydef.walkBackAnim = 7046; //Walkback anim
+            entitydef.walkLeftAnim = 7046; //Walk left anim
+            entitydef.walkRightAnim = 7046; //walk right anim
             entitydef.name = "Max";
             entitydef.combatLevel = 138;//Combat Level
             entitydef.description = "Aggroth's completionist master.".getBytes ();
         }
-        //NPC names
-        if ( i == 56 )
-        {
-            stream.currentOffset = streamIndices[ 630 ];
-            entitydef.aByte68 = 1;
-            entitydef.readValues ( stream ); // Collect original NPC data
-            entitydef.itemActions = new String[ 5 ];
-            entitydef.itemActions[ 0 ] = "Talk To";
-            entitydef.anIntArray94 = new int[ 9 ];
-            entitydef.anIntArray94[ 0 ] = 65300;//Npc's Cape
-            entitydef.anIntArray94[ 1 ] = 62738;//Npc's Head
-            entitydef.anIntArray94[ 2 ] = 62746;//Npc's Plate
-            entitydef.anIntArray94[ 3 ] = 62743;//Npc's Legs
-            entitydef.anIntArray94[ 4 ] = 5324;//Weapon
-            entitydef.anIntArray94[ 5 ] = 13319;//Npc's Gloves
-            entitydef.anIntArray94[ 6 ] = 53327;//Npc's Boots
-            entitydef.anIntArray94[ 7 ] = 53327;//Npc's Darkness(Shadow)
-            entitydef.anIntArray94[ 8 ] = 20147;//Npc's Arms(You Dont Have To Edit)
-            entitydef.anInt77 = 7047; //Stand anim
-            entitydef.anInt67 = 7046; //Walk anim
-            entitydef.anInt58 = 7046; //Walkback anim
-            entitydef.anInt83 = 7046; //Walk left anim
-            entitydef.anInt55 = 7046; //walk right anim
-            entitydef.name = "Shaloxis";
-            entitydef.combatLevel = 783;//Combat Level
-            entitydef.description = "Aggroth's strongest warrior.".getBytes ();
-        }
-        if ( i == 57 )
-        {
-            stream.currentOffset = streamIndices[ 630 ];
-            entitydef.aByte68 = 1;
-            entitydef.readValues ( stream ); // Collect original NPC data
-            entitydef.itemActions = new String[ 5 ];
-            entitydef.itemActions[ 1 ] = "Attack";
-            entitydef.anIntArray94 = new int[ 9 ];
-            entitydef.anIntArray94[ 0 ] = 65300;//Npc's Cape
-            entitydef.anIntArray94[ 1 ] = 62738;//Npc's Head
-            entitydef.anIntArray94[ 2 ] = 62746;//Npc's Plate
-            entitydef.anIntArray94[ 3 ] = 62743;//Npc's Legs
-            entitydef.anIntArray94[ 4 ] = 5324;//Weapon
-            entitydef.anIntArray94[ 5 ] = 13319;//Npc's Gloves
-            entitydef.anIntArray94[ 6 ] = 53327;//Npc's Boots
-            entitydef.anIntArray94[ 7 ] = 53327;//Npc's Darkness(Shadow)
-            entitydef.anIntArray94[ 8 ] = 20147;//Npc's Arms(You Dont Have To Edit)
-            entitydef.anInt77 = 7047; //Stand anim
-            entitydef.anInt67 = 7046; //Walk anim
-            entitydef.anInt58 = 7046; //Walkback anim
-            entitydef.anInt83 = 7046; //Walk left anim
-            entitydef.anInt55 = 7046; //walk right anim
-            entitydef.name = "Shaloxis";
-            entitydef.combatLevel = 783;//Combat Level
-            entitydef.description = "Aggroth's strongest warrior.".getBytes ();
-        }
-        if ( i == 598 )
-        {
-            entitydef.itemActions = new String[ 5 ];
-            entitydef.itemActions[ 0 ] = "Talk-to";
-            entitydef.itemActions[ 2 ] = "Teleport";
-            entitydef.name = "Boss teleporter";
-            entitydef.combatLevel = 138;//Combat Level
-            entitydef.description = "This person will teleport you to bosses, you may pick.".getBytes ();
-        }
-        if ( i == 597 )
-        {
-            entitydef.itemActions = new String[ 5 ];
-            entitydef.itemActions[ 0 ] = "Talk-to";
-            entitydef.itemActions[ 2 ] = "Teleport";
-            entitydef.name = "Boss teleporter";
-            entitydef.combatLevel = 138;//Combat Level
-            entitydef.description = "This person will teleport you to bosses, you may pick.".getBytes ();
-        }
-        if ( i == 2244 )
-        {
-            entitydef.itemActions = new String[ 5 ];
-            entitydef.itemActions[ 0 ] = "Talk-to";
-            entitydef.itemActions[ 2 ] = "PlayerStats";
-            entitydef.name = "Old John";
-            entitydef.combatLevel = 138;//Combat Level
-            entitydef.description = "Our oldest NPC.".getBytes ();
-        }
-        if ( i == 6032 )
-        {
-            stream.currentOffset = streamIndices[ 630 ];
-            entitydef.aByte68 = 1;
-            entitydef.readValues ( stream ); // Collect original NPC data
-            entitydef.itemActions = new String[ 5 ];
-            entitydef.itemActions[ 1 ] = "Attack";
-            entitydef.anIntArray94 = new int[ 1 ];
-            entitydef.anIntArray94[ 0 ] = 62717;//Npc's plate
-            entitydef.name = "Nex";
-            entitydef.combatLevel = 1001;//Combat Level
-            entitydef.description = "Even the gods fear it.".getBytes ();
-            entitydef.anInt77 = 6320;//stand animation
-            entitydef.anInt67 = 6319;//walk animation
-        }
-        if ( i == 251 )
-        { //Npc id
-            entitydef.itemActions = new String[ 5 ];
-            entitydef.itemActions[ 2 ] = "Trade with";
-            entitydef.name = "Milestone seller"; //Npc name
-            entitydef.description = "This NPC will sell you the capes you earned.".getBytes (); //Npc description
-        }
-        if ( i == 2830 )
-        { //Npc id
-            entitydef.itemActions = new String[ 5 ];
-            entitydef.itemActions[ 0 ] = "Talk to";
-            entitydef.name = "Points shop"; //Npc name
-            entitydef.description = "This NPC will sell you items for points.".getBytes (); //Npc description
-        }
-        if ( i == 304 )
-        { //Npc id
-            entitydef.itemActions = new String[ 5 ];
-            entitydef.itemActions[ 0 ] = "Talk to";
-            entitydef.name = "Skillcape shopkeeper"; //Npc name
-            entitydef.description = "This NPC sells skillcapes.".getBytes (); //Npc description
-        }
-        if ( i == 541 )
-        { //Npc id
-            entitydef.itemActions = new String[ 5 ];
-            entitydef.itemActions[ 0 ] = "Talk to";
-            entitydef.name = "Fight Shopkeeper"; //Npc name
-            entitydef.description = "This npc sells weapons and equipment for melee.".getBytes (); //Npc description
-        }
-        if ( i == 2258 )
-        { //Npc id
-            entitydef.itemActions = new String[ 5 ];
-            entitydef.itemActions[ 0 ] = "Talk to";
-            entitydef.itemActions[ 2 ] = "Teleport";
-            entitydef.name = "RuneCrafting Mage"; //Npc name
-            entitydef.description = "This NPC will teleport you to runecrafting locations.".getBytes (); //Npc description
-        }
-        if ( i == 252 )
-        { //Npc id
-            entitydef.itemActions = new String[ 5 ];
-            entitydef.itemActions[ 0 ] = "Talk to";
-            entitydef.itemActions[ 2 ] = "GodWars";
-            entitydef.name = "Weirdo"; //Npc name
-            entitydef.description = "That's a weirdo... keep walking.".getBytes (); //Npc description
-        }
-        if ( i == 8275 )
-        { //Npc id
-            entitydef.itemActions = new String[ 5 ];
-            entitydef.itemActions[ 0 ] = "Talk to";
-            entitydef.itemActions[ 2 ] = "Rewards";
-            entitydef.name = "Slayer Master"; //Npc name
-            entitydef.description = "The slayer master NPC Duradel will handle your Slayer Skill.".getBytes (); //Npc description
-        }
-        if ( i == 683 )
-        { //Npc id
-            entitydef.itemActions = new String[ 5 ];
-            entitydef.itemActions[ 0 ] = "Talk to";
-            entitydef.name = "Shopkeeper"; //Npc name
-            entitydef.description = "This npc sells weapons and equipment for ranging and magic.".getBytes (); //Npc description
-        }
-        if ( i == 519 )
-        { //Npc id
-            entitydef.itemActions = new String[ 5 ];
-            entitydef.itemActions[ 0 ] = "Talk to";
-            entitydef.name = "Bob"; //Npc name
-            entitydef.description = "This npc sells weapons and equipment for skilling.".getBytes (); //Npc description
-        }
-        if ( i == 1683 )
-        {
-            entitydef.name = "Financial Ghost";
-            entitydef.itemActions[ 0 ] = "Talk with";
-            entitydef.itemActions[ 2 ] = "Trade with";
-            entitydef.combatLevel = 0;
-        }
-        if ( i == 409 )
-        {
-            entitydef.name = "Reset Genie";
-            entitydef.itemActions[ 0 ] = "Reset Stat";
-            entitydef.description = "This person will reset your stats for a fee of 30M.".getBytes (); //Npc description
-            entitydef.combatLevel = 1;
-        }
+
         return entitydef;
     }
 
@@ -416,9 +241,9 @@ public final class EntityDef
         if ( model == null )
         {
             boolean flag = false;
-            for ( int k = 0; k < anIntArray94.length; k++ )
+            for ( int k = 0; k < armour.length; k++ )
             {
-                if ( !Model.method463 ( anIntArray94[ k ] ) )
+                if ( !Model.method463 ( armour[ k ] ) )
                 {
                     flag = true;
                 }
@@ -428,10 +253,10 @@ public final class EntityDef
             {
                 return null;
             }
-            Model amodel[] = new Model[ anIntArray94.length ];
-            for ( int l = 0; l < anIntArray94.length; l++ )
+            Model amodel[] = new Model[ armour.length ];
+            for ( int l = 0; l < armour.length; l++ )
             {
-                amodel[ l ] = Model.method462 ( anIntArray94[ l ] );
+                amodel[ l ] = Model.method462 ( armour[ l ] );
             }
 
             if ( amodel.length == 1 )
@@ -488,11 +313,11 @@ public final class EntityDef
             if ( i == 1 )
             {
                 int j = bytebuffer.readUnsignedByte ();
-                anIntArray94 = new int[ j ];
+                armour = new int[ j ];
                 int j1 = 0;
                 while ( j1 < j )
                 {
-                    anIntArray94[ j1 ] = bytebuffer.readUnsignedWord ();
+                    armour[ j1 ] = bytebuffer.readUnsignedWord ();
                     j1++;
                 }
             } else if ( i == 2 )
@@ -506,31 +331,31 @@ public final class EntityDef
                 aByte68 = bytebuffer.readSignedByte ();
             } else if ( i == 13 )
             {
-                anInt77 = bytebuffer.readUnsignedWord ();
+                standAnim = bytebuffer.readUnsignedWord ();
             } else if ( i == 14 )
             {
-                anInt67 = bytebuffer.readUnsignedWord ();
+                walkAnim = bytebuffer.readUnsignedWord ();
             } else if ( i == 17 )
             {
-                anInt67 = bytebuffer.readUnsignedWord ();
-                anInt58 = bytebuffer.readUnsignedWord ();
-                anInt83 = bytebuffer.readUnsignedWord ();
-                anInt55 = bytebuffer.readUnsignedWord ();
-                if ( anInt67 == 65535 )
+                walkAnim = bytebuffer.readUnsignedWord ();
+                walkBackAnim = bytebuffer.readUnsignedWord ();
+                walkLeftAnim = bytebuffer.readUnsignedWord ();
+                walkRightAnim = bytebuffer.readUnsignedWord ();
+                if ( walkAnim == 65535 )
                 {
-                    anInt67 = -1;
+                    walkAnim = -1;
                 }
-                if ( anInt58 == 65535 )
+                if ( walkBackAnim == 65535 )
                 {
-                    anInt58 = -1;
+                    walkBackAnim = -1;
                 }
-                if ( anInt83 == 65535 )
+                if ( walkLeftAnim == 65535 )
                 {
-                    anInt83 = -1;
+                    walkLeftAnim = -1;
                 }
-                if ( anInt55 == 65535 )
+                if ( walkRightAnim == 65535 )
                 {
-                    anInt55 = -1;
+                    walkRightAnim = -1;
                 }
             } else if ( i >= 30 && i < 40 )
             {

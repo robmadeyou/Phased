@@ -3,12 +3,10 @@
 // Decompiler options: packimports(3) 
 
 import java.applet.AppletContext;
-import java.awt.*;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.io.*;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -18,7 +16,6 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.lang.*;
 import java.lang.Character;
 import java.lang.Class;
 import java.lang.Exception;
@@ -32,7 +29,6 @@ import java.lang.String;
 import java.lang.StringBuilder;
 import java.lang.System;
 import java.lang.Thread;
-import java.net.*;
 import java.lang.reflect.Method;
 import java.net.InetAddress;
 import java.net.Socket;
@@ -40,7 +36,6 @@ import java.net.URL;
 
 import sign.signlink;
 
-import javax.swing.*;
 import javax.swing.JOptionPane;
 
 public class Client extends RSApplet
@@ -4419,17 +4414,17 @@ public class Client extends RSApplet
             if ( i1 > 15 )
                 i1 -= 32;
             int j1 = stream.readBits ( 1 );
-            npc.desc = EntityDef.forID ( stream.readBits ( 14 ) );//NPC FIX
+            npc.desc = EntityDef.forID ( stream.readBits ( 14 ) );
             int k1 = stream.readBits ( 1 );
             if ( k1 == 1 )
                 anIntArray894[ anInt893++ ] = k;
             npc.anInt1540 = npc.desc.aByte68;
             npc.anInt1504 = npc.desc.anInt79;
-            npc.anInt1554 = npc.desc.anInt67;
-            npc.anInt1555 = npc.desc.anInt58;
-            npc.anInt1556 = npc.desc.anInt83;
-            npc.anInt1557 = npc.desc.anInt55;
-            npc.anInt1511 = npc.desc.anInt77;
+            npc.anInt1554 = npc.desc.walkAnim;
+            npc.anInt1555 = npc.desc.walkBackAnim;
+            npc.anInt1556 = npc.desc.walkLeftAnim;
+            npc.anInt1557 = npc.desc.walkRightAnim;
+            npc.anInt1511 = npc.desc.standAnim;
             npc.setPos ( myPlayer.smallX[ 0 ] + i1, myPlayer.smallY[ 0 ] + l, j1 == 1 );
         }
         stream.finishBitAccess ();
@@ -10407,11 +10402,11 @@ public class Client extends RSApplet
                 npc.desc = EntityDef.forID ( stream.method436 () );
                 npc.anInt1540 = npc.desc.aByte68;
                 npc.anInt1504 = npc.desc.anInt79;
-                npc.anInt1554 = npc.desc.anInt67;
-                npc.anInt1555 = npc.desc.anInt58;
-                npc.anInt1556 = npc.desc.anInt83;
-                npc.anInt1557 = npc.desc.anInt55;
-                npc.anInt1511 = npc.desc.anInt77;
+                npc.anInt1554 = npc.desc.walkAnim;
+                npc.anInt1555 = npc.desc.walkBackAnim;
+                npc.anInt1556 = npc.desc.walkLeftAnim;
+                npc.anInt1557 = npc.desc.walkRightAnim;
+                npc.anInt1511 = npc.desc.standAnim;
             }
             if ( ( l & 4 ) != 0 )
             {
