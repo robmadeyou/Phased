@@ -15831,8 +15831,6 @@ public class Client extends RSApplet
 
     private boolean parsePacket ()
     {
-
-
         if ( socketStream == null )
             return false;
         try
