@@ -78,6 +78,7 @@ public class NPCDrops {
 		constantDrops = new HashMap<>();
 		dropRarity = new HashMap<>();
 		this.loadDrops();
+		this.loadConstants ();
 	}
 	
 	public void loadConstants() {

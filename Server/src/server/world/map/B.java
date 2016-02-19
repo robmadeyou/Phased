@@ -15,7 +15,6 @@ public class B
 
     public static final void I()
     {
-        String s = "";
         int i = 0;
         try
         {

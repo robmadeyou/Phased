@@ -113,28 +113,8 @@ public class Server
         debugPercentFormat = new DecimalFormat ( "0.0#%" );
     }
 
-    //height,absX,absY,toAbsX,toAbsY,type
-    /*public static final boolean checkPos(int height,int absX,int absY,int toAbsX,int toAbsY,int type)
-    {
-        return I.I(height,absX,absY,toAbsX,toAbsY,type);
-    }*/
     public static void main (java.lang.String args[]) throws NullPointerException, IOException
     {
-        if ( Config.USE_MYSQL_SHIT )
-        {
-            md = new MadTurnipConnection ();
-            md.start ();
-            System.out.println ( "[Auto Donation]Processing" );
-            Highscores.process ();
-            vote = new MainLoader ( "aggroth.com", "aggrothc_vote", "aggrothpassword", "aggrothc_vote" );
-            if ( Highscores.connected )
-            {
-                System.out.println ( "[Highscores]Connected to MySQL Database!" );
-            } else
-            {
-                System.out.println ( "[Highscores]Failed to connect to MySQL Database!" );
-            }
-        }
         Runtime.getRuntime ().addShutdownHook ( new Thread ()
         {
             public void run ()
@@ -162,13 +142,6 @@ public class Server
 
         System.setOut ( new Logger ( System.out ) );
         System.setErr ( new Logger ( System.err ) );
-
-        /**
-         * World Map Loader
-         */
-        //if(!Config.SERVER_DEBUG)
-        //VirtualWorld.init();
-        //WorldMap.loadWorldMap();
 
         /**
          * Script Loader
