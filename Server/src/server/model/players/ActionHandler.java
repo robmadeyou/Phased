@@ -81,13 +81,7 @@ public class ActionHandler {
 		c.sendMessage("You found a butterfly Net!");
 		c.getItems().addItem(10010, 1);
 		break;
-		
-		/*case 9398://deposit
-	c.getPlayerAssistant().sendFrame126("The Bank of Aggroth - Deposit Box", 7421);
-	c.getPlayerAssistant().sendFrame248(4465, 197);//197 just because you can't see it =\
-	c.getItems().resetItems(7423);
-break;*/
-				
+
 		case 2286:
 		c.getPlayerAssistant ().movePlayer(2595, 4778, 0);
 		c.getItems().addItem(995, 2000);
