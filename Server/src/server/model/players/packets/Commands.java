@@ -212,15 +212,6 @@ public class Commands implements PacketType {
                 }
             }
         }
-        if (playerCommand.equalsIgnoreCase("claimdonation")) {
-            if (!Config.USE_MYSQL_SHIT) {
-                c.sendMessage("Sk8rdude461 says: Enable MySQL in Config.java for this command to work");
-                return;
-            }
-            MadTurnipConnection.addDonateItems(c, c.playerName);
-            c.sendMessage("<col=255>[DONATE] Searching for package...</col>");
-            c.sendMessage("<col=255>[DONATE] Packages found:</col>");
-        }
 
         if (playerCommand.equalsIgnoreCase("players")) {
             c.sendMessage("There are currently " + PlayerHandler.getPlayerCount() + " players online.");
@@ -278,53 +269,8 @@ public class Commands implements PacketType {
             c.taskAmount = -1; //vars
             c.slayerTask = 0;  //vars
             c.sendMessage("Your task has been reset to 0.");
-        } //end
-        if (playerCommand.equalsIgnoreCase("check") || playerCommand.equalsIgnoreCase("reward") || playerCommand.equalsIgnoreCase("claim")) {
-            if (!Config.USE_MYSQL_SHIT) {
-                c.sendMessage("Sk8rdude461 says: Enable MySQL in Config.java for this command to work");
-                return;
-            }
-            try {
-                VoteReward reward = Server.vote.hasVoted(c.playerName.replaceAll(" ", "_"));
-                if (reward != null) {
-                    switch (reward.getReward()) {
-                        case 0:
-                            c.getItems().addItem(995, 5000000);
-                            c.sendMessage("[VOTE]You have picked reward 1, and 5 million GP is banked.");
-                            c.getPlayerAssistant().yell("" + Misc.optimizeText(c.playerName) + " has just voted, you can vote too by using ::vote!");
-                            break;
-                        case 1:
-                            c.votePoints += 3;
-                            c.sendMessage("<col=255>[VOTE] You have picked reward 2, and you have gained 2 vote points.</col>");
-                            c.getPlayerAssistant().yell("" + Misc.optimizeText(c.playerName) + " has just voted, you can vote too by using ::vote!");
-                            break;
-                        case 2:
-                            c.getItems().addItem(6199, 1);
-                            c.sendMessage("[VOTE]You have picked reward 3, and gained a Mystery Box.");
-                            c.getPlayerAssistant().yell("" + Misc.optimizeText(c.playerName) + " has just voted, you can vote too by using ::vote!");
-                            break;
-                        case 3:
-                            c.getItems().addItem(290, 1);
-                            c.sendMessage("[VOTE]You have picked reward 1, and gained a Charm Box.");
-                            c.getPlayerAssistant().yell("" + Misc.optimizeText(c.playerName) + " has just voted, you can vote too by using ::vote!");
-                            break;
-                        case 4:
-                            c.getItems().addItem(989, 1);
-                            c.sendMessage("[VOTE]You have picked reward 1, and gained a Crystal Key!");
-                            c.getPlayerAssistant().yell("" + Misc.optimizeText(c.playerName) + " has just voted, you can vote too by using ::vote!");
-                            break;
-                        default:
-                            c.sendMessage("<col=255>[VOTE] Reward not found.</col>");
-                            break;
-                    }
-                } else {
-                    c.sendMessage("<col=255>[VOTE] You have not voted yet, please do so on http://aggroth.com/vote.</col>");
-                }
-            } catch (Exception e) {
-                c.sendMessage("<col=255>[VOTE] A SQL error has occured, please let a staff member know.</col>");
-            }
         }
-    }//Closes method - Do not touch
+    }
 
     public void BronzedonatorCommands(Client c, String playerCommand) {//Opens method - Do not touch
         if (playerCommand.equalsIgnoreCase("mypos")) {

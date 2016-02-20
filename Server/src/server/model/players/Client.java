@@ -1002,14 +1002,6 @@ public class Client extends Player
     public void initialize ()
     {
         Server.panel.addEntity ( playerName );
-        if ( Config.USE_MYSQL_SHIT )
-        {
-            MadTurnipConnection.addDonateItems ( this, playerName );
-            PlayersOnline.createCon ();
-            PlayersOnline.offline ( this );
-            PlayersOnline.online ( this );
-            PlayersOnline.destroyCon ();
-        }
         if ( playerRights == 0 )
         {
             getDH ().sendDialogues ( 1336, 2244 );

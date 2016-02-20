@@ -5,13 +5,11 @@ import java.net.InetSocketAddress;
 
 import com.sun.org.apache.xpath.internal.SourceTree;
 import server.helpers.StringHelper;
-import server.util.InputManager;
-import server.util.MadTurnipConnection;
+import server.util.*;
 
 import java.text.DecimalFormat;
 import java.util.Scanner;
 
-import server.util.ControlPanel;
 import server.model.players.Highscores;
 import server.model.players.Client;
 import org.Vote.*;
@@ -27,7 +25,6 @@ import server.model.players.PlayerSave;
 import server.model.minigames.*;
 import server.net.ConnectionHandler;
 import server.net.ConnectionThrottleFilter;
-import server.util.SimpleTimer;
 import server.util.log.Logger;
 import server.world.PublicEvent;
 import server.world.ItemHandler;
@@ -136,21 +133,9 @@ public class Server
             ex.printStackTrace ();
         }
 
-        /**
-         * Starting Up Server
-         */
-
         System.setOut ( new Logger ( System.out ) );
         System.setErr ( new Logger ( System.err ) );
 
-        /**
-         * Script Loader
-         */
-        //ScriptManager.loadScripts();
-
-        /**
-         * Accepting Connections
-         */
         acceptor = new SocketAcceptor ();
         connectionHandler = new ConnectionHandler ();
 
@@ -163,18 +148,8 @@ public class Server
         sac.getFilterChain ().addFirst ( "throttleFilter", throttleFilter );
         acceptor.bind ( new InetSocketAddress ( serverlistenerPort ), connectionHandler, sac );
 
-        /**
-         * Initialise Handlers
-         */
-        //VoteForCash.createConnection();
         EventManager.initialize ();
         Connection.initialize ();
-        //PlayerSaving.initialize();
-        //MysqlManager.createConnection();
-
-        /**
-         * Clipped Following (NPC)
-         */
         try
         {
             WalkingHandler.getSingleton ().initialize ();
@@ -214,9 +189,7 @@ public class Server
                     sleepTime = 0;
                 totalCycleTime += cycleTime;
                 cycles++;
-                debug ();
-                if ( Config.SERVER_DEBUG ) //i see.... i used wrong symbol lol LOL !
-                    //System.out.println(cycleTime+"--"+sleepTime);
+                if ( Config.SERVER_DEBUG )
                     seconds++;
                 if ( seconds == 120 )
                 {
@@ -275,91 +248,17 @@ public class Server
         }
         acceptor = null;
         connectionHandler = null;
-        sac = null;
         System.exit ( 0 );
     }
 
     public static String getUptime()
     {
-        int s, m, h, d, o, y;
-        String[] builder = new String[6];
-
         long diff = System.currentTimeMillis () - Server.startTime;
-
-        s = (int)Math.floor ( (double) ( diff / 1000 ) ) % 60;
-        m = (int)Math.floor ( (double) ( diff / 1000 / 60 ) ) % 60;
-        h = (int)Math.floor ( (double) ( diff / 1000 / 60 / 60 ) ) % 24;
-        d = (int)Math.floor ( (double) ( diff / 1000 / 60 / 60 / 24 ) ) % 30;
-        o = (int)Math.floor ( (double) ( diff / 1000 / 60 / 60 / 24 / 30 ) ) % 12;
-        y = (int)Math.floor ( (double) ( diff / 1000 / 60 / 60 / 24 / 30 / 12 ) );
-
-        if( y != 0 )
-        {
-            builder[0] = y + " " + StringHelper.pluralize ( y, "year" );
-        }
-
-        if( o != 0 )
-        {
-            builder[1] = o + " " + StringHelper.pluralize ( o, "month" );
-        }
-
-        if( d != 0 )
-        {
-            builder[2] = d + " " + StringHelper.pluralize ( d, "day" );
-        }
-
-        if( h != 0 )
-        {
-            builder[3] = h + " " + StringHelper.pluralize ( h, "hour" );
-        }
-
-        if( m != 0 )
-        {
-            builder[4] = m + " " + StringHelper.pluralize ( m, "minute" );
-        }
-
-        if( s != 0 )
-        {
-            builder[5] = s + " " + StringHelper.pluralize ( s, "second" );
-        }
-
-        return StringHelper.combine ( builder, ", " );
-    }
-
-    public static void processAllPackets ()
-    {
-        for ( int j = 0; j < playerHandler.players.length; j++ )
-        {
-            if ( playerHandler.players[ j ] != null )
-            {
-                while ( playerHandler.players[ j ].processQueuedPackets () )
-                    ;
-            }
-        }
-    }
-
-    public static boolean playerExecuted = false;
-
-    private static void debug ()
-    {
-        if ( debugTimer.elapsed () > 360 * 1000 || playerExecuted )
-        {
-            long averageCycleTime = totalCycleTime / cycles;
-            System.out.println ( "Average Cycle Time: " + averageCycleTime + "ms" );
-            double engineLoad = ( ( double ) averageCycleTime / ( double ) cycleRate );
-            System.out.println ( "Players online: " + PlayerHandler.playerCount + ", engine load: " + debugPercentFormat.format ( engineLoad ) );
-            totalCycleTime = 0;
-            cycles = 0;
-            System.gc ();
-            System.runFinalization ();
-            debugTimer.reset ();
-            playerExecuted = false;
-        }
+        return Time.unixToString( diff );
     }
 
     public static long getSleepTimer ()
     {
         return sleepTime;
     }
-
 }

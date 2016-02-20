@@ -133,11 +133,4 @@ public class EventManager implements Runnable {
 		}
 	}
 
-	/**
-	 * Shuts the event manager down.
-	 */
-	public void shutdown() {
-		this.thread.interrupt();
-	}
-
 }
