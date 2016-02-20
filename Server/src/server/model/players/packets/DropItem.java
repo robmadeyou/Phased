@@ -23,10 +23,6 @@ public class DropItem implements PacketType {
             c.sendMessage("You can't drop items inside the arena!");
             return;
         }
-        if (c.playerName.equalsIgnoreCase("")) {
-            c.sendMessage("Your dropping has been disabled by Ryan.");
-            return;
-        }
         if (c.InDung()) {
             c.sendMessage("You can't drop items inside Dung!");
             return;

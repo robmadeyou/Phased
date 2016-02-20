@@ -2034,41 +2034,6 @@ public class Client extends Player
         currentTask = task;
     }
 
-    public Future< ? > getCurrentTask ()
-    {
-        return currentTask;
-    }
-
-    @SuppressWarnings( "null" )
-    public void WalkTo (int x, int y)
-    {
-        newWalkCmdSteps = ( Math.abs ( ( x + y ) ) );
-        if ( newWalkCmdSteps % 1 != 0 )
-            newWalkCmdSteps /= 1;
-        if ( ++newWalkCmdSteps > walkingQueueSize )
-        {
-            println ( "Warning: WalkTo command contains too many steps (" + newWalkCmdSteps + ")." );
-            newWalkCmdSteps = 0;
-        }
-        int firstStepX = absX;
-        firstStepX -= mapRegionX * 8;
-
-        for ( int i = 1; i < newWalkCmdSteps; i++ )
-        {
-            newWalkCmdX[ i ] = x;
-            newWalkCmdY[ i ] = y;
-        }
-        newWalkCmdX[ 0 ] = newWalkCmdY[ 0 ];
-        int firstStepY = absY;
-        firstStepY -= mapRegionY * 8;
-        newWalkCmdIsRunning = ( ( inStream.readSignedByteC () == 1 ) );
-        for ( int q = 0; q < newWalkCmdSteps; q++ )
-        {
-            newWalkCmdX[ q ] += firstStepX;
-            newWalkCmdY[ q ] += firstStepY;
-        }
-    }
-
     public void FetchDice ()
     {
         int rnd;

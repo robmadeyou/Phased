@@ -36,8 +36,8 @@ public class Crafting {
 					c.getItems().addItem(gems[j][1], 1);
 					c.getPlayerAssistant ().addSkillXP(gems[j][3] * Config.CRAFTING_EXPERIENCE, c.playerCrafting);
 					break;
-				}			
-			}		
+				}
+			}
 		}
 	}
 	
