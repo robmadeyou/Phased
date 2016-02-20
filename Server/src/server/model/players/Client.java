@@ -1245,11 +1245,6 @@ public class Client extends Player
 
     public void logout ()
     {
-        //highscores start/
-        ConnectedFrom.addConnectedFrom ( this, connectedFrom );
-        //Highscores.process();
-        Highscores.save ( this );
-        //Highscores end
         synchronized ( this )
         {
             if ( System.currentTimeMillis () - logoutDelay > 10000 )

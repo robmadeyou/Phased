@@ -829,9 +829,6 @@ public class Commands implements PacketType {
             String[] args = playerCommand.split(" ");
             c.getPlayerAssistant().showInterface(Integer.parseInt(args[1]));
         }
-        if (playerCommand.startsWith("savehighscores")) {
-            Highscores.process();
-        }
         if (playerCommand.startsWith("who")) {
             try {
                 String playerToCheck = playerCommand.substring(4);
