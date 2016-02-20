@@ -48,11 +48,6 @@ public class DropItem implements PacketType {
                 if (c.getShops().getItemShopValue(itemId) > 0) {
                     c.droppedItem = itemId;
                     c.getPlayerAssistant().dropItem(itemId);
-                    return;
-            /*if(c.playerItemsN[slot] != 0 && itemId != -1 && c.playerItems[slot] == itemId + 1) {
-			if(!c.getItems().playerHasItem(itemId,1,slot)) {
-			c.sendMessage("Stop cheating!");
-			return;*/
                 }
             }
         }
