@@ -1,5 +1,6 @@
 package server.model.players;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -186,39 +187,6 @@ public class Client extends Player {
     public static int torvaBoost = 50;
     public static String[] rankPpl = new String[11];
 
-    public void applyFollowing() {
-        if (follow2 > 0) {
-            //Client p = Server.playerHandler.client[followId];
-            Client p = (Client) Server.playerHandler.players[follow2];
-            if (p != null) {
-                if (isDead) {
-                    follow(0, 3, 1);
-                    return;
-                }
-                if (!goodDistance(p.absX, p.absY, absX, absY, 25)) {
-                    follow(0, 3, 1);
-                    return;
-                }
-            } else if (p == null) {
-                follow(0, 3, 1);
-            }
-        } else if (follow2 > 0) {
-            //Server.npcHandler.npcs.NPC npc = Server.npcHandler.npcs[followId2];
-            if (Server.npcHandler.npcs[followId2] != null) {
-                if (Server.npcHandler.npcs[followId2].isDead) {
-                    follow(0, 3, 1);
-                    return;
-                }
-                if (!goodDistance(Server.npcHandler.npcs[followId2].absX, Server.npcHandler.npcs[followId2].absY, absX, absY, 25)) {
-                    follow(0, 3, 1);
-                    return;
-                }
-            } else if (Server.npcHandler.npcs[followId2] == null) {
-                follow(0, 3, 1);
-            }
-        }
-    }
-
     public int followDistance = 0;
 
     public void follow(int slot, int type, int distance) {
@@ -264,6 +232,31 @@ public class Client extends Player {
             }
         }
         return null;
+    }
+
+    public ArrayList<Skill> getSkillHandlers()
+    {
+        ArrayList<Skill> builder = new ArrayList<>();
+
+        builder.add(getAgility());
+        builder.add(getCooking());
+        builder.add(getFarming());
+        builder.add(getFiremaking());
+        builder.add(getFishing());
+        builder.add(getFletching());
+        builder.add(getHerblore());
+        builder.add(getMining());
+        builder.add(getPrayer());
+        builder.add(getProspecting());
+        builder.add(getRunecrafting());
+        builder.add(getSlayer());
+        builder.add(getSmithing());
+        builder.add(getSmithingInterface());
+        builder.add(getSummoning());
+        builder.add(getThieving());
+        builder.add(getWoodcutting());
+
+        return builder;
     }
 
     public Client getClient(int id) {
