@@ -3662,7 +3662,7 @@ break;
 		3, // Sap Mage
 		3, // Sap Spirit
 		2, // Berserker
-		3, // Deflect Summoning
+		3, // Deflect summoning
 		3, // Deflect Mage
 		3, // Deflect Range
 		3, // Deflect Melee

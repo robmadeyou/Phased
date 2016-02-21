@@ -50,7 +50,7 @@ public class UseItem {
 	}
 
 	public static void ItemonItem(Client c, int itemUsed, int useWith) {
-		c.Summoning.ItemonItem(itemUsed, useWith);	
+		c.summoning.ItemonItem(itemUsed, useWith);
 		if (itemUsed == CrystalChest.toothHalf()
 				&& useWith == CrystalChest.loopHalf()
 				|| itemUsed == CrystalChest.loopHalf()

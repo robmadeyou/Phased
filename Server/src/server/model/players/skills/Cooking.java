@@ -9,16 +9,16 @@ import server.model.players.Client;
 import server.util.Misc;
 import server.Config;
 
-public class Cooking extends Skill {
+public class Cooking extends Skill implements Skill.ItemStuff{
 
 	public Cooking(Client c) {
 		super(c);
 	}
 
 	private void sendStatementTwo(String s) { // 1 line click here to continue chat box interface
-		getClient().getPlayerAssistant ().sendFrame126(s, 357);
-		getClient().getPlayerAssistant ().sendFrame126("Click here to continue", 358);
-		getClient().getPlayerAssistant ().sendFrame164(356);
+		getClient().getPlayerAssistant().sendFrame126(s, 357);
+		getClient().getPlayerAssistant().sendFrame126("Click here to continue", 358);
+		getClient().getPlayerAssistant().sendFrame164(356);
 	}
 
 	public void cookFish(int id, int slot) {
@@ -33,7 +33,7 @@ public class Cooking extends Skill {
 					getClient().startAnimation(883);
 						getClient().getItems().deleteItem(id, getClient().getItems().getItemSlot(id), 1);
 						getClient().getItems().addItem(cookingItems[slot][1], 1);
-						getClient().getPlayerAssistant ().addSkillXP(cookingItems[slot][4] * Config.COOKING_EXPERIENCE, getClient().playerCooking);
+						getClient().getPlayerAssistant().addSkillXP(cookingItems[slot][4] * Config.COOKING_EXPERIENCE, getClient().playerCooking);
 					}
 				} else {
 					sendStatementTwo("You need a cooking level of " + cookingItems[slot][3] + " to cook this fish.");

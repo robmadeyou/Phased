@@ -53,7 +53,7 @@ public class Summoning
     public void store ()
     {
 
-        c.getPlayerAssistant ().sendFrame126 ( "Summoning BoB", 7421 );
+        c.getPlayerAssistant ().sendFrame126 ( "summoning BoB", 7421 );
         for ( int k = 0; k < 29; k++ )
         {
             if ( c.storeditems[ k ] > 0 )
@@ -759,7 +759,7 @@ public class Summoning
         } else
         {
 
-            c.sendMessage ( "You need " + pouchreq + " Summoning to summon this monster" );
+            c.sendMessage ( "You need " + pouchreq + " summoning to summon this monster" );
         }
 
     }

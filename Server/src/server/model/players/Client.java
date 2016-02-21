@@ -3,8 +3,6 @@ package server.model.players;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import server.util.MadTurnipConnection;
-
 import java.util.concurrent.Future;
 
 import org.apache.mina.common.IoSession;
@@ -17,7 +15,6 @@ import server.net.HostList;
 import server.net.Packet;
 import server.net.StaticPacketBuilder;
 import server.util.Misc;
-import server.util.PlayersOnline;
 import server.model.players.skills.Summoning;
 import server.util.Stream;
 import server.model.players.skills.*;
@@ -78,7 +75,7 @@ public class Client extends Player
     private Thieving thieving = new Thieving ( this );
     private Firemaking firemaking = new Firemaking ( this );
     private Herblore herblore = new Herblore ( this );
-    public Summoning Summoning = new Summoning ( this );
+    public Summoning summoning = new Summoning ( this );
     private int somejunk;
     public int lowMemoryVersion = 0;
     public int timeOutCounter = 0;
@@ -2271,7 +2268,7 @@ public class Client extends Player
 
     public Summoning Summoning ()
     {
-        return Summoning;
+        return summoning;
     }
 
     public Mining getMining ()

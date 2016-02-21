@@ -676,7 +676,7 @@ public abstract class Player {
     };
     public final String[] CURSE_NAME = {
             "Protect Item", "Sap Warrior", "Sap Ranger", "Sap Mage", "Sap Spirit",
-            "Berserker", "Deflect Summoning", "Deflect Magic", "Deflect Missiles", "Deflect Melee",
+            "Berserker", "Deflect summoning", "Deflect Magic", "Deflect Missiles", "Deflect Melee",
             "Leech Attack", "Leech Ranged", "Leech Magic", "Leech Defence", "Leech Strength",
             "Leech Energy", "Leech Special Attack", "Wrath", "Soul Split", "Turmoil"
     };

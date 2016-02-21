@@ -95,7 +95,7 @@ case 6816:
 case 6873:
 
 c.sendMessage("You are now storing items inside your npc");
-	c.Summoning().store();
+	c.summoning().store();
 }
 			break;
 			case 66127:
@@ -1028,7 +1028,7 @@ c.sendMessage("You do not have a familiar currently spawned");
 				//mining - 3046,9779,0
 			//smithing - 3079,9502,0
 			
-			case 66126: //Summoning Special Moves	
+			case 66126: //summoning Special Moves
 			if (c.summonSpec < 1){
 				if (c.lastsummon == 7344) {
 					final int damage = Misc.random(30) + 10;
@@ -3382,7 +3382,7 @@ break;
 		c.updateRequired = true;
 	break;
 	case 27212:
-		c.forcedText = "[QC] My Summoning level is  " + c.getPlayerAssistant ().getLevelForXP(c.playerXP[22]) + ".";
+		c.forcedText = "[QC] My summoning level is  " + c.getPlayerAssistant ().getLevelForXP(c.playerXP[22]) + ".";
 		c.forcedChatUpdateRequired = true;
 		c.updateRequired = true;
 	break;

@@ -2828,9 +2828,9 @@ public class PlayerAssistant {
 
             case 22:
                 c.levelPoints += 5;
-                sendFrame126("Congratulations, you just advanced a Summoning level!", 4268);
-                sendFrame126("Your Summoning level is now " + getLevelForXP(c.playerXP[skill]) + ".", 4269);
-                c.sendMessage("Congratulations, you just advanced a Summoning level.");
+                sendFrame126("Congratulations, you just advanced a summoning level!", 4268);
+                sendFrame126("Your summoning level is now " + getLevelForXP(c.playerXP[skill]) + ".", 4269);
+                c.sendMessage("Congratulations, you just advanced a summoning level.");
                 c.sendMessage("Because you leveled you received 5 Level Points.");
                 sendFrame164(4267);
                 break;

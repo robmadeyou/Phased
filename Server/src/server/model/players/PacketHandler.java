@@ -144,6 +144,4 @@ public class PacketHandler {
             System.out.println("Unhandled packet type: " + packetType + " - size: " + packetSize);
         }
     }
-
-
 }

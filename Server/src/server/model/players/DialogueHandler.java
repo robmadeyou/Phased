@@ -53,7 +53,7 @@ public class DialogueHandler {
 		c.nextChat = 1400;
 		break;
 		case 1400:
-		sendOption4("Regular Skills Shop", "Herblore Shop", "Summoning shop 1", "Summoning shop 2");
+		sendOption4("Regular Skills Shop", "Herblore Shop", "summoning shop 1", "summoning shop 2");
 		c.teleAction = 1399;
 		c.nextChat = 0;
 		break;
@@ -426,7 +426,7 @@ public class DialogueHandler {
 			c.getItems().addItem(19314, 1);
 			c.nextChat = 0;
 		c.getPlayerAssistant ().sendFrame126("You have completed The Ritual!",12144);
-		c.getPlayerAssistant ().sendFrame126("300,000 Summoning Experience" ,12150);
+		c.getPlayerAssistant ().sendFrame126("300,000 summoning Experience" ,12150);
 		c.getPlayerAssistant ().sendFrame126("Bork's Bone Crusher" ,12151);
 		c.getPlayerAssistant ().sendFrame126("15m Cash" ,12152);
 		c.getPlayerAssistant ().sendFrame126("Third-Age Druidic Wreath" ,12153);

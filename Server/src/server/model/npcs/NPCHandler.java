@@ -1,6 +1,5 @@
 package server.model.npcs;
 
-import java.io.*;
 import java.util.ArrayList;
 
 import com.google.gson.JsonArray;
@@ -2302,7 +2301,7 @@ public class NPCHandler
 
                         npcs[ i ].isDead = true;
                         npcs[ i ].applyDead = true;
-                        c.Summoning.SummonNewNPC ( c.lastsummon );
+                        c.summoning.SummonNewNPC ( c.lastsummon );
                         npcs[ i ].gfx0 ( 1315 );
                         npcs[ i ].underAttackBy2 = -1;
                         npcs[ i ].updateRequired = true;
