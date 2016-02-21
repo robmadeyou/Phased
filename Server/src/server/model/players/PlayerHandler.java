@@ -27,11 +27,6 @@ public class PlayerHandler
     static
     {
         Runtime.getRuntime ().addShutdownHook ( new Thread () );
-        PlayerSave playerSave;
-        Client cliento1;
-        for ( int i = 0; i < Config.MAX_PLAYERS; i++ )
-            if ( players[ i ] != null )
-                ( ( Client ) players[ i ] ).save.saveGame ( Client.cliento2 );
     }
 
     public boolean newPlayerClient (Client client1)

@@ -22,7 +22,7 @@ public class UseItem {
 				CrystalChest.searchChest(c, objectID, objectX, objectY);
 			break;
 			case 2783:
-				c.getSmithingInt().showSmithInterface(itemId);
+				c.getSmithingInterface().showSmithInterface(itemId);
 			break;
 			case 7965:
 			case 8389:

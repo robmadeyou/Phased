@@ -18,7 +18,6 @@ public abstract class Player {
     public ArrayList<String> lastKilledPlayers = new ArrayList<String>();
 
     public int playerTradeWealth;
-    //public long ignores[] = new long[200];
     public int nomad;
     public int barrageorb = 0;
     public long lastEmote;
@@ -31,10 +30,7 @@ public abstract class Player {
     public boolean startDifficulty;
     public boolean middleDifficulty;
     public boolean endDifficulty;
-    //public Hit hitDiff2;
-    //public Hit hitDiff;
 
-    //public int SpeDelay = 0;
     public int SpeDelay = 0;
 
     public int barrageOrb = 0, dungRest;

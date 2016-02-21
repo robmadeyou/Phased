@@ -132,5 +132,4 @@ public class EventManager implements Runnable {
 			}
 		}
 	}
-
 }
