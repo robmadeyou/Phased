@@ -12,15 +12,15 @@ import server.Server;
  *
  **/
  
-public class Thieving {
+public class Thieving extends Skill {
 	
-	private Client c;
-		
 	public Thieving(Client c) {
-		this.c = c;
+		super(c);
 	}
 	
 	public void stealFromNPC(int id) {
+		Client c = getClient();
+
 		if (System.currentTimeMillis() - c.lastThieve < 2000)
 			return;
 		for (int j = 0; j < npcThieving.length; j++) {
@@ -50,6 +50,8 @@ public class Thieving {
 	}
 	
 	public void stealFromStall(int id, int xp, int level) {
+		Client c = getClient();
+
 		if (System.currentTimeMillis() - c.lastThieve < 2500)
 			return;
 		if (c.playerLevel[c.playerThieving] >= level) {

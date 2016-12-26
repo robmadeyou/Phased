@@ -2,15 +2,15 @@ package server.model.players.skills;
 
 import server.model.players.Client;
 
-public class SmithingInterface {
+public class SmithingInterface extends Skill {
 
-	Client c;
-	
 	public SmithingInterface(Client c) {
-		this.c = c;
+		super(c);
 	}
 
 	public void showSmithInterface(int itemId) {
+		Client c = getClient();
+
 		if (itemId == 2349)
 			makeBronzeInterface(c);
 		else if (itemId == 2351)
@@ -23,8 +23,6 @@ public class SmithingInterface {
 			makeAddyInterface(c);
 		else if (itemId == 2363)
 			makeRuneInterface(c);
-			
-	
 	}
 	
 	private void makeRuneInterface(Client c) {
@@ -522,5 +520,4 @@ public class SmithingInterface {
 		
 		return "@red@";
 	}
-	
 }

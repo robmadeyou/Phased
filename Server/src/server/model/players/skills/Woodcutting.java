@@ -4,9 +4,7 @@ import server.model.players.*;
 import server.Config;
 import server.util.Misc;
 
-public class Woodcutting {
-	
-	Client c;
+public class Woodcutting extends Skill {
 	
 	private final int VALID_AXE[] = {1351,1349,1353,1361,1355,1357,1359,6739};
 	private final int[] AXE_REQS = {1,1,6,6,21,31,41,61};
@@ -15,10 +13,12 @@ public class Woodcutting {
 	private final int EMOTE = 875;
 	
 	public Woodcutting(Client c) {
-		this.c = c;
+		super(c);
 	}
 	
 	public void startWoodcutting(int logType, int levelReq, int exp) {
+		Client c = getClient();
+
 		if (goodAxe() > 0) {
 			c.turnPlayerTo(c.objectX, c.objectY);
 			if (c.playerLevel[c.playerWoodcutting] >= levelReq) {
@@ -39,6 +39,8 @@ public class Woodcutting {
 	}
 	
 	public void cutWood() {
+		Client c = getClient();
+
 		if (c.getItems().addItem(logType,1)) {
 			c.startAnimation(EMOTE);
 			c.sendMessage("You get some logs.");
@@ -51,6 +53,8 @@ public class Woodcutting {
 	}
 	
 	public int goodAxe() {
+		Client c = getClient();
+
 		for (int j = VALID_AXE.length - 1; j >= 0; j--) {
 			if (c.playerEquipment[c.playerWeapon] == VALID_AXE[j]) {
 				if (c.playerLevel[c.playerWoodcutting] >= AXE_REQS[j])
@@ -69,8 +73,6 @@ public class Woodcutting {
 	}
 	
 	public int getWcTimer() {
-		int time = Misc.random(5);
-		return time;
+		return Misc.random(5);
 	}
-
 }

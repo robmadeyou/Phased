@@ -1,5 +1,8 @@
 package server.model.players.skills;
 
+import server.event.Event;
+import server.event.EventContainer;
+import server.event.EventManager;
 import server.model.players.*;
 import server.Config;
 import server.util.Misc;
@@ -8,10 +11,8 @@ import server.util.Misc;
 * @Author Sanity
 */
 
-public class Mining {
-	
-	Client c;
-	
+public class Mining extends Skill {
+
 	private final int VALID_PICK[] = {1265,1267,1269,1273,1271,1275};
 	private final int[] PICK_REQS = {1,1,6,6,21,31,41,61};
 	private final int[] RANDOM_GEMS = {1623,1621,1619,1617,1631};
@@ -22,10 +23,12 @@ public class Mining {
 	private final int EMOTE = 624;
 	
 	public Mining(Client c) {
-		this.c = c;
+		super(c);
 	}
 	
 	public void startMining(int oreType, int levelReq, int exp) {
+		Client c = getClient();
+
 		c.turnPlayerTo(c.objectX, c.objectY);
 		if (goodPick() > 0) {
 			if (c.playerLevel[c.playerMining] >= levelReq) {
@@ -50,6 +53,8 @@ public class Mining {
 	}
 	
 	public void mineOre() {
+		Client c = getClient();
+
 		if (c.getItems().addItem(oreType,1)) {
 			c.startAnimation(EMOTE);
 			c.sendMessage("You manage to mine some ore.");
@@ -57,7 +62,7 @@ public class Mining {
 			c.getPlayerAssistant ().refreshSkill(c.playerMining);
 			c.miningTimer = getMiningTimer(oreType);
 			if (Misc.random(25) == 10) {
-				c.getItems().addItem(RANDOM_GEMS[(int)(RANDOM_GEMS.length * Math.random())], 1);
+				c.getItems().addItem(RANDOM_GEMS[(int) (RANDOM_GEMS.length * Math.random())], 1);
 				c.sendMessage("You find a gem!");
 			}
 		} else {
@@ -74,6 +79,8 @@ public class Mining {
 	}
 	
 	public int goodPick() {
+		Client c = getClient();
+
 		for (int j = VALID_PICK.length - 1; j >= 0; j--) {
 			if (c.playerEquipment[c.playerWeapon] == VALID_PICK[j]) {
 				if (c.playerLevel[c.playerMining] >= PICK_REQS[j])
@@ -98,5 +105,22 @@ public class Mining {
 		}
 		return time;
 	}
-	
+
+	/**
+	 * Prospects the rock.
+	 * @param c The client class.
+	 * @param itemId The name of the item within the object.
+	 */
+	public void prospectRock(final Client c, final String itemName) {
+		c.sendMessage("You examine the rock for ores...");
+		EventManager.getSingleton().addEvent(new Event() {
+
+			@Override
+			public void execute(EventContainer container) {
+				c.sendMessage("This rock contains "+itemName+".");
+				container.stop();
+			}
+
+		}, 3000);
+	}
 }

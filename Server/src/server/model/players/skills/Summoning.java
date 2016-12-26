@@ -1,22 +1,13 @@
 package server.model.players.skills;
 
-import server.model.players.*;
 import server.Server;
+import server.model.players.Client;
 
 /**
  * @Author Sanity
  */
 
-public class Summoning
-{
-
-    Client c;
-
-
-    public Summoning (Client c)
-    {
-        this.c = c;
-    }
+public class Summoning extends Skill {
 
     public int shards = 18016;
     public int charm = 1;
@@ -27,44 +18,49 @@ public class Summoning
     public int crim = 12160;
     public int blue = 12163;
     public int pouchreq;
+    public int pouch = 12155;
+    public int req;
 
-    public boolean hasitem ()
-    {
-        if ( c.getItems ().playerHasItem ( charm, 1 ) && c.getItems ().playerHasItem ( item, 1 ) && c.getItems ().playerHasItem ( 18016, amountofshard ) && c.getItems ().playerHasItem ( 12155, 1 ) && c.playerLevel[ 22 ] >= req )
-        {
-            c.getItems ().deleteItem ( charm, 1 );
-            c.getItems ().deleteItem ( item, 1 );
-            c.getItems ().deleteItem ( shards, amountofshard );
-            c.getItems ().deleteItem ( 12155, 1 );
+    public Summoning(Client c) {
+        super(c);
+    }
+
+    public boolean hasitem() {
+        Client c = getClient();
+
+        if (c.getItems().playerHasItem(charm, 1) && c.getItems().playerHasItem(item, 1) && c.getItems().playerHasItem(18016, amountofshard) && c.getItems().playerHasItem(12155, 1) && c.playerLevel[22] >= req) {
+            c.getItems().deleteItem(charm, 1);
+            c.getItems().deleteItem(item, 1);
+            c.getItems().deleteItem(shards, amountofshard);
+            c.getItems().deleteItem(12155, 1);
             return true;
-        } else
-        {
-            c.sendMessage ( "You need the following items: 1x " + c.getItems ().getItemName ( charm ) + " " );
-            c.sendMessage ( "1x " + c.getItems ().getItemName ( item ) + " " );
-            c.sendMessage ( "" + amountofshard + "x " + c.getItems ().getItemName ( shards ) + " " );
-            c.sendMessage ( "You also need a summoning Level of " + req + " to make this pouch " );
+        } else {
+            c.sendMessage("You need the following items: 1x " + c.getItems().getItemName(charm) + " ");
+            c.sendMessage("1x " + c.getItems().getItemName(item) + " ");
+            c.sendMessage("" + amountofshard + "x " + c.getItems().getItemName(shards) + " ");
+            c.sendMessage("You also need a summoning Level of " + req + " to make this pouch ");
             return false;
         }
 
 
     }
+    //c.gfx0(1315);
 
+    //    c.summonedNPCS++;
+    // c.sendMessage("You Summon a "+name);
 
-    public void store ()
-    {
+    public void store() {
+        Client c = getClient();
 
-        c.getPlayerAssistant ().sendFrame126 ( "summoning BoB", 7421 );
-        for ( int k = 0; k < 29; k++ )
-        {
-            if ( c.storeditems[ k ] > 0 )
-            {
-                c.getPlayerAssistant ().Frame34 ( 7423, c.storeditems[ k ], k, 1 );
+        c.getPlayerAssistant().sendFrame126("summoning BoB", 7421);
+        for (int k = 0; k < 29; k++) {
+            if (c.storeditems[k] > 0) {
+                c.getPlayerAssistant().Frame34(7423, c.storeditems[k], k, 1);
             }
 
 
-            if ( c.storeditems[ k ] <= 0 )
-            {
-                c.getPlayerAssistant ().Frame34 ( 7423, -1, k, 1 );
+            if (c.storeditems[k] <= 0) {
+                c.getPlayerAssistant().Frame34(7423, -1, k, 1);
             }
 
         }
@@ -72,32 +68,32 @@ public class Summoning
 
         c.isBanking = true;
         c.storing = true;
-        c.getItems ().resetItems ( 5064 );
+        c.getItems().resetItems(5064);
 
-        c.getItems ().rearrangeBank ();
-        c.getItems ().resetBank ();
-        c.getItems ().resetTempItems ();
-        c.getOutStream ().createFrame ( 248 );
+        c.getItems().rearrangeBank();
+        c.getItems().resetBank();
+        c.getItems().resetTempItems();
+        c.getOutStream().createFrame(248);
 
-        c.getOutStream ().writeWordA ( 4465 );
-        c.getOutStream ().writeWord ( 5063 );
+        c.getOutStream().writeWordA(4465);
+        c.getOutStream().writeWord(5063);
         //c.getOutStream().writeWord(10600);
-        c.getPlayerAssistant ().sendFrame87 ( 286, 0 );
+        c.getPlayerAssistant().sendFrame87(286, 0);
 
-        c.flushOutStream ();
+        c.flushOutStream();
 
 
         //c.ResetKeepItems();
         //c.getPlayerAssistant().showInterface(17100);
     }
 
-    public void SummonNewNPC (int npcID)
-    {
+    public void SummonNewNPC(int npcID) {
+        Client c = getClient();
+
         int maxhit = 0;
         int attack = 0;
         int defence = 0;
-        switch ( npcID )
-        {
+        switch (npcID) {
             case 6830:
                 maxhit = 4;
                 attack = 10;
@@ -481,8 +477,7 @@ public class Summoning
                 defence = 80;
                 break;
         }
-        switch ( npcID )
-        {
+        switch (npcID) {
             case 6830:
                 pouchreq = 0;
                 break;
@@ -745,51 +740,36 @@ public class Summoning
                 break;
         }
 
-        if ( c.playerLevel[ 22 ] >= pouchreq )
-        {
-            Server.npcHandler.Summon ( c, npcID, c.absX, c.absY - 1, c.heightLevel, 0, 100, maxhit, false, attack, defence );
-            c.getItems ().deleteItem ( c.s, 1 );
-            for ( int i = 0; i < Server.npcHandler.maxNPCs; i++ )
-            {
-                if ( Server.npcHandler.npcs[ i ] != null )
-                {
-                    c.npcslot = Server.npcHandler.npcs[ i ].npcId;
+        if (c.playerLevel[22] >= pouchreq) {
+            Server.npcHandler.Summon(c, npcID, c.absX, c.absY - 1, c.heightLevel, 0, 100, maxhit, false, attack, defence);
+            c.getItems().deleteItem(c.s, 1);
+            for (int i = 0; i < Server.npcHandler.maxNPCs; i++) {
+                if (Server.npcHandler.npcs[i] != null) {
+                    c.npcslot = Server.npcHandler.npcs[i].npcId;
                 }
             }
-        } else
-        {
+        } else {
 
-            c.sendMessage ( "You need " + pouchreq + " summoning to summon this monster" );
+            c.sendMessage("You need " + pouchreq + " summoning to summon this monster");
         }
 
     }
-    //c.gfx0(1315);
 
-    //    c.summonedNPCS++;
-    // c.sendMessage("You Summon a "+name);
-
-
-    public int pouch = 12155;
-    public int req;
-
-    public void ItemonItem (int itemUsed, int useWith)
-    {
-
+    public void ItemonItem(int itemUsed, int useWith) {
+        Client c = getClient();
 
         //variables
         //charm = charm id, item = itemmatirial, amountofshard = shard amount
-        switch ( itemUsed )
-        {
+        switch (itemUsed) {
             case 2138:
                 useWith = pouch;
                 charm = gold;
                 req = 1;
                 item = 2138;
                 amountofshard = 8;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12043, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 300, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12043, 1);
+                    c.getPlayerAssistant().addSkillXP(300, 22); //AmtExp is different so its defined in the method
                 }
 
                 break;
@@ -801,10 +781,9 @@ public class Summoning
                 charm = gold;
                 item = 2859;
                 amountofshard = 7;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12047, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 500, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12047, 1);
+                    c.getPlayerAssistant().addSkillXP(500, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -814,10 +793,9 @@ public class Summoning
                 item = 6291;
                 amountofshard = 8;
                 req = 10;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12059, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 800, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12059, 1);
+                    c.getPlayerAssistant().addSkillXP(800, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -827,10 +805,9 @@ public class Summoning
                 charm = gold;
                 item = 3369;
                 amountofshard = 9;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12019, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 1000, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12019, 1);
+                    c.getPlayerAssistant().addSkillXP(1000, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -841,10 +818,9 @@ public class Summoning
                 charm = gold;
                 item = 440;
                 amountofshard = 7;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12009, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 1500, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12009, 1);
+                    c.getPlayerAssistant().addSkillXP(1500, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -855,10 +831,9 @@ public class Summoning
                 charm = gold;
                 item = 6319;
                 amountofshard = 1;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12778, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 1600, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12778, 1);
+                    c.getPlayerAssistant().addSkillXP(1600, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -869,10 +844,9 @@ public class Summoning
                 charm = green;
                 item = 1783;
                 amountofshard = 45;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12049, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 2000, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12049, 1);
+                    c.getPlayerAssistant().addSkillXP(2000, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -883,10 +857,9 @@ public class Summoning
                 charm = green;
                 item = 3095;
                 amountofshard = 57;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12055, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 2100, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12055, 1);
+                    c.getPlayerAssistant().addSkillXP(2100, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -897,10 +870,9 @@ public class Summoning
                 charm = crim;
                 item = 3095;
                 amountofshard = 64;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12808, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 2400, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12808, 1);
+                    c.getPlayerAssistant().addSkillXP(2400, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -911,10 +883,9 @@ public class Summoning
                 charm = blue;
                 item = 2134;
                 amountofshard = 75;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12067, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 2800, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12067, 1);
+                    c.getPlayerAssistant().addSkillXP(2800, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -924,10 +895,9 @@ public class Summoning
                 charm = blue;
                 item = 3138;
                 amountofshard = 51;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12063, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 3000, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12063, 1);
+                    c.getPlayerAssistant().addSkillXP(3000, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -937,10 +907,9 @@ public class Summoning
                 charm = green;
                 item = 6032;
                 amountofshard = 47;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12091, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 4000, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12091, 1);
+                    c.getPlayerAssistant().addSkillXP(4000, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -950,10 +919,9 @@ public class Summoning
                 charm = green;
                 item = 9976;
                 amountofshard = 84;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12800, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 4500, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12800, 1);
+                    c.getPlayerAssistant().addSkillXP(4500, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -964,10 +932,9 @@ public class Summoning
                 charm = crim;
                 item = 3325;
                 amountofshard = 81;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12053, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 5000, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12053, 1);
+                    c.getPlayerAssistant().addSkillXP(5000, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -978,10 +945,9 @@ public class Summoning
                 charm = crim;
                 item = itemUsed;
                 amountofshard = 84;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12065, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 5400, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12065, 1);
+                    c.getPlayerAssistant().addSkillXP(5400, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -991,10 +957,9 @@ public class Summoning
                 charm = green;
                 item = itemUsed;
                 amountofshard = 72;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12021, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 5300, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12021, 1);
+                    c.getPlayerAssistant().addSkillXP(5300, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1004,10 +969,9 @@ public class Summoning
                 charm = green;
                 item = itemUsed;
                 amountofshard = 74;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12818, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 5200, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12818, 1);
+                    c.getPlayerAssistant().addSkillXP(5200, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1017,10 +981,9 @@ public class Summoning
                 charm = blue;
                 item = itemUsed;
                 amountofshard = 74;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12814, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 5800, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12814, 1);
+                    c.getPlayerAssistant().addSkillXP(5800, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1030,10 +993,9 @@ public class Summoning
                 charm = blue;
                 item = itemUsed;
                 amountofshard = 74;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12798, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 6000, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12798, 1);
+                    c.getPlayerAssistant().addSkillXP(6000, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1043,10 +1005,9 @@ public class Summoning
                 charm = blue;
                 item = itemUsed;
                 amountofshard = 102;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12073, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 6100, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12073, 1);
+                    c.getPlayerAssistant().addSkillXP(6100, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1056,10 +1017,9 @@ public class Summoning
                 charm = gold;
                 item = itemUsed;
                 amountofshard = 11;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12087, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 6200, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12087, 1);
+                    c.getPlayerAssistant().addSkillXP(6200, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1070,10 +1030,9 @@ public class Summoning
                 charm = green;
                 item = itemUsed;
                 amountofshard = 78;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12071, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 6300, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12071, 1);
+                    c.getPlayerAssistant().addSkillXP(6300, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1084,10 +1043,9 @@ public class Summoning
                 charm = crim;
                 item = itemUsed;
                 amountofshard = 104;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12051, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 6400, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12051, 1);
+                    c.getPlayerAssistant().addSkillXP(6400, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1098,10 +1056,9 @@ public class Summoning
                 charm = blue;
                 item = itemUsed;
                 amountofshard = 125;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12075, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 6500, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12075, 1);
+                    c.getPlayerAssistant().addSkillXP(6500, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1112,10 +1069,9 @@ public class Summoning
                 charm = crim;
                 item = itemUsed;
                 amountofshard = 111;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12816, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 6600, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12816, 1);
+                    c.getPlayerAssistant().addSkillXP(6600, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1126,10 +1082,9 @@ public class Summoning
                 charm = green;
                 item = itemUsed;
                 amountofshard = 88;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12041, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 6700, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12041, 1);
+                    c.getPlayerAssistant().addSkillXP(6700, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1139,10 +1094,9 @@ public class Summoning
                 charm = crim;
                 item = itemUsed;
                 amountofshard = 117;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12061, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 6800, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12061, 1);
+                    c.getPlayerAssistant().addSkillXP(6800, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1153,10 +1107,9 @@ public class Summoning
                 charm = gold;
                 item = itemUsed;
                 amountofshard = 12;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12007, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 6900, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12007, 1);
+                    c.getPlayerAssistant().addSkillXP(6900, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1167,10 +1120,9 @@ public class Summoning
                 charm = green;
                 item = itemUsed;
                 amountofshard = 106;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12036, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 7000, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12036, 1);
+                    c.getPlayerAssistant().addSkillXP(7000, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1180,10 +1132,9 @@ public class Summoning
                 charm = blue;
                 item = itemUsed;
                 amountofshard = 151;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12027, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 7100, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12027, 1);
+                    c.getPlayerAssistant().addSkillXP(7100, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1193,10 +1144,9 @@ public class Summoning
                 charm = blue;
                 item = itemUsed;
                 amountofshard = 141;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12077, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 7200, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12077, 1);
+                    c.getPlayerAssistant().addSkillXP(7200, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1206,10 +1156,9 @@ public class Summoning
                 charm = green;
                 item = itemUsed;
                 amountofshard = 109;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12531, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 7300, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12531, 1);
+                    c.getPlayerAssistant().addSkillXP(7300, 22); //AmtExp is different so its defined in the method
                 }
 
                 break;
@@ -1221,10 +1170,9 @@ public class Summoning
                 charm = blue;
                 item = itemUsed;
                 amountofshard = 154;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12810, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 7400, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12810, 1);
+                    c.getPlayerAssistant().addSkillXP(7400, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1235,10 +1183,9 @@ public class Summoning
                 charm = blue;
                 item = itemUsed;
                 amountofshard = 153;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12812, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 7500, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12812, 1);
+                    c.getPlayerAssistant().addSkillXP(7500, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1249,10 +1196,9 @@ public class Summoning
                 charm = blue;
                 item = itemUsed;
                 amountofshard = 155;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12784, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 7600, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12784, 1);
+                    c.getPlayerAssistant().addSkillXP(7600, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1263,10 +1209,9 @@ public class Summoning
                 charm = crim;
                 item = itemUsed;
                 amountofshard = 141;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12805, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 7700, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12805, 1);
+                    c.getPlayerAssistant().addSkillXP(7700, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1288,10 +1233,9 @@ public class Summoning
                 charm = green;
                 item = itemUsed;
                 amountofshard = 116;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12015, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 7800, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12015, 1);
+                    c.getPlayerAssistant().addSkillXP(7800, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1302,10 +1246,9 @@ public class Summoning
                 charm = crim;
                 item = itemUsed;
                 amountofshard = 128;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12045, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 7900, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12045, 1);
+                    c.getPlayerAssistant().addSkillXP(7900, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1316,10 +1259,9 @@ public class Summoning
                 charm = blue;
                 item = itemUsed;
                 amountofshard = 152;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12079, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 8000, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12079, 1);
+                    c.getPlayerAssistant().addSkillXP(8000, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1330,10 +1272,9 @@ public class Summoning
                 charm = gold;
                 item = itemUsed;
                 amountofshard = 11;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12123, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 8100, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12123, 1);
+                    c.getPlayerAssistant().addSkillXP(8100, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1344,10 +1285,9 @@ public class Summoning
                 charm = gold;
                 item = itemUsed;
                 amountofshard = 1;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12031, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 8200, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12031, 1);
+                    c.getPlayerAssistant().addSkillXP(8200, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1358,10 +1298,9 @@ public class Summoning
                 charm = green;
                 item = itemUsed;
                 amountofshard = 110;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12029, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 8300, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12029, 1);
+                    c.getPlayerAssistant().addSkillXP(8300, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1372,10 +1311,9 @@ public class Summoning
                 charm = green;
                 item = itemUsed;
                 amountofshard = 130;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12033, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 8400, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12033, 1);
+                    c.getPlayerAssistant().addSkillXP(8400, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1386,10 +1324,9 @@ public class Summoning
                 charm = crim;
                 item = itemUsed;
                 amountofshard = 79;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12820, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 8500, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12820, 1);
+                    c.getPlayerAssistant().addSkillXP(8500, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1400,10 +1337,9 @@ public class Summoning
                 charm = gold;
                 item = itemUsed;
                 amountofshard = 14;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12057, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 8600, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12057, 1);
+                    c.getPlayerAssistant().addSkillXP(8600, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1414,10 +1350,9 @@ public class Summoning
                 charm = crim;
                 item = itemUsed;
                 amountofshard = 165;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 14623, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 8700, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(14623, 1);
+                    c.getPlayerAssistant().addSkillXP(8700, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1427,10 +1362,9 @@ public class Summoning
                 charm = blue;
                 item = itemUsed;
                 amountofshard = 195;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12792, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 8800, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12792, 1);
+                    c.getPlayerAssistant().addSkillXP(8800, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1441,10 +1375,9 @@ public class Summoning
                 charm = crim;
                 item = itemUsed;
                 amountofshard = 166;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12069, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 8900, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12069, 1);
+                    c.getPlayerAssistant().addSkillXP(8900, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1455,10 +1388,9 @@ public class Summoning
                 charm = crim;
                 item = itemUsed;
                 amountofshard = 168;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12011, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 9000, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12011, 1);
+                    c.getPlayerAssistant().addSkillXP(9000, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1469,10 +1401,9 @@ public class Summoning
                 charm = blue;
                 item = itemUsed;
                 amountofshard = 144;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12081, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 9100, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12081, 1);
+                    c.getPlayerAssistant().addSkillXP(9100, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1483,10 +1414,9 @@ public class Summoning
                 charm = green;
                 item = itemUsed;
                 amountofshard = 141;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12782, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 9200, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12782, 1);
+                    c.getPlayerAssistant().addSkillXP(9200, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1497,10 +1427,9 @@ public class Summoning
                 charm = crim;
                 item = itemUsed;
                 amountofshard = 174;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12794, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 9300, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12794, 1);
+                    c.getPlayerAssistant().addSkillXP(9300, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1511,10 +1440,9 @@ public class Summoning
                 charm = green;
                 item = itemUsed;
                 amountofshard = 124;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12013, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 9400, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12013, 1);
+                    c.getPlayerAssistant().addSkillXP(9400, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1525,10 +1453,9 @@ public class Summoning
                 charm = blue;
                 item = itemUsed;
                 amountofshard = 198;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12802, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 9500, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12802, 1);
+                    c.getPlayerAssistant().addSkillXP(9500, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1538,10 +1465,9 @@ public class Summoning
                 charm = blue;
                 item = itemUsed;
                 amountofshard = 198;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12806, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 9600, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12806, 1);
+                    c.getPlayerAssistant().addSkillXP(9600, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1552,10 +1478,9 @@ public class Summoning
                 charm = blue;
                 item = itemUsed;
                 amountofshard = 202;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12804, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 9700, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12804, 1);
+                    c.getPlayerAssistant().addSkillXP(9700, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1565,10 +1490,9 @@ public class Summoning
                 charm = green;
                 item = itemUsed;
                 amountofshard = 128;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12025, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 9900, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12025, 1);
+                    c.getPlayerAssistant().addSkillXP(9900, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1578,10 +1502,9 @@ public class Summoning
                 charm = crim;
                 item = itemUsed;
                 amountofshard = 1;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12017, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 10000, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12017, 1);
+                    c.getPlayerAssistant().addSkillXP(10000, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1592,10 +1515,9 @@ public class Summoning
                 charm = blue;
                 item = itemUsed;
                 amountofshard = 219;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12788, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 11000, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12788, 1);
+                    c.getPlayerAssistant().addSkillXP(11000, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1606,10 +1528,9 @@ public class Summoning
                 charm = crim;
                 item = itemUsed;
                 amountofshard = 150;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12776, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 12000, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12776, 1);
+                    c.getPlayerAssistant().addSkillXP(12000, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1620,10 +1541,9 @@ public class Summoning
                 charm = blue;
                 item = itemUsed;
                 amountofshard = 1;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12083, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 13800, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12083, 1);
+                    c.getPlayerAssistant().addSkillXP(13800, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1634,10 +1554,9 @@ public class Summoning
                 charm = green;
                 item = itemUsed;
                 amountofshard = 140;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12039, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 5800, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12039, 1);
+                    c.getPlayerAssistant().addSkillXP(5800, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1648,10 +1567,9 @@ public class Summoning
                 charm = blue;
                 item = itemUsed;
                 amountofshard = 222;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12786, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 5800, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12786, 1);
+                    c.getPlayerAssistant().addSkillXP(5800, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1661,10 +1579,9 @@ public class Summoning
                 charm = crim;
                 item = itemUsed;
                 amountofshard = 203;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12089, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 5800, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12089, 1);
+                    c.getPlayerAssistant().addSkillXP(5800, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1675,10 +1592,9 @@ public class Summoning
                 charm = green;
                 item = itemUsed;
                 amountofshard = 113;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12796, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 5800, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12796, 1);
+                    c.getPlayerAssistant().addSkillXP(5800, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1689,10 +1605,9 @@ public class Summoning
                 charm = crim;
                 item = itemUsed;
                 amountofshard = 198;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12822, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 5800, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12822, 1);
+                    c.getPlayerAssistant().addSkillXP(5800, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1702,10 +1617,9 @@ public class Summoning
                 charm = crim;
                 item = itemUsed;
                 amountofshard = 211;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12093, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 5800, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12093, 1);
+                    c.getPlayerAssistant().addSkillXP(5800, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 
@@ -1716,10 +1630,9 @@ public class Summoning
                 charm = crim;
                 item = itemUsed;
                 amountofshard = 178;
-                if ( hasitem () )
-                {
-                    c.getItems ().addItem ( 12790, 1 );
-                    c.getPlayerAssistant ().addSkillXP ( 5800, 22 ); //AmtExp is different so its defined in the method
+                if (hasitem()) {
+                    c.getItems().addItem(12790, 1);
+                    c.getPlayerAssistant().addSkillXP(5800, 22); //AmtExp is different so its defined in the method
                 }
                 break;
 

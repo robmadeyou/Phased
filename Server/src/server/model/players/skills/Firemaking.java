@@ -10,10 +10,8 @@ import server.model.objects.Objects;
  * @author Sanity
  *
  **/ 
-public class Firemaking {
-	
-	private Client c;
-	
+public class Firemaking extends Skill {
+
 	private int[] logs = {1511,1521,1519,1517,1515,1513};
 	private int[] exp = {1,3,4,5,7,8};
 	private int[] level = {1,15,30,45,60,75};
@@ -22,7 +20,7 @@ public class Firemaking {
 	public boolean resetAnim = true;
 	
 	public Firemaking(Client c) {
-		this.c = c;
+		super(c);
 	}
 	
 	public void checkLogType(int logType, int otherItem) {
@@ -35,6 +33,7 @@ public class Firemaking {
 	}
 	
 	public void lightFire(int slot) {
+		Client c = getClient();
 		if (c.duelStatus >= 5) {
 			c.sendMessage("Why am I trying to light a fire in the duel arena?");
 			return;

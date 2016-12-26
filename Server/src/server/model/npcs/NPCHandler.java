@@ -2301,7 +2301,7 @@ public class NPCHandler
 
                         npcs[ i ].isDead = true;
                         npcs[ i ].applyDead = true;
-                        c.summoning.SummonNewNPC ( c.lastsummon );
+                        c.getSummoning().SummonNewNPC ( c.lastsummon );
                         npcs[ i ].gfx0 ( 1315 );
                         npcs[ i ].underAttackBy2 = -1;
                         npcs[ i ].updateRequired = true;

@@ -4,17 +4,17 @@ import server.Config;
 import server.util.Misc;
 import server.model.players.Client;
 
-public class Fishing {
+public class Fishing extends Skill {
 
-public static final int FISHING_XP = Config.FISHING_EXPERIENCE;
-	
-	private Client c;
-	public Fishing(Client c) {
-		this.c = c;
-	}
+    public static final int FISHING_XP = Config.FISHING_EXPERIENCE;
 
-public void FishingProcess() {
-	//Fishing <3
+    public Fishing(Client c) {
+        super(c);
+    }
+
+    public void FishingProcess() {
+        Client c = getClient();
+
         if (c.fishtimer > 0) {
             c.fishtimer--;
         }
@@ -32,21 +32,21 @@ public void FishingProcess() {
                         c.sendMessage("You need bait to fish here!");
                         c.fishing = false;
                     } else if (c.fishitem == 309 && !c.getItems().playerHasItem(314)) {
-                       c.sendMessage("You need feathers to fish here!");
+                        c.sendMessage("You need feathers to fish here!");
                         c.fishing = false;
                     } else {
                         if (c.fishreq2 != 0 && c.playerLevel[10] >= c.fishreq2 && Misc.random(1) == 1) {
                             c.getItems().addItem(c.fishies2, 1);
-                       c.getPlayerAssistant ().addSkillXP(c.fishXP, 10);
-					  
+                            c.getPlayerAssistant().addSkillXP(c.fishXP, 10);
+
                         } else {
                             c.getItems().addItem(c.fishies, 1);
-                        c.getPlayerAssistant ().addSkillXP(c.fishXP, 10);
-						
+                            c.getPlayerAssistant().addSkillXP(c.fishXP, 10);
+
                         }
                         if (c.fishitem == 307)
-                        c.getPlayerAssistant ().addSkillXP(c.fishXP, 10);
-						
+                            c.getPlayerAssistant().addSkillXP(c.fishXP, 10);
+
                         c.fishtimer = Misc.random(fishtime(c.fishies, c.fishreqt));
                         //c.sendMessage("You catch a " + c.getItems().getItemName(c.fishies).toLowerCase());
                     }
@@ -56,31 +56,25 @@ public void FishingProcess() {
                 }
             } else {
                 c.fishing = false;
-               c.sendMessage("You need a " + c.getItems().getItemName(c.fishitem) + " to fish " + c.getItems().getItemName(c.fishies));
+                c.sendMessage("You need a " + c.getItems().getItemName(c.fishitem) + " to fish " + c.getItems().getItemName(c.fishies));
             }
         }
 
         if (c.fishing) {
             c.startAnimation(c.fishemote);
             //frame174(378, 3);
-	c.stopMovement();
+            c.stopMovement();
         }
-	
-      
-	
-		if (c.attemptingfish)
-           if(c.clickObjectType > 0 && c.goodDistance(c.objectX + c.objectXOffset, c.objectY + c.objectYOffset, c.getX(), c.getY(), c.objectDistance)) {
+
+
+        if (c.attemptingfish)
+            if (c.clickObjectType > 0 && c.goodDistance(c.objectX + c.objectXOffset, c.objectY + c.objectYOffset, c.getX(), c.getY(), c.objectDistance)) {
                 c.attemptingfish = false;
                 c.fishing = true;
             }
-	}
-	public void Lol() {
-	c.fishing = true;
-        c.startAnimation(c.fishemote);
-	return;
-	}       
-	
-	 public int fishtime(int fish, int req) {
+    }
+
+    public int fishtime(int fish, int req) {
         int time = 10;
         if (fish == 317) {//Shrimp 1
             time = 10;
@@ -107,15 +101,15 @@ public void FishingProcess() {
             time = 40;
         }
         if (fish == 17797) {
-		    time = 60;
-		}
-	   if (fish == 389) {//Manta ray 85
+            time = 60;
+        }
+        if (fish == 389) {//Manta ray 85
             time = 45;
         }
-	if (fish == 15272) {//Rocktail 95
+        if (fish == 15272) {//Rocktail 95
             time = 45;
         }
-        int LevelXP = c.playerLevel[10] - req;
+        int LevelXP = getClient().playerLevel[10] - req;
         if (LevelXP > req / 3)
             LevelXP = req / 3;
         time -= LevelXP;

@@ -68,7 +68,6 @@ public class Client extends Player {
     private Firemaking firemaking;
     private Herblore herblore;
     private Summoning summoning;
-    private Prospecting prospecting;
 
     public int timeOutCounter = 0;
     public int dungRest = 0;
@@ -109,7 +108,6 @@ public class Client extends Player {
         firemaking = new Firemaking(this);
         herblore = new Herblore(this);
         summoning = new Summoning(this);
-        prospecting = new Prospecting();
     }
 
     public void resetRanks() {
@@ -247,7 +245,6 @@ public class Client extends Player {
         builder.add(getHerblore());
         builder.add(getMining());
         builder.add(getPrayer());
-        builder.add(getProspecting());
         builder.add(getRunecrafting());
         builder.add(getSlayer());
         builder.add(getSmithing());
@@ -1840,15 +1837,6 @@ public class Client extends Player {
 
     public Fletching getFletching() {
         return fletching;
-    }
-
-    /**
-     * Gets the prospecting class.
-     *
-     * @return The prospecting class.
-     */
-    public Prospecting getProspecting() {
-        return prospecting;
     }
 
     /**

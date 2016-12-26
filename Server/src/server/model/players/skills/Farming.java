@@ -11,7 +11,7 @@ import server.util.Misc;
  *
  **/
  
-public class Farming {
+public class Farming extends Skill {
 	
 	private Client c;
 	
@@ -22,12 +22,11 @@ public class Farming {
 	private final int[] FARMING_REQS = {1,14,19,26,32,38,44,50,56,62,67,73,79,85};
 	private final int PATCH_HERBS = 8143;
 	private final int PATCH_WEEDS = 8389;
-	
+
 	public Farming(Client c) {
-		this.c = c;
+		super(c);
 	}
-	
-	
+
 	public void checkItemOnObject(int itemId) {
 		for (int j = 0; j < VALID_SEEDS.length; j++) {
 			if (itemId == VALID_SEEDS[j]) {
@@ -86,7 +85,4 @@ public class Farming {
 			}		
 		}
 	}
-	
-
-
 }

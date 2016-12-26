@@ -12,6 +12,8 @@ import server.Config;
 
 public class Cooking extends Skill implements Skill.ItemTraining, Skill.ObjectTraining {
 
+	private int[][] cookingItems = {{317,315,7954,1,30},{335,333,323,20,70},{331,329,323,30,90},{359,361,363,35,100},{377,379,381,40,120},{371,373,375,50,140},{17797,18159,18179,80,0},{7944,7946,7948,62,150},{383,385,387,80,210},{389,391,393,91,169}};
+
 	public Cooking(Client c) {
 		super(c);
 	}
@@ -62,5 +64,12 @@ public class Cooking extends Skill implements Skill.ItemTraining, Skill.ObjectTr
 	public void useItemOnObject (Item item, server.model.objects.Object object)
 	{
 
+	}
+
+	public void itemOnObject(int id) {
+		for (int j = 0; j < cookingItems.length; j++) {
+			if (cookingItems[j][0] == id)
+				cookFish(cookingItems[j][0],j);
+		}
 	}
 }

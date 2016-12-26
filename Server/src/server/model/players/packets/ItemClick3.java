@@ -19,7 +19,7 @@ public class ItemClick3 implements PacketType
     {
         if ( c.lastsummon < 1 )
         {
-            c.Summoning ().SummonNewNPC ( npcid );
+            c.getSummoning().SummonNewNPC ( npcid );
         } else
         {
             c.sendMessage ( "You already have a NPC summoned" );

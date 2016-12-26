@@ -10,12 +10,10 @@ import server.util.Misc;
  *
  **/
  
-public class Slayer {
-	
-	private Client c;
-		
+public class Slayer extends Skill {
+
 	public Slayer(Client c) {
-		this.c = c;
+		super(c);
 	}
 	
 	public int[] lowTasks = {117, 1265, 103, 78, 119, 18,1265,181};
@@ -28,6 +26,8 @@ public class Slayer {
 	public int[] eliteReqs = {80,95,83,90,70,99,92,72,82,86,92,85,85,85,96,94};
 	
 	public void giveTask() {
+		Client c = getClient();
+
 		if (c.combatLevel < 50)
 			giveTask(1);
 		else if (c.combatLevel >= 50 && c.combatLevel <= 90)
@@ -41,6 +41,8 @@ public class Slayer {
 	}
 	
 	public void giveTask2() {
+		Client c = getClient();
+
 		for (int j = 0; j < lowTasks.length; j++) {
 			if (lowTasks[j] == c.slayerTask) {
 				c.sendMessage("You already have an easy task... to kill " + c.taskAmount + " " + Server.npcHandler.getNpcName(c.slayerTask) + ".");
@@ -51,6 +53,8 @@ public class Slayer {
 	}
 	
 	public void giveTask(int taskLevel) {
+		Client c = getClient();
+
 		int given = 0;
 		int random = 0;
 		if (taskLevel == 1) {
@@ -82,6 +86,8 @@ public class Slayer {
 	}
 	
 	public boolean canDoTask(int taskLevel, int random) {
+		Client c = getClient();
+
 		if (taskLevel == 1) {
 			return c.playerLevel[c.playerSlayer] >= lowReqs[random];		
 		} else if (taskLevel == 2) {
