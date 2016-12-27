@@ -37,7 +37,7 @@ public class InputManager implements Runnable
 
         commands.add ( new Command ( "uptime", (Command c) -> c.output ( Server.getUptime () ) ) );
         commands.add ( new Command ( "players", (Command c) -> c.output ( StringHelper.combine ( PlayerHandler.playersCurrentlyOn, "," ) ) ) );
-        commands.add ( new PlayerCommand ( "player", (PlayerCommand c) -> {
+        commands.add ( new  PlayerCommand ( "player", (PlayerCommand c) -> {
 
             c.getArgs ().addArgument ( (String variable) -> c.setPlayer ( ( Client ) PlayerHandler.getPlayerFromName ( variable ) ), "p", "-player" );
 

@@ -13,8 +13,6 @@ import server.util.Misc;
  
 public class Farming extends Skill {
 	
-	private Client c;
-	
 	private final int[] VALID_SEEDS = {5291,5292,5293,5294,5295,5296,5297,5298,5299,5300,5301,5302,5303,5304};
 	private final int[] HERBS = {199,201,203,205,207,3049,209,211,213,3051,215,2485,217,219}; /* lant, toad, snap*/
 	private final int[] SEED_PLANT_EXP = {11,14,16,22,27,34,43,55,69,88,107,135,171,200};
@@ -37,6 +35,7 @@ public class Farming extends Skill {
 	}
 	
 	private void handleFarming(int seedId, int herbId, int exp, int slot) {
+		Client c = getClient();
 		if (c.playerLevel[c.playerFarming] < FARMING_REQS[slot]) {
 			c.sendMessage("You need a farming level of " + FARMING_REQS[slot] + " to farm this seed.");
 			return;
@@ -54,24 +53,23 @@ public class Farming extends Skill {
 	
 	public int getExp() {
 		for (int j = 0; j < HERBS.length; j++)
-			if (HERBS[j] == c.farm[0])
-				return HERB_EXPS[j];	
+			if (HERBS[j] == getClient().farm[0])
+				return HERB_EXPS[j];
 		return 0;
 	}
 	
 	public void updateHerbPatch() {
-		if (c.farm[0] > 0 && c.farm[1] > 0) {
-			//make object here
-			//c.sendMessage("Make herbs...");
-			c.getPlayerAssistant ().object(PATCH_HERBS,2813,3463,-1,10);
+		if (getClient().farm[0] > 0 && getClient().farm[1] > 0) {
+			getClient().getPlayerAssistant ().object(PATCH_HERBS,2813,3463,-1,10);
 		} else {
 			//make weed patch here
 			//c.sendMessage("Make weeds...");
-			c.getPlayerAssistant ().object(PATCH_WEEDS,2813,3463,-1,10);
+			getClient().getPlayerAssistant ().object(PATCH_WEEDS,2813,3463,-1,10);
 		}	
 	}
 	
 	public void pickHerb() {
+		Client c = getClient();
 		if (c.farm[0] > 0 && c.farm[1] > 0) {
 			if (c.getItems().addItem(c.farm[0], 1)) {
 				//c.startAnimation(2273);
