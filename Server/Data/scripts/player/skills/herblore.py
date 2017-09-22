@@ -6,10 +6,10 @@ from server.model.players.skills import Herblore
 
 def itemClick_199(player, itemId, itemSlot):
 	Herblore.idHerb(player, itemId, itemSlot, 3, 249)
-	
+
 def itemClick_201(player, itemId, itemSlot):
 	Herblore.idHerb(player, itemId, itemSlot, 5, 251)
-	
+
 def itemClick_203(player, itemId, itemSlot):
 	Herblore.idHerb(player, itemId, itemSlot, 11, 253)
 
@@ -19,9 +19,9 @@ def itemClick_205(player, itemId, itemSlot):
 def itemClick_207(player, itemId, itemSlot):
 	Herblore.idHerb(player, itemId, itemSlot, 25, 257)
 
-def itemClick_3049(player, itemId, itemSlot):	
+def itemClick_3049(player, itemId, itemSlot):
 	Herblore.idHerb(c, itemId, itemSlot, 30, 2998)
-	
+
 def itemClick_209(player, itemId, itemSlot):
 	Herblore.idHerb(player, itemId, itemSlot, 40, 259)
 
