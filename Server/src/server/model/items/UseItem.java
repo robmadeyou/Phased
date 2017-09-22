@@ -50,7 +50,7 @@ public class UseItem {
 	}
 
 	public static void ItemonItem(Client c, int itemUsed, int useWith) {
-		c.getSummoning().ItemonItem(itemUsed, useWith);
+		c.getSummoning ().ItemonItem(itemUsed, useWith);
 		if (itemUsed == CrystalChest.toothHalf()
 				&& useWith == CrystalChest.loopHalf()
 				|| itemUsed == CrystalChest.loopHalf()
@@ -68,7 +68,7 @@ public class UseItem {
 			}
 		}		
 		if (itemUsed == 4151 && useWith == 7786) {
-			if (c.playerLevel[c.playerSlayer] >= 80 && c.playerLevel[c.playerAttack] >= 99) {	
+			if (c.playerLevel[c.playerSlayer] >= 80 && c.playerLevel[c.playerAttack] >= 99) {
 				c.getItems().deleteItem(4151, c.getItems().getItemSlot(4151), 1);
 				c.getItems().deleteItem(7786, c.getItems().getItemSlot(7786), 1);
 				c.getItems().addItem(17774,1);
