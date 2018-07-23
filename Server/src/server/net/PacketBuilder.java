@@ -2,8 +2,8 @@ package server.net;
 
 /**
  * Packet builder interface
- * @author Graham
  *
+ * @author Graham
  */
 public interface PacketBuilder {
 

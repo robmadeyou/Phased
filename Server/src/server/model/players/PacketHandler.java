@@ -1,44 +1,6 @@
 package server.model.players;
 
-import server.model.players.packets.AttackPlayer;
-import server.model.players.packets.Bank10;
-import server.model.players.packets.Bank5;
-import server.model.players.packets.BankAll;
-import server.model.players.packets.BankX1;
-import server.model.players.packets.BankX2;
-import server.model.players.packets.ChallengePlayer;
-import server.model.players.packets.ChangeAppearance;
-import server.model.players.packets.ChangeRegions;
-import server.model.players.packets.Chat;
-import server.model.players.packets.ClanChat;
-import server.model.players.packets.Report;
-import server.model.players.packets.ClickItem;
-import server.model.players.packets.ClickNPC;
-import server.model.players.packets.ClickObject;
-import server.model.players.packets.ClickingButtons;
-import server.model.players.packets.ClickingInGame;
-import server.model.players.packets.ClickingStuff;
-import server.model.players.packets.Commands;
-import server.model.players.packets.Dialogue;
-import server.model.players.packets.DropItem;
-import server.model.players.packets.FollowPlayer;
-import server.model.players.packets.IdleLogout;
-import server.model.players.packets.ItemClick2;
-import server.model.players.packets.ItemClick3;
-import server.model.players.packets.ItemOnGroundItem;
-import server.model.players.packets.ItemOnItem;
-import server.model.players.packets.ItemOnNpc;
-import server.model.players.packets.ItemOnObject;
-import server.model.players.packets.MagicOnFloorItems;
-import server.model.players.packets.MagicOnItems;
-import server.model.players.packets.MoveItems;
-import server.model.players.packets.PickupItem;
-import server.model.players.packets.PrivateMessaging;
-import server.model.players.packets.RemoveItem;
-import server.model.players.packets.SilentPacket;
-import server.model.players.packets.Trade;
-import server.model.players.packets.Walking;
-import server.model.players.packets.WearItem;
+import server.model.players.packets.*;
 
 
 public class PacketHandler {
@@ -46,40 +8,63 @@ public class PacketHandler {
     private static PacketType packetId[] = new PacketType[256];
 
     static {
-
-        SilentPacket u = new SilentPacket();
-        packetId[3] = u;
-        packetId[202] = u;
-        packetId[77] = u;
-        packetId[218] = new Report();
-        packetId[86] = u;
-        packetId[78] = u;
-        packetId[36] = u;
-        packetId[226] = u;
-        packetId[246] = u;
-        packetId[148] = u;
-        packetId[183] = u;
-        packetId[230] = u;
-        packetId[136] = u;
-        packetId[189] = u;
-        packetId[152] = u;
-        packetId[200] = u;
-        packetId[85] = u;
-        packetId[165] = u;
-        packetId[238] = u;
-        packetId[150] = u;
-        packetId[40] = new Dialogue();
-        ClickObject co = new ClickObject();
-        packetId[132] = co;
-        packetId[252] = co;
-        packetId[70] = co;
-        packetId[57] = new ItemOnNpc();
+        SilentPacket silentPacket = new SilentPacket();
+        ClickObject clickObject = new ClickObject();
         ClickNPC cn = new ClickNPC();
+        AttackPlayer ap = new AttackPlayer();
+        PrivateMessaging pm = new PrivateMessaging();
+        Walking w = new Walking();
+        ChangeRegions cr = new ChangeRegions();
+
+        packetId[3] = silentPacket;
+        packetId[202] = silentPacket;
+        packetId[77] = silentPacket;
+        packetId[86] = silentPacket;
+        packetId[78] = silentPacket;
+        packetId[36] = silentPacket;
+        packetId[226] = silentPacket;
+        packetId[246] = silentPacket;
+        packetId[148] = silentPacket;
+        packetId[183] = silentPacket;
+        packetId[230] = silentPacket;
+        packetId[136] = silentPacket;
+        packetId[189] = silentPacket;
+        packetId[152] = silentPacket;
+        packetId[200] = silentPacket;
+        packetId[85] = silentPacket;
+        packetId[165] = silentPacket;
+        packetId[238] = silentPacket;
+        packetId[150] = silentPacket;
+
+        packetId[132] = clickObject;
+        packetId[252] = clickObject;
+        packetId[70] = clickObject;
+
         packetId[72] = cn;
         packetId[131] = cn;
         packetId[155] = cn;
         packetId[17] = cn;
         packetId[21] = cn;
+
+        packetId[73] = ap;
+        packetId[249] = ap;
+
+        packetId[188] = pm;
+        packetId[126] = pm;
+        packetId[215] = pm;
+        packetId[95] = pm;
+        packetId[133] = pm;
+
+        packetId[98] = w;
+        packetId[164] = w;
+        packetId[248] = w;
+
+        packetId[121] = cr;
+        packetId[210] = cr;
+
+        packetId[218] = new Report();
+        packetId[40] = new Dialogue();
+        packetId[57] = new ItemOnNpc();
         packetId[16] = new ItemClick2();
         packetId[75] = new ItemClick3();
         packetId[122] = new ClickItem();
@@ -94,9 +79,6 @@ public class PacketHandler {
         packetId[237] = new MagicOnItems();
         packetId[181] = new MagicOnFloorItems();
         packetId[202] = new IdleLogout();
-        AttackPlayer ap = new AttackPlayer();
-        packetId[73] = ap;
-        packetId[249] = ap;
         packetId[128] = new ChallengePlayer();
         packetId[39] = new Trade();
         packetId[139] = new FollowPlayer();
@@ -106,24 +88,11 @@ public class PacketHandler {
         packetId[43] = new Bank10();
         packetId[129] = new BankAll();
         packetId[101] = new ChangeAppearance();
-        PrivateMessaging pm = new PrivateMessaging();
-        packetId[188] = pm;
-        packetId[126] = pm;
-        packetId[215] = pm;
-        packetId[95] = pm;
-        packetId[133] = pm;
         packetId[135] = new BankX1();
         packetId[208] = new BankX2();
-        Walking w = new Walking();
-        packetId[98] = w;
-        packetId[164] = w;
-        packetId[248] = w;
         packetId[53] = new ItemOnItem();
         packetId[192] = new ItemOnObject();
         packetId[25] = new ItemOnGroundItem();
-        ChangeRegions cr = new ChangeRegions();
-        packetId[121] = cr;
-        packetId[210] = cr;
         packetId[60] = new ClanChat();
     }
 

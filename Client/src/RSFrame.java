@@ -2,37 +2,33 @@
 // Jad home page: http://www.kpdus.com/jad.html
 // Decompiler options: packimports(3) 
 
-import java.awt.*;import java.awt.Frame;import java.awt.Graphics;
+import java.awt.*;
 
-final class RSFrame extends Frame
-{
+final class RSFrame extends Frame {
 
-	public RSFrame(RSApplet RSApplet_, int i, int j) {
-		rsApplet = RSApplet_;
-		setTitle("Aggroth by Shaloxis!");
-		setResizable(true);
-		setVisible(true);
-		toFront();
-		setSize(i + 8, j + 30); //24
-	}
+    private final RSApplet rsApplet;
 
-	public Graphics getGraphics()
-	{
-		Graphics g = super.getGraphics();
-		g.translate(4, 24);
-		return g;
-	}
+    public RSFrame(RSApplet RSApplet_, int i, int j) {
+        rsApplet = RSApplet_;
+        setTitle("Aggroth by Shaloxis!");
+        setResizable(true);
+        setVisible(true);
+        toFront();
+        setSize(i + 8, j + 30); //24
+    }
 
-	public void update(Graphics g)
-	{
-		rsApplet.update(g);
-	}
+    public Graphics getGraphics() {
+        Graphics g = super.getGraphics();
+        g.translate(4, 24);
+        return g;
+    }
 
-	public void paint(Graphics g)
-	{
-		rsApplet.paint(g);
-	}
+    public void update(Graphics g) {
+        rsApplet.update(g);
+    }
 
-	private final RSApplet rsApplet;
+    public void paint(Graphics g) {
+        rsApplet.paint(g);
+    }
 }
 

@@ -1,8 +1,8 @@
 package server.model.players.skills;
 
 import server.Config;
-import server.util.Misc;
 import server.model.players.Client;
+import server.util.Misc;
 
 public class Fishing extends Skill {
 

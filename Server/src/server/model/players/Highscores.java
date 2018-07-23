@@ -1,6 +1,5 @@
 package server.model.players;
 
-public class Highscores
-{
+public class Highscores {
     //TODO
 }

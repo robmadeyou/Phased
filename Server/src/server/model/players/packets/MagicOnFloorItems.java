@@ -1,4 +1,5 @@
 package server.model.players.packets;
+
 import server.Server;
 import server.model.players.Client;
 import server.model.players.PacketType;
@@ -9,22 +10,22 @@ import server.model.players.PacketType;
  **/
 public class MagicOnFloorItems implements PacketType {
 
-	@Override
-	public void processPacket(Client c, int packetType, int packetSize) {
-		int itemY = c.getInStream().readSignedWordBigEndian();
-		int itemId = c.getInStream().readUnsignedWord();
-		int itemX = c.getInStream().readSignedWordBigEndian();
-		int spellId = c.getInStream().readUnsignedWordA();
+    @Override
+    public void processPacket(Client c, int packetType, int packetSize) {
+        int itemY = c.getInStream().readSignedWordBigEndian();
+        int itemId = c.getInStream().readUnsignedWord();
+        int itemX = c.getInStream().readSignedWordBigEndian();
+        int spellId = c.getInStream().readUnsignedWordA();
 
-		if(!Server.itemHandler.itemExists(itemId, itemX, itemY)) {
-			c.stopMovement();
-			return;
-		}
-		c.usingMagic = true;
-		if(!c.getCombat().checkMagicReqs(51)) {
-			c.stopMovement();
-			return;
-		}
+        if (!Server.itemHandler.itemExists(itemId, itemX, itemY)) {
+            c.stopMovement();
+            return;
+        }
+        c.usingMagic = true;
+        if (!c.getCombat().checkMagicReqs(51)) {
+            c.stopMovement();
+            return;
+        }
 		
 		/*if(c.goodDistance(c.getX(), c.getY(), itemX, itemY, 12)) {
 			int offY = (c.getX() - itemX) * -1;
@@ -42,6 +43,6 @@ public class MagicOnFloorItems implements PacketType {
 			c.getPlayerAssistant().refreshSkill(6);
 			c.stopMovement();
 		}*/
-	}
+    }
 
 }

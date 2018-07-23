@@ -8,18 +8,17 @@ import server.model.players.Client;
 public class PlayerCommand extends Command {
 
     public Client player;
+
     public PlayerCommand(String activation, CommandExecute<PlayerCommand> onActivate) {
         super(activation, onActivate);
     }
 
-    public void setPlayer( Client c )
-    {
-        this.player = c;
+    public final Client getPlayer() {
+        return this.player;
     }
 
-    public final Client getPlayer()
-    {
-        return this.player;
+    public void setPlayer(Client c) {
+        this.player = c;
     }
 
 }

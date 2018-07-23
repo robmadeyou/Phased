@@ -2,20 +2,16 @@ package server.model.players.packets;
 
 import server.Config;
 import server.Connection;
+import server.Server;
+import server.model.players.Client;
 import server.model.players.PacketType;
+import server.model.players.PlayerHandler;
 import server.util.Misc;
-import server.util.MadTurnipConnection;
-//GTLVOTE
-import org.Vote.*;
-//ENDOFGTLVOTE
-import server.model.players.Highscores;
 import server.world.PublicEvent;
 
-import server.model.players.Client;
-import server.Server;
-import server.model.players.PlayerHandler;
-
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  * Commands
@@ -78,9 +74,7 @@ public class Commands implements PacketType {
             OwnerCommands(c, playerCommand);
         if (c.playerRights == 14)
             DeveloperCommands(c, playerCommand);
-
     }
-
 
     public void playerCommands(Client c, String playerCommand) {//Opens method - Do not touch
         if (playerCommand.equalsIgnoreCase("help")) {
@@ -147,9 +141,9 @@ public class Commands implements PacketType {
             c.sendMessage("Your current maxhit is: <shad=15007744>" + c.getCombat().calculateMeleeMaxHit());
         }
         if (playerCommand.startsWith("yell")) {
-                    /*
-					*This is the sensor for the yell command
-					*/
+            /*
+             *This is the sensor for the yell command
+             */
 					/*String text = playerCommand.substring(5);
 					String[] bad = {"chalreq", "duelreq", "tradereq", ". com", "c0m", "com", 
 							"org", "net", "biz", ". net", ". org", ". biz", 
@@ -758,7 +752,7 @@ public class Commands implements PacketType {
         }
     }//Closes method - Do not touch
 
-        public void OwnerCommands(Client c, String playerCommand) {//Opens method - Do not touch
+    public void OwnerCommands(Client c, String playerCommand) {//Opens method - Do not touch
 
     }//Closes method - Do not touch
 

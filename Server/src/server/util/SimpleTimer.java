@@ -2,17 +2,17 @@ package server.util;
 
 public class SimpleTimer {
 
-	private long cachedTime;
+    private long cachedTime;
 
-	public SimpleTimer() {
-		reset();
-	}
+    public SimpleTimer() {
+        reset();
+    }
 
-	public void reset() {
-		cachedTime = System.currentTimeMillis();
-	}
+    public void reset() {
+        cachedTime = System.currentTimeMillis();
+    }
 
-	public long elapsed() {
-		return System.currentTimeMillis() - cachedTime;
-	}
+    public long elapsed() {
+        return System.currentTimeMillis() - cachedTime;
+    }
 }

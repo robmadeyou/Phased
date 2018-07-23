@@ -6,7 +6,7 @@ import server.model.players.PacketType;
 
 
 public class IdleLogout implements PacketType {
-	
-	@Override
-	public void processPacket(Client c, int packetType, int packetSize) {}
+
+    @Override
+    public void processPacket(Client c, int packetType, int packetSize) {}
 }

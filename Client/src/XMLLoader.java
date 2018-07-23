@@ -1,14 +1,17 @@
 //Credits to MITB
+
+import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
-import javax.swing.*;
 
 public class XMLLoader
-    implements ActionListener, KeyListener
-{
+        implements ActionListener, KeyListener {
 
     private String itemName[];
     private String itemID[];
@@ -17,59 +20,49 @@ public class XMLLoader
     private JTextArea idPanel;
     private JTextArea searchPanel;
 
-    public static void main(String args[]) {
-        new XMLLoader("Objects.xml");
-    }
-
-    public XMLLoader(URL xmlURL)
-    {
+    public XMLLoader(URL xmlURL) {
         itemName = new String[10000];
         itemID = new String[10000];
-        try
-        {
+        try {
             URLConnection xmlConnect = xmlURL.openConnection();
             xmlConnect.setRequestProperty("User-Agent", "Mozilla");
             xmlConnect.connect();
             readStream(xmlConnect.getInputStream());
-        }
-        catch(IOException e)
-        {
+        } catch (IOException e) {
             System.out.println((new StringBuilder()).append("Couldn't find the file ").append(fileName).toString());
         }
         initUI();
     }
 
-    public XMLLoader(String fileName)
-    {
+    public XMLLoader(String fileName) {
         itemName = new String[10000];
         itemID = new String[10000];
         File file = new File(fileName);
         this.fileName = file.getName();
-        try
-        {
+        try {
             FileInputStream fistream = new FileInputStream(file);
             readStream(fistream);
-        }
-        catch(IOException e)
-        {
+        } catch (IOException e) {
             System.out.println((new StringBuilder()).append("Couldn't find the file ").append(fileName).toString());
         }
         initUI();
     }
 
+    public static void main(String args[]) {
+        new XMLLoader("Objects.xml");
+    }
+
     private void readStream(InputStream inputStream)
-        throws IOException
-    {
+            throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         int linenumber = 0;
         String clientline[];
-        for(clientline = new String[30000]; (clientline[linenumber] = reader.readLine()) != null; linenumber++) { }
+        for (clientline = new String[30000]; (clientline[linenumber] = reader.readLine()) != null; linenumber++) {
+        }
         inputStream.close();
         int y = 0;
-        for(int x = 0; x < clientline.length && clientline[x] != null; x++)
-        {
-            if(clientline[x].contains("name="))
-            {
+        for (int x = 0; x < clientline.length && clientline[x] != null; x++) {
+            if (clientline[x].contains("name=")) {
                 String name = clientline[x].substring(clientline[x].indexOf("name=") + 6).replaceAll("\".*", "");
                 String id = clientline[x].substring(clientline[x].indexOf("interfaceType=") + 6).replaceAll("\".*", "");
                 itemName[y] = name;
@@ -80,8 +73,7 @@ public class XMLLoader
 
     }
 
-    private void initUI()
-    {
+    private void initUI() {
         JFrame.setDefaultLookAndFeelDecorated(true);
         JFrame frame = new JFrame(fileName);
         frame.setDefaultCloseOperation(2);
@@ -97,14 +89,11 @@ public class XMLLoader
         scroll.setPreferredSize(new Dimension(240, 503));
         boolean foundOne = false;
         String newLine = "\n";
-        for(int x = 0; x < itemName.length && itemName[x] != null; x++)
-        {
-            if(foundOne)
-            {
+        for (int x = 0; x < itemName.length && itemName[x] != null; x++) {
+            if (foundOne) {
                 namePanel.append((new StringBuilder()).append(newLine).append(itemName[x]).toString());
                 idPanel.append((new StringBuilder()).append(newLine).append(itemID[x]).toString());
-            } else
-            {
+            } else {
                 foundOne = true;
                 namePanel.append(itemName[x]);
                 idPanel.append(itemID[x]);
@@ -128,59 +117,47 @@ public class XMLLoader
         searchPanel.requestFocus();
     }
 
-    private void search()
-    {
+    private void search() {
         String substring = searchPanel.getText();
         namePanel.setText("");
         idPanel.setText("");
         boolean foundOne = false;
         String newLine = "\n";
-        for(int x = 0; x < itemName.length && itemName[x] != null; x++)
-        {
-            if(!itemName[x].toLowerCase().contains(substring.toLowerCase()))
-            {
+        for (int x = 0; x < itemName.length && itemName[x] != null; x++) {
+            if (!itemName[x].toLowerCase().contains(substring.toLowerCase())) {
                 continue;
             }
-            if(foundOne)
-            {
+            if (foundOne) {
                 namePanel.append((new StringBuilder()).append(newLine).append(itemName[x]).toString());
                 idPanel.append((new StringBuilder()).append(newLine).append(itemID[x]).toString());
-            } else
-            {
+            } else {
                 foundOne = true;
                 namePanel.append(itemName[x]);
                 idPanel.append(itemID[x]);
             }
         }
 
-        if(namePanel.getText().equals(""))
-        {
+        if (namePanel.getText().equals("")) {
             namePanel.setText("No Results Found");
         }
     }
 
-    public void actionPerformed(ActionEvent evt)
-    {
+    public void actionPerformed(ActionEvent evt) {
         search();
     }
 
-    public void keyPressed(KeyEvent evt)
-    {
-        if(evt.getKeyCode() == 10)
-        {
+    public void keyPressed(KeyEvent evt) {
+        if (evt.getKeyCode() == 10) {
             search();
         }
     }
 
-    public void keyReleased(KeyEvent evt)
-    {
-        if(evt.getKeyCode() == 10)
-        {
+    public void keyReleased(KeyEvent evt) {
+        if (evt.getKeyCode() == 10) {
             searchPanel.setText(searchPanel.getText().replace("\n", ""));
         }
     }
 
-    public void keyTyped(KeyEvent keyevent)
-    {
+    public void keyTyped(KeyEvent keyevent) {
     }
 }

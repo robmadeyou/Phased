@@ -216,7 +216,7 @@ public class AttackPlayer implements PacketType {
                         }
                     }
                 }
-            break;
+                break;
         }
     }
 }

@@ -4,6 +4,44 @@
 
 public final class Player extends Entity {
 
+    static MRUNodes mruNodes = new MRUNodes(260);
+    public final int[] equipment;
+    final int[] anIntArray1700;
+    public int privelage;
+    public EntityDef desc;
+    public int team;
+    public String name;
+    public int combatLevel;
+    public int headIcon;
+    public int skullIcon;
+    public int hintIcon;
+    public int anInt1707;
+    boolean aBoolean1699;
+    int anInt1708;
+    int anInt1709;
+    boolean visible;
+    int anInt1711;
+    int anInt1712;
+    int anInt1713;
+    Model aModel_1714;
+    int anInt1719;
+    int anInt1720;
+    int anInt1721;
+    int anInt1722;
+    int skill;
+    private long aLong1697;
+    private int anInt1702;
+    private int anInt1715;
+    private long aLong1718;
+    Player() {
+        aLong1697 = -1L;
+        aBoolean1699 = false;
+        anIntArray1700 = new int[5];
+        visible = false;
+        anInt1715 = 9;
+        equipment = new int[12];
+    }
+
     public Model getRotatedModel() {
         if (!visible)
             return null;
@@ -253,8 +291,6 @@ public final class Player extends Entity {
         return visible;
     }
 
-    public int privelage;
-
     public Model method453() {
         if (!visible)
             return null;
@@ -297,43 +333,5 @@ public final class Player extends Entity {
 
         return model;
     }
-
-    Player() {
-        aLong1697 = -1L;
-        aBoolean1699 = false;
-        anIntArray1700 = new int[5];
-        visible = false;
-        anInt1715 = 9;
-        equipment = new int[12];
-    }
-
-    private long aLong1697;
-    public EntityDef desc;
-    boolean aBoolean1699;
-    final int[] anIntArray1700;
-    public int team;
-    private int anInt1702;
-    public String name;
-    static MRUNodes mruNodes = new MRUNodes(260);
-    public int combatLevel;
-    public int headIcon;
-    public int skullIcon;
-    public int hintIcon;
-    public int anInt1707;
-    int anInt1708;
-    int anInt1709;
-    boolean visible;
-    int anInt1711;
-    int anInt1712;
-    int anInt1713;
-    Model aModel_1714;
-    private int anInt1715;
-    public final int[] equipment;
-    private long aLong1718;
-    int anInt1719;
-    int anInt1720;
-    int anInt1721;
-    int anInt1722;
-    int skill;
 
 }

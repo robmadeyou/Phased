@@ -10,13 +10,13 @@ import server.model.players.PacketType;
 
 public class ItemOnItem implements PacketType {
 
-	@Override
-	public void processPacket(Client c, int packetType, int packetSize) {
-		int usedWithSlot = c.getInStream().readUnsignedWord();
-		int itemUsedSlot = c.getInStream().readUnsignedWordA();
-		int useWith = c.playerItems[usedWithSlot] - 1;
-		int itemUsed = c.playerItems[itemUsedSlot] - 1;
-		UseItem.ItemonItem(c, itemUsed, useWith);
-	}
+    @Override
+    public void processPacket(Client c, int packetType, int packetSize) {
+        int usedWithSlot = c.getInStream().readUnsignedWord();
+        int itemUsedSlot = c.getInStream().readUnsignedWordA();
+        int useWith = c.playerItems[usedWithSlot] - 1;
+        int itemUsed = c.playerItems[itemUsedSlot] - 1;
+        UseItem.ItemonItem(c, itemUsed, useWith);
+    }
 
 }

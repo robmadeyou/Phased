@@ -1,17 +1,14 @@
-import java.nio.ByteBuffer;
-
 import sign.signlink;
 
+import java.nio.ByteBuffer;
+
 /**
- * 
- *
  * @author Flamable
  */
 public class OverLayFlo317 {
 
-    public boolean aBoolean393;//To add
     public static OverLayFlo317[] overLayFlo317s;
-
+    public boolean aBoolean393;//To add
     public int textureId = -1;
     public int rgb;
     public boolean boolean_5;
@@ -34,15 +31,15 @@ public class OverLayFlo317 {
     public int anInt397;
     public int anInt398;
     public int anInt399;
-	public int anInt391;
-	public int anInt390;
+    public int anInt391;
+    public int anInt390;
 
     public static void load() {
-    	ByteBuffer bb = ByteBuffer.wrap(FileOperations.ReadFile(signlink.findcachedir() + "overlay_flo.dat"));
+        ByteBuffer bb = ByteBuffer.wrap(FileOperations.ReadFile(signlink.findcachedir() + "overlay_flo.dat"));
         int count = bb.getShort();
         overLayFlo317s = new OverLayFlo317[count];
         System.out.println("[508]Overlay Floors Amount: " + count);
-        for (int i = 0; i < count ; i++) {
+        for (int i = 0; i < count; i++) {
             if (overLayFlo317s[i] == null)
                 overLayFlo317s[i] = new OverLayFlo317();
             overLayFlo317s[i].parse(bb);
@@ -50,7 +47,7 @@ public class OverLayFlo317 {
     }
 
     private void parse(ByteBuffer byteBuffer) {
-        for (;;) {
+        for (; ; ) {
             int attributeId = byteBuffer.get();
             if (attributeId == 0)
                 break;
@@ -94,7 +91,7 @@ public class OverLayFlo317 {
             } else if (attributeId == 16) {
                 int_16 = byteBuffer.get() & 0xff;
             } else {
-                System.err.println("[OverlayFloor] Missing AttributeId: "+attributeId);
+                System.err.println("[OverlayFloor] Missing AttributeId: " + attributeId);
             }
         }
     }

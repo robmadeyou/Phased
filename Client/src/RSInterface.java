@@ -1,14 +1,22 @@
 public final class RSInterface {
 
+    private static final MRUNodes modelNodes = new MRUNodes(30);
     public static NamedArchive aClass44;
+    public static RSFont[] fonts;
+    public static RSInterface interfaceCache[];
+    public static int boxIds[] = {
+            4041, 4077, 4113, 4047, 4083, 4119, 4053, 4089, 4125, 4059, 4095,
+            4131, 4065, 4101, 4137, 4071, 4107, 4143, 4154, 12168, 13918
+    };
+    static int f = 0;
+    static int f2 = 0;
+    private static MRUNodes spriteNodes;
     /* Custom added */
     public boolean drawsTransparent;
     public String hoverText;
     public String popupString;
     public boolean newScroller;
     public boolean inventoryhover;
-    public static RSFont[] fonts;
-
     /* Class */
     public Sprite disabledSprite;
     public int animationDelay;
@@ -26,7 +34,6 @@ public final class RSInterface {
     public int anInt21so6;
     public String aString228;
     public int mOverInterToTrigger;
-    public static RSInterface interfaceCache[];
     public int requiredValues[];
     public int contentType;
     public int spritesX[];
@@ -51,7 +58,6 @@ public final class RSInterface {
     public boolean deletesTargetSlot;
     public int parentID;
     public int spellUsableOn;
-    private static MRUNodes spriteNodes;
     public int enabledHoverColor;
     public int children[];
     public int childX[];
@@ -67,19 +73,15 @@ public final class RSInterface {
     public int inventoryValue[];
     public int inventory[];
     public byte opacity;
-    private int enabledMediaType;
-    private int enabledMediaID;
     public int disabledAnimation;
     public int enabledAnimation;
     public boolean allowSwapItems;
     public Sprite enabledSprite;
     public int scrollMax;
     public int interfaceType;
-    boolean aBoolean266;
     public int xOffset;
     public boolean aBoolean235;
     public boolean aBoolean259;
-    private static final MRUNodes modelNodes = new MRUNodes(30);
     public boolean aBoolean227;
     public boolean aBoolean251;
     public int yOffset;
@@ -90,18 +92,14 @@ public final class RSInterface {
     public int modelRotationY;
     public int modelRotationX;
     public int childY[];
+    boolean aBoolean266;
+    int textLines = 162;
+    int[] musicText = {4287, 4288, 4289, 4290, 4291, 4292, 4293, 4294, 4295, 4296, 4297, 4298, 4299, 4300, 4301, 4302, 4303, 4304, 8971, 4306, 4307, 4308, 4309, 4310, 4311, 8972, 4313, 4314, 4315, 4316, 4317, 8973, 4319, 4320, 4321, 8974, 4323, 4324, 4325, 4326, 4327, 4328, 4329, 4330, 4331, 4332, 4333, 4334, 4335, 4336, 4337, 4338, 4339, 4340, 4341, 4342, 4343, 4344, 4345, 4346, 4347, 4348, 4349, 4350, 4351, 4352, 4353, 4354, 4355, 4356, 4357, 4358, 4359, 4360, 4361, 4362, 8975, 4364, 4365, 4366, 4367, 4368, 4369, 4370, 4371, 4372, 4373, 4374, 4375, 4376, 4377, 4378, 4379, 4380, 8976, 4382, 4383, 4384, 4385, 4386, 4837, 4388, 12840, 8977, 8978, 4392, 4393, 4394, 4395, 4396, 4397, 4398, 4399, 8979, 4401, 4402, 4403, 4404, 4405, 4406, 4407, 4408, 4409, 4410, 4411, 4412, 4413, 4414, 4415, 4418, 7382, 4420, 4421, 4422, 4423, 4424, 4425, 4426, 13713, 4427, 4428, 4429, 4430, 4431, 4432, 4433, 4434, 4435, 4436, 4437, 5449, 4441, 5988, 5989, 5990, 6185, 6297, 961, 6842, 6843, 1883, 1890};
+    private int enabledMediaType;
+    private int enabledMediaID;
 
     public RSInterface() {
 
-    }
-
-    public void swapInventoryItems(int i, int j) {
-        int k = inventory[i];
-        inventory[i] = inventory[j];
-        inventory[j] = k;
-        k = inventoryValue[i];
-        inventoryValue[i] = inventoryValue[j];
-        inventoryValue[j] = k;
     }
 
     public static void unpack(NamedArchive archive, RSFont rsFonts[], NamedArchive streamLoader_1) {
@@ -611,7 +609,6 @@ public final class RSInterface {
 
     }
 
-
     public static final void wilderness(RSFont[] tda) {
         RSInterface rsinterface = addTabInterface(45600);
         addText(45601, "P'King Teleport", 0xff9b00, false, true, 52, tda, 2);
@@ -847,25 +844,6 @@ public final class RSInterface {
         indexChild++;
         setBounds(45234, 10, 6, indexChild, rsinterface);
         indexChild++;
-    }
-
-
-    public void child(int id, int interID, int x, int y) {
-        children[id] = interID;
-        childX[id] = x;
-        childY[id] = y;
-    }
-
-    public void totalChildren(int t) {
-        children = new int[t];
-        childX = new int[t];
-        childY = new int[t];
-    }
-
-    public void totalChildren(int id, int x, int y) {
-        children = new int[id];
-        childX = new int[x];
-        childY = new int[y];
     }
 
     public static void setChildren(int total, RSInterface rsinterface) {
@@ -1311,7 +1289,6 @@ public final class RSInterface {
         setChildren(1, rsinterfaceHover);
         setBounds(IMAGEID, 0, 0, 0, rsinterfaceHover);
     }
-
 
     public static void addText(int i, String s, int k, boolean l, boolean m, int a, TextDrawingArea[] TDA, int j) {
         RSInterface RSInterface = addInterface(i);
@@ -2336,7 +2313,7 @@ public final class RSInterface {
         drawTooltip(25064, "Level 13\nSuperhuman Strength\nIncreases your Strength by 10%");
         drawTooltip(25066, "Level 16\nImproved Reflexes\nIncreases your Attack by 10%");
         drawTooltip(25068, "Level 19\nRapid Restore\n2x restore rate for all stats\nexcept Hitpoints, Summon" +
-                        "ing\nand Prayer"
+                "ing\nand Prayer"
         );
         drawTooltip(25070, "Level 22\nRapid Heal\n2x restore rate for the\nHitpoints stat");
         drawTooltip(25072, "Level 25\nProtect Item\nKeep 1 extra item if you die");
@@ -2354,10 +2331,10 @@ public final class RSInterface {
         drawTooltip(25096, "Level 49\nRedemption\nHeals you when damaged\nand Hitpoints falls\nbelow 10%");
         drawTooltip(25098, "Level 52\nSmite\n1/4 of damage dealt is\nalso removed from\nopponent's Prayer");
         drawTooltip(25100, "Level 60\nChivalry\nIncreases your Defence by 20%,\nStrength by 18%, and Attack " +
-                        "by\n15%"
+                "by\n15%"
         );
         drawTooltip(25102, "Level 70\nPiety\nIncreases your Defence by 25%,\nStrength by 23%, and Attack by\n" +
-                        "20%"
+                "20%"
         );
         setChildren(80, rsinterface);
         setBounds(687, 85, 241, i, rsinterface);
@@ -2789,7 +2766,6 @@ public final class RSInterface {
         index++;
     }
 
-
     public static void Logout(RSFont[] wid) {
         RSInterface rsinterface = interfaceCache[2449];
         rsinterface.childY[0] = 68;
@@ -2804,43 +2780,6 @@ public final class RSInterface {
         rsinterface.disabledColor = 0xff981f;
         rsinterface = interfaceCache[2452];
         rsinterface.disabledColor = 0xff981f;
-    }
-
-    public void specialBar(int id) {//7599
-        /*addActionButton(ID, SpriteOFF, SpriteON, Width, Height, "SpriteText");*/
-        addActionButton(id - 12, 7587, -1, 150, 26, "Use @gre@Special Attack", 20003);
-        /*removeSomething(ID);*/
-        for (int i = id - 11; i < id; i++)
-            removeSomething(i);
-        RSInterface rsi = interfaceCache[id - 12];
-        rsi.width = 150;
-        rsi.height = 26;
-        rsi = interfaceCache[id];
-        rsi.width = 150;
-        rsi.height = 26;
-        rsi.child(0, id - 12, 0, 0);
-        rsi.child(12, id + 1, 3, 7);
-        rsi.child(23, id + 12, 16, 8);
-        for (int i = 13; i < 23; i++) {
-            rsi.childY[i] -= 1;
-        }
-        rsi = interfaceCache[id + 1];
-        rsi.interfaceType = 5;
-        rsi.disabledSprite = CustomSpriteLoader(7600, "");
-        for (int i = id + 2; i < id + 12; i++) {
-            rsi = interfaceCache[i];
-            rsi.interfaceType = 5;
-        }
-        disabledSprite(id + 2, 7601);
-        disabledSprite(id + 3, 7602);
-        disabledSprite(id + 4, 7603);
-        disabledSprite(id + 5, 7604);
-        disabledSprite(id + 6, 7605);
-        disabledSprite(id + 7, 7606);
-        disabledSprite(id + 8, 7607);
-        disabledSprite(id + 9, 7608);
-        disabledSprite(id + 10, 7609);
-        disabledSprite(id + 11, 7610);
     }
 
     public static void Sidebar0(RSFont[] tda) {
@@ -2957,7 +2896,7 @@ public final class RSInterface {
              RSFont[] tda, int hover, int hover2, int hover3, int hover4) //4button spec
     {
         RSInterface rsi = addInterface(id); //2423
-			/*addText(ID, "Text", tda, Size, Colour, Centered);*/
+        /*addText(ID, "Text", tda, Size, Colour, Centered);*/
         addText(id2, "-2", tda, 3, 0xff981f, true); //2426
         addText(id2 + 11, text1, tda, 0, 0xff981f, false);
         addText(id2 + 12, text2, tda, 0, 0xff981f, false);
@@ -2968,7 +2907,7 @@ public final class RSInterface {
         addTooltip(hover2, "(Agressive)\n(Slash)\n(Strength XP)");
         addTooltip(hover3, "(Agressive)\n(Crush)\n(Strength XP)");
         addTooltip(hover4, "(Defensive)\n(Slash)\n(Defence XP)");
-			/*specialBar(ID);*/
+        /*specialBar(ID);*/
         rsi.specialBar(id3); //7599
         rsi.width = 190;
         rsi.height = 261;
@@ -3034,7 +2973,7 @@ public final class RSInterface {
              RSFont[] tda) //4button nospec
     {
         RSInterface rsi = addInterface(id); //2423
-			/*addText(ID, "Text", tda, Size, Colour, Centered);*/
+        /*addText(ID, "Text", tda, Size, Colour, Centered);*/
         addText(id2, "-2", tda, 3, 0xff981f, true); //2426
         addText(id2 + 11, text1, tda, 0, 0xff981f, false);
         addText(id2 + 12, text2, tda, 0, 0xff981f, false);
@@ -3089,12 +3028,12 @@ public final class RSInterface {
              RSFont[] tda) //3button spec
     {
         RSInterface rsi = addInterface(id); //2423
-			/*addText(ID, "Text", tda, Size, Colour, Centered);*/
+        /*addText(ID, "Text", tda, Size, Colour, Centered);*/
         addText(id2, "-2", tda, 3, 0xff981f, true); //2426
         addText(id2 + 9, text1, tda, 0, 0xff981f, false);
         addText(id2 + 10, text2, tda, 0, 0xff981f, false);
         addText(id2 + 11, text3, tda, 0, 0xff981f, false);
-			/*specialBar(ID);*/
+        /*specialBar(ID);*/
         rsi.specialBar(id3); //7599
         rsi.width = 190;
         rsi.height = 261;
@@ -3141,7 +3080,7 @@ public final class RSInterface {
              RSFont[] tda) //3button nospec (magic intf)
     {
         RSInterface rsi = addInterface(id); //2423
-			/*addText(ID, "Text", tda, Size, Colour, Centered);*/
+        /*addText(ID, "Text", tda, Size, Colour, Centered);*/
         addText(id2, "-2", tda, 3, 0xff981f, true); //2426
         addText(id2 + 9, text1, tda, 0, 0xff981f, false);
         addText(id2 + 10, text2, tda, 0, 0xff981f, false);
@@ -3152,7 +3091,7 @@ public final class RSInterface {
         addCacheSprite(337, 19, 0, "combaticons");
         addCacheSprite(338, 13, 0, "combaticons2");
         addCacheSprite(339, 14, 0, "combaticons2");
-			/*addToggleButton(id, sprite, config, width, height, tooltip);*/
+        /*addToggleButton(id, sprite, config, width, height, tooltip);*/
         //addToggleButton(349, 349, 108, 68, 44, "Select");
         removeSomething(349);
         addToggleButton(350, 350, 108, 68, 44, "Select");
@@ -3658,9 +3597,6 @@ public final class RSInterface {
         setBounds(21118, 87, 88, 17, RSinterface);
     }
 
-    int textLines = 162;
-    int[] musicText = {4287, 4288, 4289, 4290, 4291, 4292, 4293, 4294, 4295, 4296, 4297, 4298, 4299, 4300, 4301, 4302, 4303, 4304, 8971, 4306, 4307, 4308, 4309, 4310, 4311, 8972, 4313, 4314, 4315, 4316, 4317, 8973, 4319, 4320, 4321, 8974, 4323, 4324, 4325, 4326, 4327, 4328, 4329, 4330, 4331, 4332, 4333, 4334, 4335, 4336, 4337, 4338, 4339, 4340, 4341, 4342, 4343, 4344, 4345, 4346, 4347, 4348, 4349, 4350, 4351, 4352, 4353, 4354, 4355, 4356, 4357, 4358, 4359, 4360, 4361, 4362, 8975, 4364, 4365, 4366, 4367, 4368, 4369, 4370, 4371, 4372, 4373, 4374, 4375, 4376, 4377, 4378, 4379, 4380, 8976, 4382, 4383, 4384, 4385, 4386, 4837, 4388, 12840, 8977, 8978, 4392, 4393, 4394, 4395, 4396, 4397, 4398, 4399, 8979, 4401, 4402, 4403, 4404, 4405, 4406, 4407, 4408, 4409, 4410, 4411, 4412, 4413, 4414, 4415, 4418, 7382, 4420, 4421, 4422, 4423, 4424, 4425, 4426, 13713, 4427, 4428, 4429, 4430, 4431, 4432, 4433, 4434, 4435, 4436, 4437, 5449, 4441, 5988, 5989, 5990, 6185, 6297, 961, 6842, 6843, 1883, 1890};
-
     public static void musicTab(RSFont[] TDA) {
         RSInterface Interface = addInterface(29500);
         addText(29501, "Playing:", 0xFF981F, false, true, 52, TDA, 1);
@@ -3679,13 +3615,6 @@ public final class RSInterface {
         addText(4439, "", 0xFF981F, false, true, 52, TDA, 1);
         addText(3206, "Click the tune to play", 0xFF981F, false, true, 52, TDA, 1);
     }
-
-    public static int boxIds[] = {
-            4041, 4077, 4113, 4047, 4083, 4119, 4053, 4089, 4125, 4059, 4095,
-            4131, 4065, 4101, 4137, 4071, 4107, 4143, 4154, 12168, 13918
-    };
-
-    // OLD WITHOUT HUNTER AND SUMMONING
 
     /*public static void skillInterface(RSFont[] wid) {
         skillInterface(19746, 255);
@@ -3763,30 +3692,30 @@ public final class RSInterface {
         rsinterface.children[55] = 13917;        rsinterface.childX[55] = 20;        rsinterface.childY[55] = 150;
         rsinterface.children[56] = 13984;        rsinterface.childX[56] = 82;        rsinterface.childY[56] = 227;
     }
-	
-	
-	
+
+
+
 	/*public static void skillInterface(RSFont[] wid) {
 	//RSInterface Interface = addTab(3917);
 	int index = 0;
 		skillInterface(19746, 255);
 		//skillInterface(19747, 51);
-		//skillInterface(19748, 50); 
+		//skillInterface(19748, 50);
 		skillInterface(19749, 52);
 		addText(29801, "1", wid, 0, 0xFFEE33); //Summoning
 		addText(29800, "1", wid, 0, 0xFFEE33); //Hunter
-		
+
 		AddInterfaceButton(19747, 51, 27700, "Interfaces/Skill/Skill", 62, 32, "View @or1@Hunter @whi@guide", 1);
 		AddInterfaceButton(19748, 50, 27701, "Interfaces/Skill/Skill", 62, 32, "View @or1@Summoning @whi@guide", 1);
 		/*
 		drawTooltip(27700, "Toggle the current\ngameframe");
 		drawTooltip(27701, "Toggle the current\ngameframe");
-		
+
 		setChildren(3, Interface);
 		setBounds(27700, 43, 140, index, Interface);index++;
 		setBounds(27701, 43, 140, index, Interface);index++;
-		
-		
+
+
 		addText(13984, "Total", wid, 0, 0xFFEE33);
 		//addText(13984, "Total", wid, 0, 0xFFEE33, false, true);
 		addText(3985, "", wid, 0, 0xFFEE33);
@@ -3998,6 +3927,8 @@ public final class RSInterface {
         tab.child(10, 14042, 476, 29);
         tab.child(11, 14043, 476, 29);
     }
+
+    // OLD WITHOUT HUNTER AND SUMMONING
 
     public static void equipmentScreen(RSFont[] TDA) {
         RSInterface Interface = addInterface(19148);
@@ -4408,9 +4339,9 @@ public final class RSInterface {
         addConfigButton(17015, 17032, 14, 8, "/SummonTab/SUMMON", 20, 30, "Familiar Special", 1, 5, 300);
         addHoverButton(17018, "/SummonTab/SUMMON", 2, 38, 36, "Beast of burden Inventory", -1, 17028, 1);
         addHoveredButton(17028, "/SummonTab/SUMMON", 12, 38, 36, 17029);
-        addHoverButton(17022, "/SummonTab/SUMMON", 1, 38, 36, "Familiar Special Attck", -1, 17030, 1);//addHoverButton(int i, String imageName, int j, int width, int height, String text, int 
+        addHoverButton(17022, "/SummonTab/SUMMON", 1, 38, 36, "Familiar Special Attck", -1, 17030, 1);//addHoverButton(int i, String imageName, int j, int width, int height, String text, int
         addHoveredButton(17030, "/SummonTab/SUMMON", 13, 38, 36, 17031);
-        addHoverButton(17023, "/SummonTab/SUMMON", 3, 38, 36, "Dismiss Familiar", -1, 17033, 1);//addHoverButton(int i, String imageName, int j, int width, int height, String text, int 
+        addHoverButton(17023, "/SummonTab/SUMMON", 3, 38, 36, "Dismiss Familiar", -1, 17033, 1);//addHoverButton(int i, String imageName, int j, int width, int height, String text, int
         addHoveredButton(17033, "/SummonTab/SUMMON", 15, 38, 36, 17034);
         addSprite(17016, 5, "SummonTab/SUMMON");
         addText(17017, "", wid, 2, 0xDAA520, false, true);
@@ -4835,6 +4766,290 @@ public final class RSInterface {
         rsinterface.height = 100;
         rsinterface.disabledSprite = getSprite(s);
     }
+
+    public static void addSkillHovers(int i, int CT) {
+        RSInterface hover = addTabInterface(i);
+        hover.interfaceType = 8;
+        hover.contentType = CT;
+        hover.disabledMessage = null;
+        hover.height = 27;
+        hover.width = 60;
+    }
+
+    public static void Hovers(RSFont[] TDA) {
+
+        /**
+         *    Skill Tab Hovers
+         **/
+        RSInterface Interface = interfaceCache[3984];
+        Interface.rsFonts = TDA[2];
+        Interface.disabledMessage = "Total level %1";
+        addSkillHovers(9215, 204);
+        addSkillHovers(9216, 229);
+        addSkillHovers(9217, 206);
+        addSkillHovers(9218, 207);
+        addSkillHovers(9219, 208);
+        addSkillHovers(9220, 209);
+        addSkillHovers(9221, 210);
+        addSkillHovers(9222, 211);
+        addSkillHovers(9223, 212);
+        addSkillHovers(9224, 213);
+        addSkillHovers(9225, 214);
+        addSkillHovers(9226, 215);
+        addSkillHovers(9227, 216);
+        addSkillHovers(9228, 217);
+        addSkillHovers(9229, 218);
+        addSkillHovers(9230, 219);
+        addSkillHovers(9231, 220);
+        addSkillHovers(9232, 221);
+        addSkillHovers(9233, 222);
+        addSkillHovers(9234, 223);
+        addSkillHovers(9235, 224);
+        addSkillHovers(9236, 225);
+        addSkillHovers(9237, 226);
+        addSkillHovers(9238, 227);
+        addSkillHovers(9239, 228);
+
+
+    }
+
+    public static void skillTab(RSFont[] TDA) {
+        RSInterface sT = addTabInterface(7101);
+
+        addSprite(7102, "Skill/Button", "Open Attack Guide", 9215, 60, 27);
+        addSprite(7103, "Skill/Button", "Open Hitpoints Guide", 9216, 60, 27);
+        addSprite(7104, "Skill/Button", "Open Mining Guide", 9217, 60, 27);
+        addSprite(7105, "Skill/Button", "Open Strength Guide", 9218, 60, 27);
+        addSprite(7106, "Skill/Button", "Open Agility Guide", 9219, 60, 27);
+        addSprite(7107, "Skill/Button", "Open Smithing Guide", 9220, 60, 27);
+        addSprite(7108, "Skill/Button", "Open Defence Guide", 9221, 60, 27);
+        addSprite(7109, "Skill/Button", "Open Herblore Guide", 9222, 60, 27);
+        addSprite(7110, "Skill/Button", "Open Fishing Guide", 9223, 60, 27);
+        addSprite(7111, "Skill/Button", "Open Ranging Guide", 9224, 60, 27);
+        addSprite(7112, "Skill/Button", "Open Thieving Guide", 9225, 60, 27);
+        addSprite(7113, "Skill/Button", "Open Cooking Guide", 9226, 60, 27);
+        addSprite(7114, "Skill/Button", "Open Prayer Guide", 9227, 60, 27);
+        addSprite(7115, "Skill/Button", "Open Crafting Guide", 9228, 60, 27);
+        addSprite(7116, "Skill/Button", "Open Firemaking Guide", 9229, 60, 27);
+        addSprite(7117, "Skill/Button", "Open Magic Guide", 9230, 60, 27);
+        addSprite(7118, "Skill/Button", "Open Fletching Guide", 9231, 60, 27);
+        addSprite(7119, "Skill/Button", "Open Woodcutting Guide", 9232, 60, 27);
+        addSprite(7120, "Skill/Button", "Open Runecrafting Guide", 9233, 60, 27);
+        addSprite(7121, "Skill/Button", "Open Slaying Guide", 9234, 60, 27);
+        addSprite(7122, "Skill/Button", "Open Farming Guide", 9235, 60, 27);
+        addSprite(7123, "Skill/Button", "Open Hunter Guide", 9236, 60, 27);
+        addSprite(7124, "Skill/Button", "Open Summoning Guide", 9237, 60, 27);
+        addSprite(7125, "Skill/Button", "Open PK'ing Guide", 9238, 60, 27);
+        addSprite(7126, "Skill/Button", "Open Dungeoneering Guide", 9239, 60, 27);
+        addText(7127, "Total Level: 2475", 0xFFFF00, false, false, 52, TDA, 2);
+        addSprite(7128, "Skill/Dungeon");
+        addSprite(7129, "Skill/Attack");
+        addSprite(7130, "Skill/Strength");
+        addSprite(7131, "Skill/Defence");
+        addSprite(7132, "Skill/Range");
+        addSprite(7133, "Skill/Prayer");
+        addSprite(7134, "Skill/Mage");
+        addSprite(7135, "Skill/Rune");
+        addSprite(7136, "Skill/Construction");
+        addSprite(7137, "Skill/HP");
+        addSprite(7138, "Skill/Agility");
+        addSprite(7139, "Skill/Herblore");
+        addSprite(7140, "Skill/Thief");
+        addSprite(7141, "Skill/Craft");
+        addSprite(7142, "Skill/Fletch");
+        addSprite(7143, "Skill/Slay");
+        addSprite(7144, "Skill/Hunter");
+        addSprite(7145, "Skill/Mine");
+        addSprite(7146, "Skill/Smith");
+        addSprite(7147, "Skill/Fish");
+        addSprite(7148, "Skill/Cook");
+        addSprite(7149, "Skill/Fire");
+        addSprite(7150, "Skill/Wood");
+        addSprite(7151, "Skill/Farm");
+        addSprite(7152, "Skill/Summon");
+        addText(7157, "99", 0xFFFF00, false, true, -1, TDA, 0);//dung
+        addText(7158, "99", 0xFFFF00, false, true, -1, TDA, 0);//dung
+        addText(7159, "99", 0xFFFF00, false, true, -1, TDA, 0);//attack
+        addText(7160, "99", 0xFFFF00, false, true, -1, TDA, 0);//attack
+        addText(7161, "99", 0xFFFF00, false, true, -1, TDA, 0);//str
+        addText(7162, "99", 0xFFFF00, false, true, -1, TDA, 0);//str
+        addText(7163, "99", 0xFFFF00, false, true, -1, TDA, 0);//def
+        addText(7164, "99", 0xFFFF00, false, true, -1, TDA, 0);//def
+        addText(7165, "99", 0xFFFF00, false, true, -1, TDA, 0);//range
+        addText(7166, "99", 0xFFFF00, false, true, -1, TDA, 0);//range
+        addText(7167, "99", 0xFFFF00, false, true, -1, TDA, 0);//prayer
+        addText(7168, "99", 0xFFFF00, false, true, -1, TDA, 0);//prayer
+        addText(7169, "99", 0xFFFF00, false, true, -1, TDA, 0);//mage
+        addText(7170, "99", 0xFFFF00, false, true, -1, TDA, 0);//rcin
+        addText(7171, "99", 0xFFFF00, false, true, -1, TDA, 0);
+        addText(7172, "99", 0xFFFF00, false, true, -1, TDA, 0);
+        addText(7173, "99", 0xFFFF00, false, true, -1, TDA, 0);
+        addText(7174, "99", 0xFFFF00, false, true, -1, TDA, 0);
+        addText(7175, "99", 0xFFFF00, false, true, -1, TDA, 0);
+        addText(7176, "99", 0xFFFF00, false, true, -1, TDA, 0);
+        addText(7177, "99", 0xFFFF00, false, true, -1, TDA, 0);
+        addText(7178, "99", 0xFFFF00, false, true, -1, TDA, 0);
+        addText(7179, "99", 0xFFFF00, false, true, -1, TDA, 0);
+        addText(7180, "99", 0xFFFF00, false, true, -1, TDA, 0);
+        addText(7181, "99", 0xFFFF00, false, true, -1, TDA, 0);
+        addText(7182, "99", 0xFFFF00, false, true, -1, TDA, 0);
+        addText(7183, "99", 0xFFFF00, false, true, -1, TDA, 0);
+        addText(7184, "99", 0xFFFF00, false, true, -1, TDA, 0);
+        addText(7185, "99", 0xFFFF00, false, true, -1, TDA, 0);
+        addText(7186, "99", 0xFFFF00, false, true, -1, TDA, 0);
+        addText(7187, "99", 0xFFFF00, false, true, -1, TDA, 0);
+        addText(7188, "99", 0xFFFF00, false, true, -1, TDA, 0);
+        addText(7189, "99", 0xFFFF00, false, true, -1, TDA, 0);
+        addText(7190, "99", 0xFFFF00, false, true, -1, TDA, 0);
+        addText(7191, "99", 0xFFFF00, false, true, -1, TDA, 0);
+        addText(7192, "99", 0xFFFF00, false, true, -1, TDA, 0);
+        addText(7193, "99", 0xFFFF00, false, true, -1, TDA, 0);
+        addText(7194, "99", 0xFFFF00, false, true, -1, TDA, 0);
+        addText(7195, "99", 0xFFFF00, false, true, -1, TDA, 0);
+        addText(7196, "99", 0xFFFF00, false, true, -1, TDA, 0);
+        addText(7197, "99", 0xFFFF00, false, true, -1, TDA, 0);
+        addText(7198, "99", 0xFFFF00, false, true, -1, TDA, 0);
+        addText(7199, "99", 0xFFFF00, false, true, -1, TDA, 0);
+        addText(7200, "99", 0xFFFF00, false, true, -1, TDA, 0);
+        addText(7201, "99", 0xFFFF00, false, true, -1, TDA, 0);
+        addText(7202, "99", 0xFFFF00, false, true, -1, TDA, 0);
+        addText(7203, "99", 0xFFFF00, false, true, -1, TDA, 0);
+        addText(7204, "99", 0xFFFF00, false, true, -1, TDA, 0);
+        addText(7205, "99", 0xFFFF00, false, true, -1, TDA, 0);
+        addText(7206, "99", 0xFFFF00, false, true, -1, TDA, 0);
+        sT.totalChildren(126);
+        /*Buttons*/
+        sT.child(0, 7102, 3, 5);
+        sT.child(1, 7103, 66, 5);
+        sT.child(2, 7104, 128, 5);
+        sT.child(3, 7105, 3, 33);
+        sT.child(4, 7106, 66, 33);
+        sT.child(5, 7107, 128, 33);
+        sT.child(6, 7108, 3, 61);
+        sT.child(7, 7109, 66, 61);
+        sT.child(8, 7110, 128, 61);
+        sT.child(9, 7111, 3, 89);
+        sT.child(10, 7112, 66, 89);
+        sT.child(11, 7113, 128, 89);
+        sT.child(12, 7114, 3, 117);
+        sT.child(13, 7115, 66, 117);
+        sT.child(14, 7116, 128, 117);
+        sT.child(15, 7117, 3, 145);
+        sT.child(16, 7118, 66, 145);
+        sT.child(17, 7119, 128, 145);
+        sT.child(18, 7120, 3, 173);
+        sT.child(19, 7121, 66, 173);
+        sT.child(20, 7122, 128, 173);
+        sT.child(21, 7123, 3, 201);
+        sT.child(22, 7124, 66, 201);
+        sT.child(23, 7125, 128, 201);
+        sT.child(24, 7126, 3, 229);
+        /*Total Level Text*/
+        sT.child(25, 7127, 70, 235);
+        /*Icons*/
+        sT.child(26, 7128, 5, 231);
+        sT.child(27, 7129, 4, 7);
+        sT.child(28, 7130, 9, 35);
+        sT.child(29, 7131, 9, 65);
+        sT.child(30, 7132, 6, 93);
+        sT.child(31, 7133, 5, 118);
+        sT.child(32, 7134, 5, 147);
+        sT.child(33, 7135, 5, 174);
+        sT.child(34, 7136, 5, 203);
+        sT.child(35, 7137, 69, 9);
+        sT.child(36, 7138, 67, 34);
+        sT.child(37, 7139, 67, 63);
+        sT.child(38, 7140, 68, 94);
+        sT.child(39, 7141, 70, 120);
+        sT.child(40, 7142, 69, 147);
+        sT.child(41, 7143, 68, 174);
+        sT.child(42, 7144, 68, 202);
+        sT.child(43, 7145, 130, 7);
+        sT.child(44, 7146, 132, 38);
+        sT.child(45, 7147, 132, 62);
+        sT.child(46, 7148, 132, 91);
+        sT.child(47, 7149, 131, 119);
+        sT.child(48, 7150, 132, 147);
+        sT.child(49, 7151, 131, 175);
+        sT.child(50, 7152, 133, 203);
+        /*##/## Text*/
+        sT.child(51, 7157, 32, 231);
+        sT.child(52, 7158, 45, 242);
+        sT.child(53, 7159, 32, 7);
+        sT.child(54, 7160, 45, 18);
+        sT.child(55, 7161, 32, 35);
+        sT.child(56, 7162, 45, 46);
+        sT.child(57, 7163, 32, 63);
+        sT.child(58, 7164, 45, 74);
+        sT.child(59, 7165, 32, 91);
+        sT.child(60, 7166, 45, 102);
+        sT.child(61, 7167, 32, 119);
+        sT.child(62, 7168, 45, 130);
+        sT.child(63, 7169, 32, 147);
+        sT.child(64, 7170, 45, 158);
+        sT.child(65, 7171, 32, 175);
+        sT.child(66, 7172, 45, 186);
+        sT.child(67, 7173, 32, 203);
+        sT.child(68, 7174, 45, 214);
+        sT.child(69, 7175, 95, 7);
+        sT.child(70, 7176, 108, 18);
+        sT.child(71, 7177, 95, 35);
+        sT.child(72, 7178, 108, 46);
+        sT.child(73, 7179, 95, 63);
+        sT.child(74, 7180, 108, 74);
+        sT.child(75, 7181, 95, 91);
+        sT.child(76, 7182, 108, 102);
+        sT.child(77, 7183, 95, 119);
+        sT.child(78, 7184, 108, 130);
+        sT.child(79, 7185, 95, 147);
+        sT.child(80, 7186, 108, 158);
+        sT.child(81, 7187, 95, 175);
+        sT.child(82, 7188, 108, 186);
+        sT.child(83, 7189, 95, 203);
+        sT.child(84, 7190, 108, 214);
+        sT.child(85, 7191, 158, 7);
+        sT.child(86, 7192, 171, 18);
+        sT.child(87, 7193, 158, 35);
+        sT.child(88, 7194, 171, 46);
+        sT.child(89, 7195, 158, 63);
+        sT.child(90, 7196, 171, 74);
+        sT.child(91, 7197, 158, 91);
+        sT.child(92, 7198, 171, 102);
+        sT.child(93, 7199, 158, 119);
+        sT.child(94, 7200, 171, 130);
+        sT.child(95, 7201, 158, 147);
+        sT.child(96, 7202, 171, 158);
+        sT.child(97, 7203, 158, 175);
+        sT.child(98, 7204, 171, 186);
+        sT.child(99, 7205, 158, 203);
+        sT.child(100, 7206, 171, 214);
+        /*Hovers*/
+        sT.child(101, 9215, 3, 5);
+        sT.child(102, 9216, 66, 5);
+        sT.child(103, 9217, 128, 5);
+        sT.child(104, 9218, 3, 33);
+        sT.child(105, 9219, 66, 33);
+        sT.child(106, 9220, 128, 33);
+        sT.child(107, 9221, 3, 61);
+        sT.child(108, 9222, 66, 61);
+        sT.child(109, 9223, 128, 61);
+        sT.child(110, 9224, 3, 89);
+        sT.child(111, 9225, 66, 89);
+        sT.child(112, 9226, 128, 89);
+        sT.child(113, 9227, 3, 117);
+        sT.child(114, 9228, 66, 117);
+        sT.child(115, 9229, 128, 117);
+        sT.child(116, 9230, 3, 145);
+        sT.child(117, 9231, 66, 145);
+        sT.child(118, 9232, 128, 145);
+        sT.child(119, 9233, 3, 173);
+        sT.child(120, 9234, 66, 173);
+        sT.child(121, 9235, 128, 173);
+        sT.child(122, 9236, 3, 201);
+        sT.child(123, 9237, 66, 201);
+        sT.child(124, 9238, 128, 201);
+        sT.child(125, 9239, 3, 229);
+    }
 	/*
 	public static void skillTab602(RSFont[] tda) 
     {
@@ -5147,291 +5362,6 @@ public final class RSInterface {
 
     }*/
 
-    public static void addSkillHovers(int i, int CT) {
-        RSInterface hover = addTabInterface(i);
-        hover.interfaceType = 8;
-        hover.contentType = CT;
-        hover.disabledMessage = null;
-        hover.height = 27;
-        hover.width = 60;
-    }
-
-    public static void Hovers(RSFont[] TDA) {
-
-        /**
-         *    Skill Tab Hovers
-         **/
-        RSInterface Interface = interfaceCache[3984];
-        Interface.rsFonts = TDA[2];
-        Interface.disabledMessage = "Total level %1";
-        addSkillHovers(9215, 204);
-        addSkillHovers(9216, 229);
-        addSkillHovers(9217, 206);
-        addSkillHovers(9218, 207);
-        addSkillHovers(9219, 208);
-        addSkillHovers(9220, 209);
-        addSkillHovers(9221, 210);
-        addSkillHovers(9222, 211);
-        addSkillHovers(9223, 212);
-        addSkillHovers(9224, 213);
-        addSkillHovers(9225, 214);
-        addSkillHovers(9226, 215);
-        addSkillHovers(9227, 216);
-        addSkillHovers(9228, 217);
-        addSkillHovers(9229, 218);
-        addSkillHovers(9230, 219);
-        addSkillHovers(9231, 220);
-        addSkillHovers(9232, 221);
-        addSkillHovers(9233, 222);
-        addSkillHovers(9234, 223);
-        addSkillHovers(9235, 224);
-        addSkillHovers(9236, 225);
-        addSkillHovers(9237, 226);
-        addSkillHovers(9238, 227);
-        addSkillHovers(9239, 228);
-
-
-    }
-
-
-    public static void skillTab(RSFont[] TDA) {
-        RSInterface sT = addTabInterface(7101);
-
-        addSprite(7102, "Skill/Button", "Open Attack Guide", 9215, 60, 27);
-        addSprite(7103, "Skill/Button", "Open Hitpoints Guide", 9216, 60, 27);
-        addSprite(7104, "Skill/Button", "Open Mining Guide", 9217, 60, 27);
-        addSprite(7105, "Skill/Button", "Open Strength Guide", 9218, 60, 27);
-        addSprite(7106, "Skill/Button", "Open Agility Guide", 9219, 60, 27);
-        addSprite(7107, "Skill/Button", "Open Smithing Guide", 9220, 60, 27);
-        addSprite(7108, "Skill/Button", "Open Defence Guide", 9221, 60, 27);
-        addSprite(7109, "Skill/Button", "Open Herblore Guide", 9222, 60, 27);
-        addSprite(7110, "Skill/Button", "Open Fishing Guide", 9223, 60, 27);
-        addSprite(7111, "Skill/Button", "Open Ranging Guide", 9224, 60, 27);
-        addSprite(7112, "Skill/Button", "Open Thieving Guide", 9225, 60, 27);
-        addSprite(7113, "Skill/Button", "Open Cooking Guide", 9226, 60, 27);
-        addSprite(7114, "Skill/Button", "Open Prayer Guide", 9227, 60, 27);
-        addSprite(7115, "Skill/Button", "Open Crafting Guide", 9228, 60, 27);
-        addSprite(7116, "Skill/Button", "Open Firemaking Guide", 9229, 60, 27);
-        addSprite(7117, "Skill/Button", "Open Magic Guide", 9230, 60, 27);
-        addSprite(7118, "Skill/Button", "Open Fletching Guide", 9231, 60, 27);
-        addSprite(7119, "Skill/Button", "Open Woodcutting Guide", 9232, 60, 27);
-        addSprite(7120, "Skill/Button", "Open Runecrafting Guide", 9233, 60, 27);
-        addSprite(7121, "Skill/Button", "Open Slaying Guide", 9234, 60, 27);
-        addSprite(7122, "Skill/Button", "Open Farming Guide", 9235, 60, 27);
-        addSprite(7123, "Skill/Button", "Open Hunter Guide", 9236, 60, 27);
-        addSprite(7124, "Skill/Button", "Open Summoning Guide", 9237, 60, 27);
-        addSprite(7125, "Skill/Button", "Open PK'ing Guide", 9238, 60, 27);
-        addSprite(7126, "Skill/Button", "Open Dungeoneering Guide", 9239, 60, 27);
-        addText(7127, "Total Level: 2475", 0xFFFF00, false, false, 52, TDA, 2);
-        addSprite(7128, "Skill/Dungeon");
-        addSprite(7129, "Skill/Attack");
-        addSprite(7130, "Skill/Strength");
-        addSprite(7131, "Skill/Defence");
-        addSprite(7132, "Skill/Range");
-        addSprite(7133, "Skill/Prayer");
-        addSprite(7134, "Skill/Mage");
-        addSprite(7135, "Skill/Rune");
-        addSprite(7136, "Skill/Construction");
-        addSprite(7137, "Skill/HP");
-        addSprite(7138, "Skill/Agility");
-        addSprite(7139, "Skill/Herblore");
-        addSprite(7140, "Skill/Thief");
-        addSprite(7141, "Skill/Craft");
-        addSprite(7142, "Skill/Fletch");
-        addSprite(7143, "Skill/Slay");
-        addSprite(7144, "Skill/Hunter");
-        addSprite(7145, "Skill/Mine");
-        addSprite(7146, "Skill/Smith");
-        addSprite(7147, "Skill/Fish");
-        addSprite(7148, "Skill/Cook");
-        addSprite(7149, "Skill/Fire");
-        addSprite(7150, "Skill/Wood");
-        addSprite(7151, "Skill/Farm");
-        addSprite(7152, "Skill/Summon");
-        addText(7157, "99", 0xFFFF00, false, true, -1, TDA, 0);//dung
-        addText(7158, "99", 0xFFFF00, false, true, -1, TDA, 0);//dung
-        addText(7159, "99", 0xFFFF00, false, true, -1, TDA, 0);//attack
-        addText(7160, "99", 0xFFFF00, false, true, -1, TDA, 0);//attack
-        addText(7161, "99", 0xFFFF00, false, true, -1, TDA, 0);//str
-        addText(7162, "99", 0xFFFF00, false, true, -1, TDA, 0);//str
-        addText(7163, "99", 0xFFFF00, false, true, -1, TDA, 0);//def
-        addText(7164, "99", 0xFFFF00, false, true, -1, TDA, 0);//def
-        addText(7165, "99", 0xFFFF00, false, true, -1, TDA, 0);//range
-        addText(7166, "99", 0xFFFF00, false, true, -1, TDA, 0);//range
-        addText(7167, "99", 0xFFFF00, false, true, -1, TDA, 0);//prayer
-        addText(7168, "99", 0xFFFF00, false, true, -1, TDA, 0);//prayer
-        addText(7169, "99", 0xFFFF00, false, true, -1, TDA, 0);//mage
-        addText(7170, "99", 0xFFFF00, false, true, -1, TDA, 0);//rcin
-        addText(7171, "99", 0xFFFF00, false, true, -1, TDA, 0);
-        addText(7172, "99", 0xFFFF00, false, true, -1, TDA, 0);
-        addText(7173, "99", 0xFFFF00, false, true, -1, TDA, 0);
-        addText(7174, "99", 0xFFFF00, false, true, -1, TDA, 0);
-        addText(7175, "99", 0xFFFF00, false, true, -1, TDA, 0);
-        addText(7176, "99", 0xFFFF00, false, true, -1, TDA, 0);
-        addText(7177, "99", 0xFFFF00, false, true, -1, TDA, 0);
-        addText(7178, "99", 0xFFFF00, false, true, -1, TDA, 0);
-        addText(7179, "99", 0xFFFF00, false, true, -1, TDA, 0);
-        addText(7180, "99", 0xFFFF00, false, true, -1, TDA, 0);
-        addText(7181, "99", 0xFFFF00, false, true, -1, TDA, 0);
-        addText(7182, "99", 0xFFFF00, false, true, -1, TDA, 0);
-        addText(7183, "99", 0xFFFF00, false, true, -1, TDA, 0);
-        addText(7184, "99", 0xFFFF00, false, true, -1, TDA, 0);
-        addText(7185, "99", 0xFFFF00, false, true, -1, TDA, 0);
-        addText(7186, "99", 0xFFFF00, false, true, -1, TDA, 0);
-        addText(7187, "99", 0xFFFF00, false, true, -1, TDA, 0);
-        addText(7188, "99", 0xFFFF00, false, true, -1, TDA, 0);
-        addText(7189, "99", 0xFFFF00, false, true, -1, TDA, 0);
-        addText(7190, "99", 0xFFFF00, false, true, -1, TDA, 0);
-        addText(7191, "99", 0xFFFF00, false, true, -1, TDA, 0);
-        addText(7192, "99", 0xFFFF00, false, true, -1, TDA, 0);
-        addText(7193, "99", 0xFFFF00, false, true, -1, TDA, 0);
-        addText(7194, "99", 0xFFFF00, false, true, -1, TDA, 0);
-        addText(7195, "99", 0xFFFF00, false, true, -1, TDA, 0);
-        addText(7196, "99", 0xFFFF00, false, true, -1, TDA, 0);
-        addText(7197, "99", 0xFFFF00, false, true, -1, TDA, 0);
-        addText(7198, "99", 0xFFFF00, false, true, -1, TDA, 0);
-        addText(7199, "99", 0xFFFF00, false, true, -1, TDA, 0);
-        addText(7200, "99", 0xFFFF00, false, true, -1, TDA, 0);
-        addText(7201, "99", 0xFFFF00, false, true, -1, TDA, 0);
-        addText(7202, "99", 0xFFFF00, false, true, -1, TDA, 0);
-        addText(7203, "99", 0xFFFF00, false, true, -1, TDA, 0);
-        addText(7204, "99", 0xFFFF00, false, true, -1, TDA, 0);
-        addText(7205, "99", 0xFFFF00, false, true, -1, TDA, 0);
-        addText(7206, "99", 0xFFFF00, false, true, -1, TDA, 0);
-        sT.totalChildren(126);
-		/*Buttons*/
-        sT.child(0, 7102, 3, 5);
-        sT.child(1, 7103, 66, 5);
-        sT.child(2, 7104, 128, 5);
-        sT.child(3, 7105, 3, 33);
-        sT.child(4, 7106, 66, 33);
-        sT.child(5, 7107, 128, 33);
-        sT.child(6, 7108, 3, 61);
-        sT.child(7, 7109, 66, 61);
-        sT.child(8, 7110, 128, 61);
-        sT.child(9, 7111, 3, 89);
-        sT.child(10, 7112, 66, 89);
-        sT.child(11, 7113, 128, 89);
-        sT.child(12, 7114, 3, 117);
-        sT.child(13, 7115, 66, 117);
-        sT.child(14, 7116, 128, 117);
-        sT.child(15, 7117, 3, 145);
-        sT.child(16, 7118, 66, 145);
-        sT.child(17, 7119, 128, 145);
-        sT.child(18, 7120, 3, 173);
-        sT.child(19, 7121, 66, 173);
-        sT.child(20, 7122, 128, 173);
-        sT.child(21, 7123, 3, 201);
-        sT.child(22, 7124, 66, 201);
-        sT.child(23, 7125, 128, 201);
-        sT.child(24, 7126, 3, 229);
-		/*Total Level Text*/
-        sT.child(25, 7127, 70, 235);
-		/*Icons*/
-        sT.child(26, 7128, 5, 231);
-        sT.child(27, 7129, 4, 7);
-        sT.child(28, 7130, 9, 35);
-        sT.child(29, 7131, 9, 65);
-        sT.child(30, 7132, 6, 93);
-        sT.child(31, 7133, 5, 118);
-        sT.child(32, 7134, 5, 147);
-        sT.child(33, 7135, 5, 174);
-        sT.child(34, 7136, 5, 203);
-        sT.child(35, 7137, 69, 9);
-        sT.child(36, 7138, 67, 34);
-        sT.child(37, 7139, 67, 63);
-        sT.child(38, 7140, 68, 94);
-        sT.child(39, 7141, 70, 120);
-        sT.child(40, 7142, 69, 147);
-        sT.child(41, 7143, 68, 174);
-        sT.child(42, 7144, 68, 202);
-        sT.child(43, 7145, 130, 7);
-        sT.child(44, 7146, 132, 38);
-        sT.child(45, 7147, 132, 62);
-        sT.child(46, 7148, 132, 91);
-        sT.child(47, 7149, 131, 119);
-        sT.child(48, 7150, 132, 147);
-        sT.child(49, 7151, 131, 175);
-        sT.child(50, 7152, 133, 203);
-		/*##/## Text*/
-        sT.child(51, 7157, 32, 231);
-        sT.child(52, 7158, 45, 242);
-        sT.child(53, 7159, 32, 7);
-        sT.child(54, 7160, 45, 18);
-        sT.child(55, 7161, 32, 35);
-        sT.child(56, 7162, 45, 46);
-        sT.child(57, 7163, 32, 63);
-        sT.child(58, 7164, 45, 74);
-        sT.child(59, 7165, 32, 91);
-        sT.child(60, 7166, 45, 102);
-        sT.child(61, 7167, 32, 119);
-        sT.child(62, 7168, 45, 130);
-        sT.child(63, 7169, 32, 147);
-        sT.child(64, 7170, 45, 158);
-        sT.child(65, 7171, 32, 175);
-        sT.child(66, 7172, 45, 186);
-        sT.child(67, 7173, 32, 203);
-        sT.child(68, 7174, 45, 214);
-        sT.child(69, 7175, 95, 7);
-        sT.child(70, 7176, 108, 18);
-        sT.child(71, 7177, 95, 35);
-        sT.child(72, 7178, 108, 46);
-        sT.child(73, 7179, 95, 63);
-        sT.child(74, 7180, 108, 74);
-        sT.child(75, 7181, 95, 91);
-        sT.child(76, 7182, 108, 102);
-        sT.child(77, 7183, 95, 119);
-        sT.child(78, 7184, 108, 130);
-        sT.child(79, 7185, 95, 147);
-        sT.child(80, 7186, 108, 158);
-        sT.child(81, 7187, 95, 175);
-        sT.child(82, 7188, 108, 186);
-        sT.child(83, 7189, 95, 203);
-        sT.child(84, 7190, 108, 214);
-        sT.child(85, 7191, 158, 7);
-        sT.child(86, 7192, 171, 18);
-        sT.child(87, 7193, 158, 35);
-        sT.child(88, 7194, 171, 46);
-        sT.child(89, 7195, 158, 63);
-        sT.child(90, 7196, 171, 74);
-        sT.child(91, 7197, 158, 91);
-        sT.child(92, 7198, 171, 102);
-        sT.child(93, 7199, 158, 119);
-        sT.child(94, 7200, 171, 130);
-        sT.child(95, 7201, 158, 147);
-        sT.child(96, 7202, 171, 158);
-        sT.child(97, 7203, 158, 175);
-        sT.child(98, 7204, 171, 186);
-        sT.child(99, 7205, 158, 203);
-        sT.child(100, 7206, 171, 214);
-		/*Hovers*/
-        sT.child(101, 9215, 3, 5);
-        sT.child(102, 9216, 66, 5);
-        sT.child(103, 9217, 128, 5);
-        sT.child(104, 9218, 3, 33);
-        sT.child(105, 9219, 66, 33);
-        sT.child(106, 9220, 128, 33);
-        sT.child(107, 9221, 3, 61);
-        sT.child(108, 9222, 66, 61);
-        sT.child(109, 9223, 128, 61);
-        sT.child(110, 9224, 3, 89);
-        sT.child(111, 9225, 66, 89);
-        sT.child(112, 9226, 128, 89);
-        sT.child(113, 9227, 3, 117);
-        sT.child(114, 9228, 66, 117);
-        sT.child(115, 9229, 128, 117);
-        sT.child(116, 9230, 3, 145);
-        sT.child(117, 9231, 66, 145);
-        sT.child(118, 9232, 128, 145);
-        sT.child(119, 9233, 3, 173);
-        sT.child(120, 9234, 66, 173);
-        sT.child(121, 9235, 128, 173);
-        sT.child(122, 9236, 3, 201);
-        sT.child(123, 9237, 66, 201);
-        sT.child(124, 9238, 128, 201);
-        sT.child(125, 9239, 3, 229);
-    }
-
     public static Sprite getSprite(String s) {
         Sprite sprite = new Sprite(s);
         Exception exception;
@@ -5439,12 +5369,6 @@ public final class RSInterface {
             return sprite;
         else
             return sprite;
-    }
-
-    public void children(int i) {
-        children = new int[i];
-        childX = new int[i];
-        childY = new int[i];
     }
 
     public static void createSkillHover(int i, int j) {
@@ -5838,58 +5762,6 @@ public final class RSInterface {
         }
     }
 
-	/*
-	public static void FriendList(RSFont[] TDA) {
-		RSInterface Interface = addInterface(5065);
-		addSprite(5072, 6, "Interfaces/Clan Chat/LIST");
-		addHover(5068, 1, 201, 5073, 8, "Interfaces/Clan Chat/LIST", 75, 32, "Add Friend");
-		addHovered(5073, 2, "Interfaces/Clan Chat/LIST", 75, 32, 5074);
-		addHover(5069, 1, 202, 5075, 8, "Interfaces/Clan Chat/LIST", 75, 32, "Delete Friend");
-		addHovered(5075, 2, "Interfaces/Clan Chat/LIST", 75, 32, 5076);
-		addText(5067, "Friend List", 0xff9933, false, true, 52,TDA, 2);
-		addText(5070, " Add Friend", 0xff9933, false, true, 52,TDA, 0);
-		addText(5071, " Del Friend", 0xff9933, false, true, 52,TDA, 0);
-		setChildren(7, Interface);
-		setBounds(5072, 4, 20, 0, Interface);
-		setBounds(5068, 15, 226, 1, Interface);
-		setBounds(5069, 105, 226, 2, Interface);
-		setBounds(5066, 4, 24, 3, Interface);
-		setBounds(5067, 55, 4, 4, Interface);
-		setBounds(5070, 21, 236, 5, Interface);
-		setBounds(5071, 112, 236, 6, Interface);
-		Interface = Interface.interfaceCache[5066];
-		Interface.height = 194;		
-		Interface.width = 167;
-		Interface.newScroller = false;
-	}
-	
-	
-	public static void IgnoreList(RSFont[] TDA) {
-		RSInterface Interface = addInterface(5715);
-		addSprite(5726, 6, "Interfaces/Clan Chat/LIST");
-		addHover(5718, 1, 501, 5722, 7, "Interfaces/Clan Chat/LIST", 75, 32, "Add Name");
-		addHovered(5722, 2, "Interfaces/Clan Chat/LIST", 75, 32, 5723);
-		
-		addHover(5719, 1, 502, 5724, 7, "Interfaces/Clan Chat/LIST", 75, 32, "Delete Name");
-		addHovered(5724, 2, "Interfaces/Clan Chat/LIST", 75, 32, 5725);
-		addText(5717, "Ignore List", 0xff9933, false, true, 52,TDA, 2);
-		addText(5720, "Add Name", 0xff9933, false, true, 52,TDA, 0);
-		addText(5721, "Del Name", 0xff9933, false, true, 52,TDA, 0);
-		setChildren(7, Interface);
-		setBounds(5726, 4, 20, 0, Interface);
-		setBounds(5718, 15, 226, 1, Interface);
-		setBounds(5719, 105, 226, 2, Interface);
-		setBounds(5716, 4, 24, 3, Interface);
-		setBounds(5717, 55, 4, 4, Interface);
-		setBounds(5720, 23, 236, 5, Interface);
-		setBounds(5721, 115, 236, 6, Interface);
-		Interface = Interface.interfaceCache[5716];
-		Interface.height = 194;		
-		Interface.width = 167;
-		Interface.newScroller = false;
-	}
-	*/
-
     public static void configureLunar(RSFont[] TDA) {
         homeTeleport();
         drawRune(30003, 1, "Fire");
@@ -6217,7 +6089,7 @@ public final class RSInterface {
         addText(3694, "Feet", TDA, 1, 0xFF9442);
         addText(3700, "Male", TDA, 1, 0xFF9442);
         addText(3701, "Female", TDA, 1, 0xFF9442);
-		/*AddInterfaceButton(int id, int sid, String spriteName, String tooltip); */
+        /*AddInterfaceButton(int id, int sid, String spriteName, String tooltip); */
 		/*AddInterfaceButton(3659, 0, "Interfaces/CharDesign/Arrow", "Change head");
 		AddInterfaceButton(3660, 0, "Interfaces/CharDesign/Arrow", "Change jaw");
 		AddInterfaceButton(3661, 0, "Interfaces/CharDesign/Arrow", "Change torso");
@@ -6673,28 +6545,57 @@ public final class RSInterface {
         rsInterface.childY[141] = 281;
     }
 
-
-    private Model method206(int i, int j) {
-        Model model = (Model) modelNodes.insertFromCache((i << 16) + j);
-        if (model != null)
-            return model;
-        if (i == 1)
-            model = Model.method462(j);
-        if (i == 2)
-            model = EntityDef.forID(j).method160();
-        if (i == 3)
-            model = Client.myPlayer.method453();
-        if (i == 4)
-            model = ItemDef.forID(j).method202(50);
-        if (i == 5)
-            model = null;
-        if (model != null)
-            modelNodes.removeFromCache(model, (i << 16) + j);
-        return model;
-    }
-
-    static int f = 0;
-    static int f2 = 0;
+	/*
+	public static void FriendList(RSFont[] TDA) {
+		RSInterface Interface = addInterface(5065);
+		addSprite(5072, 6, "Interfaces/Clan Chat/LIST");
+		addHover(5068, 1, 201, 5073, 8, "Interfaces/Clan Chat/LIST", 75, 32, "Add Friend");
+		addHovered(5073, 2, "Interfaces/Clan Chat/LIST", 75, 32, 5074);
+		addHover(5069, 1, 202, 5075, 8, "Interfaces/Clan Chat/LIST", 75, 32, "Delete Friend");
+		addHovered(5075, 2, "Interfaces/Clan Chat/LIST", 75, 32, 5076);
+		addText(5067, "Friend List", 0xff9933, false, true, 52,TDA, 2);
+		addText(5070, " Add Friend", 0xff9933, false, true, 52,TDA, 0);
+		addText(5071, " Del Friend", 0xff9933, false, true, 52,TDA, 0);
+		setChildren(7, Interface);
+		setBounds(5072, 4, 20, 0, Interface);
+		setBounds(5068, 15, 226, 1, Interface);
+		setBounds(5069, 105, 226, 2, Interface);
+		setBounds(5066, 4, 24, 3, Interface);
+		setBounds(5067, 55, 4, 4, Interface);
+		setBounds(5070, 21, 236, 5, Interface);
+		setBounds(5071, 112, 236, 6, Interface);
+		Interface = Interface.interfaceCache[5066];
+		Interface.height = 194;		
+		Interface.width = 167;
+		Interface.newScroller = false;
+	}
+	
+	
+	public static void IgnoreList(RSFont[] TDA) {
+		RSInterface Interface = addInterface(5715);
+		addSprite(5726, 6, "Interfaces/Clan Chat/LIST");
+		addHover(5718, 1, 501, 5722, 7, "Interfaces/Clan Chat/LIST", 75, 32, "Add Name");
+		addHovered(5722, 2, "Interfaces/Clan Chat/LIST", 75, 32, 5723);
+		
+		addHover(5719, 1, 502, 5724, 7, "Interfaces/Clan Chat/LIST", 75, 32, "Delete Name");
+		addHovered(5724, 2, "Interfaces/Clan Chat/LIST", 75, 32, 5725);
+		addText(5717, "Ignore List", 0xff9933, false, true, 52,TDA, 2);
+		addText(5720, "Add Name", 0xff9933, false, true, 52,TDA, 0);
+		addText(5721, "Del Name", 0xff9933, false, true, 52,TDA, 0);
+		setChildren(7, Interface);
+		setBounds(5726, 4, 20, 0, Interface);
+		setBounds(5718, 15, 226, 1, Interface);
+		setBounds(5719, 105, 226, 2, Interface);
+		setBounds(5716, 4, 24, 3, Interface);
+		setBounds(5717, 55, 4, 4, Interface);
+		setBounds(5720, 23, 236, 5, Interface);
+		setBounds(5721, 115, 236, 6, Interface);
+		Interface = Interface.interfaceCache[5716];
+		Interface.height = 194;		
+		Interface.width = 167;
+		Interface.newScroller = false;
+	}
+	*/
 
     private static Sprite method207(int i, NamedArchive archive, String s) {
         long l = (TextClass.method585(s) << 8) + (long) i;
@@ -6730,6 +6631,95 @@ public final class RSInterface {
         modelNodes.unlinkAll();
         if (model != null && j != 4)
             modelNodes.removeFromCache(model, (j << 16) + i);
+    }
+
+    public void swapInventoryItems(int i, int j) {
+        int k = inventory[i];
+        inventory[i] = inventory[j];
+        inventory[j] = k;
+        k = inventoryValue[i];
+        inventoryValue[i] = inventoryValue[j];
+        inventoryValue[j] = k;
+    }
+
+    public void child(int id, int interID, int x, int y) {
+        children[id] = interID;
+        childX[id] = x;
+        childY[id] = y;
+    }
+
+    public void totalChildren(int t) {
+        children = new int[t];
+        childX = new int[t];
+        childY = new int[t];
+    }
+
+    public void totalChildren(int id, int x, int y) {
+        children = new int[id];
+        childX = new int[x];
+        childY = new int[y];
+    }
+
+    public void specialBar(int id) {//7599
+        /*addActionButton(ID, SpriteOFF, SpriteON, Width, Height, "SpriteText");*/
+        addActionButton(id - 12, 7587, -1, 150, 26, "Use @gre@Special Attack", 20003);
+        /*removeSomething(ID);*/
+        for (int i = id - 11; i < id; i++)
+            removeSomething(i);
+        RSInterface rsi = interfaceCache[id - 12];
+        rsi.width = 150;
+        rsi.height = 26;
+        rsi = interfaceCache[id];
+        rsi.width = 150;
+        rsi.height = 26;
+        rsi.child(0, id - 12, 0, 0);
+        rsi.child(12, id + 1, 3, 7);
+        rsi.child(23, id + 12, 16, 8);
+        for (int i = 13; i < 23; i++) {
+            rsi.childY[i] -= 1;
+        }
+        rsi = interfaceCache[id + 1];
+        rsi.interfaceType = 5;
+        rsi.disabledSprite = CustomSpriteLoader(7600, "");
+        for (int i = id + 2; i < id + 12; i++) {
+            rsi = interfaceCache[i];
+            rsi.interfaceType = 5;
+        }
+        disabledSprite(id + 2, 7601);
+        disabledSprite(id + 3, 7602);
+        disabledSprite(id + 4, 7603);
+        disabledSprite(id + 5, 7604);
+        disabledSprite(id + 6, 7605);
+        disabledSprite(id + 7, 7606);
+        disabledSprite(id + 8, 7607);
+        disabledSprite(id + 9, 7608);
+        disabledSprite(id + 10, 7609);
+        disabledSprite(id + 11, 7610);
+    }
+
+    public void children(int i) {
+        children = new int[i];
+        childX = new int[i];
+        childY = new int[i];
+    }
+
+    private Model method206(int i, int j) {
+        Model model = (Model) modelNodes.insertFromCache((i << 16) + j);
+        if (model != null)
+            return model;
+        if (i == 1)
+            model = Model.method462(j);
+        if (i == 2)
+            model = EntityDef.forID(j).method160();
+        if (i == 3)
+            model = Client.myPlayer.method453();
+        if (i == 4)
+            model = ItemDef.forID(j).method202(50);
+        if (i == 5)
+            model = null;
+        if (model != null)
+            modelNodes.removeFromCache(model, (i << 16) + j);
+        return model;
     }
 
     public Model method209(int j, int k, boolean flag) {

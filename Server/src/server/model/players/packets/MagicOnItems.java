@@ -9,20 +9,20 @@ import server.model.players.PacketType;
  **/
 public class MagicOnItems implements PacketType {
 
-	@Override
-	public void processPacket(Client c, int packetType, int packetSize) {
-		int slot = c.getInStream().readSignedWord();
-		int itemId = c.getInStream().readSignedWordA();
-		int junk = c.getInStream().readSignedWord();
-		int spellId = c.getInStream().readSignedWordA();
-		
-		c.usingMagic = true;
-		if(c.playerItems[slot]-1 != itemId) { // cheat client
-			return;
-		}
-		c.getPlayerAssistant ().magicOnItems(slot, itemId, spellId);
-		c.usingMagic = false;
+    @Override
+    public void processPacket(Client c, int packetType, int packetSize) {
+        int slot = c.getInStream().readSignedWord();
+        int itemId = c.getInStream().readSignedWordA();
+        int junk = c.getInStream().readSignedWord();
+        int spellId = c.getInStream().readSignedWordA();
 
-	}
+        c.usingMagic = true;
+        if (c.playerItems[slot] - 1 != itemId) { // cheat client
+            return;
+        }
+        c.getPlayerAssistant().magicOnItems(slot, itemId, spellId);
+        c.usingMagic = false;
+
+    }
 
 }

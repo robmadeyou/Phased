@@ -1,39 +1,98 @@
 package server.model.players;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
-
 import org.apache.mina.common.IoSession;
 import server.Config;
 import server.Server;
-
+import server.event.Event;
+import server.event.EventContainer;
+import server.event.EventManager;
 import server.model.items.ItemAssistant;
+import server.model.minigames.Gambling;
+import server.model.minigames.WarriorsGuild;
+import server.model.npcs.NPC;
+import server.model.players.skills.*;
 import server.model.shops.ShopAssistant;
 import server.net.HostList;
 import server.net.Packet;
 import server.net.StaticPacketBuilder;
 import server.util.Misc;
-import server.model.players.skills.Summoning;
 import server.util.Stream;
-import server.model.players.skills.*;
-import server.event.EventManager;
-import server.event.Event;
-import server.event.EventContainer;
-import server.model.npcs.NPC;
-import server.model.minigames.WarriorsGuild;
-import server.model.minigames.Gambling;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Client extends Player {
+    public static final int PACKET_SIZES[] = {
+            0, 0, 0, 1, -1, 0, 0, 0, 0, 0, //0
+            0, 0, 0, 0, 8, 0, 6, 2, 2, 0,  //10
+            0, 2, 0, 6, 0, 12, 0, 0, 0, 0, //20
+            0, 0, 0, 0, 0, 8, 4, 0, 0, 2,  //30
+            2, 6, 0, 6, 0, -1, 0, 0, 0, 0, //40
+            0, 0, 0, 12, 0, 0, 0, 8, 8, 12, //50
+            8, 8, 0, 0, 0, 0, 0, 0, 0, 0,  //60
+            6, 0, 2, 2, 8, 6, 0, -1, 0, 6, //70
+            0, 0, 0, 0, 0, 1, 4, 6, 0, 0,  //80
+            0, 0, 0, 0, 0, 3, 0, 0, -1, 0, //90
+            0, 13, 0, -1, 0, 0, 0, 0, 0, 0,//100
+            0, 0, 0, 0, 0, 0, 0, 6, 0, 0,  //110
+            1, 0, 6, 0, 0, 0, -1, 0, 2, 6, //120
+            0, 4, 6, 8, 0, 6, 0, 0, 0, 2,  //130
+            0, 0, 0, 0, 0, 6, 0, 0, 0, 0,  //140
+            0, 0, 1, 2, 0, 2, 6, 0, 0, 0,  //150
+            0, 0, 0, 0, -1, -1, 0, 0, 0, 0,//160
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  //170
+            0, 8, 0, 3, 0, 2, 0, 0, 8, 1,  //180
+            0, 0, 12, 0, 0, 0, 0, 0, 0, 0, //190
+            2, 0, 0, 0, 0, 0, 0, 0, 4, 0,  //200
+            4, 0, 0, 0, 7, 8, 0, 0, 10, 0, //210
+            0, 0, 0, 0, 0, 0, -1, 0, 6, 0, //220
+            1, 0, 0, 0, 6, 0, 6, 8, 1, 0,  //230
+            0, 4, 0, 0, 0, 0, -1, 0, -1, 4,//240
+            0, 0, 6, 6, 0, 0, 0            //250
+    };
+    public static PlayerSave save;
+    public static int[] ranks = new int[11];
+    public static int torvaBoost = 50;
+    public static String[] rankPpl = new String[11];
     public byte buffer[] = null;
     public int s;
-    private IoSession session;
-    public static PlayerSave save;
     public int totalstored;
     public int npcslot;
     public int summoningnpcid;
     public int timer;
     public Stream inStream = null, outStream = null;
+    public int timeOutCounter = 0;
+    public int dungRest = 0;
+    public int clawDamage;
+    public int clawIndex;
+    public int clawType = 0;
+    public boolean WildernessWarning = false;
+    public boolean kamfreenaDone;
+    public boolean inCyclops;
+    public boolean basket = false;
+    public int playerRank = 0;
+    public int followDistance = 0;
+    public int maxstore = 0;
+    public int summoningslot = 0;
+    public int storeditems[] = new int[29];
+    public boolean picking = false;
+    public int amount[] = new int[29];
+    public boolean occupied[] = new boolean[29];
+    public boolean storing = false;
+    public int attackingplayer;
+    public int lastsummon;
+    public boolean summon;
+    public boolean specGfx = false;
+    public int specRestore = 0;
+    public String[] qCS = {"Attack", "Strength", "Defence", "Ranged", "Prayer", "Magic", "Runecrafting", "Hitpoint", "Agility", "Herblore", "Thieving", "Crafting", "Fletching", "Slayer", "Mining", "Smithing", "Fishing", "Cooking", "Firemaking", "Woodcutting", "Farming"};
+    public int[][] qCAB = {{33206, 0}, {33209, 2}, {33212, 1}, {33215, 4}, {33218, 5}, {33221, 6}, {33224, 20}, {33207, 3}, {33210, 16}, {33213, 15}, {33216, 17}, {33219, 12}, {33222, 9}, {47130, 18}, {33208, 14}, {33211, 13}, {33214, 10}, {33217, 7}, {33220, 11}, {33223, 8}, {54104, 19}};
+    public String qC = "[Quick Chat] ";
+    public int packetSize = 0, packetType = -1;
+    public long saveGameDelay;
+    public int tmpNWCY[] = new int[walkingQueueSize];
+    public int tmpNWCX[] = new int[walkingQueueSize];
+    private IoSession session;
     private Queue<Packet> queuedPackets = new LinkedList<>();
     private TradeLog tradeLog = new TradeLog(this);
     private ItemAssistant itemAssistant = new ItemAssistant(this);
@@ -49,7 +108,6 @@ public class Client extends Player {
     private PotionMixing potionMixing = new PotionMixing(this);
     private Food food = new Food(this);
     private Gambling gamble = new Gambling(this);
-
     private Slayer slayer;
     private Runecrafting runecrafting;
     private Woodcutting woodcutting;
@@ -68,16 +126,6 @@ public class Client extends Player {
     private Firemaking firemaking;
     private Herblore herblore;
     private Summoning summoning;
-
-    public int timeOutCounter = 0;
-    public int dungRest = 0;
-    public int clawDamage;
-    public int clawIndex;
-    public int clawType = 0;
-    public boolean WildernessWarning = false;
-    public boolean kamfreenaDone;
-    public boolean inCyclops;
-    public boolean basket = false;
 
     public Client(IoSession s, int _playerId) {
         super(_playerId);
@@ -180,13 +228,6 @@ public class Client extends Player {
         resetRanks();
     }
 
-    public int playerRank = 0;
-    public static int[] ranks = new int[11];
-    public static int torvaBoost = 50;
-    public static String[] rankPpl = new String[11];
-
-    public int followDistance = 0;
-
     public void follow(int slot, int type, int distance) {
         if (slot > 0 && slot == follow2 && type == 1 && follow2 > 0 && followDistance != distance && (/*usingOtherRangeWeapons || */usingBow || usingMagic))
             return;
@@ -232,8 +273,7 @@ public class Client extends Player {
         return null;
     }
 
-    public ArrayList<Skill> getSkillHandlers()
-    {
+    public ArrayList<Skill> getSkillHandlers() {
         ArrayList<Skill> builder = new ArrayList<>();
 
         builder.add(getAgility());
@@ -290,8 +330,7 @@ public class Client extends Player {
         return ((NPC) Server.npcHandler.npcs[index]);
     }
 
-    public void frame1()
-    {
+    public void frame1() {
         for (Player p : PlayerHandler.players) {
             if (p != null) {
                 Client c = (Client) p;
@@ -451,31 +490,11 @@ public class Client extends Player {
         }
     }
 
-
-    public int maxstore = 0;
-
     public void firstslot() {
         for (summoningslot = 0; occupied[summoningslot] == true; summoningslot += 1) {
 
         }
     }
-
-    public int summoningslot = 0;
-
-    public int storeditems[] = new int[29];
-
-    public boolean picking = false;
-
-    public int amount[] = new int[29];
-    public boolean occupied[] = new boolean[29];
-
-    public boolean storing = false;
-
-
-    public int attackingplayer;
-    public int lastsummon;
-    public boolean summon;
-
 
     public void jadSpawn() {
         //getPlayerAssistant().movePlayer(absX, absY, playerId * 4);
@@ -488,8 +507,6 @@ public class Client extends Player {
         }, 10000);
     }
 
-    public boolean specGfx = false;
-
     public void clearQInterface() {
         for (int iD = 29172; iD <= 29264; iD++) {
             getPlayerAssistant().sendFrame126("", iD);
@@ -498,8 +515,6 @@ public class Client extends Player {
         getPlayerAssistant().sendFrame126("@whi@Name: " + playerName + "", 29162); //1rd section content
         getPlayerAssistant().sendFrame126(" @whi@Combat: " + getCombatLevel() + "", 29163); //2nd section title
     }
-
-    public int specRestore = 0;
 
     public int getCombatLevel() {
         int mag = (int) ((getLevelForXP(playerXP[6])) * 1.5);
@@ -536,7 +551,6 @@ public class Client extends Player {
         }
     }
 
-
     public void flushOutStream() {
         if (disconnected || outStream.currentOffset == 0)
             return;
@@ -558,35 +572,6 @@ public class Client extends Player {
         outStream.writeWord(rights);
         outStream.endFrameVarSize();
     }
-
-    public static final int PACKET_SIZES[] = {
-            0, 0, 0, 1, -1, 0, 0, 0, 0, 0, //0
-            0, 0, 0, 0, 8, 0, 6, 2, 2, 0,  //10
-            0, 2, 0, 6, 0, 12, 0, 0, 0, 0, //20
-            0, 0, 0, 0, 0, 8, 4, 0, 0, 2,  //30
-            2, 6, 0, 6, 0, -1, 0, 0, 0, 0, //40
-            0, 0, 0, 12, 0, 0, 0, 8, 8, 12, //50
-            8, 8, 0, 0, 0, 0, 0, 0, 0, 0,  //60
-            6, 0, 2, 2, 8, 6, 0, -1, 0, 6, //70
-            0, 0, 0, 0, 0, 1, 4, 6, 0, 0,  //80
-            0, 0, 0, 0, 0, 3, 0, 0, -1, 0, //90
-            0, 13, 0, -1, 0, 0, 0, 0, 0, 0,//100
-            0, 0, 0, 0, 0, 0, 0, 6, 0, 0,  //110
-            1, 0, 6, 0, 0, 0, -1, 0, 2, 6, //120
-            0, 4, 6, 8, 0, 6, 0, 0, 0, 2,  //130
-            0, 0, 0, 0, 0, 6, 0, 0, 0, 0,  //140
-            0, 0, 1, 2, 0, 2, 6, 0, 0, 0,  //150
-            0, 0, 0, 0, -1, -1, 0, 0, 0, 0,//160
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  //170
-            0, 8, 0, 3, 0, 2, 0, 0, 8, 1,  //180
-            0, 0, 12, 0, 0, 0, 0, 0, 0, 0, //190
-            2, 0, 0, 0, 0, 0, 0, 0, 4, 0,  //200
-            4, 0, 0, 0, 7, 8, 0, 0, 10, 0, //210
-            0, 0, 0, 0, 0, 0, -1, 0, 6, 0, //220
-            1, 0, 0, 0, 6, 0, 6, 8, 1, 0,  //230
-            0, 4, 0, 0, 0, 0, -1, 0, -1, 4,//240
-            0, 0, 6, 6, 0, 0, 0            //250
-    };
 
     public void destruct() {
         synchronized (this) {
@@ -643,11 +628,6 @@ public class Client extends Player {
         }
     }
 
-    public String[] qCS = {"Attack", "Strength", "Defence", "Ranged", "Prayer", "Magic", "Runecrafting", "Hitpoint", "Agility", "Herblore", "Thieving", "Crafting", "Fletching", "Slayer", "Mining", "Smithing", "Fishing", "Cooking", "Firemaking", "Woodcutting", "Farming"};
-
-    public int[][] qCAB = {{33206, 0}, {33209, 2}, {33212, 1}, {33215, 4}, {33218, 5}, {33221, 6}, {33224, 20}, {33207, 3}, {33210, 16}, {33213, 15}, {33216, 17}, {33219, 12}, {33222, 9}, {47130, 18}, {33208, 14}, {33211, 13}, {33214, 10}, {33217, 7}, {33220, 11}, {33223, 8}, {54104, 19}};
-    public String qC = "[Quick Chat] ";
-
     public void setSidebarInterface(int menuId, int form) {
         synchronized (this) {
             if (getOutStream() != null) {
@@ -690,7 +670,6 @@ public class Client extends Player {
             foodDelay = System.currentTimeMillis();// we use food timer but it really doesn't mather, this is just used for anti-spamm :)
         }
     }
-
 
     public void CatchHunterNpc(String npcName, int Net, int npcId, int itemId, int AmtExp, int Req, int playerId) {
         npcName = Server.npcHandler.getNpcName(npcId);
@@ -759,11 +738,11 @@ public class Client extends Player {
                 getPlayerAssistant().setSkillLevel(i, playerLevel[i], playerXP[i]);
                 getPlayerAssistant().refreshSkill(i);
             }
-            for (int p = 0; p < PRAYER.length; p++) { // reset prayer glows 
+            for (int p = 0; p < PRAYER.length; p++) { // reset prayer glows
                 prayerActive[p] = false;
                 getPlayerAssistant().sendFrame36(PRAYER_GLOW[p], 0);
             }
-            for (int p = 0; p < CURSE.length; p++) { // reset prayer glows 
+            for (int p = 0; p < CURSE.length; p++) { // reset prayer glows
                 curseActive[p] = false;
                 getPlayerAssistant().sendFrame36(CURSE_GLOW[p], 0);
             }
@@ -932,7 +911,6 @@ public class Client extends Player {
             return false;
     }
 
-
     public void logout() {
         synchronized (this) {
             if (System.currentTimeMillis() - logoutDelay > 10000) {
@@ -964,9 +942,6 @@ public class Client extends Player {
             PlayerSave.saveGame(this);
         }
     }
-
-    public int packetSize = 0, packetType = -1;
-    public long saveGameDelay;
 
     public void process() {
         if (inWild() == true && WildernessWarning == false) {
@@ -1684,9 +1659,6 @@ public class Client extends Player {
         poimiY = l;
         poimiX = k;
     }
-
-    public int tmpNWCY[] = new int[walkingQueueSize];
-    public int tmpNWCX[] = new int[walkingQueueSize];
 
     public synchronized Stream getInStream() {
         return inStream;

@@ -31,7 +31,7 @@ public final class GameObject {
         return y;
     }
 
-	public int getFace() {
-		return face;
-	}
+    public int getFace() {
+        return face;
+    }
 }

@@ -1029,7 +1029,7 @@ public class CombatAssistant {
                 }
             }
         }
-                    /* DEGRADING */
+        /* DEGRADING */
         if (c.playerEquipment[c.playerWeapon] >= 13901) {
             c.degradeTime++;
         }
@@ -1052,7 +1052,7 @@ public class CombatAssistant {
             c.specEffect = 0;
 
         }
-                    /* DEGRADING */
+        /* DEGRADING */
         if (Server.playerHandler.players[i] != null) {
 
             if (Server.playerHandler.players[i].isDead) {

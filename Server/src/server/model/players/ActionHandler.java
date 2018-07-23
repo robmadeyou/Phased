@@ -548,7 +548,7 @@ public class ActionHandler {
                 c.sendMessage("Dungeoneering is being re-made right now, please hold on!");
                 c.sendMessage("Dungeoneering will be much better once this update is finished.");
                 break;
-		/* End of Dungeoneering */
+            /* End of Dungeoneering */
             case 10177:
                 c.getPlayerAssistant().movePlayer(1890, 4407, 0);
                 break;

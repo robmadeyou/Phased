@@ -5,6 +5,6 @@ package server.commands;
  */
 public interface CommandExecute<C extends Command> {
 
-    void Execute( C command );
+    void Execute(C command);
 
 }
