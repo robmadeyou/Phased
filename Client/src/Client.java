@@ -5655,7 +5655,7 @@ public class Client extends RSApplet {
         }
         loginScreenArea.initDrawingArea();
         System.out.println(sign.signlink.findcachedir());
-        Sprite loadingBarBkg = new Sprite("Login/loading1");
+        Sprite loadingBarBkg = new Sprite("Sprites/Login/loading1");
         Sprite loadingBar = new Sprite(sign.signlink.findcachedir() + "Sprites/Login/loading2.png", (int) Math.round(i * 2.02), 12);
         loadingBarBkg.drawSprite(20, 30);
         loadingBar.drawSprite(82, 54);
@@ -5747,7 +5747,7 @@ public class Client extends RSApplet {
             }
             if (abyte0 == null) {
                 drawLoadingText(0, "Connecting to File Server...");
-                new Update("http://insidia.com/Dragonic-ScapeV7cache.zip", "cache.zip", signlink.findcachedir());
+                new Update("http://localhost/AggrothCacheV0.zip", "cache.zip", signlink.findcachedir());
                 abyte0 = decompressors[0].decompress(i);
             }
         } catch (Exception e) {
@@ -10024,8 +10024,8 @@ public class Client extends RSApplet {
             compass = new Sprite(mediaArchive, "compass", 0);
             mapArea = new Sprite("MapArea");
             multiOverlay = new Sprite(mediaArchive, "overlay_multiway", 0);
-            HPBarFull = new Sprite(sign.signlink.findcachedir() + "Sprites/Player/HP 0.png", 1);
-            HPBarEmpty = new Sprite(sign.signlink.findcachedir() + "Sprites/Player/HP 1.png", 1);
+            HPBarFull = new Sprite(sign.signlink.findcachedir() + "Sprites/Player/hp0.png", 1);
+            HPBarEmpty = new Sprite(sign.signlink.findcachedir() + "Sprites/Player/hp1.png", 1);
             /**/
 
             mapBack = new Background(mediaArchive, "Mapback", 0);
@@ -13358,7 +13358,7 @@ public class Client extends RSApplet {
         sprite1 = new Sprite("Gameframe/sprite1");
         xpFlag = new Sprite("Gameframe/xpFlag");
         for (int i = 1; i <= 17; i++) {
-            ORBS[i] = new Sprite("Gameframe/Orbs/ORBS " + i + "");
+            ORBS[i] = new Sprite("Gameframe/Orbs/Orbs" + i + "");
         }
         for (int i = 0; i <= 4; i++) {
             LOGOUT[i] = new Sprite("Gameframe/Orbs/X " + i + "");
@@ -13880,7 +13880,7 @@ public class Client extends RSApplet {
         mHP = mHP.replaceAll("%", "");
         int maxHP2 = Integer.parseInt(mHP);
         health = (int) (((double) currentHP / (double) maxHP2) * 100D);
-        ORBS[0] = new Sprite(OrbDirectory + "ORBS 0.png", 27, getOrbFill(health));
+        ORBS[0] = new Sprite(OrbDirectory + "Orbs0.png", 27, getOrbFill(health));
         if (is480) {
             ORBS[14].drawSprite(174, 14);
         } else {
@@ -13911,7 +13911,7 @@ public class Client extends RSApplet {
         String mPR = RSInterface.interfaceCache[31135].disabledMessage;
         int maxPR2 = Integer.parseInt(mPR);
         prayer = (int) (((double) currentPR / (double) maxPR2) * 100D);
-        ORBS[0] = new Sprite(OD + "ORBS 0.png", 27, getOrbFill(prayer));
+        ORBS[0] = new Sprite(OD + "Orbs0.png", 27, getOrbFill(prayer));
         if (!prayClicked) {
             if (!is480) {
                 if (prayHover) {
@@ -13959,12 +13959,12 @@ public class Client extends RSApplet {
     }
 
     public void drawRunOrb() {
-        String OD = signlink.findcachedir() + "Sprites/Gameframe/Orbs/";
+        String orbDirectory = signlink.findcachedir() + "Sprites/Gameframe/Orbs/";
         String cEn = RSInterface.interfaceCache[149].disabledMessage;
         cEn = cEn.replaceAll("%", "");
         int currentEner = Integer.parseInt(cEn);
         energy = (int) (((double) currentEner / 100) * 100D);
-        ORBS[0] = new Sprite(OD + "ORBS 0.png", 27, getOrbFill(energy));
+        ORBS[0] = new Sprite(orbDirectory + "Orbs0.png", 27, getOrbFill(energy));
         if (!runClicked) {
             if (!is480) {
                 if (runHover) {

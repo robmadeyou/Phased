@@ -33,6 +33,7 @@ public final class Player extends Entity {
     private int anInt1702;
     private int anInt1715;
     private long aLong1718;
+
     Player() {
         aLong1697 = -1L;
         aBoolean1699 = false;
@@ -260,12 +261,14 @@ public final class Player extends Entity {
             }
 
             model_1 = new Model(j2, aclass30_sub2_sub4_sub6s);
-            for (int j3 = 0; j3 < 5; j3++)
+            for (int j3 = 0; j3 < 5; j3++) {
                 if (anIntArray1700[j3] != 0) {
                     model_1.method476(Client.anIntArrayArray1003[j3][0], Client.anIntArrayArray1003[j3][anIntArray1700[j3]]);
-                    if (j3 == 1)
+                    if (j3 == 1) {
                         model_1.method476(Client.anIntArray1204[0], Client.anIntArray1204[anIntArray1700[j3]]);
+                    }
                 }
+            }
 
             model_1.method469();
             model_1.method478(132, 132, 132);

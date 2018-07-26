@@ -4,6 +4,8 @@ import server.Server;
 import server.util.Misc;
 import server.util.Stream;
 import server.world.WalkingHandler;
+import server.world.*;
+import server.model.npcs.*;
 
 public class NPC {
     public int npcId;
@@ -45,24 +47,7 @@ public class NPC {
     public int lastsummon;
     public int npcslot;
     public String forcedText;
-    public String name;
-    public int npcCombat;
-    /**
-     * Graphics
-     **/
 
-    public int mask80var1 = 0;
-    public int mask80var2 = 0;
-    /**
-     * Face
-     **/
-
-    public int FocusPointX = -1, FocusPointY = -1;
-    public int face = 0;
-    public int hitDiff2 = 0;
-    public boolean hitUpdateRequired2 = false;
-    public int CIcon = 0;
-    protected boolean mask80update = false;
 
     public NPC(int _npcId, int _npcType) {
         npcId = _npcId;
@@ -113,12 +98,20 @@ public class NPC {
         updateRequired = true;
     }
 
+    /**
+     *Graphics
+     **/
+
+    public int mask80var1 = 0;
+    public int mask80var2 = 0;
+    protected boolean mask80update = false;
+
     public void appendMask80Update(Stream str) {
         str.writeWord(mask80var1);
         str.writeDWord(mask80var2);
     }
 
-    public void gfx100(int gfx) {
+    public void gfx100(int gfx){
         mask80var1 = gfx;
         mask80var2 = 6553600;
         mask80update = true;
@@ -132,7 +125,7 @@ public class NPC {
         updateRequired = true;
     }
 
-    public void gfx0(int gfx) {
+    public void gfx0(int gfx){
         mask80var1 = gfx;
         mask80var2 = 65536;
         mask80update = true;
@@ -143,6 +136,15 @@ public class NPC {
         str.writeWordBigEndian(animNumber);
         str.writeByte(1);
     }
+
+    /**
+     *
+     Face
+     *
+     **/
+
+    public int FocusPointX = -1, FocusPointY = -1;
+    public int face = 0;
 
     private void appendSetFocusDestination(Stream str) {
         str.writeWordBigEndian(FocusPointX);
@@ -171,7 +173,6 @@ public class NPC {
         dirUpdateRequired = true;
         updateRequired = true;
     }
-
     public void startAnim(int animId) {
         animNumber = animId;
         animUpdateRequired = true;
@@ -183,42 +184,29 @@ public class NPC {
         str.writeWordBigEndian(viewY);
     }
 
+
     public void appendNPCUpdateBlock(Stream str) {
-        if (!updateRequired)
-            return;
+        if(!updateRequired) return ;
         int updateMask = 0;
-        if (animUpdateRequired)
-            updateMask |= 0x10;
-        if (hitUpdateRequired2)
-            updateMask |= 8;
-        if (mask80update)
-            updateMask |= 0x80;
-        if (dirUpdateRequired)
-            updateMask |= 0x20;
-        if (forcedChatRequired)
-            updateMask |= 1;
-        if (hitUpdateRequired)
-            updateMask |= 0x40;
-        if (FocusPointX != -1)
-            updateMask |= 4;
+        if(animUpdateRequired) updateMask |= 0x10;
+        if(hitUpdateRequired2) updateMask |= 8;
+        if(mask80update) updateMask |= 0x80;
+        if(dirUpdateRequired) updateMask |= 0x20;
+        if(forcedChatRequired) updateMask |= 1;
+        if(hitUpdateRequired) updateMask |= 0x40;
+        if(FocusPointX != -1) updateMask |= 4;
 
         str.writeByte(updateMask);
 
-        if (animUpdateRequired)
-            appendAnimUpdate(str);
-        if (hitUpdateRequired2)
-            appendHitUpdate2(str);
-        if (mask80update)
-            appendMask80Update(str);
-        if (dirUpdateRequired)
-            appendFaceEntity(str);
-        if (forcedChatRequired) {
+        if (animUpdateRequired) appendAnimUpdate(str);
+        if (hitUpdateRequired2) appendHitUpdate2(str);
+        if (mask80update)       appendMask80Update(str);
+        if (dirUpdateRequired)  appendFaceEntity(str);
+        if(forcedChatRequired) {
             str.writeString(forcedText);
         }
-        if (hitUpdateRequired)
-            appendHitUpdate(str);
-        if (FocusPointX != -1)
-            appendSetFocusDestination(str);
+        if (hitUpdateRequired)  appendHitUpdate(str);
+        if(FocusPointX != -1) appendSetFocusDestination(str);
 
     }
 
@@ -238,6 +226,7 @@ public class NPC {
         FocusPointY = -1;
     }
 
+
     public int getNextWalkingDirection() {
         int dir;
         dir = Misc.direction(absX, absY, (absX + moveX), (absY + moveY));
@@ -251,10 +240,11 @@ public class NPC {
 
     public void getNextNPCMovement(int i) {
         direction = -1;
-        if (Server.npcHandler.npcs[i].freezeTimer == 0) {
+        if(Server.npcHandler.npcs[i].freezeTimer == 0) {
             direction = getNextWalkingDirection();
         }
     }
+
 
     public void appendHitUpdate(Stream str) {
         if (HP <= 0) {
@@ -270,6 +260,10 @@ public class NPC {
         str.writeByteS(HP);
         str.writeByteC(MaxHP);
     }
+
+    public int hitDiff2 = 0;
+    public boolean hitUpdateRequired2 = false;
+    public int CIcon = 0;
 
     public void appendHitUpdate2(Stream str) {
         if (HP <= 0) {
@@ -306,7 +300,7 @@ public class NPC {
     }
 
     public boolean inMulti() {
-        if ((absX >= 3136 && absX <= 3327 && absY >= 3519 && absY <= 3607) ||
+        if((absX >= 3136 && absX <= 3327 && absY >= 3519 && absY <= 3607) ||
                 (absX >= 3210 && absX <= 3339 && absY >= 9333 && absY <= 9424) ||
                 (absX >= 3190 && absX <= 3327 && absY >= 3648 && absY <= 3839) ||
                 (absX >= 3200 && absX <= 3390 && absY >= 3840 && absY <= 3967) ||
@@ -324,8 +318,8 @@ public class NPC {
                 (absX >= 2824 && absX <= 2827 && absY >= 3808 && absY <= 3812) ||
                 (absX >= 2453 && absX <= 2476 && absY >= 4768 && absY <= 4790) ||
                 (absX >= 2947 && absX <= 3002 && absY >= 9475 && absY <= 9528) ||
-                (absX >= 2256 && absX <= 2287 && absY >= 4680 && absY <= 4711) || //nex
-                (absX >= 2309 && absX <= 9813 && absY >= 2355 && absY <= 9833) || //nex
+                (absX >= 2256 && absX <= 2287 && absY >= 4680 && absY <= 4711)|| //nex
+                (absX >= 2309 && absX <= 9813 && absY >= 2355 && absY <= 9833)|| //nex
                 (absX >= 2980 && absX <= 2993 && absY >= 9629 && absY <= 9644)) {
             return true;
         }
@@ -333,7 +327,8 @@ public class NPC {
     }
 
     public boolean inWild() {
-        if (absX > 2941 && absX < 3392 && absY > 3518 && absY < 3966 || absX > 2941 && absX < 3392 && absY > 9918 && absY < 10366) {
+        if(absX > 2941 && absX < 3392 && absY > 3518 && absY < 3966 ||
+                absX > 2941 && absX < 3392 && absY > 9918 && absY < 10366) {
             return true;
         }
         return false;

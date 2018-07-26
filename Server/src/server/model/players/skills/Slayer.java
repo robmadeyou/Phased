@@ -44,7 +44,7 @@ public class Slayer extends Skill {
 
         for (int j = 0; j < lowTasks.length; j++) {
             if (lowTasks[j] == c.slayerTask) {
-                c.sendMessage("You already have an easy task... to kill " + c.taskAmount + " " + Server.npcHandler.getNpcName(c.slayerTask) + ".");
+                c.sendMessage("You already have an easy task... to kill " + c.taskAmount + " " + Server.npcHandler.getNpcListName(c.slayerTask) + ".");
                 return;
             }
         }
@@ -72,11 +72,11 @@ public class Slayer extends Skill {
         if (taskLevel <= 3) {
             c.slayerTask = given;
             c.taskAmount = Misc.random(15) + 15;
-            c.sendMessage("You have been assigned to kill " + c.taskAmount + " " + Server.npcHandler.getNpcName(given) + " as a slayer task.");
+            c.sendMessage("You have been assigned to kill " + c.taskAmount + " " + Server.npcHandler.getNpcListName(given) + " as a slayer task.");
         } else {
             c.slayerTask = given;
             c.taskAmount = Misc.random(5) + 1;
-            c.sendMessage("You have been assigned to kill " + c.taskAmount + " " + Server.npcHandler.getNpcName(given) + " as an elite slayer task.");
+            c.sendMessage("You have been assigned to kill " + c.taskAmount + " " + Server.npcHandler.getNpcListName(given) + " as an elite slayer task.");
         }
 		/*if (!canDoTask(taskLevel,random)) {
 			giveTask(taskLevel);

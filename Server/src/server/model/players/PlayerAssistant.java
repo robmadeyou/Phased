@@ -524,7 +524,7 @@ public class PlayerAssistant {
     }
 
     public String GetNpcName(int npcID) {
-        return Server.npcHandler.getNpcName(npcID);
+        return Server.npcHandler.getNpcListName(npcID);
     }
 
     public void sendQuest(String s, int id) {

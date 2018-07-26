@@ -639,7 +639,7 @@ public class Client extends Player {
     }
 
     public void CatchimpNpc(String npcName, int Net, int npcId, int itemId, int AmtExp, int Req, int playerId) {
-        npcName = Server.npcHandler.getNpcName(npcId);
+        npcName = Server.npcHandler.getNpcListName(npcId);
         if (System.currentTimeMillis() - foodDelay >= 1500) { //anti spamm
             if (playerLevel[21] >= Req) { //first we check if he's high enough to catch
                 if (playerEquipment[playerWeapon] == 10010 || playerEquipment[playerWeapon] == 11259) { //player got net?
@@ -672,7 +672,7 @@ public class Client extends Player {
     }
 
     public void CatchHunterNpc(String npcName, int Net, int npcId, int itemId, int AmtExp, int Req, int playerId) {
-        npcName = Server.npcHandler.getNpcName(npcId);
+        npcName = Server.npcHandler.getNpcListName(npcId);
         if (System.currentTimeMillis() - foodDelay >= 1500) { //anti spamm
             if (playerLevel[21] >= Req) { //first we check if he's high enough to catch
                 if (playerEquipment[playerWeapon] == 10010 || playerEquipment[playerWeapon] == 11259) { //player got net?
@@ -1681,6 +1681,10 @@ public class Client extends Player {
     }
 
     public PlayerAssistant getPlayerAssistant() {
+        return playerAssistant;
+    }
+
+    public PlayerAssistant getPA() {
         return playerAssistant;
     }
 
